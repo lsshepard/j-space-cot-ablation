@@ -1,0 +1,302 @@
+[
+  {
+    "id": "mh-001",
+    "prompt": "Fact: The currency used in the country shaped like a boot is",
+    "intermediate": "Italy",
+    "answer": "euro"
+  },
+  {
+    "id": "mh-002",
+    "prompt": "Fact: The capital of the country that invented pizza is",
+    "intermediate": "Italy",
+    "answer": "Rome"
+  },
+  {
+    "id": "mh-003",
+    "prompt": "Fact: The language spoken in the country whose capital is Tokyo is",
+    "intermediate": "Japan",
+    "answer": "Japanese"
+  },
+  {
+    "id": "mh-004",
+    "prompt": "Fact: The largest planet in the solar system of Earth is",
+    "intermediate": "solar system",
+    "answer": "Jupiter"
+  },
+  {
+    "id": "mh-005",
+    "prompt": "Fact: The author of the play Romeo and Juliet also wrote",
+    "intermediate": "Shakespeare",
+    "answer": "Hamlet"
+  },
+  {
+    "id": "mh-006",
+    "prompt": "Fact: The chemical symbol for the element with atomic number 79 is",
+    "intermediate": "gold",
+    "answer": "Au"
+  },
+  {
+    "id": "mh-007",
+    "prompt": "Fact: The ocean that lies between Africa and Australia is the",
+    "intermediate": "Indian Ocean region",
+    "answer": "Indian"
+  },
+  {
+    "id": "mh-008",
+    "prompt": "Fact: The first president of the country whose flag has stars and stripes was",
+    "intermediate": "United States",
+    "answer": "Washington"
+  },
+  {
+    "id": "mh-009",
+    "prompt": "Fact: The square root of the number of degrees in a right angle is",
+    "intermediate": "90",
+    "answer": "approx 9.5"
+  },
+  {
+    "id": "mh-010",
+    "prompt": "Fact: The planet known as the Red Planet is",
+    "intermediate": null,
+    "answer": "Mars"
+  },
+  {
+    "id": "mh-011",
+    "prompt": "Fact: The metal that has the chemical symbol Fe is commonly called",
+    "intermediate": "iron element",
+    "answer": "iron"
+  },
+  {
+    "id": "mh-012",
+    "prompt": "Fact: The continent that contains the Amazon rainforest is",
+    "intermediate": "Amazon",
+    "answer": "South America"
+  },
+  {
+    "id": "mh-013",
+    "prompt": "Fact: The device invented by Alexander Graham Bell is the",
+    "intermediate": "Bell",
+    "answer": "telephone"
+  },
+  {
+    "id": "mh-014",
+    "prompt": "Fact: The gas that plants absorb for photosynthesis is",
+    "intermediate": "photosynthesis",
+    "answer": "carbon dioxide"
+  },
+  {
+    "id": "mh-015",
+    "prompt": "Fact: The largest mammal that lives in the ocean is the",
+    "intermediate": "ocean mammal",
+    "answer": "blue whale"
+  },
+  {
+    "id": "mh-016",
+    "prompt": "Fact: The year World War II ended in Europe is remembered as",
+    "intermediate": "1945",
+    "answer": "1945"
+  },
+  {
+    "id": "mh-017",
+    "prompt": "Fact: The painting of a woman with an enigmatic smile is called the",
+    "intermediate": "Leonardo",
+    "answer": "Mona Lisa"
+  },
+  {
+    "id": "mh-018",
+    "prompt": "Fact: The currency of Japan is the",
+    "intermediate": "Japan",
+    "answer": "yen"
+  },
+  {
+    "id": "mh-019",
+    "prompt": "Fact: The process by which water turns into vapor is called",
+    "intermediate": null,
+    "answer": "evaporation"
+  },
+  {
+    "id": "mh-020",
+    "prompt": "Fact: The bone that protects the brain is the",
+    "intermediate": null,
+    "answer": "skull"
+  },
+  {
+    "id": "mh-021",
+    "prompt": "Fact: The mountain range that separates Europe and Asia is the",
+    "intermediate": null,
+    "answer": "Urals"
+  },
+  {
+    "id": "mh-022",
+    "prompt": "Fact: The organ that pumps blood through the body is the",
+    "intermediate": null,
+    "answer": "heart"
+  },
+  {
+    "id": "mh-023",
+    "prompt": "Fact: The Greek god of the sea is",
+    "intermediate": null,
+    "answer": "Poseidon"
+  },
+  {
+    "id": "mh-024",
+    "prompt": "Fact: The hardest natural substance on Earth is",
+    "intermediate": null,
+    "answer": "diamond"
+  },
+  {
+    "id": "mh-025",
+    "prompt": "Fact: The speed of light in vacuum is approximately 3 times 10 to the",
+    "intermediate": "c",
+    "answer": "8"
+  },
+  {
+    "id": "mh-026",
+    "prompt": "Fact: The inventor of the light bulb commonly credited in US history is",
+    "intermediate": null,
+    "answer": "Edison"
+  },
+  {
+    "id": "mh-027",
+    "prompt": "Fact: The capital city of France is",
+    "intermediate": "France",
+    "answer": "Paris"
+  },
+  {
+    "id": "mh-028",
+    "prompt": "Fact: The element with chemical symbol O is",
+    "intermediate": null,
+    "answer": "oxygen"
+  },
+  {
+    "id": "mh-029",
+    "prompt": "Fact: The sport played at Wimbledon with rackets is",
+    "intermediate": "Wimbledon",
+    "answer": "tennis"
+  },
+  {
+    "id": "mh-030",
+    "prompt": "Fact: The planet closest to the Sun is",
+    "intermediate": null,
+    "answer": "Mercury"
+  },
+  {
+    "id": "mh-031",
+    "prompt": "Fact: The author of 1984 also wrote",
+    "intermediate": "Orwell",
+    "answer": "Animal Farm"
+  },
+  {
+    "id": "mh-032",
+    "prompt": "Fact: The river that flows through London is the",
+    "intermediate": "London",
+    "answer": "Thames"
+  },
+  {
+    "id": "mh-033",
+    "prompt": "Fact: The freezing point of water in Celsius is",
+    "intermediate": null,
+    "answer": "0"
+  },
+  {
+    "id": "mh-034",
+    "prompt": "Fact: The company that created the iPhone is",
+    "intermediate": null,
+    "answer": "Apple"
+  },
+  {
+    "id": "mh-035",
+    "prompt": "Fact: The largest desert in the world by area (including polar) is the",
+    "intermediate": null,
+    "answer": "Antarctic"
+  },
+  {
+    "id": "mh-036",
+    "prompt": "Fact: The Italian city founded by Romulus is",
+    "intermediate": "Romulus",
+    "answer": "Rome"
+  },
+  {
+    "id": "mh-037",
+    "prompt": "Fact: The force that pulls objects toward Earth is called",
+    "intermediate": null,
+    "answer": "gravity"
+  },
+  {
+    "id": "mh-038",
+    "prompt": "Fact: The binary digit that means on or true is",
+    "intermediate": null,
+    "answer": "1"
+  },
+  {
+    "id": "mh-039",
+    "prompt": "Fact: The Shakespeare play about the Prince of Denmark is",
+    "intermediate": "Shakespeare",
+    "answer": "Hamlet"
+  },
+  {
+    "id": "mh-040",
+    "prompt": "Fact: The unit of electrical resistance is the",
+    "intermediate": null,
+    "answer": "ohm"
+  },
+  {
+    "id": "mh-041",
+    "prompt": "Fact: The country whose capital is Canberra is",
+    "intermediate": "Canberra",
+    "answer": "Australia"
+  },
+  {
+    "id": "mh-042",
+    "prompt": "Fact: The particle with positive charge in an atom is the",
+    "intermediate": null,
+    "answer": "proton"
+  },
+  {
+    "id": "mh-043",
+    "prompt": "Fact: The first man on the Moon was",
+    "intermediate": "Apollo",
+    "answer": "Armstrong"
+  },
+  {
+    "id": "mh-044",
+    "prompt": "Fact: The language of the Quran is",
+    "intermediate": null,
+    "answer": "Arabic"
+  },
+  {
+    "id": "mh-045",
+    "prompt": "Fact: The shape with three sides is a",
+    "intermediate": null,
+    "answer": "triangle"
+  },
+  {
+    "id": "mh-046",
+    "prompt": "Fact: The sea creature with eight arms is an",
+    "intermediate": null,
+    "answer": "octopus"
+  },
+  {
+    "id": "mh-047",
+    "prompt": "Fact: The composer of the Moonlight Sonata is",
+    "intermediate": null,
+    "answer": "Beethoven"
+  },
+  {
+    "id": "mh-048",
+    "prompt": "Fact: The blood vessels that carry blood away from the heart are",
+    "intermediate": null,
+    "answer": "arteries"
+  },
+  {
+    "id": "mh-049",
+    "prompt": "Fact: The hottest planet in the solar system is",
+    "intermediate": "solar system",
+    "answer": "Venus"
+  },
+  {
+    "id": "mh-050",
+    "prompt": "Fact: The writing system used for English letters is the",
+    "intermediate": null,
+    "answer": "alphabet"
+  }
+]
