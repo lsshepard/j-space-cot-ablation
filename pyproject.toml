@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jspace"
+version = "0.1.0"
+description = "J-space ablation vs CoT externalization experiment harness"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "torch>=2.2",
+    "transformers>=4.51",
+    "datasets>=2.19",
+    "accelerate>=0.30",
+    "huggingface_hub>=0.23",
+    "math_verify>=0.5",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "jlens @ git+https://github.com/anthropics/jacobian-lens.git",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-timeout>=2.3",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: tests that load a model or hit the network",
+]
+timeout = 60
