@@ -2,10 +2,14 @@ import torch
 
 from jspace.ablation import (
     active_j_directions,
+    active_j_directions_from_svd,
+    chunk_positions_to_ablate,
     clean_topk_by_position,
     clean_topk_token_ids,
+    factor_jacobian_svd,
     filter_directions_by_exclusion,
     gram_schmidt,
+    past_token_count_from_cache,
     positions_to_ablate,
     project_out_directions,
     random_directions,
@@ -36,6 +40,51 @@ def test_active_j_directions_shape():
     dirs = active_j_directions(h, J, k=3)
     assert dirs.shape[0] <= 3
     assert dirs.shape[1] == d
+
+
+def test_cached_svd_matches_fresh_svd():
+    torch.manual_seed(0)
+    d = 16
+    J = torch.randn(d, d)
+    h = torch.randn(d)
+    svd = factor_jacobian_svd(J)
+    fresh = active_j_directions(h, J, k=4)
+    cached = active_j_directions_from_svd(h, svd, k=4)
+    via_kw = active_j_directions(h, J, k=4, svd=svd)
+    assert torch.allclose(fresh, cached, atol=1e-5)
+    assert torch.allclose(fresh, via_kw, atol=1e-5)
+
+
+def test_chunk_positions_with_past_matches_absolute():
+    # Full-prefix ablate: first chunk ablates all local indices.
+    assert chunk_positions_to_ablate(
+        4,
+        past_token_count=0,
+        ablate_prompt_tokens=True,
+        prompt_token_count=4,
+    ) == [0, 1, 2, 3]
+    # Later cached step: only the new token (absolute 4) is in-chunk.
+    assert chunk_positions_to_ablate(
+        1,
+        past_token_count=4,
+        ablate_prompt_tokens=True,
+        prompt_token_count=4,
+    ) == [0]
+    # Generation-only: prompt already past, new gen token ablates.
+    assert chunk_positions_to_ablate(
+        1,
+        past_token_count=3,
+        ablate_prompt_tokens=False,
+        prompt_token_count=3,
+    ) == [0]
+
+
+def test_past_token_count_from_cache_none_and_tuple():
+    assert past_token_count_from_cache(None) == 0
+    key = torch.zeros(1, 2, 7, 4)
+    value = torch.zeros(1, 2, 7, 4)
+    past = ((key, value),)
+    assert past_token_count_from_cache(past) == 7
 
 
 def test_random_directions_seed_stable():
