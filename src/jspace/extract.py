@@ -66,7 +66,9 @@ def extract_aime(text: str) -> Extraction:
         value = int(gsm.answer)
         if 0 <= value <= 999:
             return Extraction(str(value), gsm.success)
-    candidates = [int(m) for m in _AIME_INT_RE.findall(text) if 0 <= int(m) <= 999]
+    candidates = [
+        int(m) for m in _AIME_INT_RE.findall(surface) if 0 <= int(m) <= 999
+    ]
     if candidates:
         return Extraction(str(candidates[-1]), False)
     return Extraction(None, False)

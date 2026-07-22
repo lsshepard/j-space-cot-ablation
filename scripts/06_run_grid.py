@@ -18,11 +18,12 @@ from jspace.config import (
     GSM8K_REPO,
     MATH500_REPO,
     SIZE_CONTROL_MODEL,
+    Settings,
     load_settings,
 )
 from jspace.data import dataset_revision_meta, load_aime, load_gsm8k, load_math500
 from jspace.load import load_hf_model, load_model_and_lens
-from jspace.records import append_jsonl, write_run_meta
+from jspace.records import append_jsonl, completed_run_keys, run_key, write_run_meta
 from jspace.run_one import run_problem
 from jspace.token_budgets import calibration_path, load_token_budgets, summarize_profile
 
@@ -37,14 +38,23 @@ CONDITIONS = [
 ]
 
 
-def load_cell(dataset: str, level: int | None, limit: int | None):
+def load_cell(
+    dataset: str,
+    level: int | None,
+    limit: int | None,
+    settings: Settings,
+):
     if dataset == "gsm8k":
-        return load_gsm8k(limit=limit)
+        return load_gsm8k(limit=limit, revision=settings.gsm8k_revision)
     if dataset == "math500":
-        return load_math500(level=level, limit=limit)
+        return load_math500(
+            level=level, limit=limit, revision=settings.math500_revision
+        )
     if dataset == "aime":
-        # AIME is capped at dataset size (§4.10).
-        return load_aime(limit=None if limit is None else min(limit, AIME_N))
+        return load_aime(
+            limit=None if limit is None else min(limit, AIME_N),
+            revision=settings.aime_revision,
+        )
     raise ValueError(dataset)
 
 
@@ -63,6 +73,11 @@ def main() -> None:
     parser.add_argument("--size-control", action="store_true")
     parser.add_argument("--random-seeds", default="0,1,2")
     parser.add_argument("--out-name", default="grid")
+    parser.add_argument(
+        "--fresh",
+        action="store_true",
+        help="delete existing traces and start clean (default: resume)",
+    )
     args = parser.parse_args()
 
     settings = load_settings()
@@ -105,10 +120,14 @@ def main() -> None:
 
     out_dir = settings.results_dir / args.out_name
     traces_path = out_dir / "traces.jsonl"
-    if traces_path.exists():
+    if args.fresh and traces_path.exists():
         traces_path.unlink()
+    done = completed_run_keys(traces_path)
+    if done:
+        print(f"resuming: {len(done)} completed runs in {traces_path}")
 
     token_profile = load_token_budgets(calibration_path(settings))
+    data_meta = dataset_revision_meta(settings)
     meta = {
         "model_name": loaded.model_name,
         "model_revision": loaded.model_revision,
@@ -126,20 +145,25 @@ def main() -> None:
             "aime": AIME_REPO,
             "aime_n": AIME_N,
         },
-        "data_meta": dataset_revision_meta(),
+        "data_meta": data_meta,
         "lens_meta": loaded.lens_meta,
         "random_seeds": list(random_seeds),
+        "resume": not args.fresh,
+        "completed_before_start": len(done),
     }
     write_run_meta(out_dir / "run_meta.json", meta)
 
     for dataset, level, limit in cells:
-        problems = load_cell(dataset, level, limit)
+        problems = load_cell(dataset, level, limit, settings)
         cell_name = f"{dataset}" + (f"_L{level}" if level is not None else "")
         print(f"=== cell {cell_name} n={len(problems)} ===")
         for problem in problems:
-            for _cname, thinking, kind, _seed0 in CONDITIONS:
+            for cname, thinking, kind, _seed0 in CONDITIONS:
                 seeds = random_seeds if kind == "random" else (settings.seed,)
                 for rseed in seeds:
+                    key = run_key(problem.problem_id, cname, rseed)
+                    if key in done:
+                        continue
                     abl = AblationConfig(
                         kind=kind,  # type: ignore[arg-type]
                         band_start=band_start,
@@ -160,18 +184,28 @@ def main() -> None:
                     rec.extra["cell"] = cell_name
                     rec.extra["random_seed"] = rseed
                     append_jsonl(traces_path, rec)
+                    done.add(key)
                     print(
                         f"{problem.problem_id} {rec.condition} rseed={rseed} "
-                        f"correct={rec.correct} len={rec.trace_length_tokens}"
+                        f"correct={rec.correct} graded={rec.graded_logprob} "
+                        f"len={rec.trace_length_tokens}"
                     )
 
     if args.size_control:
+        size_path = out_dir / "size_control.jsonl"
+        if args.fresh and size_path.exists():
+            size_path.unlink()
+        size_done = completed_run_keys(size_path)
         size_settings = settings.with_overrides(model_name=SIZE_CONTROL_MODEL)
         size_loaded = load_hf_model(size_settings)
         for dataset, level, limit in cells:
-            problems = load_cell(dataset, level, limit)
+            problems = load_cell(dataset, level, limit, settings)
             for problem in problems:
                 for thinking in (False, True):
+                    cname = "cot_clean" if thinking else "direct_clean"
+                    key = run_key(problem.problem_id, cname, settings.seed)
+                    if key in size_done:
+                        continue
                     rec = run_problem(
                         size_loaded,
                         problem,
@@ -184,7 +218,8 @@ def main() -> None:
                         f"_L{level}" if level is not None else ""
                     )
                     rec.extra["size_control"] = True
-                    append_jsonl(out_dir / "size_control.jsonl", rec)
+                    rec.extra["random_seed"] = settings.seed
+                    append_jsonl(size_path, rec)
 
     print(f"wrote {traces_path}")
 

@@ -17,6 +17,10 @@ from jspace.load import LoadedModel
 CALC_PROMPT = "calc: ( 4 + 17 ) * 2 + 7 ="
 CALC_INTERMEDIATES = ("21", "42", "49")
 
+# Lens readout top-k for the band diagnostic (not ablation sparsity k).
+DEFAULT_DIAGNOSTIC_TOPKS: tuple[int, ...] = (2, 16, 128)
+DEFAULT_BAND_SELECT_TOPK = 16
+
 
 @dataclass(frozen=True)
 class BandSelection:
@@ -25,6 +29,8 @@ class BandSelection:
     auto_selected: bool
     strength_label: str = "medium_equivalent"
     match_rates: list[float] | None = None
+    match_rates_by_topk: dict[int, list[float]] | None = None
+    select_topk: int = DEFAULT_BAND_SELECT_TOPK
     note: str = (
         "Single fixed medium-equivalent band; deliberate deviation from "
         "paper light/medium/heavy strength sweep (§3.A.5)."
@@ -149,6 +155,8 @@ def select_band(
     *,
     override_start: int | None = None,
     override_end: int | None = None,
+    match_rates_by_topk: dict[int, list[float]] | None = None,
+    select_topk: int = DEFAULT_BAND_SELECT_TOPK,
 ) -> BandSelection:
     auto_start, auto_end = auto_select_band(match_rates, n_layers)
     if override_start is not None and override_end is not None:
@@ -157,46 +165,61 @@ def select_band(
             band_end=override_end,
             auto_selected=False,
             match_rates=match_rates,
+            match_rates_by_topk=match_rates_by_topk,
+            select_topk=select_topk,
         )
     return BandSelection(
         band_start=auto_start,
         band_end=auto_end,
         auto_selected=True,
         match_rates=match_rates,
+        match_rates_by_topk=match_rates_by_topk,
+        select_topk=select_topk,
     )
 
 
+def _synthetic_match_rates(n_layers: int) -> list[float]:
+    rates = [0.0] * n_layers
+    lo, hi = n_layers // 3, (2 * n_layers) // 3
+    for i in range(lo, hi + 1):
+        rates[i] = 0.5
+    if n_layers >= 2:
+        rates[-1] = 0.9
+        rates[-2] = 0.85
+    return rates
+
+
 @torch.inference_mode()
-def layer_next_token_match_rates(
+def layer_next_token_match_rates_by_topk(
     loaded: LoadedModel,
     prompts: list[str],
     *,
-    topk: int = 5,
-) -> list[float]:
-    """Cheap diagnostic: fraction of prompts where J-lens top-k hits true next token."""
+    topks: tuple[int, ...] = DEFAULT_DIAGNOSTIC_TOPKS,
+) -> dict[int, list[float]]:
+    """
+    Per-layer match rates for several lens readout top-k values (§3.A.3).
+
+    One model forward + one lens.apply per prompt; all top-k curves share that pass.
+    """
     if loaded.lens is None or loaded.jlens_model is None:
         raise RuntimeError("lens not attached")
+    if not topks:
+        raise ValueError("topks must be non-empty")
 
+    sorted_ks = tuple(sorted(set(int(k) for k in topks)))
+    max_k = max(sorted_ks)
     n_layers = loaded.n_layers
     lens_d = int(getattr(loaded.lens, "d_model", 0) or 0)
     model_d = int(loaded.hf_model.config.hidden_size)
     if lens_d and lens_d != model_d:
-        # Local plumbing: return a synthetic mid-band hump for auto-select exercise.
-        rates = [0.0] * n_layers
-        lo, hi = n_layers // 3, (2 * n_layers) // 3
-        for i in range(lo, hi + 1):
-            rates[i] = 0.5
-        if n_layers >= 2:
-            rates[-1] = 0.9
-            rates[-2] = 0.85
-        return rates
+        base = _synthetic_match_rates(n_layers)
+        return {k: list(base) for k in sorted_ks}
 
-    hits = np.zeros(n_layers, dtype=np.float64)
+    hits = {k: np.zeros(n_layers, dtype=np.float64) for k in sorted_ks}
     counts = np.zeros(n_layers, dtype=np.float64)
     layers = _layers_in_model(loaded)
 
     for prompt in prompts:
-        # Use model next-token as reference from a clean forward.
         enc = loaded.tokenizer(prompt, return_tensors="pt")
         enc = {k: v.to(loaded.device) for k, v in enc.items()}
         out = loaded.hf_model(**enc)
@@ -211,27 +234,60 @@ def layer_next_token_match_rates(
                 continue
             flat = logits[0, -1] if logits.ndim == 3 else logits[0]
             counts[idx] += 1
-            if _topk_contains(flat, next_id, k=topk):
-                hits[idx] += 1
+            take = min(max_k, int(flat.numel()))
+            top_ids = torch.topk(flat, k=take).indices.tolist()
+            for k in sorted_ks:
+                if next_id in top_ids[: min(k, take)]:
+                    hits[k][idx] += 1
 
-    rates = [
-        float(hits[i] / counts[i]) if counts[i] > 0 else 0.0 for i in range(n_layers)
-    ]
-    return rates
+    return {
+        k: [
+            float(hits[k][i] / counts[i]) if counts[i] > 0 else 0.0
+            for i in range(n_layers)
+        ]
+        for k in sorted_ks
+    }
+
+
+@torch.inference_mode()
+def layer_next_token_match_rates(
+    loaded: LoadedModel,
+    prompts: list[str],
+    *,
+    topk: int = DEFAULT_BAND_SELECT_TOPK,
+) -> list[float]:
+    """Single-curve wrapper around layer_next_token_match_rates_by_topk."""
+    return layer_next_token_match_rates_by_topk(loaded, prompts, topks=(topk))[topk]
 
 
 def plot_band_diagnostic(
-    match_rates: list[float],
+    match_rates_by_topk: dict[int, list[float]],
     band: BandSelection,
     path: Path,
 ) -> None:
     import matplotlib.pyplot as plt
 
     path.parent.mkdir(parents=True, exist_ok=True)
-    xs = list(range(len(match_rates)))
     fig, ax = plt.subplots(figsize=(8, 4))
-    ax.plot(xs, match_rates, marker="o", label="J-lens top-k match rate")
-    ax.axvspan(band.band_start, band.band_end, alpha=0.2, color="C1", label="selected band")
+    for k in sorted(match_rates_by_topk):
+        rates = match_rates_by_topk[k]
+        xs = list(range(len(rates)))
+        selected = k == band.select_topk
+        ax.plot(
+            xs,
+            rates,
+            marker="o",
+            label=f"lens top-{k}" + (" (select)" if selected else ""),
+            linewidth=2.0 if selected else 1.2,
+            alpha=1.0 if selected else 0.75,
+        )
+    ax.axvspan(
+        band.band_start,
+        band.band_end,
+        alpha=0.2,
+        color="C1",
+        label="selected band",
+    )
     ax.set_xlabel("layer")
     ax.set_ylabel("match rate")
     ax.set_title("Workspace band diagnostic (medium-equivalent single band)")
@@ -315,6 +371,9 @@ def number_token_loading(
 def save_band_json(path: Path, band: BandSelection, extra: dict[str, Any] | None = None) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = asdict(band)
+    by_topk = payload.get("match_rates_by_topk")
+    if isinstance(by_topk, dict):
+        payload["match_rates_by_topk"] = {str(k): v for k, v in by_topk.items()}
     if extra:
         payload.update(extra)
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")

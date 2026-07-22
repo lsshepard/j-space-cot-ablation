@@ -11,7 +11,7 @@ from jspace.ablation import (
     AblationConfig,
     AblationHookState,
     ablation_hooks,
-    clean_topk_token_ids,
+    clean_topk_by_position,
 )
 from jspace.load import LoadedModel
 from jspace.prompts import format_user, system_prompt
@@ -26,6 +26,8 @@ class GenerationResult:
     prompt_token_count: int
     hook_call_count: int = 0
     direct_leak_flag: bool = False
+    prompt_input_ids: Any | None = None
+    prompt_attention_mask: Any | None = None
     extra: dict[str, Any] = field(default_factory=dict)
 
 
@@ -123,6 +125,8 @@ def generate_clean(
         direct_leak_flag=flag_direct_leak(
             decoded, enable_thinking=enable_thinking, token_count=len(gen_ids)
         ),
+        prompt_input_ids=inputs["input_ids"],
+        prompt_attention_mask=inputs.get("attention_mask"),
     )
 
 
@@ -162,25 +166,24 @@ def generate_with_ablation(
     if attention_mask is not None:
         attention_mask = attention_mask.to(loaded.device)
     prompt_len = int(input_ids.shape[-1])
+    prompt_input_ids = input_ids.clone()
+    prompt_attention_mask = (
+        attention_mask.clone() if attention_mask is not None else None
+    )
 
     generated: list[int] = []
     logprobs: list[float] = []
-    state = AblationHookState()
+    state = AblationHookState(prompt_token_count=prompt_len)
     eos_id = loaded.tokenizer.eos_token_id
 
-    # Optional: ablate prompt positions once before generation.
-    if ablation.ablate_prompt_tokens:
-        with ablation_hooks(loaded.hf_model, loaded.lens, ablation, state):
-            _ = loaded.hf_model(input_ids=input_ids, attention_mask=attention_mask)
-
     for _ in range(max_new_tokens):
-        # Clean pass on current prefix → top-10 exclusion set.
+        # Clean pass → per-position next-token top-k (exclusion is position-local).
         clean_out = loaded.hf_model(input_ids=input_ids, attention_mask=attention_mask)
-        state.excluded_token_ids = clean_topk_token_ids(
+        state.excluded_by_position = clean_topk_by_position(
             clean_out.logits, ablation.exclude_topk
         )
 
-        # Ablated pass produces the next token.
+        # Ablated full-prefix forward: per-position dirs on prompt+generation (§4.6).
         with ablation_hooks(loaded.hf_model, loaded.lens, ablation, state):
             ablated_out = loaded.hf_model(
                 input_ids=input_ids, attention_mask=attention_mask
@@ -212,6 +215,8 @@ def generate_with_ablation(
         direct_leak_flag=flag_direct_leak(
             decoded, enable_thinking=enable_thinking, token_count=len(generated)
         ),
+        prompt_input_ids=prompt_input_ids,
+        prompt_attention_mask=prompt_attention_mask,
     )
 
 

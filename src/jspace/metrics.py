@@ -1,4 +1,4 @@
-"""Accuracy helpers, graded logprob stub, bootstrap placeholder."""
+"""Accuracy helpers, bootstrap CI."""
 
 from __future__ import annotations
 
@@ -16,6 +16,7 @@ def accuracy(correct_flags: Sequence[bool]) -> float:
 
 
 def mean_logprob(token_logprobs: Sequence[float]) -> float | None:
+    """Mean of generated-token logprobs (debug). Gold graded metric lives in graded.py."""
     if not token_logprobs:
         return None
     return float(np.mean(token_logprobs))

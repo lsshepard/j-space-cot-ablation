@@ -8,8 +8,9 @@ from jspace.config import Settings
 from jspace.data import Problem
 from jspace.extract import extract_answer
 from jspace.generate import generate
+from jspace.graded import teacher_forced_gold_logprob
 from jspace.load import LoadedModel
-from jspace.metrics import mean_logprob, score_prediction
+from jspace.metrics import score_prediction
 from jspace.records import ProblemRecord
 from jspace.token_budgets import TokenBudgetProfile, resolve_max_new_tokens
 
@@ -59,6 +60,18 @@ def run_problem(
     )
     extraction = extract_answer(problem.dataset, result.text)
     correct = score_prediction(problem.dataset, extraction.answer, problem.gold_answer)
+    graded = None
+    if result.prompt_input_ids is not None:
+        graded = teacher_forced_gold_logprob(
+            loaded,
+            result.prompt_input_ids,
+            problem.dataset,
+            problem.gold_answer,
+            enable_thinking=enable_thinking,
+            generated_token_ids=result.token_ids,
+            ablation=ablation if ablation.kind != "none" else None,
+            attention_mask=result.prompt_attention_mask,
+        )
     bt_count = regex_backtrack_count(result.text) if enable_thinking else None
     bt_rate = (
         normalized_backtrack_rate(bt_count, len(result.token_ids))
@@ -78,7 +91,7 @@ def run_problem(
         extracted_answer=extraction.answer,
         gold_answer=problem.gold_answer,
         correct=correct,
-        graded_logprob=mean_logprob(result.token_logprobs),
+        graded_logprob=graded,
         trace_length_tokens=len(result.token_ids),
         hit_token_cap=result.hit_token_cap,
         extraction_success=extraction.success,

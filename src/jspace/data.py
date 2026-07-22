@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from jspace.config import (
     AIME_N,
@@ -16,6 +16,10 @@ from jspace.config import (
     GSM8K_REPO,
     MATH500_REPO,
 )
+
+if TYPE_CHECKING:
+    from jspace.config import Settings
+
 
 
 @dataclass(frozen=True)
@@ -140,10 +144,25 @@ def load_multihop_fixture(path: Path) -> list[Problem]:
     return problems
 
 
-def dataset_revision_meta() -> dict[str, str]:
-    return {
-        "gsm8k_repo": GSM8K_REPO,
-        "math500_repo": MATH500_REPO,
-        "aime_repo": AIME_REPO,
-        "aime_n_expected": str(AIME_N),
-    }
+def dataset_revision_meta(settings: Settings | None = None) -> dict[str, Any]:
+    """Repo ids plus resolved/pinned revisions when Settings are provided."""
+    from jspace.revisions import resolve_dataset_revisions
+
+    if settings is None:
+        return {
+            "gsm8k_repo": GSM8K_REPO,
+            "math500_repo": MATH500_REPO,
+            "aime_repo": AIME_REPO,
+            "aime_n_expected": str(AIME_N),
+        }
+    meta = resolve_dataset_revisions(
+        gsm8k_repo=GSM8K_REPO,
+        math500_repo=MATH500_REPO,
+        aime_repo=AIME_REPO,
+        gsm8k_revision=settings.gsm8k_revision,
+        math500_revision=settings.math500_revision,
+        aime_revision=settings.aime_revision,
+    )
+    meta["aime_n_expected"] = str(AIME_N)
+    return meta
+

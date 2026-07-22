@@ -58,7 +58,8 @@ python scripts/07_judge_backtracks.py --traces results/.../traces.jsonl
 2. Install deps; `export JSPACE_MODEL=Qwen/Qwen3-4B JSPACE_DEVICE=cuda JSPACE_DTYPE=bfloat16`.
 3. Run **02 → 05** first (lens, band, multihop gate, timing). Fail closed on gates.
 4. Set `--band-start` / `--band-end` from the 4B diagnostic (local band is throwaway).
-5. Run **06**; size GSM8K/MATH cells from the timing probe; AIME = all 30.
+5. Run **06** (resumes by default; `--fresh` to wipe); size GSM8K/MATH cells from the timing probe; AIME = all 30.
+   Pin revisions via `JSPACE_MODEL_REVISION`, `JSPACE_GSM8K_REVISION`, `JSPACE_MATH500_REVISION`, `JSPACE_AIME_REVISION`, `JSPACE_LENS_REVISION` (resolved SHAs are also written to `run_meta.json`).
 6. Offline: **07** + hand-label ~30–50 spans; report regex↔judge and hand↔judge agreement.
 
 ## Disclosure checklist (report)

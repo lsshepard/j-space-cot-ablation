@@ -77,13 +77,18 @@ def load_hf_model(settings: Settings) -> LoadedModel:
     hf_model.eval()
 
     n_layers = int(hf_model.config.num_hidden_layers)
+    from jspace.revisions import resolve_repo_revision
+
+    resolved_revision = resolve_repo_revision(
+        settings.model_name, settings.model_revision
+    )
     return LoadedModel(
         hf_model=hf_model,
         tokenizer=tokenizer,
         device=device,
         dtype=dtype,
         model_name=settings.model_name,
-        model_revision=settings.model_revision,
+        model_revision=resolved_revision,
         n_layers=n_layers,
     )
 
@@ -98,10 +103,13 @@ def attach_jlens(loaded: LoadedModel, settings: Settings) -> LoadedModel:
         lens_kwargs["revision"] = settings.lens_revision
 
     lens = jlens.JacobianLens.from_pretrained(settings.lens_repo, **lens_kwargs)
+    from jspace.revisions import resolve_repo_revision
+
+    resolved_lens = resolve_repo_revision(settings.lens_repo, settings.lens_revision)
     meta = {
         "lens_repo": settings.lens_repo,
         "lens_filename": settings.lens_filename,
-        "lens_revision": settings.lens_revision or "default",
+        "lens_revision": resolved_lens or settings.lens_revision or "default",
         "source_layers": list(getattr(lens, "source_layers", [])),
         "d_model": getattr(lens, "d_model", None),
     }

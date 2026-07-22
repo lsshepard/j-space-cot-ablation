@@ -62,3 +62,19 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
 def write_run_meta(path: Path, meta: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def run_key(problem_id: str, condition: str, random_seed: int) -> tuple[str, str, int]:
+    return (problem_id, condition, random_seed)
+
+
+def completed_run_keys(path: Path) -> set[tuple[str, str, int]]:
+    """Keys already present in a traces JSONL (for resume)."""
+    if not path.exists():
+        return set()
+    done: set[tuple[str, str, int]] = set()
+    for row in read_jsonl(path):
+        extra = row.get("extra") or {}
+        rseed = extra.get("random_seed", row.get("seed", 0))
+        done.add(run_key(row["problem_id"], row["condition"], int(rseed)))
+    return done

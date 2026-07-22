@@ -48,6 +48,9 @@ class Settings:
     lens_repo: str = LENS_REPO
     lens_filename: str = LENS_FILENAME
     lens_revision: str | None = None
+    gsm8k_revision: str | None = None
+    math500_revision: str | None = None
+    aime_revision: str | None = None
     device: str | None = None
     dtype: str | None = None
     attn_implementation: str = "eager"
@@ -96,6 +99,9 @@ def load_settings() -> Settings:
         lens_repo=_env_str("JSPACE_LENS_REPO") or LENS_REPO,
         lens_filename=_env_str("JSPACE_LENS_FILE") or LENS_FILENAME,
         lens_revision=_env_str("JSPACE_LENS_REVISION"),
+        gsm8k_revision=_env_str("JSPACE_GSM8K_REVISION"),
+        math500_revision=_env_str("JSPACE_MATH500_REVISION"),
+        aime_revision=_env_str("JSPACE_AIME_REVISION"),
         device=_env_str("JSPACE_DEVICE"),
         dtype=_env_str("JSPACE_DTYPE"),
         band_start=_env_int("JSPACE_BAND_START"),

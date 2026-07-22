@@ -2,11 +2,14 @@ import torch
 
 from jspace.ablation import (
     active_j_directions,
+    clean_topk_by_position,
     clean_topk_token_ids,
     filter_directions_by_exclusion,
     gram_schmidt,
+    positions_to_ablate,
     project_out_directions,
     random_directions,
+    scale_perturbation_to_norm,
 )
 
 
@@ -49,6 +52,27 @@ def test_clean_topk_token_ids():
     assert ids == {3, 5}
 
 
+def test_clean_topk_by_position_is_local():
+    logits = torch.zeros(1, 3, 10)
+    logits[0, 0, 1] = 10
+    logits[0, 1, 4] = 10
+    logits[0, 2, 7] = 10
+    by_pos = clean_topk_by_position(logits, k=1)
+    assert by_pos[0] == {1}
+    assert by_pos[1] == {4}
+    assert by_pos[2] == {7}
+
+
+def test_scale_perturbation_matches_target_norm():
+    original = torch.tensor([[3.0, 4.0, 0.0]])
+    # Weak ablation: remove only a little.
+    ablated = torch.tensor([[2.9, 4.0, 0.0]])
+    target = torch.tensor([[2.0]])
+    out = scale_perturbation_to_norm(original, ablated, target)
+    delta = original - out
+    assert abs(float(torch.linalg.vector_norm(delta)) - 2.0) < 1e-5
+
+
 def test_layer_jacobians_proxy_on_mismatch():
     import warnings
     from types import SimpleNamespace
@@ -68,12 +92,33 @@ def test_layer_jacobians_proxy_on_mismatch():
 def test_filter_exclusion_drops_matching_direction():
     d = 4
     J = torch.eye(d)
-    unembed = torch.eye(10, d)  # vocab 10, d_model 4 — pad
-    unembed = torch.nn.functional.pad(unembed, (0, 0, 0, 0))[:10, :d]
-    # Make token 2 align with e0 after J
     unembed = torch.zeros(10, d)
     unembed[2] = torch.tensor([1.0, 0.0, 0.0, 0.0])
     directions = torch.tensor([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0]])
     kept = filter_directions_by_exclusion(directions, J, unembed, excluded_token_ids={2})
     assert kept.shape[0] == 1
     assert torch.allclose(kept[0], directions[1])
+
+
+def test_positions_to_ablate_prompt_and_generation():
+    assert list(positions_to_ablate(5, ablate_prompt_tokens=True, prompt_token_count=3)) == [
+        0,
+        1,
+        2,
+        3,
+        4,
+    ]
+    assert list(
+        positions_to_ablate(5, ablate_prompt_tokens=False, prompt_token_count=3)
+    ) == [3, 4]
+    assert list(
+        positions_to_ablate(3, ablate_prompt_tokens=False, prompt_token_count=3)
+    ) == [2]
+
+
+def test_ablation_hook_state_tracks_prompt_len():
+    from jspace.ablation import AblationHookState
+
+    state = AblationHookState(prompt_token_count=12)
+    assert state.prompt_token_count == 12
+    assert state.excluded_by_position == []

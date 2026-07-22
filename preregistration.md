@@ -52,5 +52,8 @@ Exclude cells where an arm’s unablated accuracy is **< 10%** from the interact
 - Ablate prompt + generation positions across the band.
 - Per-token ablation in **both** CoT and direct arms with per-step clean top-10 exclusion.
 - Default k=10; sensitivity at k=5 and k=25.
-- Random-direction control: matched band/k/norm, seeds {0,1,2}.
+- Random-direction control: matched band/k and matched ‖Δh‖ to the J-ablation
+  perturbation at each layer/position (paper matched-norm); seeds {0,1,2}.
+- Clean top-10 exclusion is **position-local** (per prefix index), not broadcast
+  from the last token.
 - Decoding: greedy, fixed seed, one trace per problem.

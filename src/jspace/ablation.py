@@ -29,9 +29,34 @@ class AblationConfig:
 class AblationHookState:
     """Mutable state shared between clean top-10 capture and ablated step."""
 
-    excluded_token_ids: set[int] = field(default_factory=set)
+    # Per-position clean next-token top-k (paper: exclusion is position-local).
+    excluded_by_position: list[set[int]] = field(default_factory=list)
     hook_call_count: int = 0
     last_position: int | None = None
+    prompt_token_count: int = 0
+
+
+def positions_to_ablate(
+    seq_len: int,
+    *,
+    ablate_prompt_tokens: bool,
+    prompt_token_count: int,
+) -> range:
+    """
+    Token positions to project out on a full-prefix forward (no KV cache).
+
+    With ablate_prompt_tokens=True (prereg default): every position.
+    Otherwise: generation positions only; if the prefix is still prompt-only,
+    ablate the last position (next-token prediction site).
+    """
+    if seq_len <= 0:
+        return range(0)
+    if ablate_prompt_tokens:
+        return range(seq_len)
+    start = min(max(prompt_token_count, 0), seq_len)
+    if start >= seq_len:
+        return range(seq_len - 1, seq_len)
+    return range(start, seq_len)
 
 
 def gram_schmidt(vectors: torch.Tensor) -> torch.Tensor:
@@ -54,9 +79,24 @@ def project_out_directions(hidden: torch.Tensor, directions: torch.Tensor) -> to
     """Project out rows of `directions` from last-dim of hidden (§4.6)."""
     if directions.numel() == 0:
         return hidden
-    # hidden: [..., d], directions: [k, d]
     coeffs = torch.einsum("...d,kd->...k", hidden, directions)
     return hidden - torch.einsum("...k,kd->...d", coeffs, directions)
+
+
+def scale_perturbation_to_norm(
+    original: torch.Tensor,
+    ablated: torch.Tensor,
+    target_delta_norm: torch.Tensor,
+) -> torch.Tensor:
+    """
+    Rescale (original - ablated) so ‖Δh‖ matches target (paper matched-norm).
+
+    target_delta_norm broadcasts against the last dim of hidden.
+    """
+    delta = original - ablated
+    delta_norm = torch.linalg.vector_norm(delta, dim=-1, keepdim=True).clamp_min(1e-8)
+    target = target_delta_norm.reshape_as(delta_norm).clamp_min(0.0)
+    return original - delta * (target / delta_norm)
 
 
 def active_j_directions(
@@ -65,7 +105,6 @@ def active_j_directions(
     k: int,
 ) -> torch.Tensor:
     """Top-k residual directions by singular activity |(Vh @ h) * S|."""
-    # SVD on CPU float32 — MPS lacks linalg_svd; keeps local/GPU paths uniform.
     j32 = jacobian.detach().float().cpu()
     h32 = residual.detach().float().cpu()
     _u, s, vh = torch.linalg.svd(j32, full_matrices=False)
@@ -187,6 +226,15 @@ def _transformer_layers(hf_model: Any) -> list[Any]:
     raise AttributeError("unsupported model layout for residual hooks")
 
 
+def _excluded_at(
+    state: AblationHookState,
+    pos: int,
+) -> set[int]:
+    if 0 <= pos < len(state.excluded_by_position):
+        return state.excluded_by_position[pos]
+    return set()
+
+
 @contextmanager
 def ablation_hooks(
     hf_model: Any,
@@ -202,12 +250,58 @@ def ablation_hooks(
     layers = _transformer_layers(hf_model)
     handles: list[Any] = []
     unembed = get_unembed(hf_model)
-    d_model = int(get_unembed(hf_model).shape[-1])
-    jacobians = (
-        layer_jacobians(lens, config.band_start, config.band_end, d_model=d_model)
-        if config.kind == "jspace"
-        else {}
+    d_model = int(unembed.shape[-1])
+    # Random control needs J to measure ‖Δh_J‖ for matched-norm scaling.
+    if lens is None:
+        raise RuntimeError(f"lens required for ablation kind={config.kind}")
+    jacobians = layer_jacobians(
+        lens, config.band_start, config.band_end, d_model=d_model
     )
+
+    def _j_dirs_for(
+        residual: torch.Tensor,
+        layer_idx: int,
+        excluded: set[int],
+    ) -> torch.Tensor:
+        J = jacobians[layer_idx].to(device=residual.device, dtype=residual.dtype)
+        directions = active_j_directions(residual, J, config.k)
+        return filter_directions_by_exclusion(
+            directions,
+            J,
+            unembed.to(device=residual.device),
+            excluded,
+        )
+
+    def _ablate_position(
+        h_pos: torch.Tensor,
+        layer_idx: int,
+        pos: int,
+    ) -> torch.Tensor:
+        """Ablate one residual vector [batch, d] or [d]; batch dim optional."""
+        squeeze = h_pos.ndim == 1
+        if squeeze:
+            h_pos = h_pos.unsqueeze(0)
+        residual = h_pos[0]
+        excluded = _excluded_at(state, pos)
+        j_dirs = _j_dirs_for(residual, layer_idx, excluded)
+
+        if config.kind == "jspace":
+            out = project_out_directions(h_pos, j_dirs)
+        else:
+            d = residual.shape[-1]
+            r_dirs = random_directions(
+                d,
+                config.k,
+                seed=config.seed + layer_idx * 1009 + pos,
+                device=residual.device,
+                dtype=residual.dtype,
+            )
+            h_j = project_out_directions(h_pos, j_dirs)
+            target_norm = torch.linalg.vector_norm(h_pos - h_j, dim=-1, keepdim=True)
+            h_r = project_out_directions(h_pos, r_dirs)
+            out = scale_perturbation_to_norm(h_pos, h_r, target_norm)
+
+        return out.squeeze(0) if squeeze else out
 
     def make_hook(layer_idx: int):
         def hook(_module, _inputs, output):
@@ -218,43 +312,21 @@ def ablation_hooks(
             else:
                 hidden, rest, packed = output, (), False
 
-            # hidden: [batch, seq, d]
-            pos = hidden.shape[1] - 1
-            state.last_position = pos
-            if not config.ablate_prompt_tokens and pos == 0:
+            seq_len = hidden.shape[1]
+            state.last_position = seq_len - 1
+            pos_range = positions_to_ablate(
+                seq_len,
+                ablate_prompt_tokens=config.ablate_prompt_tokens,
+                prompt_token_count=state.prompt_token_count,
+            )
+            if pos_range.start == pos_range.stop:
                 return output
 
-            h_last = hidden[:, -1, :]
-            d_model = h_last.shape[-1]
-            if config.kind == "random":
-                directions = random_directions(
-                    d_model,
-                    config.k,
-                    seed=config.seed + layer_idx * 1009 + pos,
-                    device=h_last.device,
-                    dtype=h_last.dtype,
+            hidden = hidden.clone()
+            for pos in pos_range:
+                hidden[:, pos, :] = _ablate_position(
+                    hidden[:, pos, :], layer_idx, pos
                 )
-            else:
-                J = jacobians[layer_idx].to(device=h_last.device, dtype=h_last.dtype)
-                directions = active_j_directions(h_last[0], J, config.k)
-                directions = filter_directions_by_exclusion(
-                    directions,
-                    J,
-                    unembed.to(device=h_last.device),
-                    state.excluded_token_ids,
-                )
-
-            # Matched-norm project-out on the last position (generation focus).
-            # Also ablate all positions when ablate_prompt_tokens is set (prompt pass).
-            if config.ablate_prompt_tokens and hidden.shape[1] > 1:
-                # Apply to full sequence for prompt+generation consistency on first pass.
-                flat = hidden.reshape(-1, d_model)
-                # Use last-token directions as approximate active set for the step.
-                flat = project_out_directions(flat, directions)
-                hidden = flat.reshape(hidden.shape)
-            else:
-                hidden = hidden.clone()
-                hidden[:, -1, :] = project_out_directions(h_last, directions)
 
             if packed:
                 return (hidden, *rest)
@@ -265,7 +337,7 @@ def ablation_hooks(
     for idx in range(config.band_start, config.band_end + 1):
         if idx < 0 or idx >= len(layers):
             continue
-        if config.kind == "jspace" and idx not in jacobians:
+        if idx not in jacobians:
             continue
         handles.append(layers[idx].register_forward_hook(make_hook(idx)))
 
@@ -276,20 +348,32 @@ def ablation_hooks(
             handle.remove()
 
 
+def clean_topk_by_position(
+    logits: torch.Tensor,
+    k: int,
+) -> list[set[int]]:
+    """Per-position clean next-token top-k from logits [batch, seq, vocab]."""
+    if logits.ndim != 3:
+        raise ValueError(f"expected [batch, seq, vocab] logits, got {tuple(logits.shape)}")
+    seq_len = logits.shape[1]
+    vocab = logits.shape[-1]
+    take = min(k, vocab)
+    out: list[set[int]] = []
+    for pos in range(seq_len):
+        ids = torch.topk(logits[0, pos], k=take).indices.tolist()
+        out.append({int(i) for i in ids})
+    return out
+
+
 def clean_topk_token_ids(
     logits: torch.Tensor,
     k: int,
 ) -> set[int]:
-    """Top-k vocabulary ids from next-token logits (§4.6 exclusion)."""
+    """Top-k vocabulary ids from last-position next-token logits."""
+    if logits.ndim == 3:
+        return clean_topk_by_position(logits, k)[-1]
     topk = torch.topk(logits[0, -1], k=min(k, logits.shape[-1])).indices.tolist()
     return set(int(i) for i in topk)
-
-
-def matched_norm_scale(original: torch.Tensor, ablated: torch.Tensor) -> torch.Tensor:
-    """Optional rescale to preserve residual norm after projection."""
-    orig_norm = torch.linalg.vector_norm(original, dim=-1, keepdim=True).clamp_min(1e-8)
-    abl_norm = torch.linalg.vector_norm(ablated, dim=-1, keepdim=True).clamp_min(1e-8)
-    return ablated * (orig_norm / abl_norm)
 
 
 def cosine_loading(residual: torch.Tensor, direction: torch.Tensor) -> float:
