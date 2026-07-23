@@ -1,0 +1,29 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7199.16it/s]
+Generating train split:   0%|          | 0/30 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 30/30 [00:00<00:00, 2429.18 examples/s]
+{
+  "model_name": "Qwen/Qwen3-4B",
+  "multiplier": 2.0,
+  "ceiling": 8192,
+  "datasets": {
+    "gsm8k": {
+      "direct": 378,
+      "cot": 2072,
+      "direct_p95_observed": 189,
+      "cot_p95_observed": 1036
+    },
+    "math500": {
+      "direct": 1360,
+      "cot": 7476,
+      "direct_p95_observed": 680,
+      "cot_p95_observed": 3738
+    },
+    "aime": {
+      "direct": 8192,
+      "cot": 8192,
+      "direct_p95_observed": 8192,
+      "cot_p95_observed": 8192
+    }
+  }
+}
+wrote /workspace/j-space-cot-ablation/results/calibration/token_budgets.json

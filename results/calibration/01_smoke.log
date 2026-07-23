@@ -1,0 +1,13 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 8476.44it/s]
+gsm8k-test-0 thinking=False correct=True extract_ok=True cap=False len=105/378
+gsm8k-test-0 thinking=True correct=True extract_ok=True cap=False len=413/2072
+gsm8k-test-1 thinking=False correct=True extract_ok=True cap=False len=62/378
+gsm8k-test-1 thinking=True correct=True extract_ok=True cap=False len=237/2072
+gsm8k-test-2 thinking=False correct=True extract_ok=True cap=False len=189/378
+gsm8k-test-2 thinking=True correct=True extract_ok=True cap=False len=1036/2072
+gsm8k-test-3 thinking=False correct=True extract_ok=True cap=False len=116/378
+gsm8k-test-3 thinking=True correct=True extract_ok=True cap=False len=305/2072
+gsm8k-test-4 thinking=False correct=True extract_ok=True cap=False len=163/378
+gsm8k-test-4 thinking=True correct=True extract_ok=True cap=False len=356/2072
+wrote /workspace/j-space-cot-ablation/results/harness/smoke.jsonl
