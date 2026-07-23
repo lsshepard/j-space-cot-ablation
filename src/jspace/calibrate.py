@@ -14,7 +14,8 @@ from jspace.ablation import cosine_loading, get_unembed
 from jspace.load import LoadedModel
 
 
-CALC_PROMPT = "calc: ( 4 + 17 ) * 2 + 7 ="
+# Trailing space: Qwen3 emits digit tokens after whitespace; bare "=" does not.
+CALC_PROMPT = "calc: ( 4 + 17 ) * 2 + 7 = "
 CALC_INTERMEDIATES = ("21", "42", "49")
 
 # Lens readout top-k for the band diagnostic (not ablation sparsity k).
@@ -81,15 +82,32 @@ def lens_sanity_calc(
         layers=layers,
     )
     tok = loaded.tokenizer
-    intermediate_ids = {
-        name: tok.encode(name, add_special_tokens=False)[-1]
-        for name in CALC_INTERMEDIATES
-    }
+    # Qwen3 splits multi-digit numbers into per-digit tokens; the lens is
+    # single-token, so score the leading digit of each intermediate.
+    intermediate_ids: dict[str, int] = {}
+    intermediate_token_meta: dict[str, dict[str, Any]] = {}
+    for name in CALC_INTERMEDIATES:
+        ids = tok.encode(name, add_special_tokens=False)
+        if not ids:
+            raise ValueError(f"tokenizer produced no ids for {name!r}")
+        tid = ids[0]
+        intermediate_ids[name] = tid
+        intermediate_token_meta[name] = {
+            "token_ids": ids,
+            "scored_token_id": tid,
+            "scored_token": tok.decode([tid]),
+            "digit_split": len(ids) > 1,
+        }
 
     per_layer: dict[int, dict[str, bool]] = {}
     for layer, logits in sorted(lens_logits.items()):
-        # logits: [batch, vocab] or [batch, pos, vocab]
-        flat = logits[0, -1] if logits.ndim == 3 else logits[0]
+        # jlens.apply returns [n_positions, vocab]; keep a batch×pos fallback.
+        if logits.ndim == 3:
+            flat = logits[0, -1]
+        elif logits.ndim == 2:
+            flat = logits[-1]
+        else:
+            flat = logits
         per_layer[int(layer)] = {
             name: _topk_contains(flat, tid, k=10)
             for name, tid in intermediate_ids.items()
@@ -104,6 +122,7 @@ def lens_sanity_calc(
         "any_hit": any_hit,
         "all_intermediates_seen": all(any_hit.values()),
         "skipped": False,
+        "intermediate_tokens": intermediate_token_meta,
     }
 
 

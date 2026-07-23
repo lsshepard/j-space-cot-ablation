@@ -48,7 +48,8 @@ def format_user(dataset: str, problem: str) -> str:
     }
     if dataset not in templates:
         raise ValueError(f"unknown dataset template: {dataset}")
-    return templates[dataset].format(problem=problem)
+    # str.format would treat LaTeX \boxed{} (and braces in problems) as fields.
+    return templates[dataset].replace("{problem}", problem)
 
 
 def system_prompt(dataset: str) -> str:
