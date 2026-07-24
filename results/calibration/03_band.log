@@ -9,3 +9,7 @@ wrote /root/j-space-cot-ablation/results/calibration/band_diagnostic.png
 Review the plot before continuing to 04 (override with --band-start/--band-end).
 number_token_mean_cosine=-0.0101
 wrote /root/j-space-cot-ablation/results/calibration/band.json
+
+===== append gsm8k[32:64] pooled to n=64 =====
+band=[30, 33] auto=True
+number_token_mean_cosine=-0.0103
