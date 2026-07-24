@@ -33,8 +33,12 @@ DEFAULT_RANDOM_SEEDS = (0, 1, 2)
 DEFAULT_PROBLEMS_PER_CELL = 50
 FLOOR_ACCURACY_THRESHOLD = 0.10
 DEFAULT_TOKEN_BUDGET_MULTIPLIER = 2.0
+# Ablated traces may run longer than clean (compensation); floor vs observed p95.
+DEFAULT_ABLATED_TOKEN_BUDGET_MULTIPLIER = 3.0
 DEFAULT_TOKEN_BUDGET_PERCENTILE = 0.95
 DEFAULT_TOKEN_BUDGET_CEILING = 8192
+# Probe lengths without censoring at the final cost ceiling (§4.7).
+DEFAULT_TOKEN_BUDGET_PROBE_CEILING = 32768
 # Local MPS preview only: ablated runs use 2× forwards/token — cap to finish in ~1hr.
 DEFAULT_LOCAL_FAST_ABLATION_CAP = 512
 
@@ -63,8 +67,10 @@ class Settings:
     # max_new_tokens_override forces a single cap for all arms (debug only).
     max_new_tokens_override: int | None = None
     token_budget_multiplier: float = DEFAULT_TOKEN_BUDGET_MULTIPLIER
+    ablated_token_budget_multiplier: float = DEFAULT_ABLATED_TOKEN_BUDGET_MULTIPLIER
     token_budget_percentile: float = DEFAULT_TOKEN_BUDGET_PERCENTILE
     token_budget_ceiling: int = DEFAULT_TOKEN_BUDGET_CEILING
+    token_budget_probe_ceiling: int = DEFAULT_TOKEN_BUDGET_PROBE_CEILING
     local_fast_ablation_cap: int = DEFAULT_LOCAL_FAST_ABLATION_CAP
     problems_per_cell: int = DEFAULT_PROBLEMS_PER_CELL
     floor_accuracy_threshold: float = FLOOR_ACCURACY_THRESHOLD
@@ -111,10 +117,16 @@ def load_settings() -> Settings:
         max_new_tokens_override=override,
         token_budget_multiplier=_env_float("JSPACE_TOKEN_BUDGET_MULTIPLIER")
         or DEFAULT_TOKEN_BUDGET_MULTIPLIER,
+        ablated_token_budget_multiplier=_env_float(
+            "JSPACE_ABLATED_TOKEN_BUDGET_MULTIPLIER"
+        )
+        or DEFAULT_ABLATED_TOKEN_BUDGET_MULTIPLIER,
         token_budget_percentile=_env_float("JSPACE_TOKEN_BUDGET_PERCENTILE")
         or DEFAULT_TOKEN_BUDGET_PERCENTILE,
         token_budget_ceiling=_env_int("JSPACE_TOKEN_BUDGET_CEILING")
         or DEFAULT_TOKEN_BUDGET_CEILING,
+        token_budget_probe_ceiling=_env_int("JSPACE_TOKEN_BUDGET_PROBE_CEILING")
+        or DEFAULT_TOKEN_BUDGET_PROBE_CEILING,
         local_fast_ablation_cap=_env_int("JSPACE_LOCAL_FAST_ABLATION_CAP")
         or DEFAULT_LOCAL_FAST_ABLATION_CAP,
         problems_per_cell=_env_int("JSPACE_PROBLEMS_PER_CELL")

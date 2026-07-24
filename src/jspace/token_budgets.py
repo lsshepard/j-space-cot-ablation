@@ -125,12 +125,24 @@ def resolve_max_new_tokens(
     if profile is None:
         profile = load_token_budgets(calibration_path(settings))
 
+    observed_p95: int | None = None
     if profile is not None and dataset in profile.datasets:
+        caps = profile.datasets[dataset]
         base = profile.cap_for(dataset, enable_thinking=enable_thinking)
+        observed_p95 = (
+            caps.cot_p95_observed if enable_thinking else caps.direct_p95_observed
+        )
     else:
         fallback = _DEFAULT_CAPS.get(dataset, _DEFAULT_CAPS["gsm8k"])
         key = "cot" if enable_thinking else "direct"
         base = fallback[key]
+
+    if ablation_kind != "none" and observed_p95 is not None:
+        ablated_floor = math.ceil(
+            observed_p95 * settings.ablated_token_budget_multiplier
+        )
+        ceiling = profile.ceiling if profile is not None else settings.token_budget_ceiling
+        base = min(ceiling, max(base, ablated_floor))
 
     if local_fast and ablation_kind != "none":
         return min(base, settings.local_fast_ablation_cap)
@@ -170,13 +182,22 @@ def calibrate_token_budgets(
     percentile: float | None = None,
     multiplier: float | None = None,
     ceiling: int | None = None,
+    probe_ceiling: int | None = None,
 ) -> TokenBudgetProfile:
     """
     Measure unablated clean trace lengths; set caps = ceil(p95 * multiplier) (§4.7).
+
+    Probe generation uses probe_ceiling (high) so p95 is not censored by the
+    final cost ceiling applied when writing caps.
     """
     pct = percentile if percentile is not None else settings.token_budget_percentile
     mult = multiplier if multiplier is not None else settings.token_budget_multiplier
     cap_ceiling = ceiling if ceiling is not None else settings.token_budget_ceiling
+    measure_ceiling = (
+        probe_ceiling
+        if probe_ceiling is not None
+        else settings.token_budget_probe_ceiling
+    )
 
     calibrated: dict[str, DatasetTokenCaps] = {}
     for dataset in datasets:
@@ -186,7 +207,7 @@ def calibrate_token_budgets(
         direct_lens, cot_lens = _measure_clean_lengths(
             loaded,
             problems,
-            probe_ceiling=cap_ceiling,
+            probe_ceiling=measure_ceiling,
             seed=settings.seed,
         )
         direct_p95 = _percentile(direct_lens, pct)

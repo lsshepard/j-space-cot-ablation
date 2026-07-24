@@ -33,6 +33,12 @@ def main() -> None:
     parser.add_argument("--multiplier", type=float, default=None)
     parser.add_argument("--percentile", type=float, default=None)
     parser.add_argument("--ceiling", type=int, default=None)
+    parser.add_argument(
+        "--probe-ceiling",
+        type=int,
+        default=None,
+        help="max_new_tokens while measuring lengths (default: settings probe ceiling)",
+    )
     args = parser.parse_args()
 
     settings = load_settings()
@@ -47,6 +53,7 @@ def main() -> None:
         percentile=args.percentile,
         multiplier=args.multiplier,
         ceiling=args.ceiling,
+        probe_ceiling=args.probe_ceiling,
     )
     out = calibration_path(settings)
     save_token_budgets(out, profile)

@@ -87,3 +87,72 @@ def test_local_fast_caps_ablated_only():
         )
         == 422
     )
+
+
+def test_ablated_cap_at_least_three_times_observed_p95():
+    profile = TokenBudgetProfile(
+        model_name="test",
+        multiplier=2.0,
+        ceiling=8192,
+        datasets={
+            "gsm8k": DatasetTokenCaps(
+                direct=200,
+                cot=2000,
+                direct_p95_observed=100,
+                cot_p95_observed=1000,
+            )
+        },
+    )
+    settings = Settings(ablated_token_budget_multiplier=3.0)
+    assert (
+        resolve_max_new_tokens(
+            settings, "gsm8k", enable_thinking=True, profile=profile, ablation_kind="none"
+        )
+        == 2000
+    )
+    assert (
+        resolve_max_new_tokens(
+            settings,
+            "gsm8k",
+            enable_thinking=True,
+            profile=profile,
+            ablation_kind="jspace",
+        )
+        == 3000
+    )
+    assert (
+        resolve_max_new_tokens(
+            settings,
+            "gsm8k",
+            enable_thinking=False,
+            profile=profile,
+            ablation_kind="random",
+        )
+        == 300
+    )
+
+
+def test_ablated_cap_respects_profile_ceiling():
+    profile = TokenBudgetProfile(
+        model_name="test",
+        multiplier=2.0,
+        ceiling=2500,
+        datasets={
+            "gsm8k": DatasetTokenCaps(
+                direct=200,
+                cot=2000,
+                cot_p95_observed=1000,
+            )
+        },
+    )
+    settings = Settings(ablated_token_budget_multiplier=3.0)
+    assert (
+        resolve_max_new_tokens(
+            settings,
+            "gsm8k",
+            enable_thinking=True,
+            profile=profile,
+            ablation_kind="jspace",
+        )
+        == 2500
+    )
