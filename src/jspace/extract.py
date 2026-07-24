@@ -74,6 +74,31 @@ def extract_aime(text: str) -> Extraction:
     return Extraction(None, False)
 
 
+def _normalize_multihop(text: str) -> str:
+    """SQuAD-style light normalize: case, punct, articles, whitespace."""
+    text = text.strip().lower()
+    text = re.sub(r"[^\w\s]", " ", text)
+    text = re.sub(r"\b(a|an|the)\b", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _multihop_equal(predicted: str, gold: str) -> bool:
+    """Normalized EM, or gold token span contained in the prediction (entity aliases)."""
+    pred_n = _normalize_multihop(predicted)
+    gold_n = _normalize_multihop(gold)
+    if not pred_n or not gold_n:
+        return False
+    if pred_n == gold_n:
+        return True
+    pred_toks = pred_n.split()
+    gold_toks = gold_n.split()
+    g = len(gold_toks)
+    for i in range(len(pred_toks) - g + 1):
+        if pred_toks[i : i + g] == gold_toks:
+            return True
+    return False
+
+
 def extract_answer(dataset: str, text: str) -> Extraction:
     if dataset == "gsm8k":
         return extract_gsm8k(text)
@@ -82,7 +107,10 @@ def extract_answer(dataset: str, text: str) -> Extraction:
     if dataset == "aime":
         return extract_aime(text)
     if dataset == "multihop":
-        cleaned = text.strip().splitlines()[-1].strip() if text.strip() else None
+        surface = answer_surface_text(text)
+        cleaned = surface.splitlines()[-1].strip() if surface else None
+        if cleaned is not None:
+            cleaned = cleaned.strip().rstrip(".,;:!")
         return Extraction(cleaned, cleaned is not None and len(cleaned) > 0)
     raise ValueError(f"unknown dataset: {dataset}")
 
@@ -95,9 +123,8 @@ def answers_equal(dataset: str, predicted: str | None, gold: str) -> bool:
     if dataset == "math500":
         return math500_equal(predicted, gold)
     if dataset == "multihop":
-        return predicted.strip().lower() == gold.strip().lower()
+        return _multihop_equal(predicted, gold)
     raise ValueError(f"unknown dataset: {dataset}")
-
 
 def math500_equal(predicted: str, gold: str) -> bool:
     """Symbolic equivalence via math_verify when available; else normalized string."""

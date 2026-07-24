@@ -52,3 +52,10 @@ def test_aime_fallback_ignores_thinking_integers():
 def test_answers_equal_gsm8k():
     assert answers_equal("gsm8k", "42", "42")
     assert not answers_equal("gsm8k", None, "42")
+
+
+def test_answers_equal_multihop_normalized_and_alias():
+    assert answers_equal("multihop", "Rome.", "Rome")
+    assert answers_equal("multihop", "George Washington", "Washington")
+    assert answers_equal("multihop", "Indian Ocean.", "Indian")
+    assert not answers_equal("multihop", "Pacific Ocean", "Indian")
