@@ -1,11 +1,11 @@
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 7100.13it/s]
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 301.19it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 9547.72it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:07<00:00,  7.91s/it]Fetching 1 files: 100%|██████████| 1/1 [00:07<00:00,  7.91s/it]
 band=[30, 33] auto=True select_topk=16 label=medium_equivalent
-  top-2: mean_in_band=0.312
-  top-16: mean_in_band=0.594
-  top-128: mean_in_band=1.000
-wrote /workspace/j-space-cot-ablation/results/calibration/band_diagnostic.png
+  top-2: mean_in_band=0.406
+  top-16: mean_in_band=0.672
+  top-128: mean_in_band=0.961
+wrote /root/j-space-cot-ablation/results/calibration/band_diagnostic.png
 Review the plot before continuing to 04 (override with --band-start/--band-end).
-number_token_mean_cosine=-0.0103
-wrote /workspace/j-space-cot-ablation/results/calibration/band.json
+number_token_mean_cosine=-0.0101
+wrote /root/j-space-cot-ablation/results/calibration/band.json

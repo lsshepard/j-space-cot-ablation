@@ -90,8 +90,9 @@ def generate_clean(
     enable_thinking: bool,
     max_new_tokens: int,
     seed: int,
+    capture_logprobs: bool = True,
 ) -> GenerationResult:
-    """Greedy generate without ablation; capture per-token logprobs."""
+    """Greedy generate without ablation; optionally capture per-token logprobs."""
     torch.manual_seed(seed)
     text = build_chat_text(
         loaded.tokenizer, dataset, problem, enable_thinking=enable_thinking
@@ -105,13 +106,13 @@ def generate_clean(
         max_new_tokens=max_new_tokens,
         do_sample=False,
         return_dict_in_generate=True,
-        output_scores=True,
+        output_scores=capture_logprobs,
         pad_token_id=loaded.tokenizer.pad_token_id,
     )
     seq = output.sequences[0]
     gen_ids = seq[prompt_len:].tolist()
     logprobs: list[float] = []
-    if output.scores:
+    if capture_logprobs and output.scores:
         for step_scores, token_id in zip(output.scores, gen_ids):
             log_p = torch.log_softmax(step_scores[0], dim=-1)[token_id]
             logprobs.append(float(log_p.item()))
@@ -191,6 +192,7 @@ def generate_with_ablation(
             enable_thinking=enable_thinking,
             max_new_tokens=max_new_tokens,
             seed=seed,
+            capture_logprobs=True,
         )
 
     torch.manual_seed(seed)

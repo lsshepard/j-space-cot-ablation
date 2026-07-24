@@ -1,25 +1,19 @@
 {
   "model_name": "Qwen/Qwen3-4B",
   "multiplier": 2.0,
-  "ceiling": 8192,
+  "ceiling": 16384,
   "datasets": {
     "gsm8k": {
-      "direct": 378,
-      "cot": 2072,
-      "direct_p95_observed": 189,
-      "cot_p95_observed": 1036
+      "direct": 360,
+      "cot": 2048,
+      "direct_p95_observed": 180,
+      "cot_p95_observed": 899
     },
     "math500": {
       "direct": 1360,
-      "cot": 7476,
+      "cot": 9302,
       "direct_p95_observed": 680,
-      "cot_p95_observed": 3738
-    },
-    "aime": {
-      "direct": 8192,
-      "cot": 8192,
-      "direct_p95_observed": 8192,
-      "cot_p95_observed": 8192
+      "cot_p95_observed": 4651
     }
   }
 }
