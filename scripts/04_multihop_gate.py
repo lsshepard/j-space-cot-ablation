@@ -25,7 +25,8 @@ def main() -> None:
     parser.add_argument(
         "--fixture",
         type=Path,
-        default=ROOT / "tests" / "fixtures" / "multihop.json",
+        default=ROOT / "tests" / "fixtures" / "lens-eval-multihop.json",
+        help="multihop JSON fixture (homemade or Anthropic lens-eval-multihop)",
     )
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--band-start", type=int, default=None)
