@@ -1,7 +1,7 @@
 {
   "clean_accuracy": 0.6,
-  "j_ablated_accuracy": 0.7,
-  "drop": -0.09999999999999998,
+  "j_ablated_accuracy": 0.4,
+  "drop": 0.19999999999999996,
   "band_start": 27,
   "band_end": 33,
   "k": 10,

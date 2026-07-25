@@ -13,6 +13,11 @@ from jspace.diagnostics.logprob_bite import (
 )
 from jspace.diagnostics.suite import InstrumentSuiteResult, run_instrument_suite
 from jspace.diagnostics.survival import SurvivalSummary, summarize_survival
+from jspace.diagnostics.token_trace import (
+    ProblemTokenTrace,
+    run_token_traces,
+    summarize_traces,
+)
 
 __all__ = [
     "ExcludeABSummary",
@@ -20,11 +25,14 @@ __all__ = [
     "InstrumentSuiteResult",
     "LogprobBitePair",
     "LogprobBiteSummary",
+    "ProblemTokenTrace",
     "SurvivalSummary",
     "run_gold_lp_triad",
     "run_instrument_suite",
+    "run_token_traces",
     "summarize_exclude_ab",
     "summarize_gold_lp_triad",
     "summarize_logprob_bite",
     "summarize_survival",
+    "summarize_traces",
 ]
