@@ -6,7 +6,14 @@ import re
 
 import torch
 
-from jspace.ablation import AblationConfig, AblationHookState, ablation_hooks
+from jspace.ablation import (
+    AblationConfig,
+    AblationFactors,
+    AblationHookState,
+    ablation_hooks,
+    build_ablation_factors,
+    clean_topk_by_position,
+)
 from jspace.load import LoadedModel
 
 _OPEN_THINK_RE = re.compile(r"<think(?:ing)?>", re.IGNORECASE)
@@ -84,6 +91,7 @@ def teacher_forced_gold_logprob(
     generated_token_ids: list[int] | None = None,
     ablation: AblationConfig | None = None,
     attention_mask: torch.Tensor | None = None,
+    factors: AblationFactors | None = None,
 ) -> float | None:
     """
     Mean logprob of gold answer tokens teacher-forced after the graded prefix.
@@ -115,12 +123,22 @@ def teacher_forced_gold_logprob(
     cfg = ablation or AblationConfig(kind="none")
     prompt_len = int(prompt_input_ids.shape[-1])
     state = AblationHookState(prompt_token_count=prompt_len)
+    if cfg.kind != "none" and factors is None:
+        factors = build_ablation_factors(loaded.hf_model, loaded.lens, cfg)
 
     for gold_id in gold_ids:
         if cfg.kind == "none":
             out = loaded.hf_model(input_ids=input_ids, attention_mask=mask)
         else:
-            with ablation_hooks(loaded.hf_model, loaded.lens, cfg, state):
+            # Paper §4.6: exclusion is from the clean forward at this prefix.
+            clean_out = loaded.hf_model(input_ids=input_ids, attention_mask=mask)
+            state.excluded_by_position = clean_topk_by_position(
+                clean_out.logits, cfg.exclude_topk
+            )
+            state.past_token_count = 0
+            with ablation_hooks(
+                loaded.hf_model, loaded.lens, cfg, state, factors=factors
+            ):
                 out = loaded.hf_model(input_ids=input_ids, attention_mask=mask)
         logits = out.logits[0, -1]
         logprobs.append(float(torch.log_softmax(logits, dim=-1)[gold_id].item()))

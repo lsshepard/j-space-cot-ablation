@@ -1,0 +1,94 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 9223.39it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 2822.55it/s]
+gold-lp triad dataset=multihop n=28 band=[27,33] k=10 exclude_topk=10 random_seeds=(0, 1, 2)
+[1/28] amazon-language
+  gold='Portuguese' clean=-0.508 J=-3.211 R=-2.423 ΔJ=+2.703 ΔR=+1.915 ΔJ−ΔR=+0.788
+[2/28] atomic-26-symbol
+  gold='Fe' clean=-0.000 J=-0.562 R=-0.004 ΔJ=+0.562 ΔR=+0.004 ΔJ−ΔR=+0.559
+[3/28] atomic-29-flame
+  gold='green' clean=-4.250 J=-5.156 R=-2.878 ΔJ=+0.906 ΔR=-1.372 ΔJ−ΔR=+2.279
+[4/28] atomic-29-symbol
+  gold='Cu' clean=-0.000 J=-0.028 R=-0.021 ΔJ=+0.028 ΔR=+0.021 ΔJ−ΔR=+0.007
+[5/28] atomic-79-symbol
+  gold='Au' clean=-0.000 J=-0.003 R=-0.002 ΔJ=+0.003 ΔR=+0.002 ΔJ−ΔR=+0.001
+[6/28] atomic-80-state
+  gold='liquid' clean=-8.312 J=-5.906 R=-6.740 ΔJ=-2.406 ΔR=-1.573 ΔJ−ΔR=-0.833
+[7/28] basketball-players
+  gold='5' clean=-12.375 J=-13.062 R=-13.583 ΔJ=+0.688 ΔR=+1.208 ΔJ−ΔR=-0.521
+[8/28] carnival-ocean
+  gold='Atlantic' clean=-0.010 J=-0.074 R=-0.154 ΔJ=+0.064 ΔR=+0.144 ΔJ−ΔR=-0.080
+[9/28] christmas-season
+  gold='winter' clean=-8.750 J=-4.688 R=-8.302 ΔJ=-4.062 ΔR=-0.448 ΔJ−ΔR=-3.615
+[10/28] colosseum-currency
+  gold='Euro' clean=-0.043 J=-0.504 R=-0.056 ΔJ=+0.460 ΔR=+0.013 ΔJ−ΔR=+0.448
+[11/28] greatwall-ocean
+  gold='Pacific' clean=-1.055 J=-2.484 R=-1.891 ΔJ=+1.430 ΔR=+0.836 ΔJ−ΔR=+0.594
+[12/28] holiday-christmas-monthnum
+  gold='12' clean=-0.001 J=-0.000 R=-0.014 ΔJ=-0.001 ΔR=+0.013 ΔJ−ΔR=-0.014
+[13/28] holiday-halloween-monthnum
+  gold='10' clean=-3.375 J=-2.283 R=-2.511 ΔJ=-1.092 ΔR=-0.864 ΔJ−ΔR=-0.228
+[14/28] holiday-independence-monthnum
+  gold='7' clean=-0.001 J=-0.000 R=-0.002 ΔJ=-0.001 ΔR=+0.001 ΔJ−ΔR=-0.002
+[15/28] holiday-valentines-monthnum
+  gold='2' clean=-0.000 J=-0.010 R=-3.286 ΔJ=+0.010 ΔR=+3.286 ΔJ−ΔR=-3.276
+[16/28] louvre-language
+  gold='French' clean=-0.000 J=-0.000 R=-0.000 ΔJ=+0.000 ΔR=+0.000 ΔJ−ΔR=-0.000
+[17/28] mars-color
+  gold='red' clean=-12.500 J=-8.375 R=-9.625 ΔJ=-4.125 ΔR=-2.875 ΔJ−ΔR=-1.250
+[18/28] osu-rival-mascot
+  gold='wolverine' clean=-3.627 J=-4.323 R=-4.646 ΔJ=+0.696 ΔR=+1.019 ΔJ−ΔR=-0.324
+[19/28] paper-continent
+  gold='Asia' clean=-0.000 J=-0.002 R=-0.171 ΔJ=+0.001 ΔR=+0.171 ΔJ−ΔR=-0.169
+[20/28] planet-3-moons
+  gold='1' clean=-0.000 J=-0.117 R=-0.000 ΔJ=+0.117 ΔR=+0.000 ΔJ−ΔR=+0.117
+[21/28] spaceneedle-border
+  gold='Canada' clean=-15.875 J=-11.000 R=-12.458 ΔJ=-4.875 ΔR=-3.417 ΔJ−ΔR=-1.458
+[22/28] spider-legs
+  gold='8' clean=-0.412 J=-0.005 R=-0.170 ΔJ=-0.407 ΔR=-0.242 ΔJ−ΔR=-0.166
+[23/28] super-largest-country-capital
+  gold='Moscow' clean=-1.844 J=-2.916 R=-1.088 ΔJ=+1.072 ΔR=-0.756 ΔJ−ΔR=+1.828
+[24/28] super-largest-island-nation
+  gold='Jakarta' clean=-5.469 J=-7.719 R=-5.357 ΔJ=+2.250 ΔR=-0.111 ΔJ−ΔR=+2.361
+[25/28] super-populous-capital
+  gold='Beijing' clean=-0.002 J=-5.532 R=-1.548 ΔJ=+5.530 ΔR=+1.546 ΔJ−ΔR=+3.984
+[26/28] super-smallest-continent
+  gold='Europe' clean=-0.375 J=-1.305 R=-0.525 ΔJ=+0.930 ΔR=+0.150 ΔJ−ΔR=+0.780
+[27/28] tajmahal-continent
+  gold='Asia' clean=-0.707 J=-0.535 R=-1.924 ΔJ=-0.172 ΔR=+1.217 ΔJ−ΔR=-1.389
+[28/28] topeka-west
+  gold='Colorado' clean=-7.438 J=-4.156 R=-6.115 ΔJ=-3.281 ΔR=-1.323 ΔJ−ΔR=-1.958
+{
+  "dataset": "multihop",
+  "level": null,
+  "n": 28,
+  "band_start": 27,
+  "band_end": 33,
+  "k": 10,
+  "exclude_topk": 10,
+  "random_seeds": [
+    0,
+    1,
+    2
+  ],
+  "mean_clean_lp": -3.1046095192432404,
+  "mean_jspace_lp": -2.9984600182090486,
+  "mean_random_lp": -3.053333485410327,
+  "delta_j": {
+    "mean": -0.10614950103419167,
+    "lo": -0.9240508350410631,
+    "hi": 0.7372439307825905
+  },
+  "delta_r": {
+    "mean": -0.051276033832913306,
+    "lo": -0.4946749498978966,
+    "hi": 0.41975648216903194
+  },
+  "delta_j_minus_r": {
+    "mean": -0.05487346720127837,
+    "lo": -0.5814244982209944,
+    "hi": 0.5325108039414599
+  },
+  "verdict": "no_reliable_j_gold_lp_bite"
+}
+wrote /root/j-space-cot-ablation/results/diagnostics/gold_lp_triad_multihop.json

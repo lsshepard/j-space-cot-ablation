@@ -1,0 +1,9 @@
+{
+  "dataset": "gsm8k",
+  "thinking": false,
+  "level": null,
+  "n": 30,
+  "clean_accuracy": 0.9666666666666667,
+  "mean_clean_gold_lp": -8.094880772677678,
+  "in_target_band_20_80": false
+}

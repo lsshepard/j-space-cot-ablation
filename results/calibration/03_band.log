@@ -13,3 +13,6 @@ wrote /root/j-space-cot-ablation/results/calibration/band.json
 ===== append gsm8k[32:64] pooled to n=64 =====
 band=[30, 33] auto=True
 number_token_mean_cosine=-0.0103
+
+===== human override band=[27, 31] =====
+number_token_mean_cosine=0.0031

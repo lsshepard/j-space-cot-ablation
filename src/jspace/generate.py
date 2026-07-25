@@ -10,6 +10,7 @@ import torch
 from jspace.ablation import (
     AblationConfig,
     AblationHookState,
+    AblationStepDiag,
     ablation_hooks,
     build_ablation_factors,
     clean_topk_by_position,
@@ -30,6 +31,7 @@ class GenerationResult:
     direct_leak_flag: bool = False
     prompt_input_ids: Any | None = None
     prompt_attention_mask: Any | None = None
+    diag_steps: list[AblationStepDiag] = field(default_factory=list)
     extra: dict[str, Any] = field(default_factory=dict)
 
 
@@ -212,7 +214,10 @@ def generate_with_ablation(
 
     generated: list[int] = []
     logprobs: list[float] = []
-    state = AblationHookState(prompt_token_count=prompt_len)
+    state = AblationHookState(
+        prompt_token_count=prompt_len,
+        collect_diag=ablation.collect_diag,
+    )
     eos_id = loaded.tokenizer.eos_token_id
     factors = build_ablation_factors(loaded.hf_model, loaded.lens, ablation)
 
@@ -311,6 +316,7 @@ def generate_with_ablation(
         ),
         prompt_input_ids=prompt_input_ids,
         prompt_attention_mask=prompt_attention_mask,
+        diag_steps=list(state.diag_steps),
         extra={"use_kv_cache": use_kv_cache},
     )
 

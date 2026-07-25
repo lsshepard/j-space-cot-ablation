@@ -1,0 +1,43 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 9752.37it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 2606.78it/s]
+[1/30] gsm8k-test-0 correct=True ans='18' gold='18' lp=-7.62601375579834
+[2/30] gsm8k-test-1 correct=True ans='3' gold='3' lp=-11.179524739583334
+[3/30] gsm8k-test-2 correct=True ans='70000' gold='70000' lp=-4.3060182843889505
+[4/30] gsm8k-test-3 correct=True ans='540' gold='540' lp=-7.15
+[5/30] gsm8k-test-4 correct=True ans='20' gold='20' lp=-6.544332504272461
+[6/30] gsm8k-test-5 correct=True ans='64' gold='64' lp=-9.687638282775879
+[7/30] gsm8k-test-6 correct=True ans='260' gold='260' lp=-6.3718750238418576
+[8/30] gsm8k-test-7 correct=True ans='160' gold='160' lp=-5.597307205200195
+[9/30] gsm8k-test-8 correct=True ans='45' gold='45' lp=-7.6025390625
+[10/30] gsm8k-test-9 correct=True ans='460' gold='460' lp=-7.3074218988418576
+[11/30] gsm8k-test-10 correct=True ans='366' gold='366' lp=-9.407471466064454
+[12/30] gsm8k-test-11 correct=True ans='694' gold='694' lp=-8.695547485351563
+[13/30] gsm8k-test-12 correct=False ans='12' gold='13' lp=-7.786132872104645
+[14/30] gsm8k-test-13 correct=True ans='18' gold='18' lp=-8.93408203125
+[15/30] gsm8k-test-14 correct=True ans='60' gold='60' lp=-7.125573635101318
+[16/30] gsm8k-test-15 correct=True ans='125' gold='125' lp=-5.565849494934082
+[17/30] gsm8k-test-16 correct=True ans='230' gold='230' lp=-5.168750834465027
+[18/30] gsm8k-test-17 correct=True ans='57500' gold='57500' lp=-5.4525604248046875
+[19/30] gsm8k-test-18 correct=True ans='7' gold='7' lp=-10.9375
+[20/30] gsm8k-test-19 correct=True ans='6' gold='6' lp=-9.368489583333334
+[21/30] gsm8k-test-20 correct=True ans='15' gold='15' lp=-6.964877605438232
+[22/30] gsm8k-test-21 correct=True ans='14' gold='14' lp=-8.16813850402832
+[23/30] gsm8k-test-22 correct=True ans='7' gold='7' lp=-12.291666666666666
+[24/30] gsm8k-test-23 correct=True ans='8' gold='8' lp=-14.604166666666666
+[25/30] gsm8k-test-24 correct=True ans='26' gold='26' lp=-9.875138372182846
+[26/30] gsm8k-test-25 correct=True ans='2' gold='2' lp=-8.475748697916666
+[27/30] gsm8k-test-26 correct=True ans='243' gold='243' lp=-8.450927734375
+[28/30] gsm8k-test-27 correct=True ans='16' gold='16' lp=-8.33915901184082
+[29/30] gsm8k-test-28 correct=True ans='25' gold='25' lp=-5.939458519220352
+[30/30] gsm8k-test-29 correct=True ans='104' gold='104' lp=-7.922512817382812
+{
+  "dataset": "gsm8k",
+  "thinking": false,
+  "level": null,
+  "n": 30,
+  "clean_accuracy": 0.9666666666666667,
+  "mean_clean_gold_lp": -8.094880772677678,
+  "in_target_band_20_80": false
+}
+wrote /root/j-space-cot-ablation/results/diagnostics/screen_clean_gsm8k.json

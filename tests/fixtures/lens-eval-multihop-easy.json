@@ -1,0 +1,229 @@
+{
+  "items": [
+    {
+      "name": "amazon-language",
+      "prompt": "Fact: The language spoken in the country where the Amazon River ends is ",
+      "target": "Portuguese",
+      "intermediates": [
+        "Brazil"
+      ]
+    },
+    {
+      "name": "atomic-26-symbol",
+      "prompt": "Fact: The chemical symbol for the element with atomic number 26 is ",
+      "target": "Fe",
+      "intermediates": [
+        "iron"
+      ]
+    },
+    {
+      "name": "atomic-29-flame",
+      "prompt": "Fact: The flame color produced by burning the element with atomic number 29 is ",
+      "target": "green",
+      "intermediates": [
+        "copper"
+      ]
+    },
+    {
+      "name": "atomic-29-symbol",
+      "prompt": "Fact: The chemical symbol for the element with atomic number 29 is ",
+      "target": "Cu",
+      "intermediates": [
+        "copper"
+      ]
+    },
+    {
+      "name": "atomic-79-symbol",
+      "prompt": "Fact: The chemical symbol for the element with atomic number 79 is ",
+      "target": "Au",
+      "intermediates": [
+        "gold"
+      ]
+    },
+    {
+      "name": "atomic-80-state",
+      "prompt": "Fact: The state of matter at room temperature of the element with atomic number 80 is ",
+      "target": "liquid",
+      "intermediates": [
+        "mercury"
+      ]
+    },
+    {
+      "name": "basketball-players",
+      "prompt": "Fact: The number of players per side in the sport invented in Springfield, Massachusetts is ",
+      "target": "5",
+      "intermediates": [
+        "basketball"
+      ]
+    },
+    {
+      "name": "carnival-ocean",
+      "prompt": "Fact: The ocean on the coast of the country where Carnival is most famously celebrated is the ",
+      "target": "Atlantic",
+      "intermediates": [
+        "Brazil"
+      ]
+    },
+    {
+      "name": "christmas-season",
+      "prompt": "Fact: The season when the holiday with a decorated tree occurs is ",
+      "target": "winter",
+      "intermediates": [
+        "Christmas"
+      ]
+    },
+    {
+      "name": "colosseum-currency",
+      "prompt": "Fact: The currency used in the country where the Colosseum stands is the ",
+      "target": "Euro",
+      "intermediates": [
+        "Italy"
+      ]
+    },
+    {
+      "name": "greatwall-ocean",
+      "prompt": "Fact: The ocean east of the country that built the Great Wall is the ",
+      "target": "Pacific",
+      "intermediates": [
+        "China"
+      ]
+    },
+    {
+      "name": "holiday-christmas-monthnum",
+      "prompt": "Fact: Christmas Day is celebrated in month number ",
+      "target": "12",
+      "intermediates": [
+        "December"
+      ]
+    },
+    {
+      "name": "holiday-halloween-monthnum",
+      "prompt": "Fact: Halloween is celebrated in month number ",
+      "target": "10",
+      "intermediates": [
+        "October"
+      ]
+    },
+    {
+      "name": "holiday-independence-monthnum",
+      "prompt": "Fact: The US Independence Day holiday is celebrated in month number ",
+      "target": "7",
+      "intermediates": [
+        "July"
+      ]
+    },
+    {
+      "name": "holiday-valentines-monthnum",
+      "prompt": "Fact: Valentine's Day is celebrated in month number ",
+      "target": "2",
+      "intermediates": [
+        "February"
+      ]
+    },
+    {
+      "name": "louvre-language",
+      "prompt": "Fact: The primary language spoken in the country where the Louvre museum is located is ",
+      "target": "French",
+      "intermediates": [
+        "France"
+      ]
+    },
+    {
+      "name": "mars-color",
+      "prompt": "Fact: The color of the planet fourth from the Sun is ",
+      "target": "red",
+      "intermediates": [
+        "Mars"
+      ]
+    },
+    {
+      "name": "osu-rival-mascot",
+      "prompt": "Fact: The mascot of the college football rival of Ohio State is a ",
+      "target": "wolverine",
+      "intermediates": [
+        "Michigan"
+      ]
+    },
+    {
+      "name": "paper-continent",
+      "prompt": "Fact: The continent where the country that invented paper is located is ",
+      "target": "Asia",
+      "intermediates": [
+        "China"
+      ]
+    },
+    {
+      "name": "planet-3-moons",
+      "prompt": "Fact: The number of natural moons orbiting the planet third from the Sun is ",
+      "target": "1",
+      "intermediates": [
+        "Earth"
+      ]
+    },
+    {
+      "name": "spaceneedle-border",
+      "prompt": "Fact: The US state where the Space Needle is located shares its northern border with ",
+      "target": "Canada",
+      "intermediates": [
+        "Seattle"
+      ]
+    },
+    {
+      "name": "spider-legs",
+      "prompt": "Fact: The number of legs on the animal that spins webs is ",
+      "target": "8",
+      "intermediates": [
+        "spider"
+      ]
+    },
+    {
+      "name": "super-largest-country-capital",
+      "prompt": "Fact: The capital city of the largest country by area is ",
+      "target": "Moscow",
+      "intermediates": [
+        "Russia"
+      ]
+    },
+    {
+      "name": "super-largest-island-nation",
+      "prompt": "Fact: The country that is the largest island nation by area has its capital at ",
+      "target": "Jakarta",
+      "intermediates": [
+        "Indonesia"
+      ]
+    },
+    {
+      "name": "super-populous-capital",
+      "prompt": "Fact: The capital city of the most populous country in the world is ",
+      "target": "Beijing",
+      "intermediates": [
+        "China"
+      ]
+    },
+    {
+      "name": "super-smallest-continent",
+      "prompt": "Fact: The smallest country in the world is located on the continent of ",
+      "target": "Europe",
+      "intermediates": [
+        "Vatican"
+      ]
+    },
+    {
+      "name": "tajmahal-continent",
+      "prompt": "Fact: The continent where the country that built the Taj Mahal is located is ",
+      "target": "Asia",
+      "intermediates": [
+        "India"
+      ]
+    },
+    {
+      "name": "topeka-west",
+      "prompt": "Fact: The state west of the state with Topeka as its capital is ",
+      "target": "Colorado",
+      "intermediates": [
+        "Kansas"
+      ]
+    }
+  ],
+  "_note": "Anthropic lens-eval-multihop.json filtered to easier Fact: two-hop items (no nhop/rhyme/chem/...)."
+}

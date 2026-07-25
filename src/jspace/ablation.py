@@ -23,6 +23,19 @@ class AblationConfig:
     seed: int = 0
     exclude_topk: int = 10
     ablate_prompt_tokens: bool = True
+    # When True, hooks append AblationStepDiag into state.diag_steps (§instrument probe).
+    collect_diag: bool = False
+
+
+@dataclass(frozen=True)
+class AblationStepDiag:
+    """One band-layer edit: direction survival after exclusion + ‖Δh‖."""
+
+    layer_idx: int
+    abs_pos: int
+    n_active: int
+    n_survivors: int
+    delta_h_norm: float
 
 
 @dataclass
@@ -36,6 +49,8 @@ class AblationHookState:
     prompt_token_count: int = 0
     # Tokens already represented in past_key_values before the current chunk.
     past_token_count: int = 0
+    collect_diag: bool = False
+    diag_steps: list[AblationStepDiag] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -345,27 +360,14 @@ def ablation_hooks(
             raise RuntimeError(f"lens required for ablation kind={config.kind}")
         factors = build_ablation_factors(hf_model, lens, config)
 
+    if config.collect_diag:
+        state.collect_diag = True
+
     layers = _transformer_layers(hf_model)
     handles: list[Any] = []
     jacobians = factors.jacobians
     svds = factors.svds
     unembed = factors.unembed
-
-    def _j_dirs_for(
-        residual: torch.Tensor,
-        layer_idx: int,
-        excluded: set[int],
-    ) -> torch.Tensor:
-        J = jacobians[layer_idx].to(device=residual.device, dtype=residual.dtype)
-        directions = active_j_directions(
-            residual, J, config.k, svd=svds[layer_idx]
-        )
-        return filter_directions_by_exclusion(
-            directions,
-            J,
-            unembed.to(device=residual.device),
-            excluded,
-        )
 
     def _ablate_position(
         h_pos: torch.Tensor,
@@ -378,7 +380,16 @@ def ablation_hooks(
             h_pos = h_pos.unsqueeze(0)
         residual = h_pos[0]
         excluded = _excluded_at(state, abs_pos)
-        j_dirs = _j_dirs_for(residual, layer_idx, excluded)
+        J = jacobians[layer_idx].to(device=residual.device, dtype=residual.dtype)
+        active = active_j_directions(
+            residual, J, config.k, svd=svds[layer_idx]
+        )
+        j_dirs = filter_directions_by_exclusion(
+            active,
+            J,
+            unembed.to(device=residual.device),
+            excluded,
+        )
 
         if config.kind == "jspace":
             out = project_out_directions(h_pos, j_dirs)
@@ -395,6 +406,20 @@ def ablation_hooks(
             target_norm = torch.linalg.vector_norm(h_pos - h_j, dim=-1, keepdim=True)
             h_r = project_out_directions(h_pos, r_dirs)
             out = scale_perturbation_to_norm(h_pos, h_r, target_norm)
+
+        if state.collect_diag:
+            delta = float(
+                torch.linalg.vector_norm((h_pos - out).detach().float()).item()
+            )
+            state.diag_steps.append(
+                AblationStepDiag(
+                    layer_idx=layer_idx,
+                    abs_pos=abs_pos,
+                    n_active=int(active.shape[0]),
+                    n_survivors=int(j_dirs.shape[0]),
+                    delta_h_norm=delta,
+                )
+            )
 
         return out.squeeze(0) if squeeze else out
 

@@ -1,0 +1,9 @@
+{
+  "dataset": "easy_multihop",
+  "thinking": false,
+  "level": null,
+  "n": 28,
+  "clean_accuracy": 0.5357142857142857,
+  "mean_clean_gold_lp": -3.1046095192432404,
+  "in_target_band_20_80": true
+}
