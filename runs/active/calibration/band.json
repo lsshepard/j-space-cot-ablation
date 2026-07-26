@@ -1,6 +1,6 @@
 {
   "band_start": 27,
-  "band_end": 31,
+  "band_end": 33,
   "auto_selected": false,
   "strength_label": "human_override",
   "match_rates": [
@@ -228,13 +228,13 @@
       -0.002620491897687316
     ],
     "band_start": 27,
-    "band_end": 31,
+    "band_end": 33,
     "n_prompts": 64
   },
   "model_name": "Qwen/Qwen3-4B",
   "n_prompts": 64,
   "human_override": {
     "band_start": 27,
-    "band_end": 31
+    "band_end": 33
   }
 }
