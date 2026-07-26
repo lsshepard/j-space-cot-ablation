@@ -1,0 +1,73 @@
+===== gsm8k+math500 =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 9366.59it/s]
+[calibrate] start gsm8k problem=1/5 mode=direct step=1/10 probe_ceiling=32768
+[calibrate] done  gsm8k problem=1/5 mode=direct tokens=105 hit_cap=False gen_sec=3.3 elapsed_sec=3.3
+[calibrate] start gsm8k problem=1/5 mode=cot step=2/10 probe_ceiling=32768
+[calibrate] done  gsm8k problem=1/5 mode=cot tokens=302 hit_cap=False gen_sec=7.8 elapsed_sec=11.1
+[calibrate] start gsm8k problem=2/5 mode=direct step=3/10 probe_ceiling=32768
+[calibrate] done  gsm8k problem=2/5 mode=direct tokens=62 hit_cap=False gen_sec=1.6 elapsed_sec=12.7
+[calibrate] start gsm8k problem=2/5 mode=cot step=4/10 probe_ceiling=32768
+[calibrate] done  gsm8k problem=2/5 mode=cot tokens=237 hit_cap=False gen_sec=6.1 elapsed_sec=18.8
+[calibrate] start gsm8k problem=3/5 mode=direct step=5/10 probe_ceiling=32768
+[calibrate] done  gsm8k problem=3/5 mode=direct tokens=180 hit_cap=False gen_sec=4.7 elapsed_sec=23.4
+[calibrate] start gsm8k problem=3/5 mode=cot step=6/10 probe_ceiling=32768
+[calibrate] done  gsm8k problem=3/5 mode=cot tokens=899 hit_cap=False gen_sec=23.1 elapsed_sec=46.5
+[calibrate] start gsm8k problem=4/5 mode=direct step=7/10 probe_ceiling=32768
+[calibrate] done  gsm8k problem=4/5 mode=direct tokens=116 hit_cap=False gen_sec=3.0 elapsed_sec=49.5
+[calibrate] start gsm8k problem=4/5 mode=cot step=8/10 probe_ceiling=32768
+[calibrate] done  gsm8k problem=4/5 mode=cot tokens=369 hit_cap=False gen_sec=9.5 elapsed_sec=59.0
+[calibrate] start gsm8k problem=5/5 mode=direct step=9/10 probe_ceiling=32768
+[calibrate] done  gsm8k problem=5/5 mode=direct tokens=157 hit_cap=False gen_sec=4.0 elapsed_sec=63.0
+[calibrate] start gsm8k problem=5/5 mode=cot step=10/10 probe_ceiling=32768
+[calibrate] done  gsm8k problem=5/5 mode=cot tokens=662 hit_cap=False gen_sec=17.0 elapsed_sec=80.0
+[calibrate] dataset=gsm8k direct_lens=[105, 62, 180, 116, 157] cot_lens=[302, 237, 899, 369, 662] direct_p95=180 cot_p95=899 caps=(360, 2048)
+[calibrate] start math500 problem=1/5 mode=direct step=1/10 probe_ceiling=32768
+[calibrate] done  math500 problem=1/5 mode=direct tokens=203 hit_cap=False gen_sec=5.3 elapsed_sec=5.3
+[calibrate] start math500 problem=1/5 mode=cot step=2/10 probe_ceiling=32768
+[calibrate] done  math500 problem=1/5 mode=cot tokens=1113 hit_cap=False gen_sec=28.4 elapsed_sec=33.7
+[calibrate] start math500 problem=2/5 mode=direct step=3/10 probe_ceiling=32768
+[calibrate] done  math500 problem=2/5 mode=direct tokens=680 hit_cap=False gen_sec=17.6 elapsed_sec=51.3
+[calibrate] start math500 problem=2/5 mode=cot step=4/10 probe_ceiling=32768
+[calibrate] done  math500 problem=2/5 mode=cot tokens=4651 hit_cap=False gen_sec=118.5 elapsed_sec=169.8
+[calibrate] start math500 problem=3/5 mode=direct step=5/10 probe_ceiling=32768
+[calibrate] done  math500 problem=3/5 mode=direct tokens=350 hit_cap=False gen_sec=8.9 elapsed_sec=178.7
+[calibrate] start math500 problem=3/5 mode=cot step=6/10 probe_ceiling=32768
+[calibrate] done  math500 problem=3/5 mode=cot tokens=1579 hit_cap=False gen_sec=40.4 elapsed_sec=219.1
+[calibrate] start math500 problem=4/5 mode=direct step=7/10 probe_ceiling=32768
+[calibrate] done  math500 problem=4/5 mode=direct tokens=325 hit_cap=False gen_sec=8.4 elapsed_sec=227.5
+[calibrate] start math500 problem=4/5 mode=cot step=8/10 probe_ceiling=32768
+[calibrate] done  math500 problem=4/5 mode=cot tokens=1376 hit_cap=False gen_sec=35.3 elapsed_sec=262.8
+[calibrate] start math500 problem=5/5 mode=direct step=9/10 probe_ceiling=32768
+[calibrate] done  math500 problem=5/5 mode=direct tokens=554 hit_cap=False gen_sec=14.1 elapsed_sec=276.9
+[calibrate] start math500 problem=5/5 mode=cot step=10/10 probe_ceiling=32768
+[calibrate] done  math500 problem=5/5 mode=cot tokens=3055 hit_cap=False gen_sec=78.1 elapsed_sec=355.1
+[calibrate] dataset=math500 direct_lens=[203, 680, 350, 325, 554] cot_lens=[1113, 4651, 1579, 1376, 3055] direct_p95=680 cot_p95=4651 caps=(1360, 9302)
+{
+  "model_name": "Qwen/Qwen3-4B",
+  "multiplier": 2.0,
+  "ceiling": 16384,
+  "datasets": {
+    "gsm8k": {
+      "direct": 360,
+      "cot": 2048,
+      "direct_p95_observed": 180,
+      "cot_p95_observed": 899
+    },
+    "math500": {
+      "direct": 1360,
+      "cot": 9302,
+      "direct_p95_observed": 680,
+      "cot_p95_observed": 4651
+    }
+  }
+}
+wrote /root/j-space-cot-ablation/results/calibration/token_budgets.json
+===== aime =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 9718.42it/s]
+[calibrate] start aime problem=1/5 mode=direct step=1/10 probe_ceiling=32768
+[calibrate] done  aime problem=1/5 mode=direct tokens=954 hit_cap=False gen_sec=26.4 elapsed_sec=26.4
+[calibrate] start aime problem=1/5 mode=cot step=2/10 probe_ceiling=32768
+[calibrate] done  aime problem=1/5 mode=cot tokens=3922 hit_cap=False gen_sec=99.9 elapsed_sec=126.3
+[calibrate] start aime problem=2/5 mode=direct step=3/10 probe_ceiling=32768

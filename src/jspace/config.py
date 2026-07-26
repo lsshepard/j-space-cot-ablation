@@ -8,7 +8,9 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-RESULTS_DIR = REPO_ROOT / "results"
+RUNS_DIR = REPO_ROOT / "runs"
+# Default working run folder; override with JSPACE_RUN_DIR (e.g. runs/2026-07-26_my-run).
+DEFAULT_RUN_DIR = RUNS_DIR / "active"
 RUBRICS_DIR = REPO_ROOT / "rubrics"
 
 # Homework-fixed dataset repos (§4.8) — not an open choice.
@@ -63,8 +65,8 @@ class Settings:
     k: int = DEFAULT_K
     seed: int = 0
     random_ablation_seeds: tuple[int, ...] = DEFAULT_RANDOM_SEEDS
-    # Token budgets (§4.7): per-dataset caps come from calibration/token_budgets.json.
-    # max_new_tokens_override forces a single cap for all arms (debug only).
+    # Token budgets (§4.7): per-dataset caps come from calibration/token_budgets.json
+    # under run_dir. max_new_tokens_override forces a single cap for all arms (debug).
     max_new_tokens_override: int | None = None
     token_budget_multiplier: float = DEFAULT_TOKEN_BUDGET_MULTIPLIER
     ablated_token_budget_multiplier: float = DEFAULT_ABLATED_TOKEN_BUDGET_MULTIPLIER
@@ -75,7 +77,12 @@ class Settings:
     problems_per_cell: int = DEFAULT_PROBLEMS_PER_CELL
     floor_accuracy_threshold: float = FLOOR_ACCURACY_THRESHOLD
     ablate_prompt_tokens: bool = True
-    results_dir: Path = field(default_factory=lambda: RESULTS_DIR)
+    run_dir: Path = field(default_factory=lambda: DEFAULT_RUN_DIR)
+
+    @property
+    def results_dir(self) -> Path:
+        """Alias for run_dir (older scripts/docs used results/)."""
+        return self.run_dir
 
     def with_overrides(self, **kwargs: object) -> Settings:
         return replace(self, **kwargs)
@@ -131,4 +138,14 @@ def load_settings() -> Settings:
         or DEFAULT_LOCAL_FAST_ABLATION_CAP,
         problems_per_cell=_env_int("JSPACE_PROBLEMS_PER_CELL")
         or DEFAULT_PROBLEMS_PER_CELL,
+        run_dir=_resolve_run_dir(_env_str("JSPACE_RUN_DIR")),
     )
+
+
+def _resolve_run_dir(raw: str | None) -> Path:
+    if not raw:
+        return DEFAULT_RUN_DIR
+    path = Path(raw).expanduser()
+    if not path.is_absolute():
+        path = REPO_ROOT / path
+    return path

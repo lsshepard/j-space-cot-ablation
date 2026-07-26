@@ -17,7 +17,15 @@ build/
 .pytest_cache/
 .mypy_cache/
 
+# Legacy path (migrated to runs/)
 results/
+
+# Run outputs: track dated runs + handoffs; ignore default active dumps and bulky traces.
+runs/active/*
+!runs/active/calibration/
+!runs/active/calibration/**
+runs/**/*.jsonl
+runs/**/ablation_token_traces.json
 *.pt
 *.pth
 .cache/

@@ -2,18 +2,18 @@ import torch
 
 from jspace.ablation import (
     active_j_directions,
-    active_j_directions_from_svd,
     chunk_positions_to_ablate,
     clean_topk_by_position,
     clean_topk_token_ids,
-    factor_jacobian_svd,
-    filter_directions_by_exclusion,
     gram_schmidt,
+    j_lens_vectors_for_tokens,
+    lens_logits_for_residual,
     past_token_count_from_cache,
     positions_to_ablate,
     project_out_directions,
     random_directions,
     scale_perturbation_to_norm,
+    select_active_j_lens_directions,
 )
 
 
@@ -37,22 +37,39 @@ def test_active_j_directions_shape():
     d = 8
     J = torch.eye(d)
     h = torch.randn(d)
-    dirs = active_j_directions(h, J, k=3)
+    unembed = torch.randn(20, d)
+    dirs = active_j_directions(h, J, k=3, unembed=unembed)
     assert dirs.shape[0] <= 3
     assert dirs.shape[1] == d
 
 
-def test_cached_svd_matches_fresh_svd():
+def test_select_active_j_lens_skips_clean_topk_and_projects_survivors():
     torch.manual_seed(0)
-    d = 16
-    J = torch.randn(d, d)
-    h = torch.randn(d)
-    svd = factor_jacobian_svd(J)
-    fresh = active_j_directions(h, J, k=4)
-    cached = active_j_directions_from_svd(h, svd, k=4)
-    via_kw = active_j_directions(h, J, k=4, svd=svd)
-    assert torch.allclose(fresh, cached, atol=1e-5)
-    assert torch.allclose(fresh, via_kw, atol=1e-5)
+    d = 4
+    J = torch.eye(d)
+    # Token i's unembed row = e_i so lens logits ≈ residual coords.
+    unembed = torch.eye(d)
+    h = torch.tensor([0.1, 5.0, 4.0, 3.0])
+    scores = lens_logits_for_residual(h, J, unembed)
+    assert int(torch.argmax(scores).item()) == 1
+    dirs, infos = select_active_j_lens_directions(
+        h, J, unembed, k=2, excluded_token_ids={1}
+    )
+    # Top lens token 1 excluded → survivors are tokens 2 and 3.
+    survivor_ids = [i.top_token_id for i in infos if not i.excluded][:2]
+    assert survivor_ids == [2, 3]
+    assert dirs.shape[0] == 2
+    expected = j_lens_vectors_for_tokens([2, 3], J, unembed)
+    # Span of survivors matches token vectors (same orthonormal row space).
+    recon = dirs.T @ (dirs @ expected.T)
+    assert torch.allclose(recon, expected.T, atol=1e-4)
+    # Projecting out survivors zeros those directions; excluded token axis remains.
+    h_out = project_out_directions(h, dirs)
+    for tid in (2, 3):
+        v = j_lens_vectors_for_tokens([tid], J, unembed)[0]
+        assert abs(float(torch.dot(h_out, v))) < 1e-4
+    v_excl = j_lens_vectors_for_tokens([1], J, unembed)[0]
+    assert abs(float(torch.dot(h_out, v_excl)) - float(torch.dot(h, v_excl))) < 1e-4
 
 
 def test_chunk_positions_with_past_matches_absolute():
@@ -138,15 +155,28 @@ def test_layer_jacobians_proxy_on_mismatch():
     assert torch.allclose(mats[2], torch.eye(4))
 
 
-def test_filter_exclusion_drops_matching_direction():
-    d = 4
-    J = torch.eye(d)
-    unembed = torch.zeros(10, d)
-    unembed[2] = torch.tensor([1.0, 0.0, 0.0, 0.0])
-    directions = torch.tensor([[1.0, 0.0, 0.0, 0.0], [0.0, 1.0, 0.0, 0.0]])
-    kept = filter_directions_by_exclusion(directions, J, unembed, excluded_token_ids={2})
-    assert kept.shape[0] == 1
-    assert torch.allclose(kept[0], directions[1])
+def test_build_ablation_factors_moves_jacobian_to_model_device():
+    """Lens J often loads on CPU; factors must move to the model device."""
+    from types import SimpleNamespace
+
+    from jspace.ablation import AblationConfig, build_ablation_factors
+
+    device = torch.device("cpu")
+    d = 8
+    lm_head = SimpleNamespace(weight=torch.randn(16, d, device=device))
+    hf_model = SimpleNamespace(lm_head=lm_head, model=SimpleNamespace(norm=None))
+    lens = SimpleNamespace(
+        jacobians={2: torch.randn(d, d), 3: torch.randn(d, d)}  # CPU by default
+    )
+    factors = build_ablation_factors(
+        hf_model,
+        lens,
+        AblationConfig(kind="jspace", band_start=2, band_end=3, k=3),
+    )
+    for mat in factors.jacobians.values():
+        assert mat.device == device
+    assert factors.unembed_f32 is not None
+    assert factors.unembed_f32.dtype == torch.float32
 
 
 def test_positions_to_ablate_prompt_and_generation():

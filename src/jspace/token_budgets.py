@@ -4,14 +4,14 @@ from __future__ import annotations
 
 import json
 import math
+import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
-from jspace.ablation import AblationConfig
 from jspace.config import Settings
 from jspace.data import Problem, load_aime, load_gsm8k, load_math500
-from jspace.generate import generate
+from jspace.generate import generate_clean
 from jspace.load import LoadedModel
 
 # Conservative fallbacks before any calibration run (direct << CoT for Qwen3 thinking).
@@ -158,18 +158,41 @@ def _measure_clean_lengths(
 ) -> tuple[list[int], list[int]]:
     direct_lengths: list[int] = []
     cot_lengths: list[int] = []
-    for problem in problems:
+    n_problems = len(problems)
+    total = max(1, n_problems * 2)
+    done = 0
+    t0 = time.perf_counter()
+    for i, problem in enumerate(problems):
         for thinking, bucket in ((False, direct_lengths), (True, cot_lengths)):
-            result = generate(
+            mode = "cot" if thinking else "direct"
+            done += 1
+            print(
+                f"[calibrate] start {problem.dataset} "
+                f"problem={i + 1}/{n_problems} mode={mode} "
+                f"step={done}/{total} probe_ceiling={probe_ceiling}",
+                flush=True,
+            )
+            t1 = time.perf_counter()
+            # Length-only probe: skip score tensors (huge VRAM/time at 32k).
+            result = generate_clean(
                 loaded,
                 problem.dataset,
                 problem.prompt,
                 enable_thinking=thinking,
                 max_new_tokens=probe_ceiling,
                 seed=seed,
-                ablation=AblationConfig(kind="none"),
+                capture_logprobs=False,
             )
-            bucket.append(len(result.token_ids))
+            n_tokens = len(result.token_ids)
+            bucket.append(n_tokens)
+            print(
+                f"[calibrate] done  {problem.dataset} "
+                f"problem={i + 1}/{n_problems} mode={mode} "
+                f"tokens={n_tokens} hit_cap={result.hit_token_cap} "
+                f"gen_sec={time.perf_counter() - t1:.1f} "
+                f"elapsed_sec={time.perf_counter() - t0:.1f}",
+                flush=True,
+            )
     return direct_lengths, cot_lengths
 
 
@@ -219,6 +242,13 @@ def calibrate_token_budgets(
             cot=_apply_multiplier(cot_p95, mult, cap_ceiling, floor_cot),
             direct_p95_observed=direct_p95,
             cot_p95_observed=cot_p95,
+        )
+        print(
+            f"[calibrate] dataset={dataset} "
+            f"direct_lens={direct_lens} cot_lens={cot_lens} "
+            f"direct_p95={direct_p95} cot_p95={cot_p95} "
+            f"caps=({calibrated[dataset].direct}, {calibrated[dataset].cot})",
+            flush=True,
         )
 
     return TokenBudgetProfile(

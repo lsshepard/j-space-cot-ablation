@@ -1,0 +1,595 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:  27%|██▋       | 108/398 [00:00<00:00, 1050.36it/s]Loading weights:  54%|█████▍    | 214/398 [00:01<00:01, 182.07it/s] Loading weights:  67%|██████▋   | 265/398 [00:01<00:00, 223.04it/s]Loading weights:  79%|███████▉  | 316/398 [00:01<00:00, 165.98it/s]Loading weights:  88%|████████▊ | 351/398 [00:01<00:00, 174.58it/s]Loading weights: 100%|██████████| 398/398 [00:01<00:00, 214.76it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 163.41it/s]
+EM gate n=93 band=[27,33] k=10 exclude_topk=10 random_seeds=(0, 1, 2)
+nhop-alphabet-element clean correct=False ans='Calcium'
+nhop-chess-element clean correct=False ans='Sodium'
+nhop-clock-element clean correct=False ans='Calcium'
+nhop-compass-planet clean correct=False ans='Neptune'
+nhop-cube-element clean correct=False ans='Calcium'
+nhop-deck-element clean correct=False ans='Calcium'
+nhop-fortnight-element clean correct=False ans='Calcium'
+nhop-guitar-planet clean correct=False ans='Neptune has 4 legs. A standard guitar has 6 strings. The planet at that position from the Sun is Neptune'
+nhop-insect-element clean correct=False ans='Calcium'
+nhop-primary-planet clean correct=False ans='Neptune'
+nhop-rainbow-element clean correct=False ans='Calcium'
+nhop-rings-planet clean correct=False ans='Neptune has 8 legs. The planet at that position from the Sun is Neptune. The Olympic rings have 5 circles. The planet at that position from'
+nhop-soccer-element clean correct=True ans='Sodium'
+nhop-spider-element clean correct=False ans='Calcium'
+nhop-suit-element clean correct=False ans='Calcium'
+nhop-volleyball-planet clean correct=False ans='Neptune. 6. Uranus'
+nhop-week-element clean correct=True ans='Nitrogen'
+chem-atmosphere-Z clean correct=False ans='Nitrogen'
+chem-bones-Z clean correct=False ans='13'
+chem-organic-Z clean correct=True ans='6'
+chem-photosynthesis-Z clean correct=False ans='18'
+dbl-altitude-antonym clean correct=True ans='low altitude'
+dbl-armistice-antonym clean correct=False ans='war'
+dbl-obituary-antonym clean correct=False ans='death'
+double-dice-faces clean correct=False ans='10'
+dual-photosynthesis-opposite clean correct=True ans='Night'
+dual-stars-visible-opposite clean correct=True ans='The opposite of the time of day when stars are visible is "daytime."'
+etym-caesar-monthnum clean correct=True ans='7'
+etym-frigg-position clean correct=True ans='5'
+etym-janus-monthnum clean correct=False ans='February'
+etym-saturn-position clean correct=False ans='Earth'
+etym-wargod-month clean correct=False ans='February'
+firstletter-greatwall-country clean correct=True ans='C'
+firstletter-halloween-month clean correct=False ans='S'
+firstletter-paris-country clean correct=False ans='France'
+firstletter-populous-country clean correct=True ans='C'
+firstletter-valentines-month clean correct=False ans='February'
+half-clock-hours clean correct=True ans='6'
+inv-antarctica-opposite clean correct=True ans='North'
+inv-balloon-opposite clean correct=False ans='downward'
+inv-roots-opposite clean correct=False ans='upward'
+inv-sunrise-opposite clean correct=True ans='West'
+letterpos-carbon-symbol clean correct=False ans='C is the 3rd letter of the alphabet'
+letterpos-nitrogen-symbol clean correct=True ans='14'
+letterpos-oxygen-symbol clean correct=True ans='15'
+letterpos-water-symbol clean correct=False ans='H is the 8th letter of the alphabet'
+pred-valentines-prevmonth clean correct=True ans='January'
+rhyme-chair-flag clean correct=False ans='Texas'
+rhyme-door-doubled clean correct=False ans='four'
+rhyme-fix-halved clean correct=False ans='Half of the number whose name rhymes with fix is 100'
+rhyme-hive-plusone clean correct=False ans='three'
+rhyme-rain-neighbor clean correct=False ans='France'
+rhyme-shoe-doubled clean correct=False ans='twelve'
+rhyme-spoon-orbit clean correct=True ans='Earth'
+rhyme-tree-squared clean correct=False ans='144'
+roman-rings-olympic clean correct=True ans='V'
+roman-states-us clean correct=False ans='XXVII'
+succ-halloween-nextmonth clean correct=True ans='November'
+amazon-language clean correct=False ans='Spanish'
+atomic-26-symbol clean correct=True ans='Fe'
+atomic-29-flame clean correct=False ans='Blue'
+atomic-29-symbol clean correct=True ans='Cu'
+atomic-79-symbol clean correct=True ans='Au'
+atomic-80-state clean correct=False ans='Solid'
+basketball-players clean correct=False ans='11'
+birthstone-emerald-month clean correct=False ans='May'
+carnival-ocean clean correct=True ans='Atlantic Ocean'
+christmas-season clean correct=True ans='Winter'
+colosseum-currency clean correct=True ans='Euro'
+func-filters-count clean correct=False ans='1'
+func-pumps-chambers clean correct=False ans='Four'
+greatwall-ocean clean correct=False ans='Atlantic Ocean'
+holiday-christmas-monthnum clean correct=True ans='12'
+holiday-halloween-monthnum clean correct=False ans='October'
+holiday-independence-monthnum clean correct=True ans='7'
+holiday-valentines-monthnum clean correct=True ans='2'
+louvre-language clean correct=True ans='French'
+mars-color clean correct=False ans='Orange'
+month-1-godof clean correct=False ans='Jupiter'
+month-3-godof clean correct=False ans='Jupiter'
+month-7-namedafter clean correct=False ans='July'
+osu-rival-mascot clean correct=False ans='Boomer'
+paper-continent clean correct=True ans='Asia'
+planet-3-moons clean correct=True ans='1'
+spaceneedle-border clean correct=False ans='Washington state'
+spider-legs clean correct=True ans='8'
+super-largest-country-capital clean correct=False ans='Russia'
+super-largest-island-nation clean correct=False ans='Honduras'
+super-populous-capital clean correct=True ans='Beijing'
+super-smallest-continent clean correct=True ans='Europe'
+tajmahal-continent clean correct=False ans='India'
+topeka-west clean correct=False ans='Kansas'
+violin-strings clean correct=False ans='Four'
+nhop-alphabet-element jspace correct=False ans='beryllium'
+nhop-alphabet-element random seed=0 correct=False ans='Thorium'
+nhop-alphabet-element random seed=1 correct=False ans='Calcium'
+nhop-alphabet-element random seed=2 correct=False ans='Aluminium'
+nhop-chess-element jspace correct=False ans='Chess'
+nhop-chess-element random seed=0 correct=False ans='Beryllium'
+nhop-chess-element random seed=1 correct=False ans='Sodium'
+nhop-chess-element random seed=2 correct=False ans='Sodium'
+nhop-clock-element jspace correct=False ans='Titanium'
+nhop-clock-element random seed=0 correct=False ans='Beryllium'
+nhop-clock-element random seed=1 correct=False ans='Calcium'
+nhop-clock-element random seed=2 correct=False ans='Sodium'
+nhop-compass-planet jspace correct=False ans='Neptune is the planet at that position from the Sun'
+nhop-compass-planet random seed=0 correct=False ans='Neptune'
+nhop-compass-planet random seed=1 correct=False ans='Neptune'
+nhop-compass-planet random seed=2 correct=False ans='Neptune'
+nhop-cube-element jspace correct=False ans='Titanium'
+nhop-cube-element random seed=0 correct=False ans='Calcium'
+nhop-cube-element random seed=1 correct=False ans='Sulfur'
+nhop-cube-element random seed=2 correct=False ans='Iron'
+nhop-deck-element jspace correct=False ans='13. The element at that position on the periodic table is aluminum'
+nhop-deck-element random seed=0 correct=False ans='Calcium'
+nhop-deck-element random seed=1 correct=False ans='Chlorine'
+nhop-deck-element random seed=2 correct=False ans='32. The element at that position on the periodic table is Germanium'
+nhop-fortnight-element jspace correct=False ans='28. The element at that position on the periodic table is perchlorate'
+nhop-fortnight-element random seed=0 correct=False ans='Thorium'
+nhop-fortnight-element random seed=1 correct=False ans='Calcium'
+nhop-fortnight-element random seed=2 correct=False ans='Thorium'
+nhop-guitar-planet jspace correct=False ans='Neptune is the fourth planet from the Sun. A spider has 8 legs. A standard guitar has 6 strings. The planet at that position from the'
+nhop-guitar-planet random seed=0 correct=False ans='Neptune. 6. 4'
+nhop-guitar-planet random seed=1 correct=True ans='Neptune has 13 legs. A standard guitar has 6 strings. The planet at that position from the Sun is Saturn'
+nhop-guitar-planet random seed=2 correct=False ans='Neptune. 6. Earth'
+nhop-insect-element jspace correct=False ans='Titanium'
+nhop-insect-element random seed=0 correct=False ans='Aluminum'
+nhop-insect-element random seed=1 correct=False ans='Boron'
+nhop-insect-element random seed=2 correct=True ans='Carbon'
+nhop-primary-planet jspace correct=False ans='Neptune is the planet at that position from the Sun. The primary colors of light are red, blue, and green. The planet at that position from the'
+nhop-primary-planet random seed=0 correct=False ans='Neptune'
+nhop-primary-planet random seed=1 correct=False ans='Neptune'
+nhop-primary-planet random seed=2 correct=False ans='Neptune'
+nhop-rainbow-element jspace correct=False ans='rubidium'
+nhop-rainbow-element random seed=0 correct=False ans='Iron'
+nhop-rainbow-element random seed=1 correct=False ans='chlorine'
+nhop-rainbow-element random seed=2 correct=False ans='Iron'
+nhop-rings-planet jspace correct=False ans='Neptune is the planet at that position from the Sun'
+nhop-rings-planet random seed=0 correct=True ans='Neptune has 8 legs. The 5th planet from the Sun is Jupiter. The Olympic rings have 5 elements. The planet at that position from'
+nhop-rings-planet random seed=1 correct=False ans='Neptune has 8 legs. The planet at that position from the Sun is Neptune. The Olympic rings have 5 circles. The planet at that position from'
+nhop-rings-planet random seed=2 correct=False ans='Neptune has 8 legs. The Olympic rings have 5 rings. The planet at that position from the Sun is Neptune'
+nhop-soccer-element jspace correct=False ans='Titanium'
+nhop-soccer-element random seed=0 correct=True ans='Sodium'
+nhop-soccer-element random seed=1 correct=True ans='Sodium'
+nhop-soccer-element random seed=2 correct=True ans='Sodium'
+nhop-spider-element jspace correct=True ans='12. The element at that position on the periodic table is magnesium. 8. The element at that position on the periodic table is oxygen'
+nhop-spider-element random seed=0 correct=False ans='Calcium'
+nhop-spider-element random seed=1 correct=False ans='Bromine'
+nhop-spider-element random seed=2 correct=False ans='Carbon'
+nhop-suit-element jspace correct=True ans='13. The element at that position on the periodic table is aluminum'
+nhop-suit-element random seed=0 correct=False ans='Magnesium'
+nhop-suit-element random seed=1 correct=False ans='chlorine'
+nhop-suit-element random seed=2 correct=False ans='Carbon'
+nhop-volleyball-planet jspace correct=False ans='3. Neptune. 6. Pluto'
+nhop-volleyball-planet random seed=0 correct=False ans='Neptune. 6. Earth'
+nhop-volleyball-planet random seed=1 correct=False ans='Neptune. 6. Neptune'
+nhop-volleyball-planet random seed=2 correct=False ans='Neptune. 6. Uranus'
+nhop-week-element jspace correct=False ans='beryllium'
+nhop-week-element random seed=0 correct=False ans='Aluminum'
+nhop-week-element random seed=1 correct=False ans='Carbon'
+nhop-week-element random seed=2 correct=False ans='Carbon'
+chem-atmosphere-Z jspace correct=False ans='9'
+chem-atmosphere-Z random seed=0 correct=False ans='Nitrogen'
+chem-atmosphere-Z random seed=1 correct=False ans='Nitrogen (N)'
+chem-atmosphere-Z random seed=2 correct=False ans='Atomic number of nitrogen'
+chem-bones-Z jspace correct=False ans='13'
+chem-bones-Z random seed=0 correct=False ans='15'
+chem-bones-Z random seed=1 correct=False ans='12'
+chem-bones-Z random seed=2 correct=False ans='13'
+chem-organic-Z jspace correct=True ans='6 (carbon)'
+chem-organic-Z random seed=0 correct=False ans='Carbon'
+chem-organic-Z random seed=1 correct=True ans='6'
+chem-organic-Z random seed=2 correct=False ans='Carbon'
+chem-photosynthesis-Z jspace correct=False ans='6'
+chem-photosynthesis-Z random seed=0 correct=False ans='oxygen'
+chem-photosynthesis-Z random seed=1 correct=False ans='Oxygen'
+chem-photosynthesis-Z random seed=2 correct=False ans='Carbon'
+dbl-altitude-antonym jspace correct=False ans='cruising altitude is "cruising altitude" is "cruising altitude" is "cruising altitude" is "cruising altitude"'
+dbl-altitude-antonym random seed=0 correct=True ans='low altitude'
+dbl-altitude-antonym random seed=1 correct=True ans='low altitude'
+dbl-altitude-antonym random seed=2 correct=True ans='low flight'
+dbl-armistice-antonym jspace correct=False ans='a ceasefire'
+dbl-armistice-antonym random seed=0 correct=True ans='peace'
+dbl-armistice-antonym random seed=1 correct=False ans='war'
+dbl-armistice-antonym random seed=2 correct=False ans='war'
+dbl-obituary-antonym jspace correct=False ans='The antonym of what an obituary announces is "death."'
+dbl-obituary-antonym random seed=0 correct=False ans='Death'
+dbl-obituary-antonym random seed=1 correct=False ans='death'
+dbl-obituary-antonym random seed=2 correct=False ans='death'
+double-dice-faces jspace correct=False ans='10'
+double-dice-faces random seed=0 correct=False ans='14'
+double-dice-faces random seed=1 correct=True ans='12'
+double-dice-faces random seed=2 correct=True ans='12'
+dual-photosynthesis-opposite jspace correct=False ans='The opposite of the time of day when plants photosynthesize is "time of day when plants are in the opposite of photosynthesize" (i.e'
+dual-photosynthesis-opposite random seed=0 correct=True ans='Night'
+dual-photosynthesis-opposite random seed=1 correct=True ans='Night'
+dual-photosynthesis-opposite random seed=2 correct=True ans='Night'
+dual-stars-visible-opposite jspace correct=True ans='The opposite of the time of day when stars are visible is "daytime."'
+dual-stars-visible-opposite random seed=0 correct=True ans='The opposite of the time of day when stars are visible is "daytime"'
+dual-stars-visible-opposite random seed=1 correct=True ans='The opposite of the time of day when stars are visible is "daytime"'
+dual-stars-visible-opposite random seed=2 correct=False ans='Night time'
+etym-caesar-monthnum jspace correct=False ans='5'
+etym-caesar-monthnum random seed=0 correct=False ans='July'
+etym-caesar-monthnum random seed=1 correct=True ans='7'
+etym-caesar-monthnum random seed=2 correct=False ans='8'
+etym-frigg-position jspace correct=False ans='10'
+etym-frigg-position random seed=0 correct=True ans='5'
+etym-frigg-position random seed=1 correct=False ans='12'
+etym-frigg-position random seed=2 correct=True ans='5'
+etym-janus-monthnum jspace correct=False ans='2'
+etym-janus-monthnum random seed=0 correct=False ans='February'
+etym-janus-monthnum random seed=1 correct=False ans='February'
+etym-janus-monthnum random seed=2 correct=False ans='February'
+etym-saturn-position jspace correct=False ans='3'
+etym-saturn-position random seed=0 correct=False ans='Venus'
+etym-saturn-position random seed=1 correct=False ans='Earth'
+etym-saturn-position random seed=2 correct=False ans='Venus'
+etym-wargod-month jspace correct=True ans='3'
+etym-wargod-month random seed=0 correct=False ans='January'
+etym-wargod-month random seed=1 correct=False ans='March'
+etym-wargod-month random seed=2 correct=False ans='September'
+firstletter-greatwall-country jspace correct=True ans='C'
+firstletter-greatwall-country random seed=0 correct=True ans='C'
+firstletter-greatwall-country random seed=1 correct=True ans='C'
+firstletter-greatwall-country random seed=2 correct=True ans='C'
+firstletter-halloween-month jspace correct=False ans='Hassock'
+firstletter-halloween-month random seed=0 correct=True ans='O'
+firstletter-halloween-month random seed=1 correct=True ans='O'
+firstletter-halloween-month random seed=2 correct=True ans='O'
+firstletter-paris-country jspace correct=True ans="F'"
+firstletter-paris-country random seed=0 correct=False ans='France'
+firstletter-paris-country random seed=1 correct=False ans='France'
+firstletter-paris-country random seed=2 correct=False ans='France'
+firstletter-populous-country jspace correct=True ans='C'
+firstletter-populous-country random seed=0 correct=True ans='C'
+firstletter-populous-country random seed=1 correct=False ans='N'
+firstletter-populous-country random seed=2 correct=True ans='C'
+firstletter-valentines-month jspace correct=False ans='Vance'
+firstletter-valentines-month random seed=0 correct=False ans='February'
+firstletter-valentines-month random seed=1 correct=False ans='February'
+firstletter-valentines-month random seed=2 correct=False ans='February'
+half-clock-hours jspace correct=False ans='30'
+half-clock-hours random seed=0 correct=True ans='6'
+half-clock-hours random seed=1 correct=False ans='12'
+half-clock-hours random seed=2 correct=True ans='6 hours'
+inv-antarctica-opposite jspace correct=False ans='Primeville'
+inv-antarctica-opposite random seed=0 correct=True ans='North'
+inv-antarctica-opposite random seed=1 correct=True ans='North'
+inv-antarctica-opposite random seed=2 correct=True ans='North'
+inv-balloon-opposite jspace correct=True ans='direction opposite to the one a helium balloon floats toward is "down"。'
+inv-balloon-opposite random seed=0 correct=False ans='downward'
+inv-balloon-opposite random seed=1 correct=False ans='downward'
+inv-balloon-opposite random seed=2 correct=False ans='downward'
+inv-roots-opposite jspace correct=False ans='The direction opposite to the one tree roots grow is "top"'
+inv-roots-opposite random seed=0 correct=True ans='Up'
+inv-roots-opposite random seed=1 correct=False ans='The direction opposite to the one tree roots grow is "upward"'
+inv-roots-opposite random seed=2 correct=False ans='upwards'
+inv-sunrise-opposite jspace correct=True ans='The cardinal direction opposite to the one where the sun rises is west'
+inv-sunrise-opposite random seed=0 correct=False ans='South'
+inv-sunrise-opposite random seed=1 correct=False ans='Sun sets'
+inv-sunrise-opposite random seed=2 correct=True ans='West'
+letterpos-carbon-symbol jspace correct=True ans='10 (C is the 3rd letter, so 3 + 7 = 10)'
+letterpos-carbon-symbol random seed=0 correct=False ans='C is the 3rd letter of the alphabet'
+letterpos-carbon-symbol random seed=1 correct=False ans='C is the 3rd letter of the alphabet'
+letterpos-carbon-symbol random seed=2 correct=False ans='C is the 3rd letter of the alphabet'
+letterpos-nitrogen-symbol jspace correct=True ans='14'
+letterpos-nitrogen-symbol random seed=0 correct=True ans='14'
+letterpos-nitrogen-symbol random seed=1 correct=True ans='14'
+letterpos-nitrogen-symbol random seed=2 correct=True ans='14'
+letterpos-oxygen-symbol jspace correct=True ans='15 (O is the 15th letter in the alphabet)'
+letterpos-oxygen-symbol random seed=0 correct=True ans='15'
+letterpos-oxygen-symbol random seed=1 correct=True ans='15'
+letterpos-oxygen-symbol random seed=2 correct=False ans='O (15th letter)'
+letterpos-water-symbol jspace correct=False ans='H is the 8th letter of the alphabet'
+letterpos-water-symbol random seed=0 correct=False ans='H (8th letter)'
+letterpos-water-symbol random seed=1 correct=False ans='H is the 8th letter of the alphabet'
+letterpos-water-symbol random seed=2 correct=False ans='H is the 8th letter of the alphabet'
+pred-valentines-prevmonth jspace correct=True ans='January'
+pred-valentines-prevmonth random seed=0 correct=True ans='January'
+pred-valentines-prevmonth random seed=1 correct=True ans='January'
+pred-valentines-prevmonth random seed=2 correct=True ans='January'
+rhyme-chair-flag jspace correct=False ans='Chad'
+rhyme-chair-flag random seed=0 correct=False ans='Texas'
+rhyme-chair-flag random seed=1 correct=True ans='California'
+rhyme-chair-flag random seed=2 correct=False ans='Georgia'
+rhyme-door-doubled jspace correct=False ans='24'
+rhyme-door-doubled random seed=0 correct=False ans='eight'
+rhyme-door-doubled random seed=1 correct=False ans='four'
+rhyme-door-doubled random seed=2 correct=False ans='eight'
+rhyme-fix-halved jspace correct=False ans='20000000000000000000000000000000'
+rhyme-fix-halved random seed=0 correct=False ans='Half of the number whose name rhymes with fix is 15'
+rhyme-fix-halved random seed=1 correct=False ans='32'
+rhyme-fix-halved random seed=2 correct=False ans='Three'
+rhyme-hive-plusone jspace correct=False ans='two'
+rhyme-hive-plusone random seed=0 correct=False ans='One more than the number whose name rhymes with "hive" is "one more than three," which is "four."'
+rhyme-hive-plusone random seed=1 correct=False ans='three'
+rhyme-hive-plusone random seed=2 correct=False ans='One more than the number whose name rhymes with "hive" is 19'
+rhyme-rain-neighbor jspace correct=False ans='France'
+rhyme-rain-neighbor random seed=0 correct=False ans='France'
+rhyme-rain-neighbor random seed=1 correct=False ans='France'
+rhyme-rain-neighbor random seed=2 correct=False ans='Spain'
+rhyme-shoe-doubled jspace correct=False ans='22000000000000000000000000000000'
+rhyme-shoe-doubled random seed=0 correct=False ans='eighteen'
+rhyme-shoe-doubled random seed=1 correct=False ans='12'
+rhyme-shoe-doubled random seed=2 correct=False ans='eighteen'
+rhyme-spoon-orbit jspace correct=False ans='spoon, Saturn'
+rhyme-spoon-orbit random seed=0 correct=True ans='Earth'
+rhyme-spoon-orbit random seed=1 correct=True ans='Earth'
+rhyme-spoon-orbit random seed=2 correct=True ans='Spoon orbits the planet called Earth'
+rhyme-tree-squared jspace correct=False ans='144'
+rhyme-tree-squared random seed=0 correct=False ans='121'
+rhyme-tree-squared random seed=1 correct=False ans='144'
+rhyme-tree-squared random seed=2 correct=False ans='144'
+roman-rings-olympic jspace correct=False ans='M'
+roman-rings-olympic random seed=0 correct=False ans='VIII'
+roman-rings-olympic random seed=1 correct=False ans='VIII'
+roman-rings-olympic random seed=2 correct=False ans='VIII'
+roman-states-us jspace correct=False ans='XL'
+roman-states-us random seed=0 correct=False ans='XV'
+roman-states-us random seed=1 correct=False ans='XXVII'
+roman-states-us random seed=2 correct=False ans='XVII'
+succ-halloween-nextmonth jspace correct=True ans='November'
+succ-halloween-nextmonth random seed=0 correct=False ans='December'
+succ-halloween-nextmonth random seed=1 correct=True ans='November'
+succ-halloween-nextmonth random seed=2 correct=False ans='December'
+amazon-language jspace correct=True ans='Portuguese'
+amazon-language random seed=0 correct=False ans='Spanish'
+amazon-language random seed=1 correct=False ans='Spanish'
+amazon-language random seed=2 correct=False ans='Spanish'
+atomic-26-symbol jspace correct=True ans='Fe'
+atomic-26-symbol random seed=0 correct=True ans='Fe'
+atomic-26-symbol random seed=1 correct=True ans='Fe'
+atomic-26-symbol random seed=2 correct=True ans='Fe'
+atomic-29-flame jspace correct=False ans='is a flame'
+atomic-29-flame random seed=0 correct=False ans='orange'
+atomic-29-flame random seed=1 correct=False ans='orange-yellow'
+atomic-29-flame random seed=2 correct=True ans='green'
+atomic-29-symbol jspace correct=False ans='29 is the atomic number of the element with the chemical symbol in the given fact. The chemical symbol for the element with atomic number 29 is'
+atomic-29-symbol random seed=0 correct=True ans='Cu'
+atomic-29-symbol random seed=1 correct=True ans='Cu'
+atomic-29-symbol random seed=2 correct=True ans='Cu'
+atomic-79-symbol jspace correct=True ans='Au'
+atomic-79-symbol random seed=0 correct=True ans='Au'
+atomic-79-symbol random seed=1 correct=True ans='Au'
+atomic-79-symbol random seed=2 correct=True ans='Au'
+atomic-80-state jspace correct=False ans='Tough'
+atomic-80-state random seed=0 correct=False ans='Solid'
+atomic-80-state random seed=1 correct=False ans='Solid'
+atomic-80-state random seed=2 correct=False ans='Solid'
+basketball-players jspace correct=False ans='11'
+basketball-players random seed=0 correct=False ans='11'
+basketball-players random seed=1 correct=False ans='11'
+basketball-players random seed=2 correct=False ans='11'
+birthstone-emerald-month jspace correct=True ans='5"'
+birthstone-emerald-month random seed=0 correct=False ans='May'
+birthstone-emerald-month random seed=1 correct=False ans='May'
+birthstone-emerald-month random seed=2 correct=True ans='5'
+carnival-ocean jspace correct=True ans='Atlantic Ocean'
+carnival-ocean random seed=0 correct=False ans='Caribbean Sea'
+carnival-ocean random seed=1 correct=True ans='Atlantic Ocean'
+carnival-ocean random seed=2 correct=True ans='Atlantic Ocean'
+christmas-season jspace correct=False ans='The season when the holiday with a decorated tree occurs is the season of the holiday'
+christmas-season random seed=0 correct=True ans='Winter'
+christmas-season random seed=1 correct=True ans='Winter'
+christmas-season random seed=2 correct=True ans='Winter'
+colosseum-currency jspace correct=False ans='stater'
+colosseum-currency random seed=0 correct=True ans='Euro'
+colosseum-currency random seed=1 correct=True ans='Euro'
+colosseum-currency random seed=2 correct=True ans='Euro'
+func-filters-count jspace correct=False ans='1'
+func-filters-count random seed=0 correct=False ans='1'
+func-filters-count random seed=1 correct=False ans='1'
+func-filters-count random seed=2 correct=False ans='1'
+func-pumps-chambers jspace correct=True ans='4'
+func-pumps-chambers random seed=0 correct=False ans='Four'
+func-pumps-chambers random seed=1 correct=True ans='4 chambers'
+func-pumps-chambers random seed=2 correct=False ans='Four'
+greatwall-ocean jspace correct=False ans='Atlantic Ocean'
+greatwall-ocean random seed=0 correct=False ans='Atlantic Ocean'
+greatwall-ocean random seed=1 correct=True ans='Pacific Ocean'
+greatwall-ocean random seed=2 correct=False ans='Atlantic Ocean'
+holiday-christmas-monthnum jspace correct=True ans='12'
+holiday-christmas-monthnum random seed=0 correct=True ans='12'
+holiday-christmas-monthnum random seed=1 correct=True ans='12'
+holiday-christmas-monthnum random seed=2 correct=True ans='12'
+holiday-halloween-monthnum jspace correct=True ans='10'
+holiday-halloween-monthnum random seed=0 correct=False ans='October'
+holiday-halloween-monthnum random seed=1 correct=False ans='October'
+holiday-halloween-monthnum random seed=2 correct=False ans='October'
+holiday-independence-monthnum jspace correct=True ans='7'
+holiday-independence-monthnum random seed=0 correct=True ans='7'
+holiday-independence-monthnum random seed=1 correct=True ans='7'
+holiday-independence-monthnum random seed=2 correct=True ans='7'
+holiday-valentines-monthnum jspace correct=False ans='14'
+holiday-valentines-monthnum random seed=0 correct=False ans='February'
+holiday-valentines-monthnum random seed=1 correct=False ans='February'
+holiday-valentines-monthnum random seed=2 correct=True ans='2'
+louvre-language jspace correct=True ans='French'
+louvre-language random seed=0 correct=True ans='French'
+louvre-language random seed=1 correct=True ans='French'
+louvre-language random seed=2 correct=True ans='French'
+mars-color jspace correct=False ans='Physical'
+mars-color random seed=0 correct=True ans='Red'
+mars-color random seed=1 correct=False ans='Yellow'
+mars-color random seed=2 correct=False ans='Yellow'
+month-1-godof jspace correct=False ans='January is named after the Roman god of the month, Janus'
+month-1-godof random seed=0 correct=False ans='Jupiter'
+month-1-godof random seed=1 correct=False ans='Jupiter'
+month-1-godof random seed=2 correct=False ans='Jupiter'
+month-3-godof jspace correct=False ans='March, the third month of the year, is named after the Roman god of whom'
+month-3-godof random seed=0 correct=False ans='Jupiter'
+month-3-godof random seed=1 correct=False ans='Mars'
+month-3-godof random seed=2 correct=False ans='March'
+month-7-namedafter jspace correct=False ans='July'
+month-7-namedafter random seed=0 correct=False ans='Julius'
+month-7-namedafter random seed=1 correct=False ans='Julius'
+month-7-namedafter random seed=2 correct=False ans='July'
+osu-rival-mascot jspace correct=False ans='Boys'
+osu-rival-mascot random seed=0 correct=False ans='Boilermaker'
+osu-rival-mascot random seed=1 correct=False ans='wolf'
+osu-rival-mascot random seed=2 correct=False ans='Buckeye'
+paper-continent jspace correct=True ans='Asia'
+paper-continent random seed=0 correct=True ans='Asia'
+paper-continent random seed=1 correct=True ans='Asia'
+paper-continent random seed=2 correct=True ans='Asia'
+planet-3-moons jspace correct=True ans='1'
+planet-3-moons random seed=0 correct=True ans='1'
+planet-3-moons random seed=1 correct=True ans='1'
+planet-3-moons random seed=2 correct=True ans='1'
+spaceneedle-border jspace correct=False ans='Washington'
+spaceneedle-border random seed=0 correct=False ans='Washington state'
+spaceneedle-border random seed=1 correct=False ans='Washington state'
+spaceneedle-border random seed=2 correct=False ans='Washington State'
+spider-legs jspace correct=True ans='8'
+spider-legs random seed=0 correct=True ans='8'
+spider-legs random seed=1 correct=False ans='Eight'
+spider-legs random seed=2 correct=True ans='8'
+super-largest-country-capital jspace correct=False ans='Victoria'
+super-largest-country-capital random seed=0 correct=True ans='Moscow'
+super-largest-country-capital random seed=1 correct=False ans='Russia'
+super-largest-country-capital random seed=2 correct=False ans='Washington, D.C'
+super-largest-island-nation jspace correct=False ans='New Guinea'
+super-largest-island-nation random seed=0 correct=False ans='Maldives'
+super-largest-island-nation random seed=1 correct=False ans='Honduras'
+super-largest-island-nation random seed=2 correct=False ans='Hawaii'
+super-populous-capital jspace correct=False ans='London'
+super-populous-capital random seed=0 correct=True ans='Beijing'
+super-populous-capital random seed=1 correct=False ans='Washington, D.C'
+super-populous-capital random seed=2 correct=True ans='Beijing'
+super-smallest-continent jspace correct=False ans='South'
+super-smallest-continent random seed=0 correct=True ans='Europe'
+super-smallest-continent random seed=1 correct=True ans='Europe'
+super-smallest-continent random seed=2 correct=True ans='Europe'
+tajmahal-continent jspace correct=False ans='Mediterranean'
+tajmahal-continent random seed=0 correct=False ans='India'
+tajmahal-continent random seed=1 correct=False ans='India'
+tajmahal-continent random seed=2 correct=True ans='Asia'
+topeka-west jspace correct=False ans='Kansas is the state west of the state with Topeka as its capital'
+topeka-west random seed=0 correct=False ans='Kansas'
+topeka-west random seed=1 correct=False ans='Oklahoma'
+topeka-west random seed=2 correct=False ans='Kansas is the state west of the state with Topeka as its capital'
+violin-strings jspace correct=True ans='4'
+violin-strings random seed=0 correct=False ans='Four'
+violin-strings random seed=1 correct=True ans='4'
+violin-strings random seed=2 correct=False ans='Four'
+{
+  "n_requested": 93,
+  "n_eval": 93,
+  "require_clean_correct": false,
+  "eval_ids": [
+    "nhop-alphabet-element",
+    "nhop-chess-element",
+    "nhop-clock-element",
+    "nhop-compass-planet",
+    "nhop-cube-element",
+    "nhop-deck-element",
+    "nhop-fortnight-element",
+    "nhop-guitar-planet",
+    "nhop-insect-element",
+    "nhop-primary-planet",
+    "nhop-rainbow-element",
+    "nhop-rings-planet",
+    "nhop-soccer-element",
+    "nhop-spider-element",
+    "nhop-suit-element",
+    "nhop-volleyball-planet",
+    "nhop-week-element",
+    "chem-atmosphere-Z",
+    "chem-bones-Z",
+    "chem-organic-Z",
+    "chem-photosynthesis-Z",
+    "dbl-altitude-antonym",
+    "dbl-armistice-antonym",
+    "dbl-obituary-antonym",
+    "double-dice-faces",
+    "dual-photosynthesis-opposite",
+    "dual-stars-visible-opposite",
+    "etym-caesar-monthnum",
+    "etym-frigg-position",
+    "etym-janus-monthnum",
+    "etym-saturn-position",
+    "etym-wargod-month",
+    "firstletter-greatwall-country",
+    "firstletter-halloween-month",
+    "firstletter-paris-country",
+    "firstletter-populous-country",
+    "firstletter-valentines-month",
+    "half-clock-hours",
+    "inv-antarctica-opposite",
+    "inv-balloon-opposite",
+    "inv-roots-opposite",
+    "inv-sunrise-opposite",
+    "letterpos-carbon-symbol",
+    "letterpos-nitrogen-symbol",
+    "letterpos-oxygen-symbol",
+    "letterpos-water-symbol",
+    "pred-valentines-prevmonth",
+    "rhyme-chair-flag",
+    "rhyme-door-doubled",
+    "rhyme-fix-halved",
+    "rhyme-hive-plusone",
+    "rhyme-rain-neighbor",
+    "rhyme-shoe-doubled",
+    "rhyme-spoon-orbit",
+    "rhyme-tree-squared",
+    "roman-rings-olympic",
+    "roman-states-us",
+    "succ-halloween-nextmonth",
+    "amazon-language",
+    "atomic-26-symbol",
+    "atomic-29-flame",
+    "atomic-29-symbol",
+    "atomic-79-symbol",
+    "atomic-80-state",
+    "basketball-players",
+    "birthstone-emerald-month",
+    "carnival-ocean",
+    "christmas-season",
+    "colosseum-currency",
+    "func-filters-count",
+    "func-pumps-chambers",
+    "greatwall-ocean",
+    "holiday-christmas-monthnum",
+    "holiday-halloween-monthnum",
+    "holiday-independence-monthnum",
+    "holiday-valentines-monthnum",
+    "louvre-language",
+    "mars-color",
+    "month-1-godof",
+    "month-3-godof",
+    "month-7-namedafter",
+    "osu-rival-mascot",
+    "paper-continent",
+    "planet-3-moons",
+    "spaceneedle-border",
+    "spider-legs",
+    "super-largest-country-capital",
+    "super-largest-island-nation",
+    "super-populous-capital",
+    "super-smallest-continent",
+    "tajmahal-continent",
+    "topeka-west",
+    "violin-strings"
+  ],
+  "band_start": 27,
+  "band_end": 33,
+  "k": 10,
+  "exclude_topk": 10,
+  "random_seeds": [
+    0,
+    1,
+    2
+  ],
+  "clean_accuracy": 0.3655913978494624,
+  "j_ablated_accuracy": 0.3118279569892473,
+  "random_accuracy_mean": 0.34767025089605735,
+  "random_accuracy_by_seed": {
+    "0": 0.34408602150537637,
+    "1": 0.34408602150537637,
+    "2": 0.3548387096774194
+  },
+  "j_drop": 0.05376344086021506,
+  "random_drop": 0.01792114695340502,
+  "j_over_random": 0.03584229390681004,
+  "min_j_drop": 0.3,
+  "min_j_over_random": 0.1,
+  "verdict": "no_reliable_j_em_drop",
+  "gate_pass": false
+}
+wrote /root/j-space-cot-ablation/results/gates/multihop_em_full93_b27-33_summary.json
+GATE FAIL: need high clean EM, J drop ≥ threshold, and J ≫ random.

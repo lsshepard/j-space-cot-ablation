@@ -1,0 +1,456 @@
+{
+  "band_start": 27,
+  "band_end": 31,
+  "k": 10,
+  "exclude_topk": 10,
+  "n": 28,
+  "random_seeds": [
+    0,
+    1,
+    2
+  ],
+  "mean_clean_lp": -3.1046095192432404,
+  "mean_jspace_lp": -3.7334388416437876,
+  "mean_random_lp": -2.9897879012047297,
+  "delta_j": {
+    "mean": 0.6288293224005473,
+    "lo": -0.42261859020661735,
+    "hi": 1.5830843594457422
+  },
+  "delta_r": {
+    "mean": -0.1148216180385105,
+    "lo": -0.5783105002864013,
+    "hi": 0.36618351542523914
+  },
+  "delta_j_minus_r": {
+    "mean": 0.7436509404390577,
+    "lo": -0.18008950542481172,
+    "hi": 1.630195844835705
+  },
+  "verdict": "no_reliable_j_gold_lp_bite",
+  "rows": [
+    {
+      "problem_id": "amazon-language",
+      "gold_answer": "Portuguese",
+      "clean_lp": -0.5077731211980184,
+      "jspace_lp": -0.3481038411458333,
+      "random_lps": {
+        "0": -1.6943726539611816,
+        "1": -3.1673582394917807,
+        "2": -3.4597277641296387
+      },
+      "random_lp_mean": -2.773819552527534,
+      "delta_j": -0.15966928005218511,
+      "delta_r": 2.2660464313295154,
+      "delta_j_minus_r": -2.4257157113817005
+    },
+    {
+      "problem_id": "atomic-26-symbol",
+      "gold_answer": "Fe",
+      "clean_lp": -7.510185241699219e-06,
+      "jspace_lp": -0.0017242431640625,
+      "random_lps": {
+        "0": -5.602836608886719e-06,
+        "1": -0.000690460205078125,
+        "2": -6.532669067382812e-05
+      },
+      "random_lp_mean": -0.0002537965774536133,
+      "delta_j": 0.0017167329788208008,
+      "delta_r": 0.00024628639221191406,
+      "delta_j_minus_r": 0.0014704465866088867
+    },
+    {
+      "problem_id": "atomic-29-flame",
+      "gold_answer": "green",
+      "clean_lp": -4.25,
+      "jspace_lp": -4.0,
+      "random_lps": {
+        "0": -4.6875,
+        "1": -2.15625,
+        "2": -0.58984375
+      },
+      "random_lp_mean": -2.4778645833333335,
+      "delta_j": -0.25,
+      "delta_r": -1.7721354166666665,
+      "delta_j_minus_r": 1.5221354166666665
+    },
+    {
+      "problem_id": "atomic-29-symbol",
+      "gold_answer": "Cu",
+      "clean_lp": -0.00011682510375976562,
+      "jspace_lp": -5.625,
+      "random_lps": {
+        "0": -0.01092529296875,
+        "1": -0.1142578125,
+        "2": -3.3855438232421875e-05
+      },
+      "random_lp_mean": -0.04173898696899414,
+      "delta_j": 5.62488317489624,
+      "delta_r": 0.041622161865234375,
+      "delta_j_minus_r": 5.583261013031006
+    },
+    {
+      "problem_id": "atomic-79-symbol",
+      "gold_answer": "Au",
+      "clean_lp": -2.3484230041503906e-05,
+      "jspace_lp": -0.01129150390625,
+      "random_lps": {
+        "0": -5.555152893066406e-05,
+        "1": -0.004730224609375,
+        "2": -4.887580871582031e-05
+      },
+      "random_lp_mean": -0.0016115506490071614,
+      "delta_j": 0.011268019676208496,
+      "delta_r": 0.0015880664189656575,
+      "delta_j_minus_r": 0.009679953257242838
+    },
+    {
+      "problem_id": "atomic-80-state",
+      "gold_answer": "liquid",
+      "clean_lp": -8.3125,
+      "jspace_lp": -9.5,
+      "random_lps": {
+        "0": -7.1875,
+        "1": -6.03125,
+        "2": -4.59375
+      },
+      "random_lp_mean": -5.9375,
+      "delta_j": 1.1875,
+      "delta_r": -2.375,
+      "delta_j_minus_r": 3.5625
+    },
+    {
+      "problem_id": "basketball-players",
+      "gold_answer": "5",
+      "clean_lp": -12.375,
+      "jspace_lp": -12.125,
+      "random_lps": {
+        "0": -12.75,
+        "1": -14.375,
+        "2": -12.875
+      },
+      "random_lp_mean": -13.333333333333334,
+      "delta_j": -0.25,
+      "delta_r": 0.9583333333333339,
+      "delta_j_minus_r": -1.208333333333334
+    },
+    {
+      "problem_id": "carnival-ocean",
+      "gold_answer": "Atlantic",
+      "clean_lp": -0.00982666015625,
+      "jspace_lp": -0.0002460479736328125,
+      "random_lps": {
+        "0": -0.259765625,
+        "1": -0.0167236328125,
+        "2": -0.041015625
+      },
+      "random_lp_mean": -0.1058349609375,
+      "delta_j": -0.009580612182617188,
+      "delta_r": 0.09600830078125,
+      "delta_j_minus_r": -0.10558891296386719
+    },
+    {
+      "problem_id": "christmas-season",
+      "gold_answer": "winter",
+      "clean_lp": -8.75,
+      "jspace_lp": -11.0,
+      "random_lps": {
+        "0": -11.0,
+        "1": -7.75,
+        "2": -5.1875
+      },
+      "random_lp_mean": -7.979166666666667,
+      "delta_j": 2.25,
+      "delta_r": -0.770833333333333,
+      "delta_j_minus_r": 3.020833333333333
+    },
+    {
+      "problem_id": "colosseum-currency",
+      "gold_answer": "Euro",
+      "clean_lp": -0.04345703125,
+      "jspace_lp": -2.0625,
+      "random_lps": {
+        "0": -0.044189453125,
+        "1": -0.0634765625,
+        "2": -0.765625
+      },
+      "random_lp_mean": -0.2910970052083333,
+      "delta_j": 2.01904296875,
+      "delta_r": 0.24763997395833331,
+      "delta_j_minus_r": 1.7714029947916667
+    },
+    {
+      "problem_id": "greatwall-ocean",
+      "gold_answer": "Pacific",
+      "clean_lp": -1.0546875,
+      "jspace_lp": -4.5,
+      "random_lps": {
+        "0": -1.40625,
+        "1": -1.0625,
+        "2": -4.125
+      },
+      "random_lp_mean": -2.1979166666666665,
+      "delta_j": 3.4453125,
+      "delta_r": 1.1432291666666665,
+      "delta_j_minus_r": 2.3020833333333335
+    },
+    {
+      "problem_id": "holiday-christmas-monthnum",
+      "gold_answer": "12",
+      "clean_lp": -0.000965118408203125,
+      "jspace_lp": -2.980232238769531e-07,
+      "random_lps": {
+        "0": -0.08007830381393433,
+        "1": -0.000751495361328125,
+        "2": -0.06347662210464478
+      },
+      "random_lp_mean": -0.04810214042663574,
+      "delta_j": -0.000964820384979248,
+      "delta_r": 0.04713702201843262,
+      "delta_j_minus_r": -0.048101842403411865
+    },
+    {
+      "problem_id": "holiday-halloween-monthnum",
+      "gold_answer": "10",
+      "clean_lp": -3.375000476837158,
+      "jspace_lp": -0.00016760826110839844,
+      "random_lps": {
+        "0": -2.812500536441803,
+        "1": -2.8281333446502686,
+        "2": -0.10157006978988647
+      },
+      "random_lp_mean": -1.9140679836273193,
+      "delta_j": -3.37483286857605,
+      "delta_r": -1.4609324932098389,
+      "delta_j_minus_r": -1.913900375366211
+    },
+    {
+      "problem_id": "holiday-independence-monthnum",
+      "gold_answer": "7",
+      "clean_lp": -0.000911712646484375,
+      "jspace_lp": 0.0,
+      "random_lps": {
+        "0": -2.753734588623047e-05,
+        "1": -0.0181884765625,
+        "2": -0.00010919570922851562
+      },
+      "random_lp_mean": -0.006108403205871582,
+      "delta_j": -0.000911712646484375,
+      "delta_r": 0.005196690559387207,
+      "delta_j_minus_r": -0.006108403205871582
+    },
+    {
+      "problem_id": "holiday-valentines-monthnum",
+      "gold_answer": "2",
+      "clean_lp": -0.000431060791015625,
+      "jspace_lp": -5.25,
+      "random_lps": {
+        "0": -5.34375,
+        "1": -5.625,
+        "2": -0.00408935546875
+      },
+      "random_lp_mean": -3.6576131184895835,
+      "delta_j": 5.249568939208984,
+      "delta_r": 3.657182057698568,
+      "delta_j_minus_r": 1.5923868815104165
+    },
+    {
+      "problem_id": "louvre-language",
+      "gold_answer": "French",
+      "clean_lp": -8.940696716308594e-06,
+      "jspace_lp": -0.00213623046875,
+      "random_lps": {
+        "0": -6.818771362304688e-05,
+        "1": -8.916854858398438e-05,
+        "2": -3.552436828613281e-05
+      },
+      "random_lp_mean": -6.429354349772136e-05,
+      "delta_j": 0.0021272897720336914,
+      "delta_r": 5.5352846781412765e-05,
+      "delta_j_minus_r": 0.002071936925252279
+    },
+    {
+      "problem_id": "mars-color",
+      "gold_answer": "red",
+      "clean_lp": -12.5,
+      "jspace_lp": -5.6875,
+      "random_lps": {
+        "0": -7.3125,
+        "1": -13.4375,
+        "2": -10.375
+      },
+      "random_lp_mean": -10.375,
+      "delta_j": -6.8125,
+      "delta_r": -2.125,
+      "delta_j_minus_r": -4.6875
+    },
+    {
+      "problem_id": "osu-rival-mascot",
+      "gold_answer": "wolverine",
+      "clean_lp": -3.6270254055658975,
+      "jspace_lp": -2.6614768505096436,
+      "random_lps": {
+        "0": -5.239400227864583,
+        "1": -3.511052449544271,
+        "2": -3.8782657782236734
+      },
+      "random_lp_mean": -4.209572818544175,
+      "delta_j": -0.9655485550562539,
+      "delta_r": 0.5825474129782777,
+      "delta_j_minus_r": -1.5480959680345316
+    },
+    {
+      "problem_id": "paper-continent",
+      "gold_answer": "Asia",
+      "clean_lp": -0.0001544952392578125,
+      "jspace_lp": -0.0191650390625,
+      "random_lps": {
+        "0": -0.0002956390380859375,
+        "1": -3.6716461181640625e-05,
+        "2": -0.3671875
+      },
+      "random_lp_mean": -0.12250661849975586,
+      "delta_j": 0.019010543823242188,
+      "delta_r": 0.12235212326049805,
+      "delta_j_minus_r": -0.10334157943725586
+    },
+    {
+      "problem_id": "planet-3-moons",
+      "gold_answer": "1",
+      "clean_lp": -2.9802322387695312e-06,
+      "jspace_lp": -9.655952453613281e-06,
+      "random_lps": {
+        "0": -1.430511474609375e-05,
+        "1": -1.6689300537109375e-06,
+        "2": -2.6702880859375e-05
+      },
+      "random_lp_mean": -1.4225641886393229e-05,
+      "delta_j": 6.67572021484375e-06,
+      "delta_r": 1.1245409647623697e-05,
+      "delta_j_minus_r": -4.569689432779947e-06
+    },
+    {
+      "problem_id": "spaceneedle-border",
+      "gold_answer": "Canada",
+      "clean_lp": -15.875,
+      "jspace_lp": -10.0,
+      "random_lps": {
+        "0": -13.75,
+        "1": -15.125,
+        "2": -11.375
+      },
+      "random_lp_mean": -13.416666666666666,
+      "delta_j": -5.875,
+      "delta_r": -2.458333333333334,
+      "delta_j_minus_r": -3.416666666666666
+    },
+    {
+      "problem_id": "spider-legs",
+      "gold_answer": "8",
+      "clean_lp": -0.412109375,
+      "jspace_lp": -0.0020599365234375,
+      "random_lps": {
+        "0": -0.1572265625,
+        "1": -0.3515625,
+        "2": -0.1533203125
+      },
+      "random_lp_mean": -0.220703125,
+      "delta_j": -0.4100494384765625,
+      "delta_r": -0.19140625,
+      "delta_j_minus_r": -0.2186431884765625
+    },
+    {
+      "problem_id": "super-largest-country-capital",
+      "gold_answer": "Moscow",
+      "clean_lp": -1.8437593579292297,
+      "jspace_lp": -3.1718921661376953,
+      "random_lps": {
+        "0": -0.7268218994140625,
+        "1": -0.683741569519043,
+        "2": -2.453126013278961
+      },
+      "random_lp_mean": -1.287896494070689,
+      "delta_j": 1.3281328082084656,
+      "delta_r": -0.5558628638585408,
+      "delta_j_minus_r": 1.8839956720670064
+    },
+    {
+      "problem_id": "super-largest-island-nation",
+      "gold_answer": "Jakarta",
+      "clean_lp": -5.468845367431641,
+      "jspace_lp": -4.817657470703125,
+      "random_lps": {
+        "0": -5.500415802001953,
+        "1": -6.312618255615234,
+        "2": -3.7972965240478516
+      },
+      "random_lp_mean": -5.20344352722168,
+      "delta_j": -0.6511878967285156,
+      "delta_r": -0.26540184020996094,
+      "delta_j_minus_r": -0.3857860565185547
+    },
+    {
+      "problem_id": "super-populous-capital",
+      "gold_answer": "Beijing",
+      "clean_lp": -0.001928865909576416,
+      "jspace_lp": -3.750356674194336,
+      "random_lps": {
+        "0": -0.050300538539886475,
+        "1": -2.297149658203125,
+        "2": -0.0801084041595459
+      },
+      "random_lp_mean": -0.8091862003008524,
+      "delta_j": 3.7484278082847595,
+      "delta_r": 0.807257334391276,
+      "delta_j_minus_r": 2.9411704738934836
+    },
+    {
+      "problem_id": "super-smallest-continent",
+      "gold_answer": "Europe",
+      "clean_lp": -0.375,
+      "jspace_lp": -4.5625,
+      "random_lps": {
+        "0": -0.1845703125,
+        "1": -0.050537109375,
+        "2": -0.267578125
+      },
+      "random_lp_mean": -0.16756184895833334,
+      "delta_j": 4.1875,
+      "delta_r": -0.20743815104166666,
+      "delta_j_minus_r": 4.394938151041667
+    },
+    {
+      "problem_id": "tajmahal-continent",
+      "gold_answer": "Asia",
+      "clean_lp": -0.70703125,
+      "jspace_lp": -5.375,
+      "random_lps": {
+        "0": -3.53125,
+        "1": -1.09375,
+        "2": -0.28125
+      },
+      "random_lp_mean": -1.6354166666666667,
+      "delta_j": 4.66796875,
+      "delta_r": 0.9283854166666667,
+      "delta_j_minus_r": 3.739583333333333
+    },
+    {
+      "problem_id": "topeka-west",
+      "gold_answer": "Colorado",
+      "clean_lp": -7.4375,
+      "jspace_lp": -10.0625,
+      "random_lps": {
+        "0": -7.25,
+        "1": -6.59375,
+        "2": -2.65625
+      },
+      "random_lp_mean": -5.5,
+      "delta_j": 2.625,
+      "delta_r": -1.9375,
+      "delta_j_minus_r": 4.5625
+    }
+  ],
+  "dataset": "multihop",
+  "level": null,
+  "fixture": "tests/fixtures/lens-eval-multihop-easy.json"
+}

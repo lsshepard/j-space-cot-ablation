@@ -1,11 +1,17 @@
-"""J-space and random-direction residual ablation with top-10 exclusion (§4.6)."""
+"""J-space and random-direction residual ablation with top-10 exclusion (§4.6).
+
+Paper ablation (Anthropic workspace §3.5.2): at each position in a layer band,
+select the k most activated *J-lens token vectors* v_t = J^T u_t by lens logit
+on h, skip tokens in the clean next-token top-10, and project those directions
+out of the residual. Random control matches band/k and ‖Δh‖.
+"""
 
 from __future__ import annotations
 
 import warnings
 from contextlib import contextmanager
 from dataclasses import dataclass, field
-from typing import Any, Iterator, Literal
+from typing import Any, Iterator, Literal, Sequence
 
 import torch
 import torch.nn.functional as F
@@ -23,6 +29,32 @@ class AblationConfig:
     seed: int = 0
     exclude_topk: int = 10
     ablate_prompt_tokens: bool = True
+    # When True, hooks append AblationStepDiag into state.diag_steps (§instrument probe).
+    collect_diag: bool = False
+
+
+@dataclass(frozen=True)
+class DirectionExclusionInfo:
+    """One active J-direction after selection, with clean-top-k exclusion label."""
+
+    rank: int
+    top_token_id: int
+    excluded: bool
+    # |⟨h, d⟩| on the residual being edited (post gram-schmidt direction).
+    coeff_abs: float = 0.0
+
+
+@dataclass(frozen=True)
+class AblationStepDiag:
+    """One band-layer edit: direction survival after exclusion + ‖Δh‖."""
+
+    layer_idx: int
+    abs_pos: int
+    n_active: int
+    n_survivors: int
+    delta_h_norm: float
+    # Populated when collect_diag=True (same directions the hook filters/projects).
+    directions: tuple[DirectionExclusionInfo, ...] = ()
 
 
 @dataclass
@@ -36,23 +68,32 @@ class AblationHookState:
     prompt_token_count: int = 0
     # Tokens already represented in past_key_values before the current chunk.
     past_token_count: int = 0
-
-
-@dataclass(frozen=True)
-class JacobianSvd:
-    """Cached SVD factors of a fixed layer Jacobian (S, Vh only)."""
-
-    s: torch.Tensor
-    vh: torch.Tensor
+    collect_diag: bool = False
+    diag_steps: list[AblationStepDiag] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
 class AblationFactors:
-    """Per-run factors shared across decode steps (avoid re-SVD / re-extract)."""
+    """Per-run factors shared across decode steps.
+
+    Jacobians live on the model device. ``final_norm`` matches jlens/HF unembed
+    (RMSNorm then lm_head).
+
+    ``unembed_f32`` is the float32 cast of ``unembed``, materialized once here:
+    the lens path needs float32 and would otherwise rebuild a ~1.5 GB copy on
+    every (band layer, position) it touches.
+    """
 
     jacobians: dict[int, torch.Tensor]
-    svds: dict[int, JacobianSvd]
     unembed: torch.Tensor
+    final_norm: Any | None = None
+    unembed_f32: torch.Tensor | None = None
+
+    def __post_init__(self) -> None:
+        if self.unembed_f32 is None:
+            object.__setattr__(
+                self, "unembed_f32", self.unembed.detach().to(torch.float32)
+            )
 
 
 def positions_to_ablate(
@@ -157,25 +198,121 @@ def scale_perturbation_to_norm(
     return original - delta * (target / delta_norm)
 
 
-def factor_jacobian_svd(jacobian: torch.Tensor) -> JacobianSvd:
-    """SVD(J) once; activity scoring only needs S and Vh."""
-    _u, s, vh = torch.linalg.svd(jacobian.detach().float(), full_matrices=False)
-    return JacobianSvd(s=s, vh=vh)
+def _norm_input_dtype(final_norm: Any, fallback: torch.dtype) -> torch.dtype:
+    """Dtype ``final_norm`` runs in (its own weight), not the lens matmul dtype.
+
+    jlens casts the residual to the model dtype before the final RMSNorm, so
+    this must track the norm module rather than whatever precision the caller
+    happens to hold the unembed in.
+    """
+    weight = getattr(final_norm, "weight", None)
+    if isinstance(weight, torch.Tensor):
+        return weight.dtype
+    return fallback
 
 
-def active_j_directions_from_svd(
+def lens_logits_for_residual(
     residual: torch.Tensor,
-    svd: JacobianSvd,
-    k: int,
+    jacobian: torch.Tensor,
+    unembed: torch.Tensor,
+    *,
+    final_norm: Any | None = None,
 ) -> torch.Tensor:
-    """Top-k residual directions from cached Jacobian SVD factors."""
-    h = residual.detach().float()
-    vh = svd.vh.to(device=h.device)
-    s = svd.s.to(device=h.device)
-    activity = (vh @ h).abs() * s
-    kk = min(k, activity.numel())
-    idx = torch.topk(activity, k=kk).indices
-    return gram_schmidt(vh[idx].to(device=residual.device, dtype=residual.dtype))
+    """
+    J-lens scores over vocab: unembed(norm(J @ h)), matching jlens HF unembed.
+
+    Pass a float32 ``unembed`` (see ``AblationFactors.unembed_f32``) to avoid
+    re-casting the full unembedding matrix on every call.
+
+    Returns a 1-D float tensor [vocab].
+    """
+    h = residual.detach()
+    transported = jacobian.float() @ h.float()
+    if final_norm is not None:
+        dtype = _norm_input_dtype(final_norm, unembed.dtype)
+        transported = final_norm(transported.to(dtype=dtype)).float()
+    return unembed.float() @ transported
+
+
+def j_lens_vectors_for_tokens(
+    token_ids: Sequence[int],
+    jacobian: torch.Tensor,
+    unembed: torch.Tensor,
+) -> torch.Tensor:
+    """
+    Unit J-lens vectors v_t = J^T u_t for each token (rows of W_U J).
+
+    Pass a float32 ``unembed`` (see ``AblationFactors.unembed_f32``) to avoid
+    re-casting the full unembedding matrix on every call.
+
+    Returns [n, d_model] float32 on jacobian's device.
+    """
+    if not token_ids:
+        return jacobian.new_zeros((0, jacobian.shape[-1]))
+    J = jacobian.float()
+    rows = unembed.float()[list(token_ids)]  # [n, d_out]
+    dirs = (J.T @ rows.T).T  # [n, d_model]
+    norms = torch.linalg.vector_norm(dirs, dim=-1, keepdim=True).clamp_min(1e-8)
+    return dirs / norms
+
+
+def select_active_j_lens_directions(
+    residual: torch.Tensor,
+    jacobian: torch.Tensor,
+    unembed: torch.Tensor,
+    k: int,
+    excluded_token_ids: set[int],
+    *,
+    final_norm: Any | None = None,
+    candidate_pool: int | None = None,
+) -> tuple[torch.Tensor, list[DirectionExclusionInfo]]:
+    """
+    Paper §3.5.2: top-k most activated J-lens token directions, skipping clean top-10.
+
+    Activation = lens logit for token t on h. Directions are v_t (not SVD axes).
+    Returns (orthonormal survivor directions to project out, per-token infos).
+    """
+    if k <= 0:
+        return residual.new_zeros((0, residual.shape[-1])), []
+
+    scores = lens_logits_for_residual(
+        residual, jacobian, unembed, final_norm=final_norm
+    )
+    vocab = int(scores.numel())
+    # Scan far enough down the lens ranking to fill k after exclusions.
+    pool = candidate_pool if candidate_pool is not None else min(
+        vocab, max(k + len(excluded_token_ids) + 32, k * 8)
+    )
+    pool = min(vocab, max(pool, k))
+    top_scores, top_ids = torch.topk(scores, k=pool)
+
+    infos: list[DirectionExclusionInfo] = []
+    kept_ids: list[int] = []
+    for rank, (score, tid_t) in enumerate(
+        zip(top_scores.tolist(), top_ids.tolist())
+    ):
+        tid = int(tid_t)
+        excluded = bool(excluded_token_ids) and tid in excluded_token_ids
+        infos.append(
+            DirectionExclusionInfo(
+                rank=rank,
+                top_token_id=tid,
+                excluded=excluded,
+                coeff_abs=float(score),
+            )
+        )
+        if not excluded:
+            kept_ids.append(tid)
+        if len(kept_ids) >= k:
+            break
+
+    if not kept_ids:
+        return residual.new_zeros((0, residual.shape[-1])), infos
+
+    # Keep float32 through orthonormalization — bf16 GS is discontinuous for top-k.
+    dirs = j_lens_vectors_for_tokens(kept_ids, jacobian, unembed)
+    dirs = gram_schmidt(dirs.to(device=residual.device, dtype=torch.float32))
+    return dirs, infos
 
 
 def active_j_directions(
@@ -183,41 +320,20 @@ def active_j_directions(
     jacobian: torch.Tensor,
     k: int,
     *,
-    svd: JacobianSvd | None = None,
-) -> torch.Tensor:
-    """Top-k residual directions by singular activity |(Vh @ h) * S|."""
-    factors = svd if svd is not None else factor_jacobian_svd(jacobian)
-    return active_j_directions_from_svd(residual, factors, k)
-
-
-def direction_top_token(
-    direction: torch.Tensor,
-    jacobian: torch.Tensor,
     unembed: torch.Tensor,
-) -> int:
-    """Argmax vocab token for transporting a unit residual direction through J."""
-    transported = jacobian.float() @ direction.float()
-    logits = unembed.float() @ transported
-    return int(torch.argmax(logits).item())
-
-
-def filter_directions_by_exclusion(
-    directions: torch.Tensor,
-    jacobian: torch.Tensor,
-    unembed: torch.Tensor,
-    excluded_token_ids: set[int],
+    excluded_token_ids: set[int] | None = None,
+    final_norm: Any | None = None,
 ) -> torch.Tensor:
-    """Drop directions whose J-decoded top token is in the clean top-10 (§4.6)."""
-    if directions.numel() == 0 or not excluded_token_ids:
-        return directions
-    kept: list[torch.Tensor] = []
-    for direction in directions:
-        top_tok = direction_top_token(direction, jacobian, unembed)
-        if top_tok not in excluded_token_ids:
-            kept.append(direction)
-    if not kept:
-        return directions.new_zeros((0, directions.shape[-1]))
-    return torch.stack(kept, dim=0)
+    """Top-k activated J-lens token directions (paper §3.5.2)."""
+    dirs, _infos = select_active_j_lens_directions(
+        residual,
+        jacobian,
+        unembed,
+        k,
+        excluded_token_ids or set(),
+        final_norm=final_norm,
+    )
+    return dirs
 
 
 def random_directions(
@@ -294,19 +410,36 @@ def get_unembed(hf_model: Any) -> torch.Tensor:
     raise AttributeError("could not locate unembedding matrix")
 
 
+def get_final_norm(hf_model: Any) -> Any | None:
+    """Final pre-unembed norm (matches jlens HFLensModel.unembed)."""
+    if hasattr(hf_model, "model") and hasattr(hf_model.model, "norm"):
+        return hf_model.model.norm
+    if hasattr(hf_model, "transformer") and hasattr(hf_model.transformer, "ln_f"):
+        return hf_model.transformer.ln_f
+    return None
+
+
 def build_ablation_factors(
     hf_model: Any,
     lens: Any,
     config: AblationConfig,
 ) -> AblationFactors:
-    """Extract Jacobians once and cache SVD(J) per band layer for a whole decode."""
+    """Extract band Jacobians onto the model device (no SVD required)."""
     unembed = get_unembed(hf_model)
+    device = unembed.device
     d_model = int(unembed.shape[-1])
-    jacobians = layer_jacobians(
+    raw = layer_jacobians(
         lens, config.band_start, config.band_end, d_model=d_model
     )
-    svds = {idx: factor_jacobian_svd(mat) for idx, mat in jacobians.items()}
-    return AblationFactors(jacobians=jacobians, svds=svds, unembed=unembed)
+    jacobians = {
+        idx: mat.detach().to(device=device, dtype=torch.float32, non_blocking=True)
+        for idx, mat in raw.items()
+    }
+    return AblationFactors(
+        jacobians=jacobians,
+        unembed=unembed,
+        final_norm=get_final_norm(hf_model),
+    )
 
 
 def _transformer_layers(hf_model: Any) -> list[Any]:
@@ -345,27 +478,14 @@ def ablation_hooks(
             raise RuntimeError(f"lens required for ablation kind={config.kind}")
         factors = build_ablation_factors(hf_model, lens, config)
 
+    if config.collect_diag:
+        state.collect_diag = True
+
     layers = _transformer_layers(hf_model)
     handles: list[Any] = []
     jacobians = factors.jacobians
-    svds = factors.svds
-    unembed = factors.unembed
-
-    def _j_dirs_for(
-        residual: torch.Tensor,
-        layer_idx: int,
-        excluded: set[int],
-    ) -> torch.Tensor:
-        J = jacobians[layer_idx].to(device=residual.device, dtype=residual.dtype)
-        directions = active_j_directions(
-            residual, J, config.k, svd=svds[layer_idx]
-        )
-        return filter_directions_by_exclusion(
-            directions,
-            J,
-            unembed.to(device=residual.device),
-            excluded,
-        )
+    unembed = factors.unembed_f32
+    final_norm = factors.final_norm
 
     def _ablate_position(
         h_pos: torch.Tensor,
@@ -378,10 +498,22 @@ def ablation_hooks(
             h_pos = h_pos.unsqueeze(0)
         residual = h_pos[0]
         excluded = _excluded_at(state, abs_pos)
-        j_dirs = _j_dirs_for(residual, layer_idx, excluded)
+        J = jacobians[layer_idx].to(device=residual.device, dtype=torch.float32)
+        U = unembed.to(device=residual.device)
+        # Paper: top-k activated J-lens token vectors, skipping clean top-10.
+        j_dirs, dir_infos = select_active_j_lens_directions(
+            residual,
+            J,
+            U,
+            config.k,
+            excluded,
+            final_norm=final_norm,
+        )
 
+        # Edit in float32 for stable top-k / projection, then cast back.
+        h_f = h_pos.float()
         if config.kind == "jspace":
-            out = project_out_directions(h_pos, j_dirs)
+            out_f = project_out_directions(h_f, j_dirs)
         else:
             d = residual.shape[-1]
             r_dirs = random_directions(
@@ -389,12 +521,26 @@ def ablation_hooks(
                 config.k,
                 seed=config.seed + layer_idx * 1009 + abs_pos,
                 device=residual.device,
-                dtype=residual.dtype,
+                dtype=torch.float32,
             )
-            h_j = project_out_directions(h_pos, j_dirs)
-            target_norm = torch.linalg.vector_norm(h_pos - h_j, dim=-1, keepdim=True)
-            h_r = project_out_directions(h_pos, r_dirs)
-            out = scale_perturbation_to_norm(h_pos, h_r, target_norm)
+            h_j = project_out_directions(h_f, j_dirs)
+            target_norm = torch.linalg.vector_norm(h_f - h_j, dim=-1, keepdim=True)
+            h_r = project_out_directions(h_f, r_dirs)
+            out_f = scale_perturbation_to_norm(h_f, h_r, target_norm)
+        out = out_f.to(dtype=h_pos.dtype)
+
+        if state.collect_diag:
+            delta = float(torch.linalg.vector_norm((h_f - out_f).detach()).item())
+            state.diag_steps.append(
+                AblationStepDiag(
+                    layer_idx=layer_idx,
+                    abs_pos=abs_pos,
+                    n_active=int(len(dir_infos)),
+                    n_survivors=int(j_dirs.shape[0]),
+                    delta_h_norm=delta,
+                    directions=tuple(dir_infos),
+                )
+            )
 
         return out.squeeze(0) if squeeze else out
 

@@ -1,0 +1,41 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:  19%|█▉        | 77/398 [00:00<00:01, 240.28it/s]Loading weights:  29%|██▊       | 114/398 [00:00<00:01, 193.68it/s]Loading weights:  33%|███▎      | 133/398 [00:00<00:01, 150.95it/s]Loading weights:  38%|███▊      | 152/398 [00:00<00:01, 156.70it/s]Loading weights:  42%|████▏     | 168/398 [00:01<00:02, 86.58it/s] Loading weights:  45%|████▌     | 180/398 [00:01<00:03, 60.28it/s]Loading weights:  64%|██████▍   | 255/398 [00:01<00:00, 145.77it/s]Loading weights:  72%|███████▏  | 286/398 [00:02<00:01, 105.16it/s]Loading weights:  78%|███████▊  | 309/398 [00:02<00:00, 105.24it/s]Loading weights:  91%|█████████▏| 364/398 [00:02<00:00, 160.66it/s]Loading weights: 100%|██████████| 398/398 [00:02<00:00, 143.80it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 168.87it/s]
+=== cell gsm8k n=6 ===
+gsm8k-test-0 direct_clean rseed=0 correct=True graded=-7.62601375579834 len=105
+gsm8k-test-0 cot_clean rseed=0 correct=True graded=-6.7215728759765625 len=302
+gsm8k-test-0 direct_j_ablated rseed=0 correct=True graded=-8.46876209974289 len=106
+gsm8k-test-0 cot_j_ablated rseed=0 correct=True graded=-2.03125 len=768
+gsm8k-test-0 direct_random rseed=0 correct=True graded=-7.287934303283691 len=108
+gsm8k-test-0 cot_random rseed=0 correct=True graded=-7.031250983476639 len=458
+gsm8k-test-1 direct_clean rseed=0 correct=True graded=-11.179524739583334 len=62
+gsm8k-test-1 cot_clean rseed=0 correct=True graded=-9.0625 len=237
+gsm8k-test-1 direct_j_ablated rseed=0 correct=True graded=-10.65478515625 len=62
+gsm8k-test-1 cot_j_ablated rseed=0 correct=True graded=-2.8541667064030967 len=296
+gsm8k-test-1 direct_random rseed=0 correct=True graded=-10.904947916666666 len=59
+gsm8k-test-1 cot_random rseed=0 correct=True graded=-8.708345452944437 len=400
+gsm8k-test-2 direct_clean rseed=0 correct=True graded=-4.3060182843889505 len=180
+gsm8k-test-2 cot_clean rseed=0 correct=False graded=-8.035714285714286 len=768
+gsm8k-test-2 direct_j_ablated rseed=0 correct=True graded=-5.174107142857143 len=200
+gsm8k-test-2 cot_j_ablated rseed=0 correct=False graded=-4.928571803229196 len=768
+gsm8k-test-2 direct_random rseed=0 correct=True graded=-4.296901209013803 len=181
+gsm8k-test-2 cot_random rseed=0 correct=False graded=-1.875 len=768
+gsm8k-test-3 direct_clean rseed=0 correct=True graded=-7.15 len=116
+gsm8k-test-3 cot_clean rseed=0 correct=True graded=-5.3142578125 len=369
+gsm8k-test-3 direct_j_ablated rseed=0 correct=True graded=-7.1 len=61
+gsm8k-test-3 cot_j_ablated rseed=0 correct=True graded=-0.0259765625 len=768
+gsm8k-test-3 direct_random rseed=0 correct=True graded=-6.38125 len=124
+gsm8k-test-3 cot_random rseed=0 correct=True graded=-5.000012969970703 len=276
+gsm8k-test-4 direct_clean rseed=0 correct=True graded=-6.544332504272461 len=157
+gsm8k-test-4 cot_clean rseed=0 correct=True graded=-6.34765625 len=662
+gsm8k-test-4 direct_j_ablated rseed=0 correct=True graded=-6.843754261732101 len=129
+gsm8k-test-4 cot_j_ablated rseed=0 correct=True graded=-0.5390625 len=457
+gsm8k-test-4 direct_random rseed=0 correct=True graded=-6.727959156036377 len=164
+gsm8k-test-4 cot_random rseed=0 correct=True graded=-7.478515654802322 len=391
+gsm8k-test-5 direct_clean rseed=0 correct=True graded=-9.687638282775879 len=185
+gsm8k-test-5 cot_clean rseed=0 correct=True graded=-5.955322265625 len=565
+gsm8k-test-5 direct_j_ablated rseed=0 correct=True graded=-11.187500029802322 len=136
+gsm8k-test-5 cot_j_ablated rseed=0 correct=True graded=-0.0145263671875 len=768
+gsm8k-test-5 direct_random rseed=0 correct=True graded=-10.195489883422852 len=136
+gsm8k-test-5 cot_random rseed=0 correct=True graded=-6.468760222196579 len=576
+wrote /root/j-space-cot-ablation/results/grid_smoke_gsm8k/traces.jsonl

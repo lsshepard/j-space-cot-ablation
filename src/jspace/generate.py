@@ -10,6 +10,7 @@ import torch
 from jspace.ablation import (
     AblationConfig,
     AblationHookState,
+    AblationStepDiag,
     ablation_hooks,
     build_ablation_factors,
     clean_topk_by_position,
@@ -30,6 +31,7 @@ class GenerationResult:
     direct_leak_flag: bool = False
     prompt_input_ids: Any | None = None
     prompt_attention_mask: Any | None = None
+    diag_steps: list[AblationStepDiag] = field(default_factory=list)
     extra: dict[str, Any] = field(default_factory=dict)
 
 
@@ -90,8 +92,9 @@ def generate_clean(
     enable_thinking: bool,
     max_new_tokens: int,
     seed: int,
+    capture_logprobs: bool = True,
 ) -> GenerationResult:
-    """Greedy generate without ablation; capture per-token logprobs."""
+    """Greedy generate without ablation; optionally capture per-token logprobs."""
     torch.manual_seed(seed)
     text = build_chat_text(
         loaded.tokenizer, dataset, problem, enable_thinking=enable_thinking
@@ -105,13 +108,13 @@ def generate_clean(
         max_new_tokens=max_new_tokens,
         do_sample=False,
         return_dict_in_generate=True,
-        output_scores=True,
+        output_scores=capture_logprobs,
         pad_token_id=loaded.tokenizer.pad_token_id,
     )
     seq = output.sequences[0]
     gen_ids = seq[prompt_len:].tolist()
     logprobs: list[float] = []
-    if output.scores:
+    if capture_logprobs and output.scores:
         for step_scores, token_id in zip(output.scores, gen_ids):
             log_p = torch.log_softmax(step_scores[0], dim=-1)[token_id]
             logprobs.append(float(log_p.item()))
@@ -191,6 +194,7 @@ def generate_with_ablation(
             enable_thinking=enable_thinking,
             max_new_tokens=max_new_tokens,
             seed=seed,
+            capture_logprobs=True,
         )
 
     torch.manual_seed(seed)
@@ -210,7 +214,10 @@ def generate_with_ablation(
 
     generated: list[int] = []
     logprobs: list[float] = []
-    state = AblationHookState(prompt_token_count=prompt_len)
+    state = AblationHookState(
+        prompt_token_count=prompt_len,
+        collect_diag=ablation.collect_diag,
+    )
     eos_id = loaded.tokenizer.eos_token_id
     factors = build_ablation_factors(loaded.hf_model, loaded.lens, ablation)
 
@@ -309,6 +316,7 @@ def generate_with_ablation(
         ),
         prompt_input_ids=prompt_input_ids,
         prompt_attention_mask=prompt_attention_mask,
+        diag_steps=list(state.diag_steps),
         extra={"use_kv_cache": use_kv_cache},
     )
 

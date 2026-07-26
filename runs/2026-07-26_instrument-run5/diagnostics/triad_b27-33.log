@@ -1,0 +1,94 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:   9%|▊         | 34/398 [00:00<00:01, 332.87it/s]Loading weights:  17%|█▋        | 68/398 [00:00<00:01, 199.64it/s]Loading weights:  34%|███▍      | 136/398 [00:01<00:02, 97.62it/s]Loading weights:  38%|███▊      | 152/398 [00:01<00:03, 70.62it/s]Loading weights:  57%|█████▋    | 225/398 [00:02<00:02, 84.25it/s]Loading weights:  68%|██████▊   | 271/398 [00:02<00:01, 102.70it/s]Loading weights:  72%|███████▏  | 285/398 [00:03<00:01, 68.99it/s] Loading weights:  76%|███████▌  | 302/398 [00:03<00:01, 76.47it/s]Loading weights:  82%|████████▏ | 328/398 [00:03<00:00, 95.14it/s]Loading weights: 100%|██████████| 398/398 [00:03<00:00, 110.35it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 226.51it/s]
+gold-lp triad dataset=multihop n=28 band=[27,33] k=10 exclude_topk=10 random_seeds=(0, 1, 2)
+[1/28] amazon-language
+  gold='Portuguese' clean=-0.508 J=-0.696 R=-2.784 ΔJ=+0.189 ΔR=+2.276 ΔJ−ΔR=-2.088
+[2/28] atomic-26-symbol
+  gold='Fe' clean=-0.000 J=-0.035 R=-0.000 ΔJ=+0.035 ΔR=+0.000 ΔJ−ΔR=+0.035
+[3/28] atomic-29-flame
+  gold='green' clean=-4.250 J=-5.875 R=-2.796 ΔJ=+1.625 ΔR=-1.454 ΔJ−ΔR=+3.079
+[4/28] atomic-29-symbol
+  gold='Cu' clean=-0.000 J=-7.219 R=-0.022 ΔJ=+7.219 ΔR=+0.022 ΔJ−ΔR=+7.196
+[5/28] atomic-79-symbol
+  gold='Au' clean=-0.000 J=-1.094 R=-0.001 ΔJ=+1.094 ΔR=+0.001 ΔJ−ΔR=+1.093
+[6/28] atomic-80-state
+  gold='liquid' clean=-8.312 J=-6.281 R=-7.135 ΔJ=-2.031 ΔR=-1.177 ΔJ−ΔR=-0.854
+[7/28] basketball-players
+  gold='5' clean=-12.375 J=-8.875 R=-13.167 ΔJ=-3.500 ΔR=+0.792 ΔJ−ΔR=-4.292
+[8/28] carnival-ocean
+  gold='Atlantic' clean=-0.010 J=-0.009 R=-0.329 ΔJ=-0.000 ΔR=+0.319 ΔJ−ΔR=-0.319
+[9/28] christmas-season
+  gold='winter' clean=-8.750 J=-8.188 R=-7.406 ΔJ=-0.562 ΔR=-1.344 ΔJ−ΔR=+0.781
+[10/28] colosseum-currency
+  gold='Euro' clean=-0.043 J=-2.219 R=-0.265 ΔJ=+2.175 ΔR=+0.221 ΔJ−ΔR=+1.954
+[11/28] greatwall-ocean
+  gold='Pacific' clean=-1.055 J=-3.609 R=-1.542 ΔJ=+2.555 ΔR=+0.487 ΔJ−ΔR=+2.068
+[12/28] holiday-christmas-monthnum
+  gold='12' clean=-0.001 J=-0.000 R=-0.026 ΔJ=-0.001 ΔR=+0.025 ΔJ−ΔR=-0.026
+[13/28] holiday-halloween-monthnum
+  gold='10' clean=-3.375 J=-0.002 R=-2.836 ΔJ=-3.373 ΔR=-0.539 ΔJ−ΔR=-2.834
+[14/28] holiday-independence-monthnum
+  gold='7' clean=-0.001 J=0.000 R=-0.016 ΔJ=-0.001 ΔR=+0.015 ΔJ−ΔR=-0.016
+[15/28] holiday-valentines-monthnum
+  gold='2' clean=-0.000 J=-5.500 R=-4.860 ΔJ=+5.500 ΔR=+4.860 ΔJ−ΔR=+0.640
+[16/28] louvre-language
+  gold='French' clean=-0.000 J=-0.090 R=-0.000 ΔJ=+0.090 ΔR=+0.000 ΔJ−ΔR=+0.090
+[17/28] mars-color
+  gold='red' clean=-12.500 J=-10.938 R=-8.667 ΔJ=-1.562 ΔR=-3.833 ΔJ−ΔR=+2.271
+[18/28] osu-rival-mascot
+  gold='wolverine' clean=-3.627 J=-2.695 R=-4.455 ΔJ=-0.932 ΔR=+0.828 ΔJ−ΔR=-1.759
+[19/28] paper-continent
+  gold='Asia' clean=-0.000 J=-1.461 R=-0.184 ΔJ=+1.461 ΔR=+0.183 ΔJ−ΔR=+1.277
+[20/28] planet-3-moons
+  gold='1' clean=-0.000 J=-0.000 R=-0.000 ΔJ=-0.000 ΔR=+0.000 ΔJ−ΔR=-0.000
+[21/28] spaceneedle-border
+  gold='Canada' clean=-15.875 J=-7.969 R=-12.500 ΔJ=-7.906 ΔR=-3.375 ΔJ−ΔR=-4.531
+[22/28] spider-legs
+  gold='8' clean=-0.412 J=-0.000 R=-0.326 ΔJ=-0.412 ΔR=-0.086 ΔJ−ΔR=-0.326
+[23/28] super-largest-country-capital
+  gold='Moscow' clean=-1.844 J=-1.602 R=-1.067 ΔJ=-0.242 ΔR=-0.777 ΔJ−ΔR=+0.535
+[24/28] super-largest-island-nation
+  gold='Jakarta' clean=-5.469 J=-4.379 R=-5.073 ΔJ=-1.090 ΔR=-0.396 ΔJ−ΔR=-0.694
+[25/28] super-populous-capital
+  gold='Beijing' clean=-0.002 J=-3.657 R=-1.038 ΔJ=+3.655 ΔR=+1.036 ΔJ−ΔR=+2.619
+[26/28] super-smallest-continent
+  gold='Europe' clean=-0.375 J=-4.094 R=-0.370 ΔJ=+3.719 ΔR=-0.005 ΔJ−ΔR=+3.724
+[27/28] tajmahal-continent
+  gold='Asia' clean=-0.707 J=-6.062 R=-1.526 ΔJ=+5.355 ΔR=+0.819 ΔJ−ΔR=+4.536
+[28/28] topeka-west
+  gold='Colorado' clean=-7.438 J=-7.562 R=-5.469 ΔJ=+0.125 ΔR=-1.969 ΔJ−ΔR=+2.094
+{
+  "dataset": "multihop",
+  "level": null,
+  "n": 28,
+  "band_start": 27,
+  "band_end": 33,
+  "k": 10,
+  "exclude_topk": 10,
+  "random_seeds": [
+    0,
+    1,
+    2
+  ],
+  "mean_clean_lp": -3.1046095192432404,
+  "mean_jspace_lp": -3.5753854016462965,
+  "mean_random_lp": -2.994968381902528,
+  "delta_j": {
+    "mean": 0.4707758824030558,
+    "lo": -0.6262902158002059,
+    "hi": 1.4829967592443738
+  },
+  "delta_r": {
+    "mean": -0.10964113734071222,
+    "lo": -0.6177679684959235,
+    "hi": 0.45454771611543837
+  },
+  "delta_j_minus_r": {
+    "mean": 0.5804170197437679,
+    "lo": -0.3636344450688551,
+    "hi": 1.4809723088843003
+  },
+  "verdict": "no_reliable_j_gold_lp_bite"
+}
+wrote results/diagnostics/triad_b27-33/gold_lp_triad_multihop.json

@@ -1,0 +1,69 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:  23%|██▎       | 91/398 [00:00<00:00, 875.16it/s]Loading weights:  45%|████▍     | 179/398 [00:00<00:00, 261.12it/s]Loading weights:  57%|█████▋    | 226/398 [00:01<00:01, 137.96it/s]Loading weights:  64%|██████▍   | 255/398 [00:01<00:01, 108.21it/s]Loading weights:  77%|███████▋  | 306/398 [00:02<00:00, 105.97it/s]Loading weights:  93%|█████████▎| 369/398 [00:02<00:00, 153.85it/s]Loading weights: 100%|██████████| 398/398 [00:02<00:00, 163.18it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 198.89it/s]
+Generating train split:   0%|          | 0/7473 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 7473/7473 [00:00<00:00, 162803.31 examples/s]
+Generating test split:   0%|          | 0/1319 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1319/1319 [00:00<00:00, 101799.37 examples/s]
+gold-lp triad dataset=gsm8k n=64 band=[27,33] k=10 exclude_topk=10 random_seeds=(0, 1, 2)
+[1/64] gsm8k-test-0
+  gold='18' clean=-7.626 J=-8.469 R=-7.042 ΔJ=+0.843 ΔR=-0.584 ΔJ−ΔR=+1.426
+[2/64] gsm8k-test-1
+  gold='3' clean=-11.180 J=-10.655 R=-10.174 ΔJ=-0.525 ΔR=-1.005 ΔJ−ΔR=+0.480
+[3/64] gsm8k-test-2
+  gold='70000' clean=-4.306 J=-5.174 R=-3.793 ΔJ=+0.868 ΔR=-0.513 ΔJ−ΔR=+1.381
+[4/64] gsm8k-test-3
+  gold='540' clean=-7.150 J=-7.100 R=-6.379 ΔJ=-0.050 ΔR=-0.771 ΔJ−ΔR=+0.721
+[5/64] gsm8k-test-4
+  gold='20' clean=-6.544 J=-6.844 R=-6.346 ΔJ=+0.299 ΔR=-0.198 ΔJ−ΔR=+0.497
+[6/64] gsm8k-test-5
+  gold='64' clean=-9.688 J=-11.188 R=-9.079 ΔJ=+1.500 ΔR=-0.609 ΔJ−ΔR=+2.109
+[7/64] gsm8k-test-6
+  gold='260' clean=-6.372 J=-8.066 R=-5.014 ΔJ=+1.694 ΔR=-1.358 ΔJ−ΔR=+3.052
+[8/64] gsm8k-test-7
+  gold='160' clean=-5.597 J=-3.876 R=-5.401 ΔJ=-1.722 ΔR=-0.196 ΔJ−ΔR=-1.525
+[9/64] gsm8k-test-8
+  gold='45' clean=-7.603 J=-7.167 R=-6.632 ΔJ=-0.435 ΔR=-0.971 ΔJ−ΔR=+0.536
+[10/64] gsm8k-test-9
+  gold='460' clean=-7.307 J=-5.864 R=-7.469 ΔJ=-1.443 ΔR=+0.162 ΔJ−ΔR=-1.605
+[11/64] gsm8k-test-10
+  gold='366' clean=-9.407 J=-11.588 R=-8.369 ΔJ=+2.180 ΔR=-1.038 ΔJ−ΔR=+3.219
+[12/64] gsm8k-test-11
+  gold='694' clean=-8.696 J=-10.950 R=-7.637 ΔJ=+2.254 ΔR=-1.058 ΔJ−ΔR=+3.313
+[13/64] gsm8k-test-12
+  gold='13' clean=-7.786 J=-8.203 R=-7.549 ΔJ=+0.417 ΔR=-0.237 ΔJ−ΔR=+0.654
+[14/64] gsm8k-test-13
+  gold='18' clean=-8.934 J=-6.945 R=-7.801 ΔJ=-1.989 ΔR=-1.133 ΔJ−ΔR=-0.856
+[15/64] gsm8k-test-14
+  gold='60' clean=-7.126 J=-7.382 R=-6.727 ΔJ=+0.256 ΔR=-0.398 ΔJ−ΔR=+0.654
+[16/64] gsm8k-test-15
+  gold='125' clean=-5.566 J=-4.989 R=-4.934 ΔJ=-0.577 ΔR=-0.632 ΔJ−ΔR=+0.054
+[17/64] gsm8k-test-16
+  gold='230' clean=-5.169 J=-5.069 R=-4.168 ΔJ=-0.100 ΔR=-1.001 ΔJ−ΔR=+0.901
+[18/64] gsm8k-test-17
+  gold='57500' clean=-5.453 J=-5.671 R=-5.299 ΔJ=+0.219 ΔR=-0.154 ΔJ−ΔR=+0.373
+[19/64] gsm8k-test-18
+  gold='7' clean=-10.938 J=-10.958 R=-9.670 ΔJ=+0.021 ΔR=-1.267 ΔJ−ΔR=+1.288
+[20/64] gsm8k-test-19
+  gold='6' clean=-9.368 J=-6.021 R=-8.519 ΔJ=-3.347 ΔR=-0.849 ΔJ−ΔR=-2.498
+[21/64] gsm8k-test-20
+  gold='15' clean=-6.965 J=-4.087 R=-5.627 ΔJ=-2.877 ΔR=-1.337 ΔJ−ΔR=-1.540
+[22/64] gsm8k-test-21
+  gold='14' clean=-8.168 J=-7.188 R=-6.778 ΔJ=-0.980 ΔR=-1.390 ΔJ−ΔR=+0.410
+[23/64] gsm8k-test-22
+  gold='7' clean=-12.292 J=-13.333 R=-10.653 ΔJ=+1.042 ΔR=-1.639 ΔJ−ΔR=+2.681
+[24/64] gsm8k-test-23
+  gold='8' clean=-14.604 J=-13.312 R=-13.104 ΔJ=-1.292 ΔR=-1.500 ΔJ−ΔR=+0.208
+[25/64] gsm8k-test-24
+  gold='26' clean=-9.875 J=-9.875 R=-9.192 ΔJ=-0.000 ΔR=-0.683 ΔJ−ΔR=+0.683
+[26/64] gsm8k-test-25
+  gold='2' clean=-8.476 J=-7.542 R=-9.031 ΔJ=-0.934 ΔR=+0.555 ΔJ−ΔR=-1.489
+[27/64] gsm8k-test-26
+  gold='243' clean=-8.451 J=-9.094 R=-7.734 ΔJ=+0.643 ΔR=-0.717 ΔJ−ΔR=+1.360
+[28/64] gsm8k-test-27
+  gold='16' clean=-8.339 J=-10.832 R=-8.207 ΔJ=+2.493 ΔR=-0.133 ΔJ−ΔR=+2.625
+[29/64] gsm8k-test-28
+  gold='25' clean=-5.939 J=-6.396 R=-6.057 ΔJ=+0.457 ΔR=+0.117 ΔJ−ΔR=+0.340
+[30/64] gsm8k-test-29
+  gold='104' clean=-7.923 J=-8.991 R=-7.605 ΔJ=+1.068 ΔR=-0.318 ΔJ−ΔR=+1.386
+[31/64] gsm8k-test-30
+  gold='109' clean=-8.582 J=-6.682 R=-7.468 ΔJ=-1.900 ΔR=-1.114 ΔJ−ΔR=-0.785
+[32/64] gsm8k-test-31

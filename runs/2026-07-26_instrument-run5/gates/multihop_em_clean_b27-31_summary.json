@@ -1,0 +1,46 @@
+{
+  "n_requested": 28,
+  "n_eval": 15,
+  "require_clean_correct": true,
+  "eval_ids": [
+    "atomic-26-symbol",
+    "atomic-29-symbol",
+    "atomic-79-symbol",
+    "carnival-ocean",
+    "christmas-season",
+    "colosseum-currency",
+    "holiday-christmas-monthnum",
+    "holiday-independence-monthnum",
+    "holiday-valentines-monthnum",
+    "louvre-language",
+    "paper-continent",
+    "planet-3-moons",
+    "spider-legs",
+    "super-populous-capital",
+    "super-smallest-continent"
+  ],
+  "band_start": 27,
+  "band_end": 31,
+  "k": 10,
+  "exclude_topk": 10,
+  "random_seeds": [
+    0,
+    1,
+    2
+  ],
+  "clean_accuracy": 1.0,
+  "j_ablated_accuracy": 0.6,
+  "random_accuracy_mean": 0.9111111111111111,
+  "random_accuracy_by_seed": {
+    "0": 0.9333333333333333,
+    "1": 0.8666666666666667,
+    "2": 0.9333333333333333
+  },
+  "j_drop": 0.4,
+  "random_drop": 0.0888888888888889,
+  "j_over_random": 0.3111111111111111,
+  "min_j_drop": 0.3,
+  "min_j_over_random": 0.1,
+  "verdict": "j_specific_em_bite",
+  "gate_pass": true
+}

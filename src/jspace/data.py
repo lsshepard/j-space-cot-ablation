@@ -128,17 +128,31 @@ def load_aime(
 
 
 def load_multihop_fixture(path: Path) -> list[Problem]:
+    """Load homemade or Anthropic jacobian-lens multihop JSON fixtures."""
     payload = json.loads(path.read_text(encoding="utf-8"))
+    rows = payload["items"] if isinstance(payload, dict) and "items" in payload else payload
     problems: list[Problem] = []
-    for i, row in enumerate(payload):
+    for i, row in enumerate(rows):
+        # Homemade: id/answer/intermediate; Anthropic: name/target/intermediates.
+        problem_id = str(row.get("id") or row.get("name") or f"multihop-{i}")
+        if "answer" in row:
+            gold = str(row["answer"]).strip()
+        elif "target" in row:
+            gold = str(row["target"]).strip()
+        else:
+            raise KeyError(f"multihop row {problem_id!r} missing answer/target")
+        intermediate = row.get("intermediate")
+        intermediates = row.get("intermediates")
+        if intermediates is None and intermediate is not None:
+            intermediates = [intermediate]
         problems.append(
             Problem(
-                problem_id=row.get("id", f"multihop-{i}"),
+                problem_id=problem_id,
                 dataset="multihop",
-                prompt=row["prompt"].strip(),
-                gold_answer=str(row["answer"]).strip(),
+                prompt=str(row["prompt"]).strip(),
+                gold_answer=gold,
                 difficulty="control",
-                meta={"intermediate": row.get("intermediate")},
+                meta={"intermediates": intermediates},
             )
         )
     return problems
