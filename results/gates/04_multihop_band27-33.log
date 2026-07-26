@@ -1,34 +1,0 @@
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5099.24it/s]
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 8867.45it/s]
-amazon-language none correct=False ans='Spanish'
-amazon-language jspace correct=False ans='Spanish'
-atomic-26-symbol none correct=True ans='Fe'
-atomic-26-symbol jspace correct=True ans='Fe'
-atomic-29-flame none correct=False ans='Blue'
-atomic-29-flame jspace correct=True ans='blue-green color'
-atomic-29-symbol none correct=True ans='Cu'
-atomic-29-symbol jspace correct=True ans='Cu'
-atomic-79-symbol none correct=True ans='Au'
-atomic-79-symbol jspace correct=True ans='Au'
-atomic-80-state none correct=False ans='Solid'
-atomic-80-state jspace correct=False ans='solid'
-basketball-players none correct=False ans='11'
-basketball-players jspace correct=False ans='Nine'
-carnival-ocean none correct=True ans='Atlantic Ocean'
-carnival-ocean jspace correct=True ans='Atlantic Ocean'
-christmas-season none correct=True ans='Winter'
-christmas-season jspace correct=True ans='Winter season'
-colosseum-currency none correct=True ans='Euro'
-colosseum-currency jspace correct=True ans='Euro'
-{
-  "clean_accuracy": 0.6,
-  "j_ablated_accuracy": 0.7,
-  "drop": -0.09999999999999998,
-  "band_start": 27,
-  "band_end": 33,
-  "k": 10,
-  "n": 10,
-  "gate_pass": false
-}
-GATE FAIL MESSAGE: ablation did not tank multi-hop enough — hook/band/k may be wrong; downstream nulls uninterpretable.

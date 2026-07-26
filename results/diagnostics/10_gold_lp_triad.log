@@ -1,39 +1,0 @@
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 9220.39it/s]
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 2661.36it/s]
-gold-lp triad n=30 band=[27,33] k=10 exclude_topk=10 random_seeds=(0, 1, 2)
-[1/30] nhop-alphabet-element
-  gold='iron' clean=-9.938 J=-10.188 R=-10.469 ΔJ=+0.250 ΔR=+0.531 ΔJ−ΔR=-0.281
-[2/30] nhop-chess-element
-  gold='sulfur' clean=-4.398 J=-1.409 R=-5.351 ΔJ=-2.990 ΔR=+0.952 ΔJ−ΔR=-3.942
-[3/30] nhop-clock-element
-  gold='magnesium' clean=-5.370 J=-4.157 R=-4.445 ΔJ=-1.212 ΔR=-0.925 ΔJ−ΔR=-0.287
-[4/30] nhop-compass-planet
-  gold='Mars' clean=-2.516 J=-7.154 R=-3.453 ΔJ=+4.638 ΔR=+0.938 ΔJ−ΔR=+3.701
-[5/30] nhop-cube-element
-  gold='carbon' clean=-11.250 J=-8.125 R=-9.604 ΔJ=-3.125 ΔR=-1.646 ΔJ−ΔR=-1.479
-[6/30] nhop-deck-element
-  gold='tellurium' clean=-6.709 J=-4.627 R=-4.950 ΔJ=-2.082 ΔR=-1.759 ΔJ−ΔR=-0.323
-[7/30] nhop-fortnight-element
-  gold='silicon' clean=-4.500 J=-4.261 R=-3.917 ΔJ=-0.239 ΔR=-0.583 ΔJ−ΔR=+0.344
-[8/30] nhop-guitar-planet
-  gold='Saturn' clean=-3.750 J=-4.969 R=-4.563 ΔJ=+1.219 ΔR=+0.813 ΔJ−ΔR=+0.406
-[9/30] nhop-insect-element
-  gold='carbon' clean=-9.188 J=-4.281 R=-8.281 ΔJ=-4.906 ΔR=-0.906 ΔJ−ΔR=-4.000
-[10/30] nhop-primary-planet
-  gold='Earth' clean=-9.250 J=-11.688 R=-7.302 ΔJ=+2.438 ΔR=-1.948 ΔJ−ΔR=+4.385
-[11/30] nhop-rainbow-element
-  gold='nitrogen' clean=-3.297 J=-3.750 R=-3.880 ΔJ=+0.454 ΔR=+0.583 ΔJ−ΔR=-0.130
-[12/30] nhop-rings-planet
-  gold='Jupiter' clean=-7.375 J=-5.383 R=-6.969 ΔJ=-1.993 ΔR=-0.406 ΔJ−ΔR=-1.586
-[13/30] nhop-soccer-element
-  gold='sodium' clean=-6.516 J=-1.543 R=-4.809 ΔJ=-4.973 ΔR=-1.707 ΔJ−ΔR=-3.266
-[14/30] nhop-spider-element
-  gold='oxygen' clean=-6.781 J=-4.911 R=-7.104 ΔJ=-1.870 ΔR=+0.323 ΔJ−ΔR=-2.193
-[15/30] nhop-suit-element
-  gold='aluminum' clean=-4.194 J=-6.024 R=-3.443 ΔJ=+1.831 ΔR=-0.751 ΔJ−ΔR=+2.582
-[16/30] nhop-volleyball-planet
-  gold='Saturn' clean=-5.000 J=-5.720 R=-3.797 ΔJ=+0.720 ΔR=-1.203 ΔJ−ΔR=+1.923
-[17/30] nhop-week-element
-  gold='nitrogen' clean=-2.344 J=-3.141 R=-4.734 ΔJ=+0.797 ΔR=+2.391 ΔJ−ΔR=-1.594
-[18/30] chem-atmosphere-Z

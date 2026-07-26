@@ -1,41 +1,0 @@
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 9436.96it/s]
-Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 2746.76it/s]
-[1/28] amazon-language correct=False ans='Spanish' gold='Portuguese' lp=-0.5077731211980184
-[2/28] atomic-26-symbol correct=True ans='Fe' gold='Fe' lp=-7.510185241699219e-06
-[3/28] atomic-29-flame correct=False ans='Blue' gold='green' lp=-4.25
-[4/28] atomic-29-symbol correct=True ans='Cu' gold='Cu' lp=-0.00011682510375976562
-[5/28] atomic-79-symbol correct=True ans='Au' gold='Au' lp=-2.3484230041503906e-05
-[6/28] atomic-80-state correct=False ans='Solid' gold='liquid' lp=-8.3125
-[7/28] basketball-players correct=False ans='11' gold='5' lp=-12.375
-[8/28] carnival-ocean correct=True ans='Atlantic Ocean' gold='Atlantic' lp=-0.00982666015625
-[9/28] christmas-season correct=True ans='Winter' gold='winter' lp=-8.75
-[10/28] colosseum-currency correct=True ans='Euro' gold='Euro' lp=-0.04345703125
-[11/28] greatwall-ocean correct=False ans='Atlantic Ocean' gold='Pacific' lp=-1.0546875
-[12/28] holiday-christmas-monthnum correct=True ans='12' gold='12' lp=-0.000965118408203125
-[13/28] holiday-halloween-monthnum correct=False ans='October' gold='10' lp=-3.375000476837158
-[14/28] holiday-independence-monthnum correct=True ans='7' gold='7' lp=-0.000911712646484375
-[15/28] holiday-valentines-monthnum correct=True ans='2' gold='2' lp=-0.000431060791015625
-[16/28] louvre-language correct=True ans='French' gold='French' lp=-8.940696716308594e-06
-[17/28] mars-color correct=False ans='Orange' gold='red' lp=-12.5
-[18/28] osu-rival-mascot correct=False ans='Boomer' gold='wolverine' lp=-3.6270254055658975
-[19/28] paper-continent correct=True ans='Asia' gold='Asia' lp=-0.0001544952392578125
-[20/28] planet-3-moons correct=True ans='1' gold='1' lp=-2.9802322387695312e-06
-[21/28] spaceneedle-border correct=False ans='Washington state' gold='Canada' lp=-15.875
-[22/28] spider-legs correct=True ans='8' gold='8' lp=-0.412109375
-[23/28] super-largest-country-capital correct=False ans='Russia' gold='Moscow' lp=-1.8437593579292297
-[24/28] super-largest-island-nation correct=False ans='Honduras' gold='Jakarta' lp=-5.468845367431641
-[25/28] super-populous-capital correct=True ans='Beijing' gold='Beijing' lp=-0.001928865909576416
-[26/28] super-smallest-continent correct=True ans='Europe' gold='Europe' lp=-0.375
-[27/28] tajmahal-continent correct=False ans='India' gold='Asia' lp=-0.70703125
-[28/28] topeka-west correct=False ans='Kansas' gold='Colorado' lp=-7.4375
-{
-  "dataset": "easy_multihop",
-  "thinking": false,
-  "level": null,
-  "n": 28,
-  "clean_accuracy": 0.5357142857142857,
-  "mean_clean_gold_lp": -3.1046095192432404,
-  "in_target_band_20_80": true
-}
-wrote /root/j-space-cot-ablation/results/diagnostics/screen_clean_easy_multihop.json
