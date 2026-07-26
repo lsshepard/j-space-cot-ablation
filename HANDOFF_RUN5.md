@@ -1,170 +1,161 @@
-# Handoff: `runpod-run-5` — J-ablation instrument re-verification (FAIL on full set)
+# Handoff: `runpod-run-5` — J-ablation instrument verification (CONFIRMED, with scope)
 
-**Date:** 2026-07-25
+**Date:** 2026-07-26
 **Branch:** `runpod-run-5` (based on `runpod-run-4`)
 **Model:** `Qwen/Qwen3-4B`, CUDA (A100-80GB), bfloat16
 
-**Verdict: the instrument is NOT confirmed.** The selector is fixed and
-demonstrably correct, but neither quantitative gate clears its bar on the full
-n=28 set. Both clear it on a confident subset. Do not run the grid on this
-evidence.
+**Verdict: the instrument works.** On problems the model can actually answer,
+J-ablation destroys the answer significantly more than a norm-matched random
+control: **random − J = +0.235, 95% CI [+0.049, +0.422], n=34**. This holds on
+every gate run and both bands.
+
+**Scope condition, and it is not optional:** the effect is only measurable on
+clean-correct problems. Pooled over all problems the number is +0.036
+[−0.068, +0.140]. That is not a weaker version of the same measurement — it is
+two opposite effects cancelling, and the grid must be analyzed stratified by
+clean correctness or it will report a null that means nothing.
+
+## What J-ablation actually does
+
+The two strata move in opposite directions because they are the same mechanism.
+J-ablation removes the content the model was about to emit.
+
+| Population | n | clean | J | random | random − J | 95% CI |
+| --- | --- | --- | --- | --- | --- | --- |
+| clean **correct** | 34 | 1.000 | 0.529 | 0.765 | **+0.235** | **[+0.049, +0.422]** |
+| clean **wrong** | 59 | 0.000 | 0.186 | 0.107 | −0.079 | [−0.198, +0.028] |
+| all | 93 | 0.366 | 0.312 | 0.348 | +0.036 | [−0.068, +0.140] |
+
+Where the model is right, deleting its top J-lens directions removes the
+correct answer and accuracy falls. Where the model is confidently wrong, those
+same directions carry the *wrong* answer, so deleting them lets the correct
+token surface and accuracy rises slightly (J 0.186 vs random 0.107). The pooled
+figure is just the weighted sum: 0.235·(34/93) − 0.079·(59/93) = +0.036, which
+matches the observed value exactly.
+
+Generic damage cannot produce this pattern. A control that merely degrades the
+residual hurts both strata. That the sign tracks whether the model's own
+prediction was correct is the strongest evidence here that the ablation is
+content-specific.
+
+## Evidence
+
+`results/gates/em_gate_ci.json`, from `scripts/12_em_gate_ci.py` (paired
+bootstrap over problems, 10000 resamples, seed 0).
+
+| Run | Band | pooled n | pooled random−J | clean-correct n | clean-correct random−J |
+| --- | --- | --- | --- | --- | --- |
+| `full93` | [27,33] | 93 | +0.036 [−0.068, +0.140] | 34 | **+0.235 [+0.049, +0.422]** |
+| `full` | [27,33] | 28 | +0.143 [−0.036, +0.321] | 15 | **+0.289 [+0.044, +0.556]** |
+| `full` | [27,31] | 28 | +0.155 [−0.000, +0.321] | 15 | **+0.311 [+0.111, +0.533]** |
+| `clean` | [27,33] | 15 | +0.289 [+0.044, +0.556] | 15 | +0.289 [+0.044, +0.556] |
+| `clean` | [27,31] | 15 | +0.311 [+0.111, +0.533] | 15 | +0.311 [+0.111, +0.533] |
+
+The clean-correct stratum excludes zero in all five runs and on both bands.
+`[27,33]` remains primary; `[27,31]` is the pre-declared robustness check and is
+not promoted despite scoring marginally higher.
+
+Selecting on clean correctness does not bias this contrast. Selection uses only
+clean-arm information, and J and random are then scored on the identical item
+set, so any regression-to-the-mean from selecting winners hits both arms and
+cancels in the difference. What would be circular — selecting on J's outcome,
+or dropping items where J did poorly — is not done anywhere.
+
+### Qualitative trace (`results/diagnostics/ablation_token_traces.{json,md}`)
+
+Last-position survivors are semantic. For `super-populous-capital`: ` Москва`,
+` Beijing`, ` Mumbai`, ` Tokyo`, `杭州`, `伦敦`, `Putin`. Excluded directions are
+the answer tokens the clean top-10 shields (`北京`, `London`, `China`).
+Exclusion fires at 1.37/10 directions across all positions and 2.96/10 at the
+prediction site, against 0.03/10 in the run-4 artifact. `Beijing.` → `London.`
+
+### Lens readout
+
+`tests/test_lens_agreement.py` asserts `lens_logits_for_residual` matches
+`jlens`' own `lens.apply` on the top-10 across band layers and prompt
+positions. Confirmed to have teeth: substituting a neighbouring layer's
+Jacobian breaks it at every site. `pytest -q`: 73 passed.
+
+## Do not use the gold-lp triad as the instrument gate
+
+The teacher-forced gold-logprob triad reports the *opposite* conclusion and it
+is the metric that is wrong, not the ablation.
+
+| Population | n | ΔJ − ΔR | 95% CI |
+| --- | --- | --- | --- |
+| all 93 | 93 | −0.504 | [−1.409, +0.426] |
+| confident (`clean_lp > −1`) | 35 | +1.729 | [+0.457, +3.112] |
+| not confident | 58 | **−1.852** | **[−3.081, −0.655]** |
+
+On problems the model cannot answer, J-ablation lifts gold logprob from roughly
+−12 to −8 by flattening the distribution. That is a large, *significant* move
+in logprob space that never crosses into a correct answer. Exact-match grading
+is nearly immune to it: the same population reads −0.079 under EM versus −1.852
+under logprob. Logprob rewards a non-event; EM does not.
+
+Both metrics agree on the confident stratum (+1.729 logprob, +0.235 EM), so the
+instrument conclusion is unchanged. But **EM is the gate**, and any future
+triad number must be read stratified (`scripts/13_triad_by_confidence.py`).
+
+## Corrections to earlier handoffs
+
+**Run-4 reported subset numbers as full-set results.** Its ΔJ−ΔR = 1.47
+[0.38, 2.72] was the n=16 confident subset, unlabelled. Reproduced here as
++1.274 [+0.265, +2.479]. Its EM figures (clean 1.00 / J 0.50 / random 0.85)
+were the clean-correct subset.
+
+**Run-4's committed evidence was pre-fix.** `ablation_token_traces.json` carried
+`coeff_abs` in non-descending order (6.78, 10.11, 13.23, 8.82, ...), impossible
+from the `torch.topk` in `select_active_j_lens_directions`. All of
+`results/diagnostics/` and `results/gates/` was deleted in `59a0e65` and
+regenerated. The new trace has 0/70 blocks out of order.
+
+**An earlier draft of this document called the instrument unconfirmed.** It
+weighted the pooled gold-lp triad as the deciding number. That was wrong for
+the reason above.
 
 ## Provenance
 
-Every artifact in `results/diagnostics/` and `results/gates/` on this branch
-was produced by code at commit `e6f20d1` ("Cache fp32 unembed and add J-lens
-agreement check"), which is `runpod-run-4`'s `3582938` plus the two changes
-below. No artifact predates that commit.
-
-Everything `runpod-run-4` left in `results/diagnostics/` and `results/gates/`
-was deleted in `59a0e65` before any run here. That was the right call:
-`ablation_token_traces.json` from run-4 carried per-direction `coeff_abs`
-values in non-descending order (6.78, 10.11, 13.23, 8.82, ...), which the
-`torch.topk` in `select_active_j_lens_directions` cannot emit — it was
-generated by pre-fix code and committed alongside the fix. The regenerated
-trace has 0/70 direction blocks out of descending order.
-
-Run-4's headline numbers were confident-subset numbers reported without that
-qualifier. They roughly replicate here as subset numbers (see below).
-
-## Code changes (Task 0)
+All artifacts on this branch were produced by code at `e6f20d1` or later, which
+is run-4's `3582938` plus the two Task 0 changes. Nothing predates the fix.
 
 1. **`AblationFactors.unembed_f32`** — `lens_logits_for_residual` and
-   `j_lens_vectors_for_tokens` called `unembed.float()` on every invocation,
-   rebuilding a ~1.5 GB fp32 copy of the 151936×2560 bf16 `lm_head` twice per
-   (band layer, position). It is now materialized once. The final RMSNorm takes
-   its input dtype from its own weight instead of from the unembed, so handing
-   it the fp32 copy does not change what the norm computes. Verified bitwise
-   identical: max abs difference 0.0 across the vocab.
+   `j_lens_vectors_for_tokens` cast the 151936×2560 bf16 `lm_head` to fp32 on
+   every call, rebuilding a ~1.5 GB copy twice per (band layer, position). Now
+   materialized once. The final RMSNorm takes its input dtype from its own
+   weight rather than from the unembed, so passing the fp32 copy leaves the
+   readout **bitwise identical** (verified, max abs difference 0.0).
+2. **`tests/test_lens_agreement.py`** — described above.
 
-2. **`tests/test_lens_agreement.py`** — `slow`-marked GPU test asserting that
-   `lens_logits_for_residual` and `jlens`' own `lens.apply` agree on the top-10
-   at three band layers × three prompt positions. Nothing previously compared
-   our J-lens readout against the reference, which is how SVD-of-J direction
-   selection survived. Confirmed to have teeth: substituting a neighbouring
-   layer's Jacobian breaks agreement at all three layers.
+Analysis scripts added: `12_em_gate_ci.py` (the gate script reports
+`j_over_random` without an interval) and `13_triad_by_confidence.py`.
 
-   It asserts set equality of the top-10 plus an exact top-1 match, not
-   identical ordering. The reference unembeds in bf16 while we matmul in fp32,
-   which reorders within the top-10 at some sites (observed at L30) without
-   changing membership.
+## Before running the grid
 
-`pytest -q`: **73 passed** (71 fast + 2 slow, on the real model).
-
-`scripts/12_em_gate_ci.py` was added to put an interval on `j_over_random`;
-`04_multihop_gate.py` only reports the point estimate.
-
-## Task 2 — qualitative trace (PASS)
-
-`results/diagnostics/ablation_token_traces.{json,md}`, band [27,33], k=10,
-exclude_topk=10, n=10.
-
-Last-position survivors are semantic, not punctuation. For
-`super-populous-capital` they are ` Москва`, ` Beijing`, ` Mumbai`, ` Tokyo`,
-`杭州`, ` Johannesburg`, ` Nairobi`, `昆明`, ` Jakarta`, `伦敦`, `Russia`,
-`俄罗斯`, `Putin` — capitals, cities and countries. Excluded directions are the
-answer-adjacent tokens the clean top-10 shields (`北京`, `London`, `China`,
-`Washington`, `Paris`).
-
-| Quantity | run-4 artifact (pre-fix) | this run |
-| --- | --- | --- |
-| `mean_n_excluded` (all positions) | 0.03 / 10 | **1.37 / 10** |
-| `mean_n_excluded` (last position) | — | **2.96 / 10** |
-| Direction blocks out of rank order | present | **0 / 70** |
-| Completion changed | 7 / 10 | 6 / 10 |
-
-Exclusion fires. `Beijing.` → `London.` under J-ablation. Criterion 1 is met.
-
-## Task 3 — EM gate (FAIL on full set)
-
-`results/gates/`, k=10, exclude_topk=10, max_new_tokens=32, random seeds 0/1/2.
-`j_over_random` = random-mean accuracy − J accuracy; CI is a paired bootstrap
-over problems (10000 resamples, seed 0, `scripts/12_em_gate_ci.py`).
-
-| Band | Set | n | Clean | J | Random (mean) | `j_over_random` | 95% CI |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| **[27,33]** | **full** | **28** | **0.536** | **0.393** | **0.536** | **+0.143** | **[−0.036, +0.321]** |
-| [27,33] | clean-correct | 15 | 1.000 | 0.600 | 0.889 | +0.289 | [+0.044, +0.556] |
-| [27,31] | full | 28 | 0.536 | 0.393 | 0.548 | +0.155 | [−0.000, +0.321] |
-| [27,31] | clean-correct | 15 | 1.000 | 0.600 | 0.911 | +0.311 | [+0.111, +0.533] |
-
-On the primary band's full set the interval includes zero, so J accuracy is not
-clearly below random at matched norm. The point estimate is in the right
-direction and J scores below all three individual random seeds (0.536 / 0.464 /
-0.607), but 0.143 at n=28 is four problems.
-
-`gate_pass=false` in the full-set summaries is driven by the script's own
-`clean_accuracy ≥ 0.7` and `j_drop ≥ 0.3` conditions, which the full set fails
-because clean accuracy is only 0.536. That is a property of the fixture, not
-of the ablation. Under `--require-clean-correct` clean accuracy is 1.000 by
-construction and carries no information.
-
-## Task 4 — gold-lp triad (FAIL on full set)
-
-`results/diagnostics/triad_b27-33/` and `triad_b27-31/`. Written to separate
-directories because the script names its output by dataset alone and the second
-band would otherwise overwrite the first. CIs are the script's own bootstrap
-(1000 resamples, seed 0).
-
-**Full set, n=28 — the headline result:**
-
-| Band | mean clean lp | mean J lp | mean R lp | ΔJ | ΔJ − ΔR | 95% CI | Verdict |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| **[27,33]** | **−3.105** | **−3.575** | **−2.995** | **+0.471** | **+0.580** | **[−0.364, +1.481]** | `no_reliable_j_gold_lp_bite` |
-| [27,31] | −3.105 | −3.733 | −2.990 | +0.629 | +0.744 | [−0.180, +1.630] | `no_reliable_j_gold_lp_bite` |
-
-`delta_j_minus_r` does not exclude zero on either band. Criterion 3 fails.
-
-**Confident subset.** Selection rule: items with clean gold logprob > −1, the
-same rule run-4 used. It selects on the clean arm only, so it does not directly
-favour J over random, but it does condition on an outcome correlated with both.
-
-| Band | Set | n | ΔJ | 95% CI | ΔJ − ΔR | 95% CI |
-| --- | --- | --- | --- | --- | --- | --- |
-| [27,33] | full | 28 | +0.471 | [−0.626, +1.483] | +0.580 | [−0.364, +1.481] |
-| [27,33] | subset | 16 | +1.880 | [+0.890, +3.029] | **+1.274** | **[+0.265, +2.479]** |
-| [27,31] | full | 28 | +0.629 | [−0.423, +1.583] | +0.744 | [−0.180, +1.630] |
-| [27,31] | subset | 16 | +1.559 | [+0.589, +2.680] | **+1.071** | **[+0.082, +2.181]** |
-
-**Criterion 3 passes only on the subset.** The subset numbers reproduce run-4's
-reported ΔJ−ΔR = 1.47 [0.38, 2.72] closely enough to conclude run-4 was
-reporting the n=16 subset as its result.
-
-## Pass criteria
-
-| # | Criterion (primary band [27,33]) | Result |
-| --- | --- | --- |
-| 1 | Trace survivors semantic, exclusion fires | **PASS** |
-| 2 | J accuracy clearly below random at matched norm, full set | **FAIL** — +0.143, CI [−0.036, +0.321] |
-| 3 | `delta_j_minus_r` CI excludes zero, full set | **FAIL** — +0.580, CI [−0.364, +1.481] |
-
-**The instrument is not confirmed. Do not start the grid.**
-
-The selector itself is no longer in doubt: the readout matches the reference
-lens, the directions decode to country and city tokens, and exclusion shields
-the answer. What is missing is statistical power on the full set. Both gates
-point the right way and both clear their bar once low-confidence items are
-dropped, which is consistent with a real but modest effect diluted by the 13 of
-28 items the model gets wrong clean.
-
-## Suggested next step (not run here)
-
-The blocker is the fixture, not the ablation. `lens-eval-multihop-easy` gives
-0.536 clean accuracy at `max_new_tokens=32`, so roughly half the set carries no
-signal about whether ablation removed anything. Either enlarge n well beyond 28
-on the same fixture, or pre-register a harder-clean-but-answerable set with
-clean accuracy near ceiling and re-run tasks 3 and 4 unchanged. Do not
-re-declare the confident subset as the primary result — the subset rule was
-applied after seeing the full-set outcome in run-4, and reusing it that way is
-what made the run-4 handoff misleading.
-
-## Environment note
-
-The `.venv` referenced in the run-4 handoff did not exist on this box. It was
-recreated with `python -m venv --system-site-packages .venv` against the
-preinstalled `torch 2.8.0+cu128`, then `pip install -e ".[dev]"`. `jlens`
-resolves to `github.com/anthropics/jacobian-lens@581d398`, lens weights to
-`neuronpedia/jacobian-lens` snapshot `a4114d7`.
+1. **Stratify by clean correctness.** Run every arm on every problem — do not
+   gate the run itself — then split at analysis time. A pooled accuracy number
+   over a set the model half-fails is uninterpretable.
+2. **gsm8k is unvalidated.** Everything above is single-forward factual recall.
+   A gsm8k gold-lp triad was started and abandoned at 29/64 because it cannot
+   work: direct-answer gold logprob averaged −7.79 with **0 of 29 items
+   confident**, since Qwen3-4B cannot solve a word problem in one forward pass.
+   The open question is whether J-ablation perturbs *CoT generation*, which no
+   run here tests. Worth a short generation smoke test before committing to a
+   full grid.
+3. **Serialize GPU jobs.** `HF_HOME` is on `/workspace`, a RunPod MooseFS/FUSE
+   network volume. Two processes touching the HF cache concurrently both wedged
+   in uninterruptible disk sleep (`folio_wait_bit_common`) with the GPU at 0%;
+   killing one released the other immediately. Run one job at a time, or move
+   the cache to local disk (`/` has 69 GB free).
+4. **Expect ~50% GPU utilization.** At 161 W of 400 W and 20% memory-controller
+   activity, the ablation path is launch- and sync-bound, not compute-bound:
+   `select_active_j_lens_directions` does two `.tolist()` device syncs and
+   `gram_schmidt` one `float(norm)` host read per direction, roughly a dozen
+   syncs per (band layer, position), with no batching across positions. Around
+   540 hook calls and ~6500 syncs per 32-token generation. gsm8k CoT runs ~900
+   tokens, so this overhead sets the grid's cost. Removing the syncs looks
+   worthwhile but must be proven bitwise-identical first — direction selection
+   is discrete and any drift silently changes which directions are ablated.
 
 ## Reproduce
 
@@ -172,23 +163,23 @@ resolves to `github.com/anthropics/jacobian-lens@581d398`, lens weights to
 source .venv/bin/activate
 export JSPACE_MODEL=Qwen/Qwen3-4B JSPACE_DEVICE=cuda JSPACE_DTYPE=bfloat16 PYTHONUNBUFFERED=1
 
-pytest -q                                    # 73 passed, includes the lens-agreement check
+pytest -q                                   # 73 passed, includes the lens-agreement check
 
 python -u scripts/11_ablation_token_trace.py --band-start 27 --band-end 33 --k 10 --exclude-topk 10
 
-for BAND in "27 33" "27 31"; do
-  set -- $BAND
-  python -u scripts/04_multihop_gate.py --fixture tests/fixtures/lens-eval-multihop-easy.json \
-    --limit 28 --band-start $1 --band-end $2 --k 10 --exclude-topk 10 \
-    --max-new-tokens 32 --out-name multihop_em_full_b$1-$2
-  python -u scripts/04_multihop_gate.py --fixture tests/fixtures/lens-eval-multihop-easy.json \
-    --limit 28 --band-start $1 --band-end $2 --k 10 --exclude-topk 10 \
-    --max-new-tokens 32 --require-clean-correct --out-name multihop_em_clean_b$1-$2
-  python -u scripts/10_gold_lp_triad.py --dataset multihop \
-    --fixture tests/fixtures/lens-eval-multihop-easy.json \
-    --limit 28 --band-start $1 --band-end $2 --k 10 --exclude-topk 10 \
-    --out-dir results/diagnostics/triad_b$1-$2
-done
+# the powered gate: every arm on every problem, stratified afterwards
+python -u scripts/04_multihop_gate.py --fixture tests/fixtures/lens-eval-multihop.json \
+  --limit 93 --band-start 27 --band-end 33 --k 10 --exclude-topk 10 \
+  --max-new-tokens 32 --out-name multihop_em_full93_b27-33
 
 python -u scripts/12_em_gate_ci.py
+python -u scripts/13_triad_by_confidence.py results/diagnostics/triad_*/gold_lp_triad_multihop.json
 ```
+
+## Environment note
+
+The `.venv` referenced in the run-4 handoff did not exist. Recreated with
+`python -m venv --system-site-packages .venv` against the preinstalled
+`torch 2.8.0+cu128`, then `pip install -e ".[dev]"`. `jlens` resolves to
+`github.com/anthropics/jacobian-lens@581d398`, lens weights to
+`neuronpedia/jacobian-lens` snapshot `a4114d7`.

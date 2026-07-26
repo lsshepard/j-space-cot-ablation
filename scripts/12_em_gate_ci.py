@@ -68,6 +68,20 @@ def bootstrap_j_over_random(
     }
 
 
+def arm_accuracies(flags: dict[str, dict[str, bool]], ids: list[str]) -> dict[str, float]:
+    def mean(fn) -> float:
+        return sum(fn(flags[i]) for i in ids) / len(ids)
+
+    return {
+        "clean_accuracy": mean(lambda row: float(row["clean"])),
+        "j_accuracy": mean(lambda row: float(row["j"])),
+        "random_accuracy": mean(
+            lambda row: sum(row[k] for k in row if k.startswith("r"))
+            / len([k for k in row if k.startswith("r")])
+        ),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--n-boot", type=int, default=10000)
@@ -78,11 +92,29 @@ def main() -> None:
     gates_dir = load_settings().results_dir / "gates"
     results = {}
     for path in sorted(gates_dir.glob("multihop_em_*.jsonl")):
-        stats = bootstrap_j_over_random(
-            per_problem_flags(path), n_boot=args.n_boot, seed=args.seed
-        )
+        flags = per_problem_flags(path)
+        stats = bootstrap_j_over_random(flags, n_boot=args.n_boot, seed=args.seed)
         stats["excludes_zero"] = stats["lo"] > 0.0
+
+        # J-ablation removes whatever the model was about to say, so the two
+        # strata move in opposite directions and cancel when pooled.
+        evaluated = {k: v for k, v in flags.items() if "j" in v}
+        strata: dict[str, dict] = {}
+        for label, ids in (
+            ("clean_correct", [i for i in evaluated if evaluated[i]["clean"]]),
+            ("clean_wrong", [i for i in evaluated if not evaluated[i]["clean"]]),
+        ):
+            if len(ids) < 3:
+                continue
+            sub = bootstrap_j_over_random(
+                {i: evaluated[i] for i in ids}, n_boot=args.n_boot, seed=args.seed
+            )
+            sub["excludes_zero"] = sub["lo"] > 0.0
+            sub.update(arm_accuracies(evaluated, ids))
+            strata[label] = sub
+        stats["strata"] = strata
         results[path.stem] = stats
+
         print(
             f"{path.stem:<30} n={stats['n']:<3} "
             f"j_over_random={stats['j_over_random']:+.3f} "
@@ -90,6 +122,16 @@ def main() -> None:
             f"{'EXCLUDES 0' if stats['excludes_zero'] else 'includes 0'}",
             flush=True,
         )
+        for label, sub in strata.items():
+            print(
+                f"    {label:<14} n={sub['n']:<3} "
+                f"clean={sub['clean_accuracy']:.3f} J={sub['j_accuracy']:.3f} "
+                f"random={sub['random_accuracy']:.3f} "
+                f"rand-J={sub['j_over_random']:+.3f} "
+                f"[{sub['lo']:+.3f}, {sub['hi']:+.3f}]"
+                f"{'  EXCLUDES 0' if sub['excludes_zero'] else ''}",
+                flush=True,
+            )
 
     payload = {"n_boot": args.n_boot, "seed": args.seed, "runs": results}
     out_path = gates_dir / f"{args.out_name}.json"
