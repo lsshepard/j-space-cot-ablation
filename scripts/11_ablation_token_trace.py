@@ -59,7 +59,7 @@ def main() -> None:
         "--out-dir",
         type=Path,
         default=None,
-        help="defaults to results/diagnostics/",
+        help="defaults to <run_dir>/diagnostics/",
     )
     args = parser.parse_args()
 

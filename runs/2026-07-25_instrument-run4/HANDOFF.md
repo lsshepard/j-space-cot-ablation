@@ -39,7 +39,7 @@ Control set: easy multihop with **clean gold lp > −1** (n=16), band `[27,33]`,
 | exclude=10 | 0.94 | 0.56 | **0.375** |
 | exclude=0 | 0.94 | 0.25 | **0.688** |
 
-Artifacts: `results/diagnostics/positive_control_jlens.json` (EM sweep + triad @ exclude=0).
+Artifacts: `diagnostics/positive_control_jlens.json` (EM sweep + triad @ exclude=0).
 
 ### Gold-lp triad vs random (same confident set)
 
@@ -78,7 +78,7 @@ Last-pos survivors are now semantic (cities / China / Russia / …); clean top-1
 - J drop = **0.50** (≥ 0.30)
 - J ≫ random: random−J = **0.35** (≥ 0.10)
 - **Verdict:** `j_specific_em_bite` · `gate_pass=true`
-- Artifact: `results/gates/multihop_em_gate_n20_summary.json`
+- Artifact: `gates/multihop_em_gate_n20_summary.json`
 
 ## Main grid readiness
 

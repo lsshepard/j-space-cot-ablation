@@ -253,3 +253,15 @@ Before full runs, do a **timing probe on ~5 problems** covering the most expensi
 8. Metrics, bootstrap CIs, backtrack judge, plots, write-up.
 
 Steps 2–5 hold the risk; 6–8 are mechanical once the hook is validated. If time-boxed: logit-lens ablation as a fallback for the lens (needs no Jacobian — just `W_U` on intermediate activations; the paper notes it captures much of the workspace structure with lower reliability) + steps 1,2,3,4,5,7 is a complete, defensible study.
+
+---
+
+## 8. Implementation lock-ins (post-instrument, Qwen3-4B)
+
+Recorded after the instrument gate; does not change the hypotheses in §2.
+
+- **Ablation selection:** top-k activated **J-lens token vectors** \(v_t = J^\top u_t\) ranked by lens logit on \(h\), not right singular vectors of \(J\). Survivors after clean top-10 exclusion are Gram–Schmidt’d and the span is projected out; the ranking walks past excluded tokens to refill up to \(k\) (slightly stronger than dropping to \(<k\)).
+- **Band:** layers **[27, 33]** on Qwen3-4B (36 layers). The match-rate diagnostic is a **late ramp**, not a mid-network plateau; auto-select preferred [30, 33]; human lock includes onset. Prompt tokens are ablated.
+- **Instrument success:** exact-match on multihop items that are clean-correct, with J accuracy clearly below matched-norm random. Pooled EM / gold-lp over items the model does not know can null or invert — do not use those as the sole gate.
+- **Artifacts:** session outputs live under `runs/<YYYY-MM-DD_slug>/` with a `HANDOFF.md`; see `runs/README.md`.
+- **Math caveat unchanged:** number-token J-space loading remains near zero; a null on GSM8K/MATH CoT EM is compatible with a working factual instrument.

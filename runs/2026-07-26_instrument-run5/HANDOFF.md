@@ -20,7 +20,7 @@ Push if not already: commits may sit only locally depending whether the last pus
 
 ### Exact-match gate, full 93-item Anthropic multihop set
 
-Artifact: `results/gates/multihop_em_full93_b27-33_*`, CIs in `results/gates/em_gate_ci.json`.
+Artifact: `gates/multihop_em_full93_b27-33_*`, CIs in `gates/em_gate_ci.json`.
 
 Every arm run on every problem (no `--require-clean-correct` during the run). Stratify at analysis:
 
@@ -38,13 +38,13 @@ Clean-correct strata exclude zero on every EM gate run on this branch (easy-28 a
 
 ### Qualitative + lens agreement
 
-- Trace: `results/diagnostics/ablation_token_traces.{json,md}` — semantic survivors, exclusion fires (~1.37/10 all-pos, ~2.96/10 last-pos). Run-4's committed trace was pre-fix (non-descending `coeff_abs`); deleted and regenerated.
+- Trace: `diagnostics/ablation_token_traces.{json,md}` — semantic survivors, exclusion fires (~1.37/10 all-pos, ~2.96/10 last-pos). Run-4's committed trace was pre-fix (non-descending `coeff_abs`); deleted and regenerated.
 - `tests/test_lens_agreement.py` — our `lens_logits_for_residual` matches `jlens.apply` top-10. `pytest -q`: 73 passed (incl. slow).
 - Code: `AblationFactors.unembed_f32` cache; final RMSNorm dtype from norm weight (bitwise-identical readout).
 
 ### Gold-lp triad — secondary only
 
-`results/diagnostics/triad_multihop93_b27-33/`, stratified via `scripts/13_triad_by_confidence.py`.
+`diagnostics/triad_multihop93_b27-33/`, stratified via `scripts/13_triad_by_confidence.py`.
 
 | Stratum | n | ΔJ−ΔR | CI |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ python -u scripts/06_run_grid.py --datasets gsm8k --limit 6 \
   --max-new-tokens 768 --out-name grid_smoke_gsm8k
 ```
 
-**Artifacts:** `results/grid_smoke_gsm8k/{traces.jsonl,run_meta.json}`, log `results/grid_smoke_gsm8k.log`.
+**Artifacts:** `grid_smoke_gsm8k/{traces.jsonl,run_meta.json}`, log `grid_smoke_gsm8k.log`.
 
 | Condition | n | accuracy | mean len | cap hits |
 | --- | --- | --- | --- | --- |
