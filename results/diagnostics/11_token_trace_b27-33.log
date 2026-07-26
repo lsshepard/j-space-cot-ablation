@@ -1,0 +1,1639 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:  14%|█▍        | 55/398 [00:00<00:02, 119.80it/s]Loading weights:  23%|██▎       | 92/398 [00:00<00:02, 133.41it/s]Loading weights:  27%|██▋       | 106/398 [00:00<00:02, 108.72it/s]Loading weights:  29%|██▉       | 117/398 [00:01<00:03, 88.99it/s] Loading weights:  47%|████▋     | 188/398 [00:01<00:01, 198.53it/s]Loading weights:  55%|█████▍    | 218/398 [00:02<00:03, 57.14it/s] Loading weights:  71%|███████   | 281/398 [00:02<00:01, 97.22it/s]Loading weights:  79%|███████▉  | 315/398 [00:03<00:00, 105.11it/s]Loading weights:  93%|█████████▎| 369/398 [00:03<00:00, 149.73it/s]Loading weights: 100%|██████████| 398/398 [00:03<00:00, 123.69it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 231.19it/s]
+token traces n=10 band=[27,33] k=10 exclude_topk=10
+[1/10] tracing super-populous-capital
+### super-populous-capital
+prompt: Fact: The capital city of the most populous country in the world is
+gold: 'Beijing'  intermediates: ['China']
+clean→ 'Beijing.'
+J-abl→ 'London.'
+aggregates: survivors=10.00/11.49 (frac=0.887)  excluded_dirs/step=1.49  ‖Δh‖=36.30  steps_with_any_excl=198/329
+intermediate hits: survivor=138 excluded=30 clean_topk=51
+last-pos clean top-10: ['Be', 'Berlin', 'China', 'London', 'New', 'Paris', 'Tok', 'Wars', 'Washington', '北京']
+last-pos active J-dirs by layer ([S]=survivor ablated, [X]=excluded):
+  L27 surv=10/12 ‖Δh‖=24.17 | 0:' Москва'[S](c=21.74), 1:'London'[X](c=21.27), 2:'北京'[X](c=20.46), 3:' Beijing'[S]G(c=19.44), 4:' Mumbai'[S](c=19.31), 5:' Tokyo'[S](c=19.22), 6:'杭州'[S](c=18.89), 7:' Johannesburg'[S](c=18.86), 8:' Nairobi'[S](c=18.66), 9:'昆明'[S](c=18.58), 10:' Jakarta'[S](c=18.47), 11:'伦敦'[S](c=18.31)
+  L28 surv=10/14 ‖Δh‖=18.56 | 0:'(World'[S](c=7.91), 1:'<|endoftext|>'[S](c=7.29), 2:'(None'[S](c=7.25), 3:'/world'[S](c=7.14), 4:'Berlin'[X](c=6.99), 5:'])**'[S](c=6.98), 6:'sterdam'[S](c=6.94), 7:'世界'[S](c=6.89), 8:'联合国'[S](c=6.88), 9:' Ankara'[S](c=6.85), 10:'Washington'[X](c=6.83), 11:'北京'[X](c=6.78), 12:'Tok'[X](c=6.75), 13:'Russia'[S](c=6.73)
+  L29 surv=10/14 ‖Δh‖=16.09 | 0:'Russia'[S](c=11.79), 1:'China'[X]*(c=9.03), 2:'俄罗斯'[S](c=8.50), 3:'Washington'[X](c=7.21), 4:'北京'[X](c=7.20), 5:'Tok'[X](c=7.15), 6:'-China'[S]*(c=7.01), 7:'苏联'[S](c=7.00), 8:' Russia'[S](c=6.84), 9:'Putin'[S](c=6.84), 10:'是中国'[S](c=6.83), 11:'(None'[S](c=6.79), 12:' Putin'[S](c=6.72), 13:';</'[S](c=6.62)
+  L30 surv=10/16 ‖Δh‖=21.95 | 0:'北京'[X](c=13.38), 1:'London'[X](c=11.47), 2:' Tokyo'[S](c=11.42), 3:'东京'[S](c=11.32), 4:'Tok'[X](c=11.17), 5:'Paris'[X](c=11.08), 6:' Johannesburg'[S](c=11.06), 7:'Berlin'[X](c=10.91), 8:' Москва'[S](c=10.65), 9:'Washington'[X](c=10.56), 10:'Atlanta'[S](c=10.12), 11:' Beijing'[S]G(c=9.94), 12:'深圳'[S](c=9.82), 13:'合肥'[S](c=9.71), 14:'首都'[S](c=9.65), 15:' Jakarta'[S](c=9.61)
+  L31 surv=10/16 ‖Δh‖=25.68 | 0:'Washington'[X](c=9.29), 1:'London'[X](c=6.96), 2:'北京'[X](c=6.66), 3:'Tok'[X](c=6.57), 4:' Washington'[S](c=6.09), 5:'华盛顿'[S](c=6.02), 6:'(New'[S](c=5.94), 7:'_New'[S](c=5.85), 8:' Islamabad'[S](c=5.52), 9:'Berlin'[X](c=5.47), 10:'>New'[S](c=5.41), 11:'-New'[S](c=5.22), 12:'New'[X](c=5.08), 13:' Москва'[S](c=4.93), 14:'呼和浩特'[S](c=4.90), 15:' washington'[S](c=4.88)
+  L32 surv=10/16 ‖Δh‖=15.32 | 0:'Tok'[X](c=6.17), 1:'London'[X](c=5.55), 2:'>New'[S](c=5.46), 3:' washington'[S](c=5.32), 4:'That'[S](c=5.12), 5:'Wars'[X](c=5.01), 6:'New'[X](c=4.97), 7:'北京'[X](c=4.90), 8:'berra'[S](c=4.87), 9:'Washington'[X](c=4.82), 10:'华盛顿'[S](c=4.54), 11:'The'[S](c=4.54), 12:'capital'[S](c=4.51), 13:'(New'[S](c=4.45), 14:'Russia'[S](c=4.33), 15:'Bag'[S](c=4.29)
+  L33 surv=10/11 ‖Δh‖=20.79 | 0:'Russia'[S](c=3.94), 1:'sorry'[S](c=3.35), 2:'Victoria'[S](c=3.16), 3:'�'[S](c=3.01), 4:'�'[S](c=2.75), 5:'Tok'[X](c=2.70), 6:'(world'[S](c=2.56), 7:'ndon'[S](c=2.36), 8:'(World'[S](c=2.26), 9:' cairo'[S](c=2.17), 10:'不要再'[S](c=2.09)
+top survivors (all pos): '�':35, '��':22, ' emojis':11, '：\\n':10, '回答':10, 'ären':10, '_persona':10, ' markup':10, '____':9, ')((':8
+top excluded (all pos): ' answer':17, '.\\n\\n':16, ' of':16, ',':16, '<think>':15, '.':13, '</think>':11, '<|im_end|>':10, '北京':9, ' in':9
+intermediate hit detail (first 20):
+  clean_topk clean pos=1 @ 'system' → '\\n' (~China)
+  clean_topk clean pos=2 @ '\\n' → 'A' (~China)
+  clean_topk clean pos=2 @ '\\n' → 'In' (~China)
+  clean_topk clean pos=3 @ 'Answer' → '\\n' (~China)
+  clean_topk clean pos=3 @ 'Answer' → ' a' (~China)
+  clean_topk clean pos=3 @ 'Answer' → ' in' (~China)
+  clean_topk clean pos=3 @ 'Answer' → ':\\n' (~China)
+  clean_topk clean pos=4 @ ' with' → ' a' (~China)
+  clean_topk clean pos=7 @ ' entity' → ' in' (~China)
+  clean_topk clean pos=7 @ ' entity' → '.\\n' (~China)
+  clean_topk clean pos=10 @ ' phrase' → ' in' (~China)
+  clean_topk clean pos=10 @ ' phrase' → '.\\n' (~China)
+  clean_topk clean pos=11 @ ' only' → '\\n' (~China)
+  clean_topk clean pos=11 @ ' only' → '.\\n' (~China)
+  clean_topk clean pos=11 @ ' only' → ' in' (~China)
+  clean_topk clean pos=12 @ '.' → ' In' (~China)
+  clean_topk clean pos=14 @ ' line' → '.\\n' (~China)
+  clean_topk clean pos=15 @ ',' → ' in' (~China)
+  clean_topk clean pos=17 @ ' explanation' → ':\\n' (~China)
+  clean_topk clean pos=17 @ ' explanation' → '\\n' (~China)
+
+[2/10] tracing amazon-language
+### amazon-language
+prompt: Fact: The language spoken in the country where the Amazon River ends is
+gold: 'Portuguese'  intermediates: ['Brazil']
+clean→ 'Spanish.'
+J-abl→ 'Portuguese.'
+aggregates: survivors=10.00/11.40 (frac=0.893)  excluded_dirs/step=1.40  ‖Δh‖=36.54  steps_with_any_excl=194/329
+intermediate hits: survivor=17 excluded=7 clean_topk=11
+last-pos clean top-10: [' Portuguese', ' Spanish', 'Brazil', 'Esp', 'French', 'Port', 'Span', 'Spanish', '葡萄牙', '西班牙']
+last-pos active J-dirs by layer ([S]=survivor ablated, [X]=excluded):
+  L27 surv=10/14 ‖Δh‖=36.68 | 0:'语言'[S](c=29.80), 1:'的语言'[S](c=29.13), 2:'Spanish'[X](c=28.17), 3:'Languages'[S](c=27.48), 4:'Latin'[S](c=27.14), 5:'Language'[S](c=26.99), 6:'汉语'[S](c=26.95), 7:'西班牙'[X](c=26.92), 8:'英语'[S](c=26.73), 9:' Portuguese'[X]G(c=26.67), 10:'普通话'[S](c=26.54), 11:' Spanish'[X](c=26.26), 12:' Languages'[S](c=25.39), 13:'English'[S](c=25.19)
+  L28 surv=10/16 ‖Δh‖=18.77 | 0:'Spanish'[X](c=16.58), 1:'西班牙'[X](c=15.45), 2:' Portuguese'[X]G(c=14.54), 3:'傣'[S](c=14.20), 4:' Spanish'[X](c=14.06), 5:' Venezuelan'[S](c=13.94), 6:' Colombian'[S](c=13.79), 7:'Brazil'[X]*(c=13.74), 8:' Venezuel'[S](c=13.35), 9:'云南省'[S](c=13.32), 10:'阿根廷'[S](c=12.83), 11:'葡萄牙'[X](c=12.67), 12:' Ecuador'[S](c=12.56), 13:'江苏省'[S](c=12.31), 14:' Español'[S](c=12.24), 15:'巴西'[S](c=12.18)
+  L29 surv=10/14 ‖Δh‖=21.27 | 0:' Portuguese'[X]G(c=9.95), 1:'Brazil'[X]*(c=9.93), 2:'Spanish'[X](c=9.63), 3:'Latin'[S](c=8.65), 4:'English'[S](c=8.58), 5:'巴西'[S](c=8.55), 6:'汉语'[S](c=8.08), 7:'sink'[S](c=7.96), 8:'葡萄牙'[X](c=7.85), 9:'英语'[S](c=7.64), 10:'<|endoftext|>'[S](c=7.56), 11:';</'[S](c=7.33), 12:'Python'[S](c=7.21), 13:' Brazilian'[S]*(c=7.20)
+  L30 surv=10/14 ‖Δh‖=12.83 | 0:'Latin'[S](c=7.81), 1:'巴西'[S](c=7.66), 2:'Brazil'[X]*(c=7.63), 3:' Portuguese'[X]G(c=7.17), 4:'/native'[S](c=6.82), 5:'Native'[S](c=6.79), 6:'葡'[S](c=5.96), 7:'葡萄牙'[X](c=5.81), 8:' Braz'[S]*(c=5.74), 9:'Spanish'[X](c=5.70), 10:'傣'[S](c=5.21), 11:'�回'[S](c=5.07), 12:'_native'[S](c=4.99), 13:'_NATIVE'[S](c=4.89)
+  L31 surv=10/13 ‖Δh‖=32.71 | 0:'巴西'[S](c=13.88), 1:'Brazil'[X]*(c=11.93), 2:' Brazil'[S]*(c=9.43), 3:'Amazon'[S](c=9.40), 4:' Portuguese'[X]G(c=8.89), 5:'亚马逊'[S](c=8.57), 6:' Brazilian'[S]*(c=8.34), 7:' Brasil'[S](c=8.22), 8:'葡萄牙'[X](c=7.95), 9:' Braz'[S]*(c=7.80), 10:' Amazon'[S](c=7.73), 11:'内马尔'[S](c=7.73), 12:'Latin'[S](c=7.42)
+  L32 surv=10/13 ‖Δh‖=19.50 | 0:'Latin'[S](c=7.79), 1:'Spanish'[X](c=7.56), 2:' Portuguese'[X]G(c=7.42), 3:'Bas'[S](c=7.08), 4:'That'[S](c=6.68), 5:'Tok'[S](c=6.35), 6:'Port'[X]G(c=6.18), 7:' Guar'[S](c=6.11), 8:'Native'[S](c=5.76), 9:'The'[S](c=5.71), 10:'Sh'[S](c=5.64), 11:'[a'[S]*(c=5.62), 12:'off'[S](c=5.60)
+  L33 surv=10/12 ‖Δh‖=21.17 | 0:'Spanish'[X](c=3.95), 1:'方言'[S](c=3.91), 2:'spoken'[S](c=3.47), 3:'_ascii'[S](c=3.44), 4:' Portuguese'[X]G(c=3.11), 5:'(()'[S](c=2.94), 6:'Latin'[S](c=2.87), 7:'fallback'[S](c=2.75), 8:')(('[S](c=2.68), 9:'爨'[S](c=2.62), 10:'bash'[S](c=2.60), 11:'_por'[S]G(c=2.53)
+top survivors (all pos): '�':30, '��':20, '回答':11, ' emojis':11, ')((':10, '：\\n':10, '普通话':10, 'ären':10, '_persona':10, ' markup':10
+top excluded (all pos): ' answer':17, '.\\n\\n':16, '<think>':15, '.':13, ' Portuguese':13, '</think>':12, ',':10, ' basin':9, 'Spanish':8, ' nothing':7
+intermediate hit detail (first 20):
+  clean_topk clean pos=2 @ '\\n' → 'A' (~Brazil)
+  clean_topk clean pos=3 @ 'Answer' → ' a' (~Brazil)
+  clean_topk clean pos=4 @ ' with' → ' a' (~Brazil)
+  clean_topk clean pos=25 @ ':' → ' A' (~Brazil)
+  clean_topk clean pos=29 @ ' in' → ' Brazil' (~Brazil)
+  clean_topk clean pos=32 @ ' where' → ' I' (~Brazil)
+  clean_topk clean pos=32 @ ' where' → ' a' (~Brazil)
+  clean_topk clean pos=37 @ ' is' → ' Brazilian' (~Brazil)
+  clean_topk clean pos=37 @ ' is' → ' a' (~Brazil)
+  clean_topk clean pos=43 @ '<think>' → '\\r' (~Brazil)
+  clean_topk clean pos=46 @ '\\n\\n' → 'Brazil' (~Brazil)
+  active_excluded L27 pos=29 @ ' in' → ' Brazil' (~Brazil) c=27.08
+  active_excluded L28 pos=46 @ '\\n\\n' → 'Brazil' (~Brazil) c=13.74
+  active_excluded L29 pos=37 @ ' is' → ' Brazilian' (~Brazil) c=16.49
+  active_survivor L29 pos=37 @ ' is' → ' Brazil' (~Brazil) c=13.26
+  active_survivor L29 pos=37 @ ' is' → 'Brazil' (~Brazil) c=13.05
+  active_excluded L29 pos=46 @ '\\n\\n' → 'Brazil' (~Brazil) c=9.93
+  active_survivor L29 pos=46 @ '\\n\\n' → ' Brazilian' (~Brazil) c=7.20
+  active_survivor L30 pos=17 @ ' explanation' → '.Br' (~Brazil) c=6.97
+  active_survivor L30 pos=28 @ ' spoken' → '[Z' (~Brazil) c=3.19
+
+[3/10] tracing super-smallest-continent
+### super-smallest-continent
+prompt: Fact: The smallest country in the world is located on the continent of
+gold: 'Europe'  intermediates: ['Vatican']
+clean→ 'Europe.'
+J-abl→ 'South.'
+aggregates: survivors=10.00/11.31 (frac=0.899)  excluded_dirs/step=1.31  ‖Δh‖=37.21  steps_with_any_excl=194/329
+intermediate hits: survivor=126 excluded=19 clean_topk=43
+last-pos clean top-10: ['Africa', 'Ant', 'Asia', 'Atlantic', 'E', 'EU', 'Eu', 'Euro', 'Europe', 'European']
+last-pos active J-dirs by layer ([S]=survivor ablated, [X]=excluded):
+  L27 surv=10/13 ‖Δh‖=35.03 | 0:'Africa'[X](c=27.21), 1:'Asia'[X](c=27.08), 2:' Africa'[S](c=25.99), 3:'亚洲'[S](c=25.98), 4:' Europe'[S]G(c=25.13), 5:' Asia'[S](c=24.91), 6:'欧洲'[S](c=24.88), 7:'Europe'[X]G(c=24.77), 8:' continent'[S](c=24.20), 9:' Antarctica'[S](c=23.28), 10:'大陆'[S](c=23.17), 11:' continents'[S](c=22.77), 12:' Continent'[S](c=22.43)
+  L28 surv=10/11 ‖Δh‖=18.52 | 0:'<|endoftext|>'[S](c=10.53), 1:'南极'[S](c=8.67), 2:'Asia'[X](c=7.93), 3:'地理'[S](c=7.46), 4:'/tiny'[S](c=7.27), 5:' Antarctica'[S](c=7.16), 6:'.Small'[S](c=6.88), 7:' Greenland'[S](c=6.77), 8:' Peninsula'[S](c=6.76), 9:'岛屿'[S](c=6.71), 10:' Armenia'[S](c=6.54)
+  L29 surv=10/11 ‖Δh‖=13.75 | 0:'岛屿'[S](c=8.45), 1:'南极'[S](c=7.85), 2:'Asia'[X](c=7.10), 3:'岛'[S](c=6.30), 4:')(('[S](c=6.23), 5:'：</'[S](c=6.16), 6:'()).'[S](c=5.83), 7:')</'[S](c=5.77), 8:';</'[S](c=5.73), 9:'isEmpty'[S](c=5.70), 10:'(None'[S](c=5.68)
+  L30 surv=10/12 ‖Δh‖=25.19 | 0:'Asia'[X](c=12.80), 1:' Continent'[S](c=10.98), 2:' Asia'[S](c=10.48), 3:'continent'[S](c=10.28), 4:'Europe'[X]G(c=10.13), 5:'亚洲'[S](c=10.06), 6:'美洲'[S](c=9.27), 7:'Contin'[S](c=9.17), 8:' Euras'[S](c=9.10), 9:'Cont'[S](c=8.73), 10:' continents'[S](c=8.72), 11:' continent'[S](c=8.63)
+  L31 surv=10/11 ‖Δh‖=19.01 | 0:'：</'[S](c=5.45), 1:'Contin'[S](c=4.99), 2:'南极'[S](c=4.85), 3:'Asia'[X](c=4.38), 4:'testdata'[S](c=4.24), 5:')(('[S](c=4.20), 6:'亚洲'[S](c=4.19), 7:'asia'[S](c=4.15), 8:'西北'[S](c=4.08), 9:'South'[S](c=3.88), 10:'南'[S](c=3.88)
+  L32 surv=10/12 ‖Δh‖=18.01 | 0:'South'[S](c=7.84), 1:'Where'[S](c=7.44), 2:'Europe'[X]G(c=7.19), 3:'Contin'[S](c=6.76), 4:'Which'[S](c=6.58), 5:'Asia'[X](c=6.57), 6:'createQuery'[S](c=6.34), 7:'南极'[S](c=5.75), 8:'contin'[S](c=5.67), 9:'where'[S](c=5.36), 10:'iber'[S](c=5.14), 11:'•'[S](c=5.00)
+  L33 surv=10/13 ‖Δh‖=22.78 | 0:'1'[S](c=4.14), 1:'Contin'[S](c=3.24), 2:'南极'[S](c=3.15), 3:'�'[S](c=3.07), 4:'Europe'[X]G(c=2.93), 5:'�'[S](c=2.90), 6:'5'[S](c=2.67), 7:'Africa'[X](c=2.44), 8:'Asia'[X](c=2.20), 9:'7'[S](c=2.17), 10:'Fortunately'[S](c=2.13), 11:'[a'[S]*(c=2.12), 12:'_Mouse'[S](c=2.04)
+top survivors (all pos): '�':31, '南极':30, '��':23, '岛屿':17, ')__':16, ' Antarctica':15, ')((':14, ' continent':12, '回答':11, ' emojis':11
+top excluded (all pos): ' answer':17, '.\\n\\n':16, '<think>':14, '.':13, 'Asia':13, ' Europe':11, 'Europe':11, ',':11, ' in':10, ' Euras':8
+intermediate hit detail (first 20):
+  clean_topk clean pos=1 @ 'system' → '\\n' (~Vatican)
+  clean_topk clean pos=2 @ '\\n' → 'A' (~Vatican)
+  clean_topk clean pos=3 @ 'Answer' → '\\n' (~Vatican)
+  clean_topk clean pos=3 @ 'Answer' → ' a' (~Vatican)
+  clean_topk clean pos=3 @ 'Answer' → ':\\n' (~Vatican)
+  clean_topk clean pos=4 @ ' with' → ' a' (~Vatican)
+  clean_topk clean pos=4 @ ' with' → ' an' (~Vatican)
+  clean_topk clean pos=7 @ ' entity' → '.\\n' (~Vatican)
+  clean_topk clean pos=10 @ ' phrase' → '.\\n' (~Vatican)
+  clean_topk clean pos=11 @ ' only' → '\\n' (~Vatican)
+  clean_topk clean pos=11 @ ' only' → '.\\n' (~Vatican)
+  clean_topk clean pos=14 @ ' line' → '.\\n' (~Vatican)
+  clean_topk clean pos=17 @ ' explanation' → ':\\n' (~Vatican)
+  clean_topk clean pos=17 @ ' explanation' → '\\n' (~Vatican)
+  clean_topk clean pos=17 @ ' explanation' → '.\\n' (~Vatican)
+  clean_topk clean pos=19 @ '<|im_end|>' → '\\n' (~Vatican)
+  clean_topk clean pos=19 @ '<|im_end|>' → ' \\n' (~Vatican)
+  clean_topk clean pos=19 @ '<|im_end|>' → '  \\n' (~Vatican)
+  clean_topk clean pos=21 @ '<|im_start|>' → '\\n' (~Vatican)
+  clean_topk clean pos=22 @ 'user' → "'\\n" (~Vatican)
+
+[4/10] tracing atomic-26-symbol
+### atomic-26-symbol
+prompt: Fact: The chemical symbol for the element with atomic number 26 is
+gold: 'Fe'  intermediates: ['iron']
+clean→ 'Fe'
+J-abl→ 'Fe'
+aggregates: survivors=10.00/11.31 (frac=0.902)  excluded_dirs/step=1.31  ‖Δh‖=36.72  steps_with_any_excl=182/336
+intermediate hits: survivor=150 excluded=23 clean_topk=40
+last-pos clean top-10: [' Fe', 'Co', 'Cr', 'FE', 'Fe', 'Iron', 'Ni', 'Nick', 'iron', '铁']
+last-pos active J-dirs by layer ([S]=survivor ablated, [X]=excluded):
+  L27 surv=10/11 ‖Δh‖=36.31 | 0:'钢铁'[S](c=26.16), 1:'铁'[X](c=23.78), 2:'金属'[S](c=23.05), 3:'不锈钢'[S](c=22.21), 4:'钢材'[S](c=22.08), 5:'钢'[S](c=21.97), 6:'磁场'[S](c=21.77), 7:'合金'[S](c=20.99), 8:'IRON'[S]*(c=20.95), 9:'冶炼'[S](c=20.26), 10:'Steel'[S](c=20.03)
+  L28 surv=10/11 ‖Δh‖=19.64 | 0:'\\('[S](c=14.22), 1:'**\\r\\n'[S](c=12.82), 2:'原子'[S](c=12.72), 3:'\\['[S](c=12.57), 4:')**'[S](c=12.19), 5:'(**'[S](c=12.16), 6:'Fe'[X]G(c=11.83), 7:']**'[S](c=11.76), 8:'[Z'[S](c=11.62), 9:':**'[S](c=11.11), 10:'反应'[S](c=10.67)
+  L29 surv=10/16 ‖Δh‖=21.01 | 0:'Fe'[X]G(c=10.98), 1:'bcc'[S](c=10.21), 2:'铁'[X](c=9.66), 3:'cob'[S](c=9.64), 4:'rium'[S](c=9.58), 5:'CO'[S](c=9.51), 6:'.]'[S](c=9.24), 7:'adium'[S](c=9.08), 8:'FE'[X]G(c=9.04), 9:'Iron'[X]*(c=8.96), 10:'.OUT'[S](c=8.61), 11:'Ni'[X](c=8.61), 12:' XC'[S](c=8.58), 13:' Fe'[X]G(c=8.56), 14:'镍'[S](c=8.50), 15:' Nickel'[S](c=8.46)
+  L30 surv=10/15 ‖Δh‖=14.49 | 0:'铁'[X](c=8.62), 1:'Fe'[X]G(c=6.30), 2:'FE'[X]G(c=5.26), 3:'�'[S](c=4.77), 4:'黑'[S](c=4.33), 5:'�'[S](c=4.29), 6:'Iron'[X]*(c=4.20), 7:'过渡'[S](c=4.17), 8:' Fe'[X]G(c=4.06), 9:'_FE'[S]G(c=4.04), 10:'rium'[S](c=3.97), 11:'ZN'[S](c=3.95), 12:'�'[S](c=3.92), 13:'IRON'[S]*(c=3.82), 14:'开始'[S](c=3.67)
+  L31 surv=10/15 ‖Δh‖=17.68 | 0:'Fe'[X]G(c=9.95), 1:' Fe'[X]G(c=9.48), 2:'铁'[X](c=8.38), 3:'FE'[X]G(c=7.51), 4:'_fe'[S]G(c=6.12), 5:'_FE'[S]G(c=5.79), 6:'.fe'[S]G(c=5.31), 7:'(fe'[S]G(c=5.04), 8:'ZN'[S](c=4.71), 9:'Iron'[X]*(c=4.71), 10:'聊城'[S](c=4.53), 11:'izia'[S](c=4.37), 12:'Fc'[S](c=4.36), 13:'fe'[S]G(c=4.28), 14:'rium'[S](c=4.28)
+  L32 surv=10/16 ‖Δh‖=17.29 | 0:'Fe'[X]G(c=8.20), 1:' Fe'[X]G(c=7.24), 2:'铁'[X](c=6.05), 3:'∅'[S](c=5.92), 4:'Ni'[X](c=5.29), 5:'₁'[S](c=4.81), 6:'–and'[S](c=4.77), 7:'_FE'[S]G(c=4.55), 8:'₂'[S](c=4.49), 9:'rium'[S](c=4.37), 10:'iron'[X]*(c=4.36), 11:'½'[S](c=4.33), 12:'FE'[X]G(c=4.24), 13:'IF'[S](c=4.21), 14:' Ni'[S](c=4.09), 15:'2'[S](c=3.94)
+  L33 surv=10/12 ‖Δh‖=20.89 | 0:'sorry'[S](c=2.71), 1:'奋'[S](c=2.65), 2:'过渡'[S](c=2.35), 3:'Fe'[X]G(c=2.11), 4:'ichi'[S](c=1.95), 5:'2'[S](c=1.88), 6:'化合'[S](c=1.79), 7:'有很多种'[S](c=1.73), 8:'铁'[X](c=1.58), 9:'�'[S](c=1.57), 10:'.fe'[S]G(c=1.52), 11:'testdata'[S](c=1.50)
+top survivors (all pos): '�':43, '��':21, '原子':14, 'Atomic':13, '.\\n\\n':13, '.]\\n\\n':12, '回答':11, ' emojis':11, ' chlorine':11, '：\\n':10
+top excluded (all pos): ' answer':17, '<think>':16, '.\\n\\n':15, '.':15, ',':12, '铁':10, 'Fe':10, ' Fe':8, ' concise':7, ' explanations':7
+intermediate hit detail (first 20):
+  clean_topk clean pos=1 @ 'system' → '\\n' (~iron)
+  clean_topk clean pos=3 @ 'Answer' → '\\n' (~iron)
+  clean_topk clean pos=3 @ 'Answer' → ':\\n' (~iron)
+  clean_topk clean pos=7 @ ' entity' → '.\\n' (~iron)
+  clean_topk clean pos=10 @ ' phrase' → '.\\n' (~iron)
+  clean_topk clean pos=11 @ ' only' → '\\n' (~iron)
+  clean_topk clean pos=11 @ ' only' → '.\\n' (~iron)
+  clean_topk clean pos=14 @ ' line' → '.\\n' (~iron)
+  clean_topk clean pos=17 @ ' explanation' → ':\\n' (~iron)
+  clean_topk clean pos=17 @ ' explanation' → '\\n' (~iron)
+  clean_topk clean pos=17 @ ' explanation' → '.\\n' (~iron)
+  clean_topk clean pos=19 @ '<|im_end|>' → '\\n' (~iron)
+  clean_topk clean pos=19 @ '<|im_end|>' → ' \\n' (~iron)
+  clean_topk clean pos=19 @ '<|im_end|>' → '  \\n' (~iron)
+  clean_topk clean pos=21 @ '<|im_start|>' → '\\n' (~iron)
+  clean_topk clean pos=22 @ 'user' → "'\\n" (~iron)
+  clean_topk clean pos=22 @ 'user' → '()\\n' (~iron)
+  clean_topk clean pos=22 @ 'user' → '\\n' (~iron)
+  clean_topk clean pos=22 @ 'user' → '"\\n' (~iron)
+  clean_topk clean pos=22 @ 'user' → ':\\n' (~iron)
+
+[5/10] tracing colosseum-currency
+### colosseum-currency
+prompt: Fact: The currency used in the country where the Colosseum stands is the
+gold: 'Euro'  intermediates: ['Italy']
+clean→ 'Euro.'
+J-abl→ 'stater.'
+aggregates: survivors=10.00/11.46 (frac=0.888)  excluded_dirs/step=1.46  ‖Δh‖=35.77  steps_with_any_excl=226/350
+intermediate hits: survivor=17 excluded=0 clean_topk=8
+last-pos clean top-10: [' Euro', ' euro', 'E', 'EU', 'EUR', 'Euro', 'European', 'Italian', 'e', '欧元']
+last-pos active J-dirs by layer ([S]=survivor ablated, [X]=excluded):
+  L27 surv=10/11 ‖Δh‖=34.26 | 0:'欧元'[X](c=25.80), 1:'人民币'[S](c=25.52), 2:'Currency'[S](c=24.42), 3:'currency'[S](c=23.98), 4:'_currency'[S](c=23.80), 5:'美元'[S](c=23.36), 6:'货币'[S](c=23.19), 7:'英镑'[S](c=23.16), 8:'金币'[S](c=22.54), 9:' Currency'[S](c=22.50), 10:'.Currency'[S](c=21.44)
+  L28 surv=10/11 ‖Δh‖=29.99 | 0:'意大利'[S](c=22.23), 1:'Italian'[X](c=21.76), 2:'Italy'[S]*(c=21.64), 3:' Italian'[S](c=18.64), 4:' Italians'[S](c=18.19), 5:' Italy'[S]*(c=17.82), 6:'Roman'[S](c=15.25), 7:' Luigi'[S](c=14.72), 8:'罗马'[S](c=14.53), 9:' italiano'[S](c=14.39), 10:' italian'[S](c=13.72)
+  L29 surv=10/11 ‖Δh‖=19.09 | 0:').\\r\\n'[S](c=11.26), 1:'**\\r\\n'[S](c=10.83), 2:'.")\\r\\n'[S](c=9.33), 3:')**'[S](c=8.77), 4:')\\r\\n'[S](c=8.52), 5:'.\\r\\n'[S](c=8.49), 6:'Euro'[X]G(c=8.25), 7:' euros'[S]G(c=8.12), 8:'*\\r\\n'[S](c=8.10), 9:',\\r\\n'[S](c=8.07), 10:'})\\r\\n'[S](c=8.01)
+  L30 surv=10/12 ‖Δh‖=18.89 | 0:'Italian'[X](c=8.28), 1:'izzo'[S](c=5.77), 2:' Italians'[S](c=5.43), 3:'<|endoftext|>'[S](c=5.28), 4:' italian'[S](c=5.28), 5:'-pound'[S](c=5.23), 6:'Italy'[S]*(c=5.16), 7:'Euro'[X]G(c=5.16), 8:'izza'[S](c=5.07), 9:'<strong'[S](c=5.00), 10:' Pound'[S](c=4.94), 11:' Italian'[S](c=4.67)
+  L31 surv=10/13 ‖Δh‖=21.37 | 0:' Romans'[S](c=8.72), 1:'欧元'[X](c=8.28), 2:' euro'[X]G(c=7.10), 3:'Euro'[X]G(c=6.06), 4:' euros'[S]G(c=5.82), 5:'____'[S](c=5.73), 6:' гр'[S](c=5.41), 7:'_.'[S](c=5.16), 8:' Roma'[S](c=5.14), 9:'._'[S](c=5.00), 10:'罗马'[S](c=4.92), 11:'元'[S](c=4.85), 12:'ROM'[S](c=4.79)
+  L32 surv=10/12 ‖Δh‖=17.17 | 0:'Euro'[X]G(c=6.69), 1:'•'[S](c=6.61), 2:'\xa0\xa0\xa0\xa0'[S](c=6.02), 3:'abyte'[S](c=5.69), 4:'\xa0\xa0\xa0\xa0\xa0\xa0\xa0'[S](c=5.67), 5:'The'[S](c=5.56), 6:'It'[S]*(c=5.45), 7:'\xa0'[S](c=5.40), 8:'\xa0\xa0\xa0'[S](c=5.13), 9:'That'[S](c=4.96), 10:'欧元'[X](c=4.74), 11:'●'[S](c=4.70)
+  L33 surv=10/12 ‖Δh‖=23.62 | 0:'plural'[S](c=4.21), 1:'Euro'[X]G(c=4.18), 2:'1'[S](c=4.07), 3:'uctor'[S](c=3.35), 4:'apus'[S](c=3.26), 5:'eon'[S](c=3.20), 6:'bearer'[S](c=2.99), 7:'the'[S](c=2.98), 8:'of'[S](c=2.77), 9:'欧元'[X](c=2.75), 10:'The'[S](c=2.73), 11:'2'[S](c=2.67)
+top survivors (all pos): '�':45, '��':24, ' originates':12, 'filePath':12, '回答':11, ' emojis':11, '货币':11, '罗马':11, 'Italy':11, '_persona':11
+top excluded (all pos): '欧元':22, ' answer':17, '.\\n\\n':16, ' euros':16, '<think>':14, '.':13, '</think>':12, 'Euro':12, ',':11, ' is':10
+intermediate hit detail (first 20):
+  clean_topk clean pos=2 @ '\\n' → 'A' (~Italy)
+  clean_topk clean pos=3 @ 'Answer' → ' a' (~Italy)
+  clean_topk clean pos=4 @ ' with' → ' a' (~Italy)
+  clean_topk clean pos=25 @ ':' → ' A' (~Italy)
+  clean_topk clean pos=32 @ ' where' → ' I' (~Italy)
+  clean_topk clean pos=32 @ ' where' → ' a' (~Italy)
+  clean_topk clean pos=32 @ ' where' → ' A' (~Italy)
+  clean_topk clean pos=32 @ ' where' → ' T' (~Italy)
+  active_survivor L27 pos=29 @ ' in' → ' Italy' (~Italy) c=27.47
+  active_survivor L27 pos=47 @ '\\n\\n' → 'Italy' (~Italy) c=23.26
+  active_survivor L28 pos=37 @ 'um' → 'Italy' (~Italy) c=11.54
+  active_survivor L28 pos=37 @ 'um' → ' Italy' (~Italy) c=10.32
+  active_survivor L28 pos=40 @ ' the' → 'Italy' (~Italy) c=17.26
+  active_survivor L28 pos=40 @ ' the' → ' Italy' (~Italy) c=15.39
+  active_survivor L28 pos=42 @ '\\n' → 'Italy' (~Italy) c=15.96
+  active_survivor L28 pos=49 @ '\\n\\n' → 'Italy' (~Italy) c=21.64
+  active_survivor L28 pos=49 @ '\\n\\n' → ' Italy' (~Italy) c=17.82
+  active_survivor L30 pos=47 @ '\\n\\n' → 'Italy' (~Italy) c=5.86
+  active_survivor L30 pos=49 @ '\\n\\n' → 'Italy' (~Italy) c=5.16
+  active_survivor L31 pos=42 @ '\\n' → 'Italy' (~Italy) c=11.65
+
+[6/10] tracing planet-3-moons
+### planet-3-moons
+prompt: Fact: The number of natural moons orbiting the planet third from the Sun is
+gold: '1'  intermediates: ['Earth']
+clean→ '1'
+J-abl→ '1'
+aggregates: survivors=10.00/11.48 (frac=0.890)  excluded_dirs/step=1.48  ‖Δh‖=35.80  steps_with_any_excl=205/343
+intermediate hits: survivor=10 excluded=4 clean_topk=10
+last-pos clean top-10: ['0', '1', '2', '3', '4', '5', '6', '9', 'Fact', 'The']
+last-pos active J-dirs by layer ([S]=survivor ablated, [X]=excluded):
+  L27 surv=10/10 ‖Δh‖=28.78 | 0:'Earth'[S]*(c=18.88), 1:'地球'[S](c=18.79), 2:'月亮'[S](c=18.14), 3:':Number'[S](c=17.95), 4:'嫦'[S](c=17.39), 5:' Earth'[S]*(c=17.31), 6:'数目'[S](c=17.16), 7:'数量'[S](c=16.95), 8:'Moon'[S](c=16.91), 9:'地球上'[S](c=16.65)
+  L28 surv=10/10 ‖Δh‖=22.69 | 0:'One'[S](c=16.20), 1:'ONE'[S](c=15.12), 2:'_One'[S](c=14.73), 3:'_one'[S](c=13.24), 4:']**'[S](c=12.75), 5:'-One'[S](c=12.56), 6:'**\\r\\n'[S](c=12.30), 7:'.ONE'[S](c=12.27), 8:')**'[S](c=12.17), 9:' ONE'[S](c=12.11)
+  L29 surv=10/10 ‖Δh‖=14.60 | 0:'�s'[S](c=9.61), 1:'<|endoftext|>'[S](c=9.40), 2:'Evidence'[S](c=8.88), 3:'围着'[S](c=8.61), 4:'Hint'[S](c=8.51), 5:'\\Plugin'[S](c=8.43), 6:' Hint'[S](c=8.30), 7:'-Ass'[S](c=8.25), 8:'溏'[S](c=8.22), 9:'addEventListener'[S](c=8.18)
+  L30 surv=10/10 ‖Δh‖=21.22 | 0:'零'[S](c=10.12), 1:'Zero'[S](c=9.07), 2:'_Zero'[S](c=7.41), 3:'.ZERO'[S](c=7.21), 4:' zero'[S](c=6.61), 5:' Zero'[S](c=6.48), 6:'.false'[S](c=6.28), 7:'zero'[S](c=6.22), 8:'一颗'[S](c=6.08), 9:'_zero'[S](c=5.98)
+  L31 surv=10/12 ‖Δh‖=19.04 | 0:'Fact'[X](c=15.12), 1:'fact'[S](c=12.85), 2:'_fact'[S](c=11.95), 3:'事实'[S](c=11.78), 4:' Fact'[S](c=11.12), 5:'的事实'[S](c=9.25), 6:' fact'[S](c=7.97), 7:' Facts'[S](c=7.67), 8:'facts'[S](c=7.59), 9:'_FACT'[S](c=6.82), 10:'The'[X](c=6.16), 11:'FACT'[S](c=5.83)
+  L32 surv=10/16 ‖Δh‖=16.37 | 0:'1'[X]G(c=16.67), 1:'The'[X](c=10.60), 2:'3'[X](c=10.32), 3:'2'[X](c=9.97), 4:'�'[S](c=9.04), 5:'１'[S](c=8.96), 6:'0'[X](c=8.53), 7:'Fact'[X](c=8.19), 8:'₁'[S](c=8.10), 9:'Answer'[S](c=7.30), 10:'\\'[S](c=7.05), 11:'\\\\'[S](c=6.99), 12:'Ass'[S](c=6.90), 13:'\\u'[S](c=6.87), 14:'Has'[S](c=6.86), 15:'This'[S](c=6.53)
+  L33 surv=10/17 ‖Δh‖=21.80 | 0:'1'[X]G(c=10.04), 1:'Fact'[X](c=6.68), 2:'2'[X](c=5.46), 3:'3'[X](c=5.14), 4:'The'[X](c=4.96), 5:'0'[X](c=3.71), 6:'facts'[S](c=3.38), 7:'isis'[S](c=3.33), 8:'_fact'[S](c=3.13), 9:'的事实'[S](c=3.12), 10:'fact'[S](c=2.78), 11:'Caption'[S](c=2.69), 12:'事实'[S](c=2.56), 13:'elli'[S](c=1.75), 14:'4'[X](c=1.73), 15:'潼'[S](c=1.69), 16:'nosti'[S](c=1.54)
+top survivors (all pos): '�':42, '��':26, '地球':12, '_persona':12, '回答':11, ' emojis':11, '星球':11, '.]\\n\\n':10, 'planet':10, ' Pluto':10
+top excluded (all pos): ' answer':17, '<think>':17, '.\\n\\n':16, '</think>':16, '.':13, ' planets':13, ' Saturn':13, ',':12, ' Venus':10, ' planet':9
+intermediate hit detail (first 20):
+  clean_topk clean pos=2 @ '\\n' → 'A' (~Earth)
+  clean_topk clean pos=3 @ 'Answer' → ' a' (~Earth)
+  clean_topk clean pos=4 @ ' with' → ' a' (~Earth)
+  clean_topk clean pos=25 @ ':' → ' A' (~Earth)
+  clean_topk clean pos=32 @ 'ing' → ' a' (~Earth)
+  clean_topk clean pos=32 @ 'ing' → ' Earth' (~Earth)
+  clean_topk clean pos=33 @ ' the' → ' Earth' (~Earth)
+  clean_topk clean pos=34 @ ' planet' → ' Earth' (~Earth)
+  clean_topk clean pos=39 @ ' is' → ' a' (~Earth)
+  clean_topk clean pos=45 @ '<think>' → '\\r' (~Earth)
+  active_survivor L27 pos=26 @ ' The' → ' Earth' (~Earth) c=22.77
+  active_survivor L27 pos=29 @ ' natural' → ' earthquakes' (~Earth) c=17.03
+  active_excluded L27 pos=32 @ 'ing' → ' Earth' (~Earth) c=29.05
+  active_excluded L27 pos=33 @ ' the' → ' Earth' (~Earth) c=32.00
+  active_excluded L27 pos=34 @ ' planet' → ' Earth' (~Earth) c=27.58
+  active_survivor L27 pos=34 @ ' planet' → 'Earth' (~Earth) c=23.88
+  active_survivor L27 pos=36 @ ' from' → ' Earth' (~Earth) c=21.84
+  active_survivor L27 pos=36 @ ' from' → 'Earth' (~Earth) c=20.40
+  active_survivor L27 pos=37 @ ' the' → ' Earth' (~Earth) c=24.34
+  active_survivor L27 pos=48 @ '\\n\\n' → 'Earth' (~Earth) c=18.88
+
+[7/10] tracing carnival-ocean
+### carnival-ocean
+prompt: Fact: The ocean on the coast of the country where Carnival is most famously celebrated is the
+gold: 'Atlantic'  intermediates: ['Brazil']
+clean→ 'Atlantic Ocean.'
+J-abl→ 'Atlantic Ocean.'
+aggregates: survivors=10.00/11.38 (frac=0.895)  excluded_dirs/step=1.38  ‖Δh‖=35.36  steps_with_any_excl=212/357
+intermediate hits: survivor=2 excluded=0 clean_topk=12
+last-pos clean top-10: [' Atlantic', ' Caribbean', 'A', 'At', 'Atl', 'Atlantic', 'Car', 'English', 'North', 'Spanish']
+last-pos active J-dirs by layer ([S]=survivor ablated, [X]=excluded):
+  L27 surv=10/13 ‖Δh‖=34.45 | 0:' Caribbean'[X](c=27.82), 1:' Ocean'[S](c=24.38), 2:'Ocean'[S](c=23.86), 3:'Atlantic'[X]G(c=23.43), 4:'海水'[S](c=22.61), 5:' Mediterranean'[S](c=22.49), 6:' Atlantic'[X]G(c=22.10), 7:' Bahamas'[S](c=21.78), 8:'海洋'[S](c=21.70), 9:'海域'[S](c=21.05), 10:' Miami'[S](c=20.71), 11:' ocean'[S](c=20.60), 12:'Miami'[S](c=20.52)
+  L28 surv=10/13 ‖Δh‖=20.88 | 0:'<|endoftext|>'[S](c=11.73), 1:'Atlantic'[X]G(c=11.45), 2:' Caribbean'[X](c=9.65), 3:'River'[S](c=9.57), 4:'Lake'[S](c=9.21), 5:' Atlantic'[X]G(c=8.77), 6:'湖'[S](c=8.72), 7:'])**'[S](c=8.55), 8:'河流'[S](c=8.42), 9:']**'[S](c=8.07), 10:'运河'[S](c=8.03), 11:'[ID'[S](c=7.89), 12:')**'[S](c=7.66)
+  L29 surv=10/13 ‖Δh‖=14.67 | 0:'Atlantic'[X]G(c=12.01), 1:' Caribbean'[X](c=10.57), 2:' Atlantic'[X]G(c=9.42), 3:'法国'[S](c=7.38), 4:' Mediterranean'[S](c=6.77), 5:'sea'[S](c=6.64), 6:'French'[S](c=6.60), 7:'北海'[S](c=6.53), 8:'Pacific'[S](c=6.49), 9:'牂'[S](c=6.19), 10:'Sea'[S](c=6.05), 11:' Louisiana'[S](c=5.89), 12:'海域'[S](c=5.78)
+  L30 surv=10/13 ‖Δh‖=13.39 | 0:'Atlantic'[X]G(c=13.77), 1:' Caribbean'[X](c=11.61), 2:' Atlantic'[X]G(c=10.88), 3:'北海'[S](c=8.38), 4:'Sea'[S](c=7.79), 5:'海域'[S](c=6.93), 6:'海岸'[S](c=6.86), 7:'南海'[S](c=6.33), 8:' Baltic'[S](c=6.21), 9:'东海'[S](c=6.20), 10:'Where'[S](c=6.02), 11:' Gulf'[S](c=6.02), 12:'海峡'[S](c=5.82)
+  L31 surv=10/14 ‖Δh‖=17.82 | 0:'Atlantic'[X]G(c=11.75), 1:' Caribbean'[X](c=9.52), 2:' Atlantic'[X]G(c=9.44), 3:'北海'[S](c=7.54), 4:'海峡'[S](c=5.68), 5:'Qué'[S](c=4.98), 6:'Sea'[S](c=4.45), 7:'Bay'[S](c=4.00), 8:'海岸'[S](c=3.73), 9:'Atl'[X]G(c=3.60), 10:'�'[S](c=3.43), 11:'elize'[S](c=3.17), 12:'Black'[S](c=3.12), 13:'uese'[S](c=3.08)
+  L32 surv=10/16 ‖Δh‖=20.69 | 0:'Atlantic'[X]G(c=13.39), 1:' Atlantic'[X]G(c=12.36), 2:' Caribbean'[X](c=9.98), 3:'Atl'[X]G(c=6.50), 4:'Sea'[S](c=6.33), 5:'海岸'[S](c=6.08), 6:'tid'[S](c=5.47), 7:'北海'[S](c=4.93), 8:'海峡'[S](c=4.82), 9:'Car'[X](c=4.73), 10:' Gulf'[S](c=4.70), 11:'Spanish'[X](c=4.63), 12:'Attrib'[S](c=4.62), 13:' Sea'[S](c=4.47), 14:'Black'[S](c=4.30), 15:'Saint'[S](c=4.29)
+  L33 surv=10/14 ‖Δh‖=20.27 | 0:'Atlantic'[X]G(c=6.69), 1:' Atlantic'[X]G(c=4.99), 2:'Atl'[X]G(c=3.16), 3:' Caribbean'[X](c=3.03), 4:'the'[S](c=2.82), 5:'`'[S](c=2.61), 6:'�'[S](c=2.60), 7:'.`'[S](c=2.59), 8:'ADF'[S](c=2.43), 9:' \u200b\u200b'[S](c=2.34), 10:'__'[S](c=2.29), 11:'1'[S](c=2.25), 12:'preter'[S](c=2.14), 13:'Attrib'[S](c=2.11)
+top survivors (all pos): '�':37, '��':21, '岛屿':15, ' festivities':15, '北海':14, ')__':12, '南极':12, ' emojis':11, '_persona':11, 'filePath':11
+top excluded (all pos): 'Atlantic':18, ' answer':17, ' celebrated':17, '.\\n\\n':16, ' Caribbean':14, ' Atlantic':14, '<think>':14, '.':13, ',':12, ' occurs':8
+intermediate hit detail (first 20):
+  clean_topk clean pos=2 @ '\\n' → 'A' (~Brazil)
+  clean_topk clean pos=3 @ 'Answer' → ' a' (~Brazil)
+  clean_topk clean pos=4 @ ' with' → ' a' (~Brazil)
+  clean_topk clean pos=25 @ ':' → ' A' (~Brazil)
+  clean_topk clean pos=31 @ ' of' → ' a' (~Brazil)
+  clean_topk clean pos=34 @ ' where' → ' I' (~Brazil)
+  clean_topk clean pos=34 @ ' where' → ' a' (~Brazil)
+  clean_topk clean pos=34 @ ' where' → ' A' (~Brazil)
+  clean_topk clean pos=36 @ ' is' → ' a' (~Brazil)
+  clean_topk clean pos=40 @ ' is' → ' a' (~Brazil)
+  clean_topk clean pos=47 @ '<think>' → '\\r' (~Brazil)
+  clean_topk clean pos=50 @ '\\n\\n' → 'A' (~Brazil)
+  active_survivor L27 pos=39 @ ' celebrated' → '—a' (~Brazil) c=21.28
+  active_survivor L28 pos=31 @ ' of' → ' Brazil' (~Brazil) c=24.59
+
+[8/10] tracing atomic-29-symbol
+### atomic-29-symbol
+prompt: Fact: The chemical symbol for the element with atomic number 29 is
+gold: 'Cu'  intermediates: ['copper']
+clean→ 'Cu'
+J-abl→ '29 is the atomic number of the element with the chemical symbol in the given'
+aggregates: survivors=10.00/11.25 (frac=0.906)  excluded_dirs/step=1.25  ‖Δh‖=36.79  steps_with_any_excl=181/336
+intermediate hits: survivor=17 excluded=7 clean_topk=10
+last-pos clean top-10: [' Cu', 'Ag', 'Au', 'CU', 'Co', 'Cr', 'Cu', 'Fe', 'Ni', 'cu']
+last-pos active J-dirs by layer ([S]=survivor ablated, [X]=excluded):
+  L27 surv=10/10 ‖Δh‖=30.88 | 0:'金属'[S](c=23.43), 1:'铁'[S](c=22.94), 2:'钢铁'[S](c=22.22), 3:'不锈钢'[S](c=21.45), 4:'合金'[S](c=21.28), 5:'铜'[S](c=20.89), 6:'钢'[S](c=20.83), 7:'青铜'[S](c=20.58), 8:'IRON'[S](c=20.43), 9:' Zinc'[S](c=20.30)
+  L28 surv=10/10 ‖Δh‖=24.51 | 0:'\\('[S](c=13.13), 1:'原子'[S](c=12.58), 2:'PD'[S](c=10.79), 3:' PDT'[S](c=10.65), 4:' \\('[S](c=10.62), 5:'\\['[S](c=10.60), 6:')\\\\n'[S](c=10.33), 7:'Atomic'[S](c=10.27), 8:'.CV'[S](c=9.94), 9:'ReLU'[S](c=9.94)
+  L29 surv=10/11 ‖Δh‖=17.71 | 0:'IRON'[S](c=9.52), 1:'镍'[S](c=9.24), 2:'Ars'[S](c=8.99), 3:'重金属'[S](c=8.45), 4:'镓'[S](c=8.04), 5:'Ag'[X](c=7.92), 6:'黄金'[S](c=7.88), 7:'(Z'[S](c=7.77), 8:'白银'[S](c=7.72), 9:'金币'[S](c=7.70), 10:'```'[S](c=7.65)
+  L30 surv=10/12 ‖Δh‖=18.36 | 0:'金'[S](c=6.19), 1:'�试'[S](c=5.74), 2:'**\\r\\n'[S](c=5.48), 3:'金币'[S](c=5.29), 4:'铁'[S](c=5.19), 5:'刀'[S](c=5.02), 6:'Au'[X](c=4.90), 7:'```'[S](c=4.85), 8:' "\\<'[S](c=4.83), 9:' PROVIDED'[S](c=4.80), 10:'Ag'[X](c=4.76), 11:'黄金'[S](c=4.74)
+  L31 surv=10/14 ‖Δh‖=18.58 | 0:'Cu'[X]G(c=6.27), 1:'铜'[S](c=5.80), 2:'Au'[X](c=5.22), 3:' copper'[S]*(c=4.79), 4:'黄金'[S](c=4.51), 5:'tron'[S](c=4.47), 6:'金币'[S](c=4.36), 7:'  '[S](c=4.01), 8:'cpp'[S](c=3.94), 9:'   '[S](c=3.85), 10:' Cu'[X]G(c=3.81), 11:'Ag'[X](c=3.62), 12:'IRON'[S](c=3.62), 13:'金价'[S](c=3.53)
+  L32 surv=10/16 ‖Δh‖=25.43 | 0:'Ag'[X](c=8.53), 1:'Cu'[X]G(c=6.96), 2:'Ni'[X](c=6.86), 3:'Au'[X](c=6.45), 4:'Fe'[X](c=5.56), 5:'._'[S](c=5.05), 6:'�'[S](c=4.33), 7:'FUL'[S](c=4.17), 8:' Fe'[S](c=3.96), 9:'•\\n\\n'[S](c=3.91), 10:'₁'[S](c=3.67), 11:' Cu'[X]G(c=3.63), 12:' Au'[S](c=3.33), 13:'.gov'[S](c=3.26), 14:'–\\n\\n'[S](c=3.15), 15:' Ni'[S](c=3.04)
+  L33 surv=10/10 ‖Δh‖=30.47 | 0:'sorry'[S](c=5.01), 1:'洒'[S](c=4.52), 2:'2'[S](c=3.04), 3:'Cannot'[S](c=2.96), 4:'�'[S](c=2.74), 5:'就不'[S](c=2.73), 6:'flows'[S](c=2.26), 7:'ichi'[S](c=2.23), 8:'�'[S](c=2.03), 9:'�'[S](c=2.01)
+top survivors (all pos): '�':42, '��':20, '原子':15, '.]\\n\\n':14, 'Atomic':14, '.\\n\\n':13, '回答':11, ' emojis':11, ' chlorine':11, '._':11
+top excluded (all pos): ' answer':17, '.\\n\\n':15, '.':14, '<think>':13, ',':11, ' is':10, '</think>':9, ' concise':7, ' explanations':7, ' preamble':7
+intermediate hit detail (first 20):
+  clean_topk clean pos=13 @ ' One' → ' per' (~copper)
+  clean_topk clean pos=14 @ ' line' → ' per' (~copper)
+  clean_topk clean pos=29 @ ' for' → ' copper' (~copper)
+  clean_topk clean pos=31 @ ' element' → ' copper' (~copper)
+  clean_topk clean pos=38 @ ' is' → ' Co' (~copper)
+  clean_topk clean pos=38 @ ' is' → ' CO' (~copper)
+  clean_topk clean pos=40 @ '\\n' → ' copper' (~copper)
+  clean_topk clean pos=44 @ '<think>' → '\\r' (~copper)
+  clean_topk clean pos=45 @ '\\n\\n' → ' copper' (~copper)
+  clean_topk clean pos=47 @ '\\n\\n' → 'Co' (~copper)
+  active_survivor L27 pos=37 @ '9' → ' copper' (~copper) c=20.83
+  active_excluded L30 pos=14 @ ' line' → ' per' (~copper) c=9.99
+  active_excluded L31 pos=14 @ ' line' → ' per' (~copper) c=4.51
+  active_survivor L31 pos=14 @ ' line' → '_per' (~copper) c=1.51
+  active_survivor L31 pos=38 @ ' is' → ' copper' (~copper) c=6.84
+  active_survivor L31 pos=47 @ '\\n\\n' → ' copper' (~copper) c=4.79
+  active_excluded L32 pos=13 @ ' One' → ' per' (~copper) c=12.65
+  active_survivor L32 pos=13 @ ' One' → '_per' (~copper) c=8.30
+  active_survivor L32 pos=13 @ ' One' → 'Per' (~copper) c=7.97
+  active_survivor L32 pos=13 @ ' One' → 'per' (~copper) c=6.53
+
+[9/10] tracing paper-continent
+### paper-continent
+prompt: Fact: The continent where the country that invented paper is located is
+gold: 'Asia'  intermediates: ['China']
+clean→ 'Asia.'
+J-abl→ 'Asia'
+aggregates: survivors=10.00/11.47 (frac=0.890)  excluded_dirs/step=1.47  ‖Δh‖=36.77  steps_with_any_excl=196/322
+intermediate hits: survivor=154 excluded=26 clean_topk=50
+last-pos clean top-10: [' Asia', 'AS', 'Africa', 'As', 'Asia', 'Asian', 'E', 'East', 'Europe', '亚洲']
+last-pos active J-dirs by layer ([S]=survivor ablated, [X]=excluded):
+  L27 surv=10/16 ‖Δh‖=34.05 | 0:'Asia'[X]G(c=28.04), 1:' Asia'[X]G(c=26.80), 2:'亚洲'[X](c=26.54), 3:' Europe'[S](c=24.55), 4:'Europe'[X](c=24.46), 5:'Africa'[X](c=23.83), 6:'欧洲'[S](c=23.25), 7:' Africa'[S](c=22.81), 8:'Asian'[X]G(c=22.31), 9:'东南亚'[S](c=22.00), 10:' continent'[S](c=21.82), 11:'大陆'[S](c=21.32), 12:' Continent'[S](c=21.13), 13:' Euras'[S](c=21.07), 14:'China'[S]*(c=20.92), 15:' Asian'[S]G(c=20.35)
+  L28 surv=10/12 ‖Δh‖=17.21 | 0:'China'[S]*(c=11.62), 1:'Asia'[X]G(c=10.72), 2:' Mongolia'[S](c=10.33), 3:' Armenia'[S](c=8.66), 4:'新疆'[S](c=8.32), 5:'甘肃'[S](c=8.26), 6:'丝绸之路'[S](c=8.18), 7:'Turkey'[S](c=8.11), 8:'亚洲'[X](c=8.09), 9:'��'[S](c=7.96), 10:'Italy'[S](c=7.91), 11:'-China'[S]*(c=7.90)
+  L29 surv=10/11 ‖Δh‖=17.73 | 0:'Where'[S](c=8.07), 1:'Asia'[X]G(c=7.62), 2:'Turkey'[S](c=6.95), 3:'<|endoftext|>'[S](c=6.79), 4:'China'[S]*(c=6.74), 5:'。</'[S](c=6.02), 6:'Containing'[S](c=5.73), 7:'(where'[S](c=5.72), 8:'\\twhere'[S](c=5.59), 9:"')."[S](c=5.56), 10:'DataFrame'[S](c=5.48)
+  L30 surv=10/14 ‖Δh‖=22.63 | 0:'Asia'[X]G(c=11.28), 1:' Asia'[X]G(c=10.23), 2:'亚洲'[X](c=10.01), 3:' asia'[S]G(c=9.17), 4:'Europe'[X](c=9.02), 5:'asia'[S]G(c=8.24), 6:'欧洲'[S](c=7.79), 7:' Continent'[S](c=7.78), 8:' Europe'[S](c=7.70), 9:'เอเช'[S](c=6.50), 10:'东亚'[S](c=6.29), 11:'China'[S]*(c=6.25), 12:'continent'[S](c=6.08), 13:'北'[S](c=6.06)
+  L31 surv=10/13 ‖Δh‖=15.15 | 0:'亚洲'[X](c=7.65), 1:'Asia'[X]G(c=7.13), 2:'China'[S]*(c=6.62), 3:'?</'[S](c=6.26), 4:'-China'[S]*(c=6.20), 5:' Asia'[X]G(c=6.15), 6:'是中国'[S](c=5.88), 7:'：</'[S](c=5.82), 8:'。</'[S](c=5.79), 9:'เอเช'[S](c=5.79), 10:'，'[S](c=5.64), 11:'**\\r\\n'[S](c=5.64), 12:'名称'[S](c=4.94)
+  L32 surv=10/15 ‖Δh‖=19.85 | 0:'Asia'[X]G(c=14.36), 1:' Asia'[X]G(c=13.52), 2:'亚洲'[X](c=11.68), 3:'Asian'[X]G(c=9.41), 4:'China'[S]*(c=9.34), 5:'1'[S](c=8.93), 6:'east'[S](c=8.49), 7:'_As'[S]G(c=8.39), 8:'东亚'[S](c=7.83), 9:'เอเช'[S](c=7.75), 10:'East'[X](c=7.73), 11:'Where'[S](c=7.65), 12:' Asi'[S]G(c=7.64), 13:'where'[S](c=7.62), 14:'-China'[S]*(c=7.42)
+  L33 surv=10/13 ‖Δh‖=23.82 | 0:' \u200b\u200b'[S](c=3.91), 1:'Asia'[X]G(c=3.76), 2:'1'[S](c=3.18), 3:'最好不要'[S](c=2.34), 4:' mainland'[S](c=2.15), 5:'east'[S](c=2.12), 6:'5'[S](c=1.94), 7:'4'[S](c=1.85), 8:'Earth'[S](c=1.81), 9:' Asia'[X]G(c=1.79), 10:'placer'[S](c=1.78), 11:'亚洲'[X](c=1.78), 12:'�'[S](c=1.66)
+top survivors (all pos): '�':35, '��':25, '南极':14, '回答':13, 'China':13, 'filePath':13, ' emojis':11, ')((':10, '.]\\n\\n':10, ' continent':10
+top excluded (all pos): '.\\n\\n':21, ' answer':17, '<think>':15, '.':14, ' Antarctica':12, 'Asia':12, ',':12, '.\\n':11, ' located':10, ' Asia':10
+intermediate hit detail (first 20):
+  clean_topk clean pos=1 @ 'system' → '\\n' (~China)
+  clean_topk clean pos=2 @ '\\n' → 'A' (~China)
+  clean_topk clean pos=2 @ '\\n' → 'In' (~China)
+  clean_topk clean pos=3 @ 'Answer' → '\\n' (~China)
+  clean_topk clean pos=3 @ 'Answer' → ' a' (~China)
+  clean_topk clean pos=3 @ 'Answer' → ' in' (~China)
+  clean_topk clean pos=3 @ 'Answer' → ':\\n' (~China)
+  clean_topk clean pos=4 @ ' with' → ' a' (~China)
+  clean_topk clean pos=7 @ ' entity' → ' in' (~China)
+  clean_topk clean pos=7 @ ' entity' → '.\\n' (~China)
+  clean_topk clean pos=10 @ ' phrase' → ' in' (~China)
+  clean_topk clean pos=10 @ ' phrase' → '.\\n' (~China)
+  clean_topk clean pos=11 @ ' only' → '\\n' (~China)
+  clean_topk clean pos=11 @ ' only' → '.\\n' (~China)
+  clean_topk clean pos=11 @ ' only' → ' in' (~China)
+  clean_topk clean pos=12 @ '.' → ' In' (~China)
+  clean_topk clean pos=14 @ ' line' → '.\\n' (~China)
+  clean_topk clean pos=15 @ ',' → ' in' (~China)
+  clean_topk clean pos=17 @ ' explanation' → ':\\n' (~China)
+  clean_topk clean pos=17 @ ' explanation' → '\\n' (~China)
+
+[10/10] tracing spider-legs
+### spider-legs
+prompt: Fact: The number of legs on the animal that spins webs is
+gold: '8'  intermediates: ['spider']
+clean→ '8'
+J-abl→ '8'
+aggregates: survivors=10.00/11.15 (frac=0.912)  excluded_dirs/step=1.15  ‖Δh‖=36.89  steps_with_any_excl=171/322
+intermediate hits: survivor=41 excluded=7 clean_topk=5
+last-pos clean top-10: ['6', '8', 'Eight', 'Fact', 'Six', 'Sp', 'Spider', 'The', 'eight', '八']
+last-pos active J-dirs by layer ([S]=survivor ablated, [X]=excluded):
+  L27 surv=10/11 ‖Δh‖=32.33 | 0:'Spider'[X]*(c=24.01), 1:'蜘蛛'[S](c=23.79), 2:' spiders'[S]*(c=23.06), 3:' spider'[S]*(c=21.54), 4:' Spider'[S]*(c=21.33), 5:'昆虫'[S](c=21.19), 6:'蜈'[S](c=18.69), 7:'蜜蜂'[S](c=16.83), 8:'虫'[S](c=16.68), 9:'织'[S](c=16.49), 10:' worms'[S](c=16.43)
+  L28 surv=10/10 ‖Δh‖=17.09 | 0:'numberOf'[S](c=9.42), 1:'十八条'[S](c=9.37), 2:'**\\r\\n'[S](c=9.14), 3:'十条'[S](c=9.06), 4:'trait'[S](c=9.04), 5:'答案'[S](c=8.94), 6:'])**'[S](c=8.77), 7:'\\('[S](c=8.75), 8:'十二条'[S](c=8.47), 9:'蚣'[S](c=8.37)
+  L29 surv=10/13 ‖Δh‖=24.08 | 0:'蜘蛛'[S](c=6.18), 1:'��'[S](c=6.06), 2:'eight'[X](c=5.89), 3:'Eight'[X](c=5.50), 4:'伸出'[S](c=5.44), 5:'八'[X](c=5.43), 6:'十八条'[S](c=5.42), 7:'])**'[S](c=5.38), 8:'Digits'[S](c=5.18), 9:'�'[S](c=5.15), 10:'十七'[S](c=5.05), 11:'肢'[S](c=5.02), 12:'８'[S](c=4.96)
+  L30 surv=10/12 ‖Δh‖=17.40 | 0:' spider'[S]*(c=10.11), 1:'蜘蛛'[S](c=10.08), 2:'Spider'[X]*(c=8.59), 3:'Web'[S](c=8.13), 4:'(Web'[S](c=7.44), 5:'蛛'[S](c=7.26), 6:'网'[S](c=7.16), 7:'web'[S](c=7.12), 8:' crawling'[S](c=6.84), 9:'The'[X](c=6.77), 10:'编织'[S](c=6.75), 11:'爬'[S](c=6.52)
+  L31 surv=10/14 ‖Δh‖=14.21 | 0:'�'[S](c=5.75), 1:'Fact'[X](c=5.67), 2:'事实'[S](c=5.34), 3:' crawling'[S](c=5.17), 4:'eight'[X](c=4.62), 5:'The'[X](c=4.33), 6:'_four'[S](c=4.27), 7:'five'[S](c=4.08), 8:'挣扎'[S](c=4.06), 9:'八年'[S](c=3.93), 10:' семь'[S](c=3.92), 11:'八'[X](c=3.91), 12:'_five'[S](c=3.85), 13:'facts'[S](c=3.85)
+  L32 surv=10/17 ‖Δh‖=22.29 | 0:'The'[X](c=9.49), 1:'Fact'[X](c=7.99), 2:'Has'[S](c=7.50), 3:'8'[X]G(c=7.43), 4:'eight'[X](c=7.10), 5:'Eight'[X](c=6.32), 6:'verte'[S](c=6.24), 7:'昆虫'[S](c=6.18), 8:'HAS'[S](c=6.16), 9:'Spider'[X]*(c=5.97), 10:'Ass'[S](c=5.95), 11:'4'[S](c=5.93), 12:' crawling'[S](c=5.83), 13:'(Http'[S](c=5.82), 14:' Facts'[S](c=5.80), 15:'6'[X](c=5.76), 16:'蜘蛛'[S](c=5.74)
+  L33 surv=10/16 ‖Δh‖=24.83 | 0:'8'[X]G(c=7.21), 1:'The'[X](c=6.67), 2:'6'[X](c=5.38), 3:'Has'[S](c=3.97), 4:'蟏'[S](c=3.66), 5:'sid'[S](c=3.18), 6:'eight'[X](c=3.12), 7:'Fact'[X](c=2.82), 8:'八年'[S](c=2.65), 9:'More'[S](c=2.59), 10:'Number'[S](c=2.54), 11:'Eight'[X](c=2.53), 12:'the'[S](c=2.52), 13:'tre'[S](c=2.39), 14:'(The'[S](c=2.35), 15:'Equals'[S](c=2.30)
+top survivors (all pos): '�':38, '��':28, '蜈':14, 'Spider':13, '回答':11, ' emojis':11, 'ären':10, ' markup':10, '：\\n':9, '++\\n':9
+top excluded (all pos): ' answer':17, '.\\n\\n':16, '<think>':16, '.':13, '</think>':13, ',':11, ' concise':7, ' explanations':7, ' preamble':7, '<|im_end|>':7
+intermediate hit detail (first 20):
+  clean_topk clean pos=31 @ ' the' → ' spider' (~spider)
+  clean_topk clean pos=33 @ ' that' → "'s" (~spider)
+  clean_topk clean pos=42 @ '<think>' → '\\r' (~spider)
+  clean_topk clean pos=45 @ '\\n\\n' → 'Sp' (~spider)
+  clean_topk clean pos=45 @ '\\n\\n' → 'Spider' (~spider)
+  active_survivor L27 pos=29 @ ' legs' → ' spiders' (~spider) c=15.00
+  active_survivor L27 pos=29 @ ' legs' → ' spider' (~spider) c=14.07
+  active_excluded L27 pos=31 @ ' the' → ' spider' (~spider) c=23.25
+  active_survivor L27 pos=35 @ ' webs' → ' spiders' (~spider) c=28.24
+  active_survivor L27 pos=35 @ ' webs' → ' spider' (~spider) c=26.60
+  active_survivor L27 pos=35 @ ' webs' → ' Spider' (~spider) c=21.57
+  active_survivor L27 pos=36 @ ' is' → ' spiders' (~spider) c=22.17
+  active_survivor L27 pos=43 @ '\\n\\n' → 'Spider' (~spider) c=19.27
+  active_survivor L27 pos=43 @ '\\n\\n' → ' spiders' (~spider) c=16.10
+  active_survivor L27 pos=43 @ '\\n\\n' → ' Spider' (~spider) c=15.71
+  active_excluded L27 pos=45 @ '\\n\\n' → 'Spider' (~spider) c=24.01
+  active_survivor L27 pos=45 @ '\\n\\n' → ' spiders' (~spider) c=23.06
+  active_survivor L27 pos=45 @ '\\n\\n' → ' spider' (~spider) c=21.54
+  active_survivor L27 pos=45 @ '\\n\\n' → ' Spider' (~spider) c=21.33
+  active_survivor L28 pos=31 @ ' the' → 'Spider' (~spider) c=10.92
+
+{
+  "n": 10,
+  "mean_survivor_fraction": 0.896177356999124,
+  "mean_n_excluded": 1.3682747447465837,
+  "mean_delta_h_norm": 36.413540557048826,
+  "problems_with_intermediate_survivor": 10,
+  "problems_with_intermediate_excluded": 8,
+  "problems_with_intermediate_in_clean_topk": 10,
+  "problems_where_completion_changed": 6,
+  "per_problem": [
+    {
+      "problem_id": "super-populous-capital",
+      "gold": "Beijing",
+      "intermediates": [
+        "China"
+      ],
+      "clean_completion": "Beijing.",
+      "jspace_completion": "London.",
+      "mean_survivor_fraction": 0.8872265955850229,
+      "mean_n_excluded": 1.4924012158054711,
+      "mean_delta_h_norm": 36.29925692480023,
+      "n_intermediate_survivor_hits": 138,
+      "n_intermediate_excluded_hits": 30,
+      "n_intermediate_clean_topk_hits": 51,
+      "last_pos_survivor_tokens": [
+        " \u041c\u043e\u0441\u043a\u0432\u0430",
+        " Beijing",
+        " Mumbai",
+        " Tokyo",
+        "\u676d\u5dde",
+        " Johannesburg",
+        " Nairobi",
+        "\u6606\u660e",
+        " Jakarta",
+        "\u4f26\u6566",
+        "(World",
+        "<|endoftext|>",
+        "(None",
+        "/world",
+        "])**",
+        "sterdam",
+        "\u4e16\u754c",
+        "\u8054\u5408\u56fd",
+        " Ankara",
+        "Russia",
+        "Russia",
+        "\u4fc4\u7f57\u65af",
+        "-China",
+        "\u82cf\u8054",
+        " Russia",
+        "Putin",
+        "\u662f\u4e2d\u56fd",
+        "(None",
+        " Putin",
+        ";</",
+        " Tokyo",
+        "\u4e1c\u4eac",
+        " Johannesburg",
+        " \u041c\u043e\u0441\u043a\u0432\u0430",
+        "Atlanta",
+        " Beijing",
+        "\u6df1\u5733",
+        "\u5408\u80a5",
+        "\u9996\u90fd",
+        " Jakarta",
+        " Washington",
+        "\u534e\u76db\u987f",
+        "(New",
+        "_New",
+        " Islamabad",
+        ">New",
+        "-New",
+        " \u041c\u043e\u0441\u043a\u0432\u0430",
+        "\u547c\u548c\u6d69\u7279",
+        " washington",
+        ">New",
+        " washington",
+        "That",
+        "berra",
+        "\u534e\u76db\u987f",
+        "The",
+        "capital",
+        "(New",
+        "Russia",
+        "Bag",
+        "Russia",
+        "sorry",
+        "Victoria",
+        "\ufffd",
+        "\ufffd",
+        "(world",
+        "ndon",
+        "(World",
+        " cairo",
+        "\u4e0d\u8981\u518d"
+      ],
+      "last_pos_excluded_tokens": [
+        "London",
+        "\u5317\u4eac",
+        "Berlin",
+        "Washington",
+        "\u5317\u4eac",
+        "Tok",
+        "China",
+        "Washington",
+        "\u5317\u4eac",
+        "Tok",
+        "\u5317\u4eac",
+        "London",
+        "Tok",
+        "Paris",
+        "Berlin",
+        "Washington",
+        "Washington",
+        "London",
+        "\u5317\u4eac",
+        "Tok",
+        "Berlin",
+        "New",
+        "Tok",
+        "London",
+        "Wars",
+        "New",
+        "\u5317\u4eac",
+        "Washington",
+        "Tok"
+      ],
+      "last_pos_clean_topk": [
+        "Be",
+        "Berlin",
+        "China",
+        "London",
+        "New",
+        "Paris",
+        "Tok",
+        "Wars",
+        "Washington",
+        "\u5317\u4eac"
+      ]
+    },
+    {
+      "problem_id": "amazon-language",
+      "gold": "Portuguese",
+      "intermediates": [
+        "Brazil"
+      ],
+      "clean_completion": "Spanish.",
+      "jspace_completion": "Portuguese.",
+      "mean_survivor_fraction": 0.8930938286559034,
+      "mean_n_excluded": 1.4042553191489362,
+      "mean_delta_h_norm": 36.53916561422377,
+      "n_intermediate_survivor_hits": 17,
+      "n_intermediate_excluded_hits": 7,
+      "n_intermediate_clean_topk_hits": 11,
+      "last_pos_survivor_tokens": [
+        "\u8bed\u8a00",
+        "\u7684\u8bed\u8a00",
+        "Languages",
+        "Latin",
+        "Language",
+        "\u6c49\u8bed",
+        "\u82f1\u8bed",
+        "\u666e\u901a\u8bdd",
+        " Languages",
+        "English",
+        "\u50a3",
+        " Venezuelan",
+        " Colombian",
+        " Venezuel",
+        "\u4e91\u5357\u7701",
+        "\u963f\u6839\u5ef7",
+        " Ecuador",
+        "\u6c5f\u82cf\u7701",
+        " Espa\u00f1ol",
+        "\u5df4\u897f",
+        "Latin",
+        "English",
+        "\u5df4\u897f",
+        "\u6c49\u8bed",
+        "sink",
+        "\u82f1\u8bed",
+        "<|endoftext|>",
+        ";</",
+        "Python",
+        " Brazilian",
+        "Latin",
+        "\u5df4\u897f",
+        "/native",
+        "Native",
+        "\u8461",
+        " Braz",
+        "\u50a3",
+        "\ufffd\u56de",
+        "_native",
+        "_NATIVE",
+        "\u5df4\u897f",
+        " Brazil",
+        "Amazon",
+        "\u4e9a\u9a6c\u900a",
+        " Brazilian",
+        " Brasil",
+        " Braz",
+        " Amazon",
+        "\u5185\u9a6c\u5c14",
+        "Latin",
+        "Latin",
+        "Bas",
+        "That",
+        "Tok",
+        " Guar",
+        "Native",
+        "The",
+        "Sh",
+        "[a",
+        "off",
+        "\u65b9\u8a00",
+        "spoken",
+        "_ascii",
+        "(()",
+        "Latin",
+        "fallback",
+        ")((",
+        "\u7228",
+        "bash",
+        "_por"
+      ],
+      "last_pos_excluded_tokens": [
+        "Spanish",
+        "\u897f\u73ed\u7259",
+        " Portuguese",
+        " Spanish",
+        "Spanish",
+        "\u897f\u73ed\u7259",
+        " Portuguese",
+        " Spanish",
+        "Brazil",
+        "\u8461\u8404\u7259",
+        " Portuguese",
+        "Brazil",
+        "Spanish",
+        "\u8461\u8404\u7259",
+        "Brazil",
+        " Portuguese",
+        "\u8461\u8404\u7259",
+        "Spanish",
+        "Brazil",
+        " Portuguese",
+        "\u8461\u8404\u7259",
+        "Spanish",
+        " Portuguese",
+        "Port",
+        "Spanish",
+        " Portuguese"
+      ],
+      "last_pos_clean_topk": [
+        " Portuguese",
+        " Spanish",
+        "Brazil",
+        "Esp",
+        "French",
+        "Port",
+        "Span",
+        "Spanish",
+        "\u8461\u8404\u7259",
+        "\u897f\u73ed\u7259"
+      ]
+    },
+    {
+      "problem_id": "super-smallest-continent",
+      "gold": "Europe",
+      "intermediates": [
+        "Vatican"
+      ],
+      "clean_completion": "Europe.",
+      "jspace_completion": "South.",
+      "mean_survivor_fraction": 0.8991931023264833,
+      "mean_n_excluded": 1.3100303951367782,
+      "mean_delta_h_norm": 37.20750816252456,
+      "n_intermediate_survivor_hits": 126,
+      "n_intermediate_excluded_hits": 19,
+      "n_intermediate_clean_topk_hits": 43,
+      "last_pos_survivor_tokens": [
+        " Africa",
+        "\u4e9a\u6d32",
+        " Europe",
+        " Asia",
+        "\u6b27\u6d32",
+        " continent",
+        " Antarctica",
+        "\u5927\u9646",
+        " continents",
+        " Continent",
+        "<|endoftext|>",
+        "\u5357\u6781",
+        "\u5730\u7406",
+        "/tiny",
+        " Antarctica",
+        ".Small",
+        " Greenland",
+        " Peninsula",
+        "\u5c9b\u5c7f",
+        " Armenia",
+        "\u5c9b\u5c7f",
+        "\u5357\u6781",
+        "\u5c9b",
+        ")((",
+        "\uff1a</",
+        "()).",
+        ")</",
+        ";</",
+        "isEmpty",
+        "(None",
+        " Continent",
+        " Asia",
+        "continent",
+        "\u4e9a\u6d32",
+        "\u7f8e\u6d32",
+        "Contin",
+        " Euras",
+        "Cont",
+        " continents",
+        " continent",
+        "\uff1a</",
+        "Contin",
+        "\u5357\u6781",
+        "testdata",
+        ")((",
+        "\u4e9a\u6d32",
+        "asia",
+        "\u897f\u5317",
+        "South",
+        "\u5357",
+        "South",
+        "Where",
+        "Contin",
+        "Which",
+        "createQuery",
+        "\u5357\u6781",
+        "contin",
+        "where",
+        "iber",
+        "\u2022",
+        "1",
+        "Contin",
+        "\u5357\u6781",
+        "\ufffd",
+        "\ufffd",
+        "5",
+        "7",
+        "Fortunately",
+        "[a",
+        "_Mouse"
+      ],
+      "last_pos_excluded_tokens": [
+        "Africa",
+        "Asia",
+        "Europe",
+        "Asia",
+        "Asia",
+        "Asia",
+        "Europe",
+        "Asia",
+        "Europe",
+        "Asia",
+        "Europe",
+        "Africa",
+        "Asia"
+      ],
+      "last_pos_clean_topk": [
+        "Africa",
+        "Ant",
+        "Asia",
+        "Atlantic",
+        "E",
+        "EU",
+        "Eu",
+        "Euro",
+        "Europe",
+        "European"
+      ]
+    },
+    {
+      "problem_id": "atomic-26-symbol",
+      "gold": "Fe",
+      "intermediates": [
+        "iron"
+      ],
+      "clean_completion": "Fe",
+      "jspace_completion": "Fe",
+      "mean_survivor_fraction": 0.9015654557277457,
+      "mean_n_excluded": 1.3095238095238095,
+      "mean_delta_h_norm": 36.71547141671181,
+      "n_intermediate_survivor_hits": 150,
+      "n_intermediate_excluded_hits": 23,
+      "n_intermediate_clean_topk_hits": 40,
+      "last_pos_survivor_tokens": [
+        "\u94a2\u94c1",
+        "\u91d1\u5c5e",
+        "\u4e0d\u9508\u94a2",
+        "\u94a2\u6750",
+        "\u94a2",
+        "\u78c1\u573a",
+        "\u5408\u91d1",
+        "IRON",
+        "\u51b6\u70bc",
+        "Steel",
+        "\\(",
+        "**\\r\\n",
+        "\u539f\u5b50",
+        "\\[",
+        ")**",
+        "(**",
+        "]**",
+        "[Z",
+        ":**",
+        "\u53cd\u5e94",
+        "bcc",
+        "cob",
+        "rium",
+        "CO",
+        ".]",
+        "adium",
+        ".OUT",
+        " XC",
+        "\u954d",
+        " Nickel",
+        "\ufffd",
+        "\u9ed1",
+        "\ufffd",
+        "\u8fc7\u6e21",
+        "_FE",
+        "rium",
+        "ZN",
+        "\ufffd",
+        "IRON",
+        "\u5f00\u59cb",
+        "_fe",
+        "_FE",
+        ".fe",
+        "(fe",
+        "ZN",
+        "\u804a\u57ce",
+        "izia",
+        "Fc",
+        "fe",
+        "rium",
+        "\u2205",
+        "\u2081",
+        "\u2013and",
+        "_FE",
+        "\u2082",
+        "rium",
+        "\u00bd",
+        "IF",
+        " Ni",
+        "2",
+        "sorry",
+        "\u594b",
+        "\u8fc7\u6e21",
+        "ichi",
+        "2",
+        "\u5316\u5408",
+        "\u6709\u5f88\u591a\u79cd",
+        "\ufffd",
+        ".fe",
+        "testdata"
+      ],
+      "last_pos_excluded_tokens": [
+        "\u94c1",
+        "Fe",
+        "Fe",
+        "\u94c1",
+        "FE",
+        "Iron",
+        "Ni",
+        " Fe",
+        "\u94c1",
+        "Fe",
+        "FE",
+        "Iron",
+        " Fe",
+        "Fe",
+        " Fe",
+        "\u94c1",
+        "FE",
+        "Iron",
+        "Fe",
+        " Fe",
+        "\u94c1",
+        "Ni",
+        "iron",
+        "FE",
+        "Fe",
+        "\u94c1"
+      ],
+      "last_pos_clean_topk": [
+        " Fe",
+        "Co",
+        "Cr",
+        "FE",
+        "Fe",
+        "Iron",
+        "Ni",
+        "Nick",
+        "iron",
+        "\u94c1"
+      ]
+    },
+    {
+      "problem_id": "colosseum-currency",
+      "gold": "Euro",
+      "intermediates": [
+        "Italy"
+      ],
+      "clean_completion": "Euro.",
+      "jspace_completion": "stater.",
+      "mean_survivor_fraction": 0.8882383955913369,
+      "mean_n_excluded": 1.457142857142857,
+      "mean_delta_h_norm": 35.772105527605326,
+      "n_intermediate_survivor_hits": 17,
+      "n_intermediate_excluded_hits": 0,
+      "n_intermediate_clean_topk_hits": 8,
+      "last_pos_survivor_tokens": [
+        "\u4eba\u6c11\u5e01",
+        "Currency",
+        "currency",
+        "_currency",
+        "\u7f8e\u5143",
+        "\u8d27\u5e01",
+        "\u82f1\u9551",
+        "\u91d1\u5e01",
+        " Currency",
+        ".Currency",
+        "\u610f\u5927\u5229",
+        "Italy",
+        " Italian",
+        " Italians",
+        " Italy",
+        "Roman",
+        " Luigi",
+        "\u7f57\u9a6c",
+        " italiano",
+        " italian",
+        ").\\r\\n",
+        "**\\r\\n",
+        ".\")\\r\\n",
+        ")**",
+        ")\\r\\n",
+        ".\\r\\n",
+        " euros",
+        "*\\r\\n",
+        ",\\r\\n",
+        "})\\r\\n",
+        "izzo",
+        " Italians",
+        "<|endoftext|>",
+        " italian",
+        "-pound",
+        "Italy",
+        "izza",
+        "<strong",
+        " Pound",
+        " Italian",
+        " Romans",
+        " euros",
+        "____",
+        " \u0433\u0440",
+        "_.",
+        " Roma",
+        "._",
+        "\u7f57\u9a6c",
+        "\u5143",
+        "ROM",
+        "\u2022",
+        "\u00a0\u00a0\u00a0\u00a0",
+        "abyte",
+        "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0",
+        "The",
+        "It",
+        "\u00a0",
+        "\u00a0\u00a0\u00a0",
+        "That",
+        "\u25cf",
+        "plural",
+        "1",
+        "uctor",
+        "apus",
+        "eon",
+        "bearer",
+        "the",
+        "of",
+        "The",
+        "2"
+      ],
+      "last_pos_excluded_tokens": [
+        "\u6b27\u5143",
+        "Italian",
+        "Euro",
+        "Italian",
+        "Euro",
+        "\u6b27\u5143",
+        " euro",
+        "Euro",
+        "Euro",
+        "\u6b27\u5143",
+        "Euro",
+        "\u6b27\u5143"
+      ],
+      "last_pos_clean_topk": [
+        " Euro",
+        " euro",
+        "E",
+        "EU",
+        "EUR",
+        "Euro",
+        "European",
+        "Italian",
+        "e",
+        "\u6b27\u5143"
+      ]
+    },
+    {
+      "problem_id": "planet-3-moons",
+      "gold": "1",
+      "intermediates": [
+        "Earth"
+      ],
+      "clean_completion": "1",
+      "jspace_completion": "1",
+      "mean_survivor_fraction": 0.8903523209388413,
+      "mean_n_excluded": 1.4752186588921283,
+      "mean_delta_h_norm": 35.803565492435375,
+      "n_intermediate_survivor_hits": 10,
+      "n_intermediate_excluded_hits": 4,
+      "n_intermediate_clean_topk_hits": 10,
+      "last_pos_survivor_tokens": [
+        "Earth",
+        "\u5730\u7403",
+        "\u6708\u4eae",
+        ":Number",
+        "\u5ae6",
+        " Earth",
+        "\u6570\u76ee",
+        "\u6570\u91cf",
+        "Moon",
+        "\u5730\u7403\u4e0a",
+        "One",
+        "ONE",
+        "_One",
+        "_one",
+        "]**",
+        "-One",
+        "**\\r\\n",
+        ".ONE",
+        ")**",
+        " ONE",
+        "\ufffds",
+        "<|endoftext|>",
+        "Evidence",
+        "\u56f4\u7740",
+        "Hint",
+        "\\Plugin",
+        " Hint",
+        "-Ass",
+        "\u6e8f",
+        "addEventListener",
+        "\u96f6",
+        "Zero",
+        "_Zero",
+        ".ZERO",
+        " zero",
+        " Zero",
+        ".false",
+        "zero",
+        "\u4e00\u9897",
+        "_zero",
+        "fact",
+        "_fact",
+        "\u4e8b\u5b9e",
+        " Fact",
+        "\u7684\u4e8b\u5b9e",
+        " fact",
+        " Facts",
+        "facts",
+        "_FACT",
+        "FACT",
+        "\ufffd",
+        "\uff11",
+        "\u2081",
+        "Answer",
+        "\\",
+        "\\\\",
+        "Ass",
+        "\\u",
+        "Has",
+        "This",
+        "facts",
+        "isis",
+        "_fact",
+        "\u7684\u4e8b\u5b9e",
+        "fact",
+        "Caption",
+        "\u4e8b\u5b9e",
+        "elli",
+        "\u6f7c",
+        "nosti"
+      ],
+      "last_pos_excluded_tokens": [
+        "Fact",
+        "The",
+        "1",
+        "The",
+        "3",
+        "2",
+        "0",
+        "Fact",
+        "1",
+        "Fact",
+        "2",
+        "3",
+        "The",
+        "0",
+        "4"
+      ],
+      "last_pos_clean_topk": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "9",
+        "Fact",
+        "The"
+      ]
+    },
+    {
+      "problem_id": "carnival-ocean",
+      "gold": "Atlantic",
+      "intermediates": [
+        "Brazil"
+      ],
+      "clean_completion": "Atlantic Ocean.",
+      "jspace_completion": "Atlantic Ocean.",
+      "mean_survivor_fraction": 0.8945831589183048,
+      "mean_n_excluded": 1.3753501400560224,
+      "mean_delta_h_norm": 35.3576822948723,
+      "n_intermediate_survivor_hits": 2,
+      "n_intermediate_excluded_hits": 0,
+      "n_intermediate_clean_topk_hits": 12,
+      "last_pos_survivor_tokens": [
+        " Ocean",
+        "Ocean",
+        "\u6d77\u6c34",
+        " Mediterranean",
+        " Bahamas",
+        "\u6d77\u6d0b",
+        "\u6d77\u57df",
+        " Miami",
+        " ocean",
+        "Miami",
+        "<|endoftext|>",
+        "River",
+        "Lake",
+        "\u6e56",
+        "])**",
+        "\u6cb3\u6d41",
+        "]**",
+        "\u8fd0\u6cb3",
+        "[ID",
+        ")**",
+        "\u6cd5\u56fd",
+        " Mediterranean",
+        "sea",
+        "French",
+        "\u5317\u6d77",
+        "Pacific",
+        "\u7242",
+        "Sea",
+        " Louisiana",
+        "\u6d77\u57df",
+        "\u5317\u6d77",
+        "Sea",
+        "\u6d77\u57df",
+        "\u6d77\u5cb8",
+        "\u5357\u6d77",
+        " Baltic",
+        "\u4e1c\u6d77",
+        "Where",
+        " Gulf",
+        "\u6d77\u5ce1",
+        "\u5317\u6d77",
+        "\u6d77\u5ce1",
+        "Qu\u00e9",
+        "Sea",
+        "Bay",
+        "\u6d77\u5cb8",
+        "\ufffd",
+        "elize",
+        "Black",
+        "uese",
+        "Sea",
+        "\u6d77\u5cb8",
+        "tid",
+        "\u5317\u6d77",
+        "\u6d77\u5ce1",
+        " Gulf",
+        "Attrib",
+        " Sea",
+        "Black",
+        "Saint",
+        "the",
+        "`",
+        "\ufffd",
+        ".`",
+        "ADF",
+        " \u200b\u200b",
+        "__",
+        "1",
+        "preter",
+        "Attrib"
+      ],
+      "last_pos_excluded_tokens": [
+        " Caribbean",
+        "Atlantic",
+        " Atlantic",
+        "Atlantic",
+        " Caribbean",
+        " Atlantic",
+        "Atlantic",
+        " Caribbean",
+        " Atlantic",
+        "Atlantic",
+        " Caribbean",
+        " Atlantic",
+        "Atlantic",
+        " Caribbean",
+        " Atlantic",
+        "Atl",
+        "Atlantic",
+        " Atlantic",
+        " Caribbean",
+        "Atl",
+        "Car",
+        "Spanish",
+        "Atlantic",
+        " Atlantic",
+        "Atl",
+        " Caribbean"
+      ],
+      "last_pos_clean_topk": [
+        " Atlantic",
+        " Caribbean",
+        "A",
+        "At",
+        "Atl",
+        "Atlantic",
+        "Car",
+        "English",
+        "North",
+        "Spanish"
+      ]
+    },
+    {
+      "problem_id": "atomic-29-symbol",
+      "gold": "Cu",
+      "intermediates": [
+        "copper"
+      ],
+      "clean_completion": "Cu",
+      "jspace_completion": "29 is the atomic number of the element with the chemical symbol in the given",
+      "mean_survivor_fraction": 0.905626003315079,
+      "mean_n_excluded": 1.2470238095238095,
+      "mean_delta_h_norm": 36.78899884223938,
+      "n_intermediate_survivor_hits": 17,
+      "n_intermediate_excluded_hits": 7,
+      "n_intermediate_clean_topk_hits": 10,
+      "last_pos_survivor_tokens": [
+        "\u91d1\u5c5e",
+        "\u94c1",
+        "\u94a2\u94c1",
+        "\u4e0d\u9508\u94a2",
+        "\u5408\u91d1",
+        "\u94dc",
+        "\u94a2",
+        "\u9752\u94dc",
+        "IRON",
+        " Zinc",
+        "\\(",
+        "\u539f\u5b50",
+        "PD",
+        " PDT",
+        " \\(",
+        "\\[",
+        ")\\\\n",
+        "Atomic",
+        ".CV",
+        "ReLU",
+        "IRON",
+        "\u954d",
+        "Ars",
+        "\u91cd\u91d1\u5c5e",
+        "\u9553",
+        "\u9ec4\u91d1",
+        "(Z",
+        "\u767d\u94f6",
+        "\u91d1\u5e01",
+        "```",
+        "\u91d1",
+        "\ufffd\u8bd5",
+        "**\\r\\n",
+        "\u91d1\u5e01",
+        "\u94c1",
+        "\u5200",
+        "```",
+        " \"\\<",
+        " PROVIDED",
+        "\u9ec4\u91d1",
+        "\u94dc",
+        " copper",
+        "\u9ec4\u91d1",
+        "tron",
+        "\u91d1\u5e01",
+        "  ",
+        "cpp",
+        "   ",
+        "IRON",
+        "\u91d1\u4ef7",
+        "._",
+        "\ufffd",
+        "FUL",
+        " Fe",
+        "\u2022\\n\\n",
+        "\u2081",
+        " Au",
+        ".gov",
+        "\u2013\\n\\n",
+        " Ni",
+        "sorry",
+        "\u6d12",
+        "2",
+        "Cannot",
+        "\ufffd",
+        "\u5c31\u4e0d",
+        "flows",
+        "ichi",
+        "\ufffd",
+        "\ufffd"
+      ],
+      "last_pos_excluded_tokens": [
+        "Ag",
+        "Au",
+        "Ag",
+        "Cu",
+        "Au",
+        " Cu",
+        "Ag",
+        "Ag",
+        "Cu",
+        "Ni",
+        "Au",
+        "Fe",
+        " Cu"
+      ],
+      "last_pos_clean_topk": [
+        " Cu",
+        "Ag",
+        "Au",
+        "CU",
+        "Co",
+        "Cr",
+        "Cu",
+        "Fe",
+        "Ni",
+        "cu"
+      ]
+    },
+    {
+      "problem_id": "paper-continent",
+      "gold": "Asia",
+      "intermediates": [
+        "China"
+      ],
+      "clean_completion": "Asia.",
+      "jspace_completion": "Asia",
+      "mean_survivor_fraction": 0.8899194825391391,
+      "mean_n_excluded": 1.4658385093167703,
+      "mean_delta_h_norm": 36.766573978507,
+      "n_intermediate_survivor_hits": 154,
+      "n_intermediate_excluded_hits": 26,
+      "n_intermediate_clean_topk_hits": 50,
+      "last_pos_survivor_tokens": [
+        " Europe",
+        "\u6b27\u6d32",
+        " Africa",
+        "\u4e1c\u5357\u4e9a",
+        " continent",
+        "\u5927\u9646",
+        " Continent",
+        " Euras",
+        "China",
+        " Asian",
+        "China",
+        " Mongolia",
+        " Armenia",
+        "\u65b0\u7586",
+        "\u7518\u8083",
+        "\u4e1d\u7ef8\u4e4b\u8def",
+        "Turkey",
+        "\ufffd\ufffd",
+        "Italy",
+        "-China",
+        "Where",
+        "Turkey",
+        "<|endoftext|>",
+        "China",
+        "\u3002</",
+        "Containing",
+        "(where",
+        "\\twhere",
+        "').",
+        "DataFrame",
+        " asia",
+        "asia",
+        "\u6b27\u6d32",
+        " Continent",
+        " Europe",
+        "\u0e40\u0e2d\u0e40\u0e0a",
+        "\u4e1c\u4e9a",
+        "China",
+        "continent",
+        "\u5317",
+        "China",
+        "?</",
+        "-China",
+        "\u662f\u4e2d\u56fd",
+        "\uff1a</",
+        "\u3002</",
+        "\u0e40\u0e2d\u0e40\u0e0a",
+        "\uff0c",
+        "**\\r\\n",
+        "\u540d\u79f0",
+        "China",
+        "1",
+        "east",
+        "_As",
+        "\u4e1c\u4e9a",
+        "\u0e40\u0e2d\u0e40\u0e0a",
+        "Where",
+        " Asi",
+        "where",
+        "-China",
+        " \u200b\u200b",
+        "1",
+        "\u6700\u597d\u4e0d\u8981",
+        " mainland",
+        "east",
+        "5",
+        "4",
+        "Earth",
+        "placer",
+        "\ufffd"
+      ],
+      "last_pos_excluded_tokens": [
+        "Asia",
+        " Asia",
+        "\u4e9a\u6d32",
+        "Europe",
+        "Africa",
+        "Asian",
+        "Asia",
+        "\u4e9a\u6d32",
+        "Asia",
+        "Asia",
+        " Asia",
+        "\u4e9a\u6d32",
+        "Europe",
+        "\u4e9a\u6d32",
+        "Asia",
+        " Asia",
+        "Asia",
+        " Asia",
+        "\u4e9a\u6d32",
+        "Asian",
+        "East",
+        "Asia",
+        " Asia",
+        "\u4e9a\u6d32"
+      ],
+      "last_pos_clean_topk": [
+        " Asia",
+        "AS",
+        "Africa",
+        "As",
+        "Asia",
+        "Asian",
+        "E",
+        "East",
+        "Europe",
+        "\u4e9a\u6d32"
+      ]
+    },
+    {
+      "problem_id": "spider-legs",
+      "gold": "8",
+      "intermediates": [
+        "spider"
+      ],
+      "clean_completion": "8",
+      "jspace_completion": "8",
+      "mean_survivor_fraction": 0.911975226393385,
+      "mean_n_excluded": 1.1459627329192548,
+      "mean_delta_h_norm": 36.885077316568506,
+      "n_intermediate_survivor_hits": 41,
+      "n_intermediate_excluded_hits": 7,
+      "n_intermediate_clean_topk_hits": 5,
+      "last_pos_survivor_tokens": [
+        "\u8718\u86db",
+        " spiders",
+        " spider",
+        " Spider",
+        "\u6606\u866b",
+        "\u8708",
+        "\u871c\u8702",
+        "\u866b",
+        "\u7ec7",
+        " worms",
+        "numberOf",
+        "\u5341\u516b\u6761",
+        "**\\r\\n",
+        "\u5341\u6761",
+        "trait",
+        "\u7b54\u6848",
+        "])**",
+        "\\(",
+        "\u5341\u4e8c\u6761",
+        "\u86a3",
+        "\u8718\u86db",
+        "\ufffd\ufffd",
+        "\u4f38\u51fa",
+        "\u5341\u516b\u6761",
+        "])**",
+        "Digits",
+        "\ufffd",
+        "\u5341\u4e03",
+        "\u80a2",
+        "\uff18",
+        " spider",
+        "\u8718\u86db",
+        "Web",
+        "(Web",
+        "\u86db",
+        "\u7f51",
+        "web",
+        " crawling",
+        "\u7f16\u7ec7",
+        "\u722c",
+        "\ufffd",
+        "\u4e8b\u5b9e",
+        " crawling",
+        "_four",
+        "five",
+        "\u6323\u624e",
+        "\u516b\u5e74",
+        " \u0441\u0435\u043c\u044c",
+        "_five",
+        "facts",
+        "Has",
+        "verte",
+        "\u6606\u866b",
+        "HAS",
+        "Ass",
+        "4",
+        " crawling",
+        "(Http",
+        " Facts",
+        "\u8718\u86db",
+        "Has",
+        "\u87cf",
+        "sid",
+        "\u516b\u5e74",
+        "More",
+        "Number",
+        "the",
+        "tre",
+        "(The",
+        "Equals"
+      ],
+      "last_pos_excluded_tokens": [
+        "Spider",
+        "eight",
+        "Eight",
+        "\u516b",
+        "Spider",
+        "The",
+        "Fact",
+        "eight",
+        "The",
+        "\u516b",
+        "The",
+        "Fact",
+        "8",
+        "eight",
+        "Eight",
+        "Spider",
+        "6",
+        "8",
+        "The",
+        "6",
+        "eight",
+        "Fact",
+        "Eight"
+      ],
+      "last_pos_clean_topk": [
+        "6",
+        "8",
+        "Eight",
+        "Fact",
+        "Six",
+        "Sp",
+        "Spider",
+        "The",
+        "eight",
+        "\u516b"
+      ]
+    }
+  ]
+}
+wrote /root/j-space-cot-ablation/results/diagnostics/ablation_token_traces.json
+wrote /root/j-space-cot-ablation/results/diagnostics/ablation_token_traces.md

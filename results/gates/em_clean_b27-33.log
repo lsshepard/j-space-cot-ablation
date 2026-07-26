@@ -1,0 +1,140 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 53/398 [00:00<00:01, 225.80it/s]Loading weights:  25%|██▌       | 101/398 [00:00<00:01, 180.29it/s]Loading weights:  30%|███       | 120/398 [00:01<00:03, 78.91it/s] Loading weights:  40%|███▉      | 159/398 [00:01<00:02, 97.99it/s]Loading weights:  47%|████▋     | 187/398 [00:01<00:01, 121.13it/s]Loading weights:  55%|█████▍    | 217/398 [00:01<00:01, 148.98it/s]Loading weights:  64%|██████▍   | 255/398 [00:01<00:00, 179.10it/s]Loading weights: 100%|██████████| 398/398 [00:01<00:00, 214.88it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 224.80it/s]
+EM gate n=28 band=[27,33] k=10 exclude_topk=10 random_seeds=(0, 1, 2)
+amazon-language clean correct=False ans='Spanish'
+atomic-26-symbol clean correct=True ans='Fe'
+atomic-29-flame clean correct=False ans='Blue'
+atomic-29-symbol clean correct=True ans='Cu'
+atomic-79-symbol clean correct=True ans='Au'
+atomic-80-state clean correct=False ans='Solid'
+basketball-players clean correct=False ans='11'
+carnival-ocean clean correct=True ans='Atlantic Ocean'
+christmas-season clean correct=True ans='Winter'
+colosseum-currency clean correct=True ans='Euro'
+greatwall-ocean clean correct=False ans='Atlantic Ocean'
+holiday-christmas-monthnum clean correct=True ans='12'
+holiday-halloween-monthnum clean correct=False ans='October'
+holiday-independence-monthnum clean correct=True ans='7'
+holiday-valentines-monthnum clean correct=True ans='2'
+louvre-language clean correct=True ans='French'
+mars-color clean correct=False ans='Orange'
+osu-rival-mascot clean correct=False ans='Boomer'
+paper-continent clean correct=True ans='Asia'
+planet-3-moons clean correct=True ans='1'
+spaceneedle-border clean correct=False ans='Washington state'
+spider-legs clean correct=True ans='8'
+super-largest-country-capital clean correct=False ans='Russia'
+super-largest-island-nation clean correct=False ans='Honduras'
+super-populous-capital clean correct=True ans='Beijing'
+super-smallest-continent clean correct=True ans='Europe'
+tajmahal-continent clean correct=False ans='India'
+topeka-west clean correct=False ans='Kansas'
+restricting J/random eval to clean-correct n=15
+atomic-26-symbol jspace correct=True ans='Fe'
+atomic-26-symbol random seed=0 correct=True ans='Fe'
+atomic-26-symbol random seed=1 correct=True ans='Fe'
+atomic-26-symbol random seed=2 correct=True ans='Fe'
+atomic-29-symbol jspace correct=False ans='29 is the atomic number of the element with the chemical symbol in the given fact. The chemical symbol for the element with atomic number 29 is'
+atomic-29-symbol random seed=0 correct=True ans='Cu'
+atomic-29-symbol random seed=1 correct=True ans='Cu'
+atomic-29-symbol random seed=2 correct=True ans='Cu'
+atomic-79-symbol jspace correct=True ans='Au'
+atomic-79-symbol random seed=0 correct=True ans='Au'
+atomic-79-symbol random seed=1 correct=True ans='Au'
+atomic-79-symbol random seed=2 correct=True ans='Au'
+carnival-ocean jspace correct=True ans='Atlantic Ocean'
+carnival-ocean random seed=0 correct=False ans='Caribbean Sea'
+carnival-ocean random seed=1 correct=True ans='Atlantic Ocean'
+carnival-ocean random seed=2 correct=True ans='Atlantic Ocean'
+christmas-season jspace correct=False ans='The season when the holiday with a decorated tree occurs is the season of the holiday'
+christmas-season random seed=0 correct=True ans='Winter'
+christmas-season random seed=1 correct=True ans='Winter'
+christmas-season random seed=2 correct=True ans='Winter'
+colosseum-currency jspace correct=False ans='stater'
+colosseum-currency random seed=0 correct=True ans='Euro'
+colosseum-currency random seed=1 correct=True ans='Euro'
+colosseum-currency random seed=2 correct=True ans='Euro'
+holiday-christmas-monthnum jspace correct=True ans='12'
+holiday-christmas-monthnum random seed=0 correct=True ans='12'
+holiday-christmas-monthnum random seed=1 correct=True ans='12'
+holiday-christmas-monthnum random seed=2 correct=True ans='12'
+holiday-independence-monthnum jspace correct=True ans='7'
+holiday-independence-monthnum random seed=0 correct=True ans='7'
+holiday-independence-monthnum random seed=1 correct=True ans='7'
+holiday-independence-monthnum random seed=2 correct=True ans='7'
+holiday-valentines-monthnum jspace correct=False ans='14'
+holiday-valentines-monthnum random seed=0 correct=False ans='February'
+holiday-valentines-monthnum random seed=1 correct=False ans='February'
+holiday-valentines-monthnum random seed=2 correct=True ans='2'
+louvre-language jspace correct=True ans='French'
+louvre-language random seed=0 correct=True ans='French'
+louvre-language random seed=1 correct=True ans='French'
+louvre-language random seed=2 correct=True ans='French'
+paper-continent jspace correct=True ans='Asia'
+paper-continent random seed=0 correct=True ans='Asia'
+paper-continent random seed=1 correct=True ans='Asia'
+paper-continent random seed=2 correct=True ans='Asia'
+planet-3-moons jspace correct=True ans='1'
+planet-3-moons random seed=0 correct=True ans='1'
+planet-3-moons random seed=1 correct=True ans='1'
+planet-3-moons random seed=2 correct=True ans='1'
+spider-legs jspace correct=True ans='8'
+spider-legs random seed=0 correct=True ans='8'
+spider-legs random seed=1 correct=False ans='Eight'
+spider-legs random seed=2 correct=True ans='8'
+super-populous-capital jspace correct=False ans='London'
+super-populous-capital random seed=0 correct=True ans='Beijing'
+super-populous-capital random seed=1 correct=False ans='Washington, D.C'
+super-populous-capital random seed=2 correct=True ans='Beijing'
+super-smallest-continent jspace correct=False ans='South'
+super-smallest-continent random seed=0 correct=True ans='Europe'
+super-smallest-continent random seed=1 correct=True ans='Europe'
+super-smallest-continent random seed=2 correct=True ans='Europe'
+{
+  "n_requested": 28,
+  "n_eval": 15,
+  "require_clean_correct": true,
+  "eval_ids": [
+    "atomic-26-symbol",
+    "atomic-29-symbol",
+    "atomic-79-symbol",
+    "carnival-ocean",
+    "christmas-season",
+    "colosseum-currency",
+    "holiday-christmas-monthnum",
+    "holiday-independence-monthnum",
+    "holiday-valentines-monthnum",
+    "louvre-language",
+    "paper-continent",
+    "planet-3-moons",
+    "spider-legs",
+    "super-populous-capital",
+    "super-smallest-continent"
+  ],
+  "band_start": 27,
+  "band_end": 33,
+  "k": 10,
+  "exclude_topk": 10,
+  "random_seeds": [
+    0,
+    1,
+    2
+  ],
+  "clean_accuracy": 1.0,
+  "j_ablated_accuracy": 0.6,
+  "random_accuracy_mean": 0.888888888888889,
+  "random_accuracy_by_seed": {
+    "0": 0.8666666666666667,
+    "1": 0.8,
+    "2": 1.0
+  },
+  "j_drop": 0.4,
+  "random_drop": 0.11111111111111105,
+  "j_over_random": 0.288888888888889,
+  "min_j_drop": 0.3,
+  "min_j_over_random": 0.1,
+  "verdict": "j_specific_em_bite",
+  "gate_pass": true
+}
+wrote /root/j-space-cot-ablation/results/gates/multihop_em_clean_b27-33_summary.json

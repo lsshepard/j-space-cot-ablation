@@ -1,0 +1,34 @@
+{
+  "n_boot": 10000,
+  "seed": 0,
+  "runs": {
+    "multihop_em_clean_b27-31": {
+      "n": 15,
+      "j_over_random": 0.3111111111111111,
+      "lo": 0.1111111111111111,
+      "hi": 0.5333333333333333,
+      "excludes_zero": true
+    },
+    "multihop_em_clean_b27-33": {
+      "n": 15,
+      "j_over_random": 0.28888888888888886,
+      "lo": 0.04444444444444443,
+      "hi": 0.5555555555555556,
+      "excludes_zero": true
+    },
+    "multihop_em_full_b27-31": {
+      "n": 28,
+      "j_over_random": 0.15476190476190474,
+      "lo": -1.1895246692412391e-17,
+      "hi": 0.32142857142857145,
+      "excludes_zero": false
+    },
+    "multihop_em_full_b27-33": {
+      "n": 28,
+      "j_over_random": 0.14285714285714285,
+      "lo": -0.03571428571428573,
+      "hi": 0.32142857142857145,
+      "excludes_zero": false
+    }
+  }
+}

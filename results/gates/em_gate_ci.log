@@ -1,0 +1,5 @@
+multihop_em_clean_b27-31       n=15  j_over_random=+0.311 95% CI [+0.111, +0.533] EXCLUDES 0
+multihop_em_clean_b27-33       n=15  j_over_random=+0.289 95% CI [+0.044, +0.556] EXCLUDES 0
+multihop_em_full_b27-31        n=28  j_over_random=+0.155 95% CI [-0.000, +0.321] includes 0
+multihop_em_full_b27-33        n=28  j_over_random=+0.143 95% CI [-0.036, +0.321] includes 0
+wrote /root/j-space-cot-ablation/results/gates/em_gate_ci.json
