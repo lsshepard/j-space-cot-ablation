@@ -1,0 +1,19 @@
+{
+  "model_name": "Qwen/Qwen3-4B",
+  "multiplier": 2.0,
+  "ceiling": 16384,
+  "datasets": {
+    "gsm8k": {
+      "direct": 360,
+      "cot": 2048,
+      "direct_p95_observed": 180,
+      "cot_p95_observed": 899
+    },
+    "math500": {
+      "direct": 1360,
+      "cot": 9302,
+      "direct_p95_observed": 680,
+      "cot_p95_observed": 4651
+    }
+  }
+}

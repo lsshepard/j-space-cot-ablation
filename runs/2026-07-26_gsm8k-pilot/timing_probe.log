@@ -1,0 +1,24 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Fetching 3 files:  33%|███▎      | 1/3 [00:17<00:35, 17.53s/it]Fetching 3 files: 100%|██████████| 3/3 [00:17<00:00,  5.84s/it]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 6914.96it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:13<00:00, 13.25s/it]Fetching 1 files: 100%|██████████| 1/1 [00:13<00:00, 13.25s/it]
+Generating train split:   0%|          | 0/7473 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 7473/7473 [00:00<00:00, 92440.37 examples/s]
+Generating test split:   0%|          | 0/1319 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 1319/1319 [00:00<00:00, 80351.58 examples/s]
+gsm8k-test-0: 509.3s tokens=2697 hooks=18879
+gsm8k-test-1: 56.3s tokens=296 hooks=2072
+gsm8k-test-2: 675.4s tokens=2697 hooks=18879
+gsm8k-test-3: 565.7s tokens=2697 hooks=18879
+gsm8k-test-4: 100.0s tokens=457 hooks=3199
+{
+  "dataset": "gsm8k",
+  "n_probe": 5,
+  "mean_seconds_cot_j_ablated": 381.3579971955158,
+  "recommended_problems_per_cell_gsm_math": 50,
+  "aime_n": 30,
+  "est_gpu_hours_gsm_math_6conds": 190.67899859775792,
+  "est_gpu_hours_aime_6conds": 19.06789985977579,
+  "band_start": 27,
+  "band_end": 33,
+  "note": "Estimates exclude size-control and calibration overhead."
+}
+wrote /root/j-space-cot-ablation/runs/2026-07-26_gsm8k-pilot/calibration/timing_probe.json

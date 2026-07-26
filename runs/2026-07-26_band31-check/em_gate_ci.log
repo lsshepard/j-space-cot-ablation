@@ -1,0 +1,4 @@
+multihop_em_full93_b27-31      n=93  j_over_random=+0.050 95% CI [-0.054, +0.151] includes 0
+    clean_correct  n=34  clean=1.000 J=0.529 random=0.784 rand-J=+0.255 [+0.049, +0.451]  EXCLUDES 0
+    clean_wrong    n=59  clean=0.000 J=0.169 random=0.102 rand-J=-0.068 [-0.169, +0.028]
+wrote /root/j-space-cot-ablation/runs/2026-07-26_band31-check/gates/em_gate_ci.json

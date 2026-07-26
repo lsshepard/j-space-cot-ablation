@@ -1,0 +1,44 @@
+{
+  "dataset": "gsm8k",
+  "n_probe": 5,
+  "mean_seconds_cot_j_ablated": 381.3579971955158,
+  "recommended_problems_per_cell_gsm_math": 50,
+  "aime_n": 30,
+  "est_gpu_hours_gsm_math_6conds": 190.67899859775792,
+  "est_gpu_hours_aime_6conds": 19.06789985977579,
+  "band_start": 27,
+  "band_end": 33,
+  "note": "Estimates exclude size-control and calibration overhead.",
+  "timings": [
+    {
+      "problem_id": "gsm8k-test-0",
+      "seconds": 509.3357802280225,
+      "tokens": 2697,
+      "hit_cap": true
+    },
+    {
+      "problem_id": "gsm8k-test-1",
+      "seconds": 56.3396778232418,
+      "tokens": 296,
+      "hit_cap": false
+    },
+    {
+      "problem_id": "gsm8k-test-2",
+      "seconds": 675.3923499849625,
+      "tokens": 2697,
+      "hit_cap": true
+    },
+    {
+      "problem_id": "gsm8k-test-3",
+      "seconds": 565.7380893202499,
+      "tokens": 2697,
+      "hit_cap": true
+    },
+    {
+      "problem_id": "gsm8k-test-4",
+      "seconds": 99.98408862110227,
+      "tokens": 457,
+      "hit_cap": false
+    }
+  ]
+}
