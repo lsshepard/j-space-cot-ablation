@@ -1,0 +1,224 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:  11%|█         | 43/398 [00:00<00:03, 92.82it/s]Loading weights:  30%|██▉       | 118/398 [00:00<00:01, 240.49it/s]Loading weights:  40%|████      | 161/398 [00:01<00:01, 147.89it/s]Loading weights:  56%|█████▌    | 223/398 [00:01<00:00, 217.92it/s]Loading weights:  66%|██████▌   | 263/398 [00:01<00:00, 187.82it/s]Loading weights:  74%|███████▍  | 294/398 [00:01<00:00, 167.86it/s]Loading weights:  85%|████████▌ | 340/398 [00:01<00:00, 170.03it/s]Loading weights:  91%|█████████ | 363/398 [00:02<00:00, 79.00it/s] Loading weights: 100%|██████████| 398/398 [00:02<00:00, 136.08it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 184.64it/s]
+gold-lp triad dataset=multihop n=93 band=[27,33] k=10 exclude_topk=10 random_seeds=(0, 1, 2)
+[1/93] nhop-alphabet-element
+  gold='iron' clean=-9.938 J=-7.094 R=-11.292 ΔJ=-2.844 ΔR=+1.354 ΔJ−ΔR=-4.198
+[2/93] nhop-chess-element
+  gold='sulfur' clean=-4.398 J=-4.250 R=-5.378 ΔJ=-0.148 ΔR=+0.979 ΔJ−ΔR=-1.128
+[3/93] nhop-clock-element
+  gold='magnesium' clean=-5.370 J=-2.792 R=-5.048 ΔJ=-2.578 ΔR=-0.321 ΔJ−ΔR=-2.256
+[4/93] nhop-compass-planet
+  gold='Mars' clean=-2.516 J=-7.127 R=-3.112 ΔJ=+4.611 ΔR=+0.597 ΔJ−ΔR=+4.015
+[5/93] nhop-cube-element
+  gold='carbon' clean=-11.250 J=-3.938 R=-9.979 ΔJ=-7.312 ΔR=-1.271 ΔJ−ΔR=-6.042
+[6/93] nhop-deck-element
+  gold='tellurium' clean=-6.709 J=-8.469 R=-4.226 ΔJ=+1.760 ΔR=-2.483 ΔJ−ΔR=+4.243
+[7/93] nhop-fortnight-element
+  gold='silicon' clean=-4.500 J=-4.625 R=-3.958 ΔJ=+0.125 ΔR=-0.542 ΔJ−ΔR=+0.667
+[8/93] nhop-guitar-planet
+  gold='Saturn' clean=-3.750 J=-6.781 R=-4.333 ΔJ=+3.031 ΔR=+0.583 ΔJ−ΔR=+2.448
+[9/93] nhop-insect-element
+  gold='carbon' clean=-9.188 J=-4.281 R=-8.760 ΔJ=-4.906 ΔR=-0.427 ΔJ−ΔR=-4.479
+[10/93] nhop-primary-planet
+  gold='Earth' clean=-9.250 J=-10.375 R=-8.729 ΔJ=+1.125 ΔR=-0.521 ΔJ−ΔR=+1.646
+[11/93] nhop-rainbow-element
+  gold='nitrogen' clean=-3.297 J=-4.282 R=-3.381 ΔJ=+0.985 ΔR=+0.084 ΔJ−ΔR=+0.901
+[12/93] nhop-rings-planet
+  gold='Jupiter' clean=-7.375 J=-8.907 R=-7.188 ΔJ=+1.532 ΔR=-0.187 ΔJ−ΔR=+1.719
+[13/93] nhop-soccer-element
+  gold='sodium' clean=-6.516 J=-3.984 R=-4.650 ΔJ=-2.531 ΔR=-1.865 ΔJ−ΔR=-0.666
+[14/93] nhop-spider-element
+  gold='oxygen' clean=-6.781 J=-4.869 R=-7.636 ΔJ=-1.912 ΔR=+0.854 ΔJ−ΔR=-2.766
+[15/93] nhop-suit-element
+  gold='aluminum' clean=-4.194 J=-3.474 R=-2.959 ΔJ=-0.719 ΔR=-1.235 ΔJ−ΔR=+0.516
+[16/93] nhop-volleyball-planet
+  gold='Saturn' clean=-5.000 J=-7.127 R=-3.771 ΔJ=+2.127 ΔR=-1.229 ΔJ−ΔR=+3.356
+[17/93] nhop-week-element
+  gold='nitrogen' clean=-2.344 J=-1.798 R=-4.328 ΔJ=-0.546 ΔR=+1.984 ΔJ−ΔR=-2.531
+[18/93] chem-atmosphere-Z
+  gold='7' clean=-16.500 J=-9.062 R=-12.771 ΔJ=-7.438 ΔR=-3.729 ΔJ−ΔR=-3.708
+[19/93] chem-bones-Z
+  gold='20' clean=-5.031 J=-3.453 R=-5.083 ΔJ=-1.578 ΔR=+0.052 ΔJ−ΔR=-1.630
+[20/93] chem-organic-Z
+  gold='6' clean=-0.475 J=0.000 R=-3.516 ΔJ=-0.475 ΔR=+3.042 ΔJ−ΔR=-3.516
+[21/93] chem-photosynthesis-Z
+  gold='8' clean=-4.625 J=-11.500 R=-8.906 ΔJ=+6.875 ΔR=+4.281 ΔJ−ΔR=+2.594
+[22/93] dbl-altitude-antonym
+  gold='low' clean=-0.003 J=-7.594 R=-0.042 ΔJ=+7.591 ΔR=+0.039 ΔJ−ΔR=+7.551
+[23/93] dbl-armistice-antonym
+  gold='peace' clean=-0.742 J=-9.125 R=-2.197 ΔJ=+8.383 ΔR=+1.454 ΔJ−ΔR=+6.928
+[24/93] dbl-obituary-antonym
+  gold='birth' clean=-7.594 J=-5.125 R=-6.651 ΔJ=-2.469 ΔR=-0.943 ΔJ−ΔR=-1.526
+[25/93] double-dice-faces
+  gold='12' clean=-3.000 J=-5.049 R=-1.438 ΔJ=+2.049 ΔR=-1.562 ΔJ−ΔR=+3.612
+[26/93] dual-photosynthesis-opposite
+  gold='night' clean=-8.188 J=-10.250 R=-6.604 ΔJ=+2.062 ΔR=-1.583 ΔJ−ΔR=+3.646
+[27/93] dual-stars-visible-opposite
+  gold='day' clean=-5.969 J=-5.094 R=-10.146 ΔJ=-0.875 ΔR=+4.177 ΔJ−ΔR=-5.052
+[28/93] etym-caesar-monthnum
+  gold='7' clean=-0.062 J=-1.547 R=-3.435 ΔJ=+1.485 ΔR=+3.372 ΔJ−ΔR=-1.888
+[29/93] etym-frigg-position
+  gold='5' clean=-0.268 J=-3.766 R=-1.383 ΔJ=+3.498 ΔR=+1.116 ΔJ−ΔR=+2.382
+[30/93] etym-janus-monthnum
+  gold='1' clean=-20.750 J=-3.125 R=-17.354 ΔJ=-17.625 ΔR=-3.396 ΔJ−ΔR=-14.229
+[31/93] etym-saturn-position
+  gold='6' clean=-8.938 J=-1.734 R=-13.125 ΔJ=-7.203 ΔR=+4.188 ΔJ−ΔR=-11.391
+[32/93] etym-wargod-month
+  gold='3' clean=-13.125 J=-0.080 R=-15.125 ΔJ=-13.045 ΔR=+2.000 ΔJ−ΔR=-15.045
+[33/93] firstletter-greatwall-country
+  gold='C' clean=-0.003 J=-0.175 R=-0.020 ΔJ=+0.172 ΔR=+0.017 ΔJ−ΔR=+0.154
+[34/93] firstletter-halloween-month
+  gold='O' clean=-0.984 J=-15.250 R=-0.295 ΔJ=+14.266 ΔR=-0.690 ΔJ−ΔR=+14.955
+[35/93] firstletter-paris-country
+  gold='F' clean=-0.992 J=-0.241 R=-5.500 ΔJ=-0.751 ΔR=+4.508 ΔJ−ΔR=-5.259
+[36/93] firstletter-populous-country
+  gold='C' clean=-0.000 J=-0.210 R=-1.148 ΔJ=+0.210 ΔR=+1.148 ΔJ−ΔR=-0.938
+[37/93] firstletter-valentines-month
+  gold='F' clean=-2.812 J=-5.469 R=-7.125 ΔJ=+2.656 ΔR=+4.312 ΔJ−ΔR=-1.656
+[38/93] half-clock-hours
+  gold='6' clean=-0.000 J=-3.672 R=-1.399 ΔJ=+3.672 ΔR=+1.399 ΔJ−ΔR=+2.273
+[39/93] inv-antarctica-opposite
+  gold='north' clean=-10.250 J=-7.938 R=-8.844 ΔJ=-2.312 ΔR=-1.406 ΔJ−ΔR=-0.906
+[40/93] inv-balloon-opposite
+  gold='down' clean=-0.161 J=-4.812 R=-0.331 ΔJ=+4.651 ΔR=+0.170 ΔJ−ΔR=+4.481
+[41/93] inv-roots-opposite
+  gold='up' clean=-0.910 J=-5.625 R=-2.495 ΔJ=+4.715 ΔR=+1.585 ΔJ−ΔR=+3.130
+[42/93] inv-sunrise-opposite
+  gold='west' clean=-9.250 J=-11.188 R=-8.896 ΔJ=+1.938 ΔR=-0.354 ΔJ−ΔR=+2.292
+[43/93] letterpos-carbon-symbol
+  gold='3' clean=-8.000 J=-7.625 R=-7.844 ΔJ=-0.375 ΔR=-0.156 ΔJ−ΔR=-0.219
+[44/93] letterpos-nitrogen-symbol
+  gold='14' clean=-0.091 J=-0.145 R=-0.081 ΔJ=+0.053 ΔR=-0.011 ΔJ−ΔR=+0.064
+[45/93] letterpos-oxygen-symbol
+  gold='15' clean=-0.159 J=-0.000 R=-0.375 ΔJ=-0.159 ΔR=+0.216 ΔJ−ΔR=-0.375
+[46/93] letterpos-water-symbol
+  gold='8' clean=-8.312 J=-6.875 R=-8.438 ΔJ=-1.438 ΔR=+0.125 ΔJ−ΔR=-1.562
+[47/93] pred-valentines-prevmonth
+  gold='January' clean=-0.127 J=-0.949 R=-0.028 ΔJ=+0.822 ΔR=-0.099 ΔJ−ΔR=+0.922
+[48/93] rhyme-chair-flag
+  gold='California' clean=-1.859 J=-2.953 R=-2.977 ΔJ=+1.094 ΔR=+1.117 ΔJ−ΔR=-0.023
+[49/93] rhyme-door-doubled
+  gold='8' clean=-12.625 J=-8.250 R=-13.292 ΔJ=-4.375 ΔR=+0.667 ΔJ−ΔR=-5.042
+[50/93] rhyme-fix-halved
+  gold='3' clean=-1.914 J=-1.758 R=-2.315 ΔJ=-0.156 ΔR=+0.401 ΔJ−ΔR=-0.557
+[51/93] rhyme-hive-plusone
+  gold='6' clean=-22.000 J=-8.625 R=-25.125 ΔJ=-13.375 ΔR=+3.125 ΔJ−ΔR=-16.500
+[52/93] rhyme-rain-neighbor
+  gold='Portugal' clean=-5.063 J=-3.393 R=-4.324 ΔJ=-1.669 ΔR=-0.738 ΔJ−ΔR=-0.931
+[53/93] rhyme-shoe-doubled
+  gold='4' clean=-11.312 J=-3.891 R=-11.750 ΔJ=-7.422 ΔR=+0.438 ΔJ−ΔR=-7.859
+[54/93] rhyme-spoon-orbit
+  gold='Earth' clean=-0.066 J=-9.500 R=-0.836 ΔJ=+9.434 ΔR=+0.770 ΔJ−ΔR=+8.664
+[55/93] rhyme-tree-squared
+  gold='9' clean=-3.188 J=-1.539 R=-4.555 ΔJ=-1.648 ΔR=+1.367 ΔJ−ΔR=-3.016
+[56/93] roman-rings-olympic
+  gold='V' clean=-0.001 J=-5.406 R=-0.005 ΔJ=+5.405 ΔR=+0.004 ΔJ−ΔR=+5.401
+[57/93] roman-states-us
+  gold='L' clean=-14.375 J=-5.875 R=-16.875 ΔJ=-8.500 ΔR=+2.500 ΔJ−ΔR=-11.000
+[58/93] succ-halloween-nextmonth
+  gold='November' clean=-0.387 J=-1.172 R=-2.262 ΔJ=+0.785 ΔR=+1.876 ΔJ−ΔR=-1.090
+[59/93] amazon-language
+  gold='Portuguese' clean=-0.508 J=-0.696 R=-2.784 ΔJ=+0.189 ΔR=+2.276 ΔJ−ΔR=-2.088
+[60/93] atomic-26-symbol
+  gold='Fe' clean=-0.000 J=-0.035 R=-0.000 ΔJ=+0.035 ΔR=+0.000 ΔJ−ΔR=+0.035
+[61/93] atomic-29-flame
+  gold='green' clean=-4.250 J=-5.875 R=-2.796 ΔJ=+1.625 ΔR=-1.454 ΔJ−ΔR=+3.079
+[62/93] atomic-29-symbol
+  gold='Cu' clean=-0.000 J=-7.219 R=-0.022 ΔJ=+7.219 ΔR=+0.022 ΔJ−ΔR=+7.196
+[63/93] atomic-79-symbol
+  gold='Au' clean=-0.000 J=-1.094 R=-0.001 ΔJ=+1.094 ΔR=+0.001 ΔJ−ΔR=+1.093
+[64/93] atomic-80-state
+  gold='liquid' clean=-8.312 J=-6.281 R=-7.135 ΔJ=-2.031 ΔR=-1.177 ΔJ−ΔR=-0.854
+[65/93] basketball-players
+  gold='5' clean=-12.375 J=-8.875 R=-13.167 ΔJ=-3.500 ΔR=+0.792 ΔJ−ΔR=-4.292
+[66/93] birthstone-emerald-month
+  gold='5' clean=-0.824 J=-0.000 R=-3.719 ΔJ=-0.824 ΔR=+2.895 ΔJ−ΔR=-3.719
+[67/93] carnival-ocean
+  gold='Atlantic' clean=-0.010 J=-0.009 R=-0.329 ΔJ=-0.000 ΔR=+0.319 ΔJ−ΔR=-0.319
+[68/93] christmas-season
+  gold='winter' clean=-8.750 J=-8.188 R=-7.406 ΔJ=-0.562 ΔR=-1.344 ΔJ−ΔR=+0.781
+[69/93] colosseum-currency
+  gold='Euro' clean=-0.043 J=-2.219 R=-0.265 ΔJ=+2.175 ΔR=+0.221 ΔJ−ΔR=+1.954
+[70/93] func-filters-count
+  gold='2' clean=-4.750 J=-9.750 R=-7.833 ΔJ=+5.000 ΔR=+3.083 ΔJ−ΔR=+1.917
+[71/93] func-pumps-chambers
+  gold='4' clean=-4.750 J=-0.000 R=-4.173 ΔJ=-4.750 ΔR=-0.577 ΔJ−ΔR=-4.173
+[72/93] greatwall-ocean
+  gold='Pacific' clean=-1.055 J=-3.609 R=-1.542 ΔJ=+2.555 ΔR=+0.487 ΔJ−ΔR=+2.068
+[73/93] holiday-christmas-monthnum
+  gold='12' clean=-0.001 J=-0.000 R=-0.026 ΔJ=-0.001 ΔR=+0.025 ΔJ−ΔR=-0.026
+[74/93] holiday-halloween-monthnum
+  gold='10' clean=-3.375 J=-0.002 R=-2.836 ΔJ=-3.373 ΔR=-0.539 ΔJ−ΔR=-2.834
+[75/93] holiday-independence-monthnum
+  gold='7' clean=-0.001 J=0.000 R=-0.016 ΔJ=-0.001 ΔR=+0.015 ΔJ−ΔR=-0.016
+[76/93] holiday-valentines-monthnum
+  gold='2' clean=-0.000 J=-5.500 R=-4.860 ΔJ=+5.500 ΔR=+4.860 ΔJ−ΔR=+0.640
+[77/93] louvre-language
+  gold='French' clean=-0.000 J=-0.090 R=-0.000 ΔJ=+0.090 ΔR=+0.000 ΔJ−ΔR=+0.090
+[78/93] mars-color
+  gold='red' clean=-12.500 J=-10.938 R=-8.667 ΔJ=-1.562 ΔR=-3.833 ΔJ−ΔR=+2.271
+[79/93] month-1-godof
+  gold='beginnings' clean=-11.270 J=-6.783 R=-11.158 ΔJ=-4.486 ΔR=-0.112 ΔJ−ΔR=-4.374
+[80/93] month-3-godof
+  gold='war' clean=-12.750 J=-10.750 R=-12.042 ΔJ=-2.000 ΔR=-0.708 ΔJ−ΔR=-1.292
+[81/93] month-7-namedafter
+  gold='Caesar' clean=-10.094 J=-11.883 R=-10.887 ΔJ=+1.789 ΔR=+0.794 ΔJ−ΔR=+0.996
+[82/93] osu-rival-mascot
+  gold='wolverine' clean=-3.627 J=-2.695 R=-4.455 ΔJ=-0.932 ΔR=+0.828 ΔJ−ΔR=-1.759
+[83/93] paper-continent
+  gold='Asia' clean=-0.000 J=-1.461 R=-0.184 ΔJ=+1.461 ΔR=+0.183 ΔJ−ΔR=+1.277
+[84/93] planet-3-moons
+  gold='1' clean=-0.000 J=-0.000 R=-0.000 ΔJ=-0.000 ΔR=+0.000 ΔJ−ΔR=-0.000
+[85/93] spaceneedle-border
+  gold='Canada' clean=-15.875 J=-7.969 R=-12.500 ΔJ=-7.906 ΔR=-3.375 ΔJ−ΔR=-4.531
+[86/93] spider-legs
+  gold='8' clean=-0.412 J=-0.000 R=-0.326 ΔJ=-0.412 ΔR=-0.086 ΔJ−ΔR=-0.326
+[87/93] super-largest-country-capital
+  gold='Moscow' clean=-1.844 J=-1.602 R=-1.067 ΔJ=-0.242 ΔR=-0.777 ΔJ−ΔR=+0.535
+[88/93] super-largest-island-nation
+  gold='Jakarta' clean=-5.469 J=-4.379 R=-5.073 ΔJ=-1.090 ΔR=-0.396 ΔJ−ΔR=-0.694
+[89/93] super-populous-capital
+  gold='Beijing' clean=-0.002 J=-3.657 R=-1.038 ΔJ=+3.655 ΔR=+1.036 ΔJ−ΔR=+2.619
+[90/93] super-smallest-continent
+  gold='Europe' clean=-0.375 J=-4.094 R=-0.370 ΔJ=+3.719 ΔR=-0.005 ΔJ−ΔR=+3.724
+[91/93] tajmahal-continent
+  gold='Asia' clean=-0.707 J=-6.062 R=-1.526 ΔJ=+5.355 ΔR=+0.819 ΔJ−ΔR=+4.536
+[92/93] topeka-west
+  gold='Colorado' clean=-7.438 J=-7.562 R=-5.469 ΔJ=+0.125 ΔR=-1.969 ΔJ−ΔR=+2.094
+[93/93] violin-strings
+  gold='4' clean=-3.781 J=-0.434 R=-2.500 ΔJ=-3.348 ΔR=-1.281 ΔJ−ΔR=-2.066
+{
+  "dataset": "multihop",
+  "level": null,
+  "n": 93,
+  "band_start": 27,
+  "band_end": 33,
+  "k": 10,
+  "exclude_topk": 10,
+  "random_seeds": [
+    0,
+    1,
+    2
+  ],
+  "mean_clean_lp": -4.8132800526089135,
+  "mean_jspace_lp": -4.6550777120829485,
+  "mean_random_lp": -5.159231103734161,
+  "delta_j": {
+    "mean": -0.15820234052596555,
+    "lo": -1.1551555322703495,
+    "hi": 0.7695493223098869
+  },
+  "delta_r": {
+    "mean": 0.34595105112524716,
+    "lo": -0.003912976663670923,
+    "hi": 0.711248898109156
+  },
+  "delta_j_minus_r": {
+    "mean": -0.5041533916512128,
+    "lo": -1.3791816088496713,
+    "hi": 0.44689685630577564
+  },
+  "verdict": "no_reliable_j_gold_lp_bite"
+}
+wrote results/diagnostics/triad_multihop93_b27-33/gold_lp_triad_multihop.json

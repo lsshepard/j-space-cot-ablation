@@ -1,0 +1,165 @@
+{
+  "threshold_clean_lp": -1.0,
+  "n_boot": 2000,
+  "strata": {
+    "multihop:triad_b27-33": {
+      "all": {
+        "n": 28,
+        "mean_clean_lp": -3.1046095192432404,
+        "delta_j": {
+          "mean": 0.4707758824030558,
+          "lo": -0.6377181536207597,
+          "hi": 1.5718438649816173
+        },
+        "delta_j_minus_r": {
+          "mean": 0.5804170197437679,
+          "lo": -0.3370401629025027,
+          "hi": 1.4786655613413404
+        },
+        "excludes_zero_positive": false,
+        "excludes_zero_negative": false,
+        "verdict": "no_reliable_j_gold_lp_bite"
+      },
+      "confident": {
+        "n": 16,
+        "mean_clean_lp": -0.12873427694042525,
+        "delta_j": {
+          "mean": 1.8797581357260544,
+          "lo": 0.845390122445921,
+          "hi": 3.0401268433158597
+        },
+        "delta_j_minus_r": {
+          "mean": 1.2742970552709365,
+          "lo": 0.23908280894781136,
+          "hi": 2.457691333411882
+        },
+        "excludes_zero_positive": true,
+        "excludes_zero_negative": false,
+        "verdict": "j_specific_gold_lp_bite"
+      },
+      "not_confident": {
+        "n": 12,
+        "mean_clean_lp": -7.0724431756469945,
+        "delta_j": {
+          "mean": -1.4078671220276089,
+          "lo": -2.939070082083344,
+          "hi": -0.06798680495057136
+        },
+        "delta_j_minus_r": {
+          "mean": -0.3447563609591237,
+          "lo": -1.8203199190122106,
+          "hi": 0.9670855758228785
+        },
+        "excludes_zero_positive": false,
+        "excludes_zero_negative": false,
+        "verdict": "j_raises_gold_lp"
+      }
+    },
+    "multihop:triad_b27-31": {
+      "all": {
+        "n": 28,
+        "mean_clean_lp": -3.1046095192432404,
+        "delta_j": {
+          "mean": 0.6288293224005473,
+          "lo": -0.48040906586462545,
+          "hi": 1.611433691371764
+        },
+        "delta_j_minus_r": {
+          "mean": 0.7436509404390577,
+          "lo": -0.17437140929202236,
+          "hi": 1.610318634901491
+        },
+        "excludes_zero_positive": false,
+        "excludes_zero_negative": false,
+        "verdict": "no_reliable_j_gold_lp_bite"
+      },
+      "confident": {
+        "n": 16,
+        "mean_clean_lp": -0.12873427694042525,
+        "delta_j": {
+          "mean": 1.5593965649604797,
+          "lo": 0.5575366681441665,
+          "hi": 2.669224012270569
+        },
+        "delta_j_minus_r": {
+          "mean": 1.070528811050786,
+          "lo": 0.07804912609151668,
+          "hi": 2.133875177366038
+        },
+        "excludes_zero_positive": true,
+        "excludes_zero_negative": false,
+        "verdict": "j_specific_gold_lp_bite"
+      },
+      "not_confident": {
+        "n": 12,
+        "mean_clean_lp": -7.0724431756469945,
+        "delta_j": {
+          "mean": -0.6119270010126961,
+          "lo": -2.4859667177829476,
+          "hi": 1.0061487524873667
+        },
+        "delta_j_minus_r": {
+          "mean": 0.3078137796234201,
+          "lo": -1.3188969903522068,
+          "hi": 1.8566617638700535
+        },
+        "excludes_zero_positive": false,
+        "excludes_zero_negative": false,
+        "verdict": "no_reliable_j_gold_lp_bite"
+      }
+    },
+    "multihop:triad_multihop93_b27-33": {
+      "all": {
+        "n": 93,
+        "mean_clean_lp": -4.8132800526089135,
+        "delta_j": {
+          "mean": -0.15820234052596555,
+          "lo": -1.1017443821955752,
+          "hi": 0.7878546970399046
+        },
+        "delta_j_minus_r": {
+          "mean": -0.5041533916512128,
+          "lo": -1.4087122378027421,
+          "hi": 0.42618791358623276
+        },
+        "excludes_zero_positive": false,
+        "excludes_zero_negative": false,
+        "verdict": "no_reliable_j_gold_lp_bite"
+      },
+      "confident": {
+        "n": 35,
+        "mean_clean_lp": -0.23762810116722471,
+        "delta_j": {
+          "mean": 2.6573560022172478,
+          "lo": 1.5448629920113652,
+          "hi": 4.009833756401423
+        },
+        "delta_j_minus_r": {
+          "mean": 1.728861169209556,
+          "lo": 0.45703408736558193,
+          "hi": 3.1121355363300864
+        },
+        "excludes_zero_positive": true,
+        "excludes_zero_negative": false,
+        "verdict": "j_specific_gold_lp_bite"
+      },
+      "not_confident": {
+        "n": 58,
+        "mean_clean_lp": -7.574449333651312,
+        "delta_j": {
+          "mean": -1.8572461680434216,
+          "lo": -3.0312824774319416,
+          "hi": -0.7810501436392469
+        },
+        "delta_j_minus_r": {
+          "mean": -1.8516621783775387,
+          "lo": -3.0812839724523124,
+          "hi": -0.6551217878658427
+        },
+        "excludes_zero_positive": false,
+        "excludes_zero_negative": true,
+        "verdict": "j_raises_gold_lp"
+      }
+    }
+  }
+}
