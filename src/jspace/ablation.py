@@ -87,12 +87,23 @@ class AblationFactors:
     Jacobians live on the model device. ``final_norm`` matches jlens/HF unembed
     (RMSNorm then lm_head). ``svds`` is optional legacy (unused by the paper
     top-k J-lens-token ablation path).
+
+    ``unembed_f32`` is the float32 cast of ``unembed``, materialized once here:
+    the lens path needs float32 and would otherwise rebuild a ~1.5 GB copy on
+    every (band layer, position) it touches.
     """
 
     jacobians: dict[int, torch.Tensor]
     unembed: torch.Tensor
     final_norm: Any | None = None
     svds: dict[int, JacobianSvd] = field(default_factory=dict)
+    unembed_f32: torch.Tensor | None = None
+
+    def __post_init__(self) -> None:
+        if self.unembed_f32 is None:
+            object.__setattr__(
+                self, "unembed_f32", self.unembed.detach().to(torch.float32)
+            )
 
 
 def positions_to_ablate(
@@ -222,6 +233,19 @@ def active_j_directions_from_svd(
     return gram_schmidt(vh[idx].to(device=residual.device, dtype=residual.dtype))
 
 
+def _norm_input_dtype(final_norm: Any, fallback: torch.dtype) -> torch.dtype:
+    """Dtype ``final_norm`` runs in (its own weight), not the lens matmul dtype.
+
+    jlens casts the residual to the model dtype before the final RMSNorm, so
+    this must track the norm module rather than whatever precision the caller
+    happens to hold the unembed in.
+    """
+    weight = getattr(final_norm, "weight", None)
+    if isinstance(weight, torch.Tensor):
+        return weight.dtype
+    return fallback
+
+
 def lens_logits_for_residual(
     residual: torch.Tensor,
     jacobian: torch.Tensor,
@@ -232,12 +256,15 @@ def lens_logits_for_residual(
     """
     J-lens scores over vocab: unembed(norm(J @ h)), matching jlens HF unembed.
 
+    Pass a float32 ``unembed`` (see ``AblationFactors.unembed_f32``) to avoid
+    re-casting the full unembedding matrix on every call.
+
     Returns a 1-D float tensor [vocab].
     """
     h = residual.detach()
     transported = jacobian.float() @ h.float()
     if final_norm is not None:
-        dtype = unembed.dtype
+        dtype = _norm_input_dtype(final_norm, unembed.dtype)
         transported = final_norm(transported.to(dtype=dtype)).float()
     return unembed.float() @ transported
 
@@ -249,6 +276,9 @@ def j_lens_vectors_for_tokens(
 ) -> torch.Tensor:
     """
     Unit J-lens vectors v_t = J^T u_t for each token (rows of W_U J).
+
+    Pass a float32 ``unembed`` (see ``AblationFactors.unembed_f32``) to avoid
+    re-casting the full unembedding matrix on every call.
 
     Returns [n, d_model] float32 on jacobian's device.
     """
@@ -586,7 +616,7 @@ def ablation_hooks(
     layers = _transformer_layers(hf_model)
     handles: list[Any] = []
     jacobians = factors.jacobians
-    unembed = factors.unembed
+    unembed = factors.unembed_f32
     final_norm = factors.final_norm
 
     def _ablate_position(
