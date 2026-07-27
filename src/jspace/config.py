@@ -77,6 +77,8 @@ class Settings:
     problems_per_cell: int = DEFAULT_PROBLEMS_PER_CELL
     floor_accuracy_threshold: float = FLOOR_ACCURACY_THRESHOLD
     ablate_prompt_tokens: bool = True
+    # Stop CoT/direct once a scorable final answer marker is present (cuts spin).
+    early_stop_on_answer: bool = False
     run_dir: Path = field(default_factory=lambda: DEFAULT_RUN_DIR)
 
     @property
@@ -103,9 +105,17 @@ def _env_float(name: str) -> float | None:
     return float(raw) if raw is not None and raw != "" else None
 
 
+def _env_bool(name: str) -> bool | None:
+    raw = os.environ.get(name)
+    if raw is None or raw == "":
+        return None
+    return raw.strip().lower() in {"1", "true", "yes", "on"}
+
+
 def load_settings() -> Settings:
     """Build Settings from defaults and JSPACE_* environment variables."""
     override = _env_int("JSPACE_MAX_NEW_TOKENS")
+    early_stop = _env_bool("JSPACE_EARLY_STOP_ON_ANSWER")
     return Settings(
         model_name=_env_str("JSPACE_MODEL") or DEV_MODEL,
         model_revision=_env_str("JSPACE_MODEL_REVISION"),
@@ -138,6 +148,7 @@ def load_settings() -> Settings:
         or DEFAULT_LOCAL_FAST_ABLATION_CAP,
         problems_per_cell=_env_int("JSPACE_PROBLEMS_PER_CELL")
         or DEFAULT_PROBLEMS_PER_CELL,
+        early_stop_on_answer=bool(early_stop) if early_stop is not None else False,
         run_dir=_resolve_run_dir(_env_str("JSPACE_RUN_DIR")),
     )
 

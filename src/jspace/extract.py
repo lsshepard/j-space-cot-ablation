@@ -99,6 +99,54 @@ def _multihop_equal(predicted: str, gold: str) -> bool:
     return False
 
 
+def answer_ready_for_early_stop(
+    dataset: str,
+    text: str,
+    *,
+    enable_thinking: bool,
+) -> bool:
+    """
+    True when generation can stop because a scorable final answer is present.
+
+    For thinking modes, require a closed ``</think>`` so we do not freeze on a
+    draft marker inside an open think block. Uses the same extractors as scoring
+    (last successful ``####`` / ``\\boxed`` on the answer surface).
+
+    GSM8K / AIME ``####`` answers must be followed by a newline so we do not stop
+    mid-numeral (e.g. ``#### 1`` while still generating ``18``). ``\\boxed{...}``
+    is complete once the closing brace matches.
+    """
+    if enable_thinking:
+        # Local import avoids graded↔extract cycles; pattern matches graded.py.
+        open_n = len(re.findall(r"<think(?:ing)?>", text, flags=re.IGNORECASE))
+        close_n = len(re.findall(r"</think(?:ing)?>", text, flags=re.IGNORECASE))
+        if open_n > close_n:
+            return False
+
+    # Do not .strip() — trailing newline is the "answer line complete" signal.
+    surface = _THINKING_BLOCK_RE.sub("", text)
+    if dataset in {"gsm8k", "aime"}:
+        matches = list(_GSM8K_RE.finditer(surface))
+        if matches:
+            rest = surface[matches[-1].end() :]
+            # Require a completed answer line (newline after the number).
+            if rest.startswith("\n") or rest.startswith("\r"):
+                return True
+        if dataset == "gsm8k":
+            return False
+        # AIME may also finish via \\boxed{...} below.
+
+    if dataset in {"math500", "aime"}:
+        boxed = list(_BOXED_RE.finditer(surface))
+        if boxed:
+            # Closing brace means the marker is complete; prefer last box.
+            return True
+        return False
+
+    ext = extract_answer(dataset, text)
+    return bool(ext.success and ext.answer is not None)
+
+
 def extract_answer(dataset: str, text: str) -> Extraction:
     if dataset == "gsm8k":
         return extract_gsm8k(text)

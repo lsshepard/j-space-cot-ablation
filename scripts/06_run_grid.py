@@ -78,11 +78,18 @@ def main() -> None:
         action="store_true",
         help="delete existing traces and start clean (default: resume)",
     )
+    parser.add_argument(
+        "--early-stop-on-answer",
+        action="store_true",
+        help="stop once a scorable final answer marker is present (cuts post-answer spin)",
+    )
     args = parser.parse_args()
 
     settings = load_settings()
     if args.max_new_tokens is not None:
         settings = settings.with_overrides(max_new_tokens_override=args.max_new_tokens)
+    if args.early_stop_on_answer:
+        settings = settings.with_overrides(early_stop_on_answer=True)
     k = args.k if args.k is not None else settings.k
     random_seeds = tuple(int(x) for x in args.random_seeds.split(",") if x.strip())
 
@@ -150,6 +157,8 @@ def main() -> None:
         "random_seeds": list(random_seeds),
         "resume": not args.fresh,
         "completed_before_start": len(done),
+        "early_stop_on_answer": settings.early_stop_on_answer,
+        "ablated_token_budget_multiplier": settings.ablated_token_budget_multiplier,
     }
     write_run_meta(out_dir / "run_meta.json", meta)
 
@@ -185,10 +194,12 @@ def main() -> None:
                     rec.extra["random_seed"] = rseed
                     append_jsonl(traces_path, rec)
                     done.add(key)
+                    early = rec.extra.get("early_stopped", False)
                     print(
                         f"{problem.problem_id} {rec.condition} rseed={rseed} "
                         f"correct={rec.correct} graded={rec.graded_logprob} "
-                        f"len={rec.trace_length_tokens}"
+                        f"len={rec.trace_length_tokens} "
+                        f"cap={rec.hit_token_cap} early_stop={early}"
                     )
 
     if args.size_control:

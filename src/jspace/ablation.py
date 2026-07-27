@@ -62,7 +62,11 @@ class AblationHookState:
     """Mutable state shared between clean top-10 capture and ablated step."""
 
     # Per-position clean next-token top-k (paper: exclusion is position-local).
+    # Prefer ``excluded_ids`` ([n_pos, k] on device) in the decode hot path to
+    # avoid per-step host syncs; ``excluded_by_position`` remains for tests /
+    # diagnostics that materialize Python sets.
     excluded_by_position: list[set[int]] = field(default_factory=list)
+    excluded_ids: torch.Tensor | None = None
     hook_call_count: int = 0
     last_position: int | None = None
     prompt_token_count: int = 0
@@ -235,7 +239,7 @@ def lens_logits_for_residual(
 
 
 def j_lens_vectors_for_tokens(
-    token_ids: Sequence[int],
+    token_ids: Sequence[int] | torch.Tensor,
     jacobian: torch.Tensor,
     unembed: torch.Tensor,
 ) -> torch.Tensor:
@@ -247,13 +251,42 @@ def j_lens_vectors_for_tokens(
 
     Returns [n, d_model] float32 on jacobian's device.
     """
-    if not token_ids:
-        return jacobian.new_zeros((0, jacobian.shape[-1]))
     J = jacobian.float()
-    rows = unembed.float()[list(token_ids)]  # [n, d_out]
+    if isinstance(token_ids, torch.Tensor):
+        if token_ids.numel() == 0:
+            return J.new_zeros((0, J.shape[-1]))
+        rows = unembed.float()[token_ids.long().reshape(-1)]
+    else:
+        if not token_ids:
+            return J.new_zeros((0, J.shape[-1]))
+        rows = unembed.float()[list(token_ids)]  # [n, d_out]
     dirs = (J.T @ rows.T).T  # [n, d_model]
     norms = torch.linalg.vector_norm(dirs, dim=-1, keepdim=True).clamp_min(1e-8)
     return dirs / norms
+
+
+def _exclusion_mask(
+    top_ids: torch.Tensor,
+    excluded_token_ids: set[int] | torch.Tensor | None,
+) -> torch.Tensor:
+    """Boolean mask over ``top_ids`` — True means skip (clean top-k hit)."""
+    if excluded_token_ids is None:
+        return torch.zeros(top_ids.shape[0], dtype=torch.bool, device=top_ids.device)
+    if isinstance(excluded_token_ids, torch.Tensor):
+        excl = excluded_token_ids.reshape(-1).to(
+            device=top_ids.device, dtype=top_ids.dtype
+        )
+        if excl.numel() == 0:
+            return torch.zeros(
+                top_ids.shape[0], dtype=torch.bool, device=top_ids.device
+            )
+        return torch.isin(top_ids, excl)
+    if not excluded_token_ids:
+        return torch.zeros(top_ids.shape[0], dtype=torch.bool, device=top_ids.device)
+    excl = torch.tensor(
+        list(excluded_token_ids), device=top_ids.device, dtype=top_ids.dtype
+    )
+    return torch.isin(top_ids, excl)
 
 
 def select_active_j_lens_directions(
@@ -261,16 +294,19 @@ def select_active_j_lens_directions(
     jacobian: torch.Tensor,
     unembed: torch.Tensor,
     k: int,
-    excluded_token_ids: set[int],
+    excluded_token_ids: set[int] | torch.Tensor,
     *,
     final_norm: Any | None = None,
     candidate_pool: int | None = None,
+    collect_infos: bool = True,
 ) -> tuple[torch.Tensor, list[DirectionExclusionInfo]]:
     """
     Paper §3.5.2: top-k most activated J-lens token directions, skipping clean top-10.
 
     Activation = lens logit for token t on h. Directions are v_t (not SVD axes).
     Returns (orthonormal survivor directions to project out, per-token infos).
+
+    Hot path keeps selection on-device (no ``.tolist()``) unless ``collect_infos``.
     """
     if k <= 0:
         return residual.new_zeros((0, residual.shape[-1])), []
@@ -279,34 +315,40 @@ def select_active_j_lens_directions(
         residual, jacobian, unembed, final_norm=final_norm
     )
     vocab = int(scores.numel())
+    if isinstance(excluded_token_ids, torch.Tensor):
+        n_excl = int(excluded_token_ids.numel())
+    else:
+        n_excl = len(excluded_token_ids)
     # Scan far enough down the lens ranking to fill k after exclusions.
     pool = candidate_pool if candidate_pool is not None else min(
-        vocab, max(k + len(excluded_token_ids) + 32, k * 8)
+        vocab, max(k + n_excl + 32, k * 8)
     )
     pool = min(vocab, max(pool, k))
     top_scores, top_ids = torch.topk(scores, k=pool)
+    excl_mask = _exclusion_mask(top_ids, excluded_token_ids)
+    kept_ids = top_ids[~excl_mask][:k]
 
     infos: list[DirectionExclusionInfo] = []
-    kept_ids: list[int] = []
-    for rank, (score, tid_t) in enumerate(
-        zip(top_scores.tolist(), top_ids.tolist())
-    ):
-        tid = int(tid_t)
-        excluded = bool(excluded_token_ids) and tid in excluded_token_ids
-        infos.append(
-            DirectionExclusionInfo(
-                rank=rank,
-                top_token_id=tid,
-                excluded=excluded,
-                coeff_abs=float(score),
+    if collect_infos:
+        # Diagnostics only — sync once here, never on the decode hot path.
+        n_keep = 0
+        for rank, (score, tid_t, excluded) in enumerate(
+            zip(top_scores.tolist(), top_ids.tolist(), excl_mask.tolist())
+        ):
+            infos.append(
+                DirectionExclusionInfo(
+                    rank=rank,
+                    top_token_id=int(tid_t),
+                    excluded=bool(excluded),
+                    coeff_abs=float(score),
+                )
             )
-        )
-        if not excluded:
-            kept_ids.append(tid)
-        if len(kept_ids) >= k:
-            break
+            if not excluded:
+                n_keep += 1
+            if n_keep >= k:
+                break
 
-    if not kept_ids:
+    if kept_ids.numel() == 0:
         return residual.new_zeros((0, residual.shape[-1])), infos
 
     # Keep float32 through orthonormalization — bf16 GS is discontinuous for top-k.
@@ -453,7 +495,11 @@ def _transformer_layers(hf_model: Any) -> list[Any]:
 def _excluded_at(
     state: AblationHookState,
     pos: int,
-) -> set[int]:
+) -> set[int] | torch.Tensor:
+    if state.excluded_ids is not None:
+        if 0 <= pos < int(state.excluded_ids.shape[0]):
+            return state.excluded_ids[pos]
+        return state.excluded_ids.new_empty((0,), dtype=torch.long)
     if 0 <= pos < len(state.excluded_by_position):
         return state.excluded_by_position[pos]
     return set()
@@ -508,6 +554,7 @@ def ablation_hooks(
             config.k,
             excluded,
             final_norm=final_norm,
+            collect_infos=state.collect_diag,
         )
 
         # Edit in float32 for stable top-k / projection, then cast back.
@@ -592,6 +639,20 @@ def ablation_hooks(
             handle.remove()
 
 
+def clean_topk_ids_matrix(
+    logits: torch.Tensor,
+    k: int,
+) -> torch.Tensor:
+    """Per-position clean next-token top-k ids as ``[seq, take]`` on-device."""
+    if logits.ndim != 3:
+        raise ValueError(f"expected [batch, seq, vocab] logits, got {tuple(logits.shape)}")
+    seq_len = logits.shape[1]
+    if k <= 0:
+        return logits.new_empty((seq_len, 0), dtype=torch.long)
+    take = min(k, logits.shape[-1])
+    return torch.topk(logits[0], k=take, dim=-1).indices
+
+
 def clean_topk_by_position(
     logits: torch.Tensor,
     k: int,
@@ -602,13 +663,8 @@ def clean_topk_by_position(
     seq_len = logits.shape[1]
     if k <= 0:
         return [set() for _ in range(seq_len)]
-    vocab = logits.shape[-1]
-    take = min(k, vocab)
-    out: list[set[int]] = []
-    for pos in range(seq_len):
-        ids = torch.topk(logits[0, pos], k=take).indices.tolist()
-        out.append({int(i) for i in ids})
-    return out
+    ids = clean_topk_ids_matrix(logits, k)
+    return [{int(i) for i in row.tolist()} for row in ids]
 
 
 def clean_topk_token_ids(

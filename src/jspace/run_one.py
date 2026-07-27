@@ -57,6 +57,7 @@ def run_problem(
         max_new_tokens=budget,
         seed=seed,
         ablation=ablation,
+        early_stop_on_answer=settings.early_stop_on_answer,
     )
     extraction = extract_answer(problem.dataset, result.text)
     correct = score_prediction(problem.dataset, extraction.answer, problem.gold_answer)
@@ -103,5 +104,7 @@ def run_problem(
             "hook_call_count": result.hook_call_count,
             "max_new_tokens": budget,
             "local_fast": local_fast and ablation.kind != "none",
+            "early_stopped": result.early_stopped,
+            "early_stop_on_answer": settings.early_stop_on_answer,
         },
     )

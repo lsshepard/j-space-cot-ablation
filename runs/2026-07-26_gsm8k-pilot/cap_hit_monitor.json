@@ -1,0 +1,30 @@
+{
+  "n_total": 3,
+  "grid_alive": false,
+  "by_condition": {
+    "cot_clean": {
+      "n": 1,
+      "cap_hits": 0,
+      "early_stops": 1,
+      "max_len": 300,
+      "mean_len": 300.0,
+      "em": 0.0
+    },
+    "direct_clean": {
+      "n": 1,
+      "cap_hits": 0,
+      "early_stops": 1,
+      "max_len": 103,
+      "mean_len": 103.0,
+      "em": 0.0
+    },
+    "direct_j_ablated": {
+      "n": 1,
+      "cap_hits": 0,
+      "early_stops": 1,
+      "max_len": 125,
+      "mean_len": 125.0,
+      "em": 0.0
+    }
+  }
+}

@@ -1,4 +1,10 @@
-from jspace.extract import answers_equal, extract_aime, extract_boxed, extract_gsm8k
+from jspace.extract import (
+    answer_ready_for_early_stop,
+    answers_equal,
+    extract_aime,
+    extract_boxed,
+    extract_gsm8k,
+)
 
 
 def test_gsm8k_hash_line():
@@ -59,3 +65,48 @@ def test_answers_equal_multihop_normalized_and_alias():
     assert answers_equal("multihop", "George Washington", "Washington")
     assert answers_equal("multihop", "Indian Ocean.", "Indian")
     assert not answers_equal("multihop", "Pacific Ocean", "Indian")
+
+
+def test_early_stop_requires_closed_think_for_cot():
+    open_t = "<" + "think" + ">"
+    close_t = "</" + "think" + ">"
+    # Draft #### inside open think must not trigger stop.
+    assert not answer_ready_for_early_stop(
+        "gsm8k",
+        f"{open_t}\nscratch #### 1\n",
+        enable_thinking=True,
+    )
+    # After think closes, surface #### + newline is enough.
+    assert answer_ready_for_early_stop(
+        "gsm8k",
+        f"{open_t}\nscratch{close_t}\n#### 18\n",
+        enable_thinking=True,
+    )
+
+
+def test_early_stop_gsm8k_waits_for_newline_not_mid_number():
+    # Generating "#### 18": after first digit must NOT stop.
+    assert not answer_ready_for_early_stop(
+        "gsm8k", "work\n#### 1", enable_thinking=False
+    )
+    assert not answer_ready_for_early_stop(
+        "gsm8k", "work\n#### 18", enable_thinking=False
+    )
+    assert answer_ready_for_early_stop(
+        "gsm8k", "work\n#### 18\n", enable_thinking=False
+    )
+
+
+def test_early_stop_math500_boxed_after_think():
+    open_t = "<" + "think" + ">"
+    close_t = "</" + "think" + ">"
+    assert not answer_ready_for_early_stop(
+        "math500",
+        f"{open_t}\n\\boxed{{1}} still thinking",
+        enable_thinking=True,
+    )
+    assert answer_ready_for_early_stop(
+        "math500",
+        f"{open_t}\nwork{close_t}\n\\boxed{{\\frac{{1}}{{2}}}}\n",
+        enable_thinking=True,
+    )

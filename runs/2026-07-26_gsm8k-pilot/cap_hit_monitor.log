@@ -1,0 +1,18 @@
+t=0 alive=True n=0
+t=1 alive=True n=0
+t=2 alive=True n=0
+t=3 alive=True n=0
+t=4 alive=True n=0
+t=5 alive=True n=1 | direct_clean: n=1 cap=0 early=1 max=103
+t=6 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=7 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=8 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=9 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=10 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=11 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=12 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=13 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=14 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=15 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=16 alive=True n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
+t=17 alive=False n=3 | cot_clean: n=1 cap=0 early=1 max=300 | direct_clean: n=1 cap=0 early=1 max=103 | direct_j_ablated: n=1 cap=0 early=1 max=125
