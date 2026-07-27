@@ -141,7 +141,12 @@ def resolve_max_new_tokens(
         ablated_floor = math.ceil(
             observed_p95 * settings.ablated_token_budget_multiplier
         )
-        ceiling = profile.ceiling if profile is not None else settings.token_budget_ceiling
+        profile_ceiling = (
+            profile.ceiling if profile is not None else settings.token_budget_ceiling
+        )
+        # Settings/env can tighten the ablated hard cap (e.g. 10k) without
+        # rewriting calibration JSON; never raises above the profile ceiling.
+        ceiling = min(profile_ceiling, settings.token_budget_ceiling)
         base = min(ceiling, max(base, ablated_floor))
 
     if local_fast and ablation_kind != "none":

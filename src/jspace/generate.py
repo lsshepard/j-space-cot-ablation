@@ -49,6 +49,17 @@ _LEAK_MARKERS = (
     "wait,",
 )
 
+# Full decode+regex every token is a large host sync; check sparsely.
+_EARLY_STOP_CHECK_EVERY = 16
+
+
+def _should_run_early_stop_check(n_generated: int) -> bool:
+    """True when it is worth decoding for answer early-stop."""
+    if n_generated <= 0:
+        return False
+    return n_generated % _EARLY_STOP_CHECK_EVERY == 0
+
+
 
 def build_chat_text(
     tokenizer: Any,
@@ -103,6 +114,8 @@ def _make_answer_stopping_criteria(
         ) -> bool:
             gen = input_ids[0, prompt_len:]
             if gen.numel() == 0:
+                return False
+            if not _should_run_early_stop_check(int(gen.numel())):
                 return False
             text = loaded.tokenizer.decode(gen.tolist(), skip_special_tokens=True)
             if answer_ready_for_early_stop(
@@ -348,7 +361,7 @@ def generate_with_ablation(
             attention_mask = _extend_attention_mask(attention_mask, chunk_ids)
             if eos_id is not None and next_id == eos_id:
                 break
-            if early_stop_on_answer:
+            if early_stop_on_answer and _should_run_early_stop_check(len(generated)):
                 decoded_so_far = loaded.tokenizer.decode(
                     generated, skip_special_tokens=True
                 )
@@ -394,7 +407,7 @@ def generate_with_ablation(
             attention_mask = _extend_attention_mask(attention_mask, next_token)
             if eos_id is not None and next_id == eos_id:
                 break
-            if early_stop_on_answer:
+            if early_stop_on_answer and _should_run_early_stop_check(len(generated)):
                 decoded_so_far = loaded.tokenizer.decode(
                     generated, skip_special_tokens=True
                 )

@@ -106,5 +106,7 @@ def run_problem(
             "local_fast": local_fast and ablation.kind != "none",
             "early_stopped": result.early_stopped,
             "early_stop_on_answer": settings.early_stop_on_answer,
+            # Source problem text (not only restated inside raw_trace).
+            "prompt": problem.prompt,
         },
     )

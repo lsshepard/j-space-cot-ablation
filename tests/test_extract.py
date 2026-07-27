@@ -60,6 +60,13 @@ def test_answers_equal_gsm8k():
     assert not answers_equal("gsm8k", None, "42")
 
 
+def test_math500_equal_identical_latex_not_false_negative():
+    # math_verify may parse simple \\sqrt{} to []; must not mark equal strings wrong.
+    assert answers_equal("math500", r"\sqrt{51}", r"\sqrt{51}")
+    assert answers_equal("math500", r"\sqrt{51}", r" \sqrt{51} ")
+    assert not answers_equal("math500", "10", r"\sqrt{51}")
+
+
 def test_answers_equal_multihop_normalized_and_alias():
     assert answers_equal("multihop", "Rome.", "Rome")
     assert answers_equal("multihop", "George Washington", "Washington")

@@ -38,7 +38,8 @@ DEFAULT_TOKEN_BUDGET_MULTIPLIER = 2.0
 # Ablated traces may run longer than clean (compensation); floor vs observed p95.
 DEFAULT_ABLATED_TOKEN_BUDGET_MULTIPLIER = 3.0
 DEFAULT_TOKEN_BUDGET_PERCENTILE = 0.95
-DEFAULT_TOKEN_BUDGET_CEILING = 8192
+# Align with calibrated profiles on disk (ablated floor often hits this on MATH CoT).
+DEFAULT_TOKEN_BUDGET_CEILING = 16384
 # Probe lengths without censoring at the final cost ceiling (§4.7).
 DEFAULT_TOKEN_BUDGET_PROBE_CEILING = 32768
 # Local MPS preview only: ablated runs use 2× forwards/token — cap to finish in ~1hr.
@@ -59,7 +60,9 @@ class Settings:
     aime_revision: str | None = None
     device: str | None = None
     dtype: str | None = None
-    attn_implementation: str = "eager"
+    # Prefer sdpa on CUDA for long dual-KV ablated decode (eager OOMs ~8k+).
+    # Override with JSPACE_ATTN_IMPLEMENTATION=eager if hooks need it.
+    attn_implementation: str = "sdpa"
     band_start: int | None = None
     band_end: int | None = None
     k: int = DEFAULT_K
@@ -127,6 +130,7 @@ def load_settings() -> Settings:
         aime_revision=_env_str("JSPACE_AIME_REVISION"),
         device=_env_str("JSPACE_DEVICE"),
         dtype=_env_str("JSPACE_DTYPE"),
+        attn_implementation=_env_str("JSPACE_ATTN_IMPLEMENTATION") or "sdpa",
         band_start=_env_int("JSPACE_BAND_START"),
         band_end=_env_int("JSPACE_BAND_END"),
         k=_env_int("JSPACE_K") or DEFAULT_K,

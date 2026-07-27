@@ -145,7 +145,10 @@ def test_ablated_cap_respects_profile_ceiling():
             )
         },
     )
-    settings = Settings(ablated_token_budget_multiplier=3.0)
+    settings = Settings(
+        ablated_token_budget_multiplier=3.0,
+        token_budget_ceiling=16384,
+    )
     assert (
         resolve_max_new_tokens(
             settings,
@@ -155,4 +158,33 @@ def test_ablated_cap_respects_profile_ceiling():
             ablation_kind="jspace",
         )
         == 2500
+    )
+
+
+def test_ablated_cap_respects_settings_ceiling_tighten():
+    profile = TokenBudgetProfile(
+        model_name="test",
+        multiplier=2.0,
+        ceiling=16384,
+        datasets={
+            "math500": DatasetTokenCaps(
+                direct=1360,
+                cot=9302,
+                cot_p95_observed=4651,
+            )
+        },
+    )
+    settings = Settings(
+        ablated_token_budget_multiplier=6.0,
+        token_budget_ceiling=10000,
+    )
+    assert (
+        resolve_max_new_tokens(
+            settings,
+            "math500",
+            enable_thinking=True,
+            profile=profile,
+            ablation_kind="jspace",
+        )
+        == 10000
     )

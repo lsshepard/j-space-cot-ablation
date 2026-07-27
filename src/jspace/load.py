@@ -54,7 +54,7 @@ def resolve_dtype(device: torch.device, requested: str | None = None) -> torch.d
 
 
 def load_hf_model(settings: Settings) -> LoadedModel:
-    """Load HF causal LM + tokenizer with eager attention."""
+    """Load HF causal LM + tokenizer (attn via settings.attn_implementation)."""
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     device = resolve_device(settings.device)

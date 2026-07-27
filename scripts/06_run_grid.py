@@ -66,6 +66,11 @@ def main() -> None:
         help="comma list: gsm8k,math500,aime",
     )
     parser.add_argument("--limit", type=int, default=None, help="override per-cell limit")
+    parser.add_argument(
+        "--levels",
+        default=None,
+        help="math500 levels comma list (default: 1-5). Example: 1,3,5",
+    )
     parser.add_argument("--band-start", type=int, default=None)
     parser.add_argument("--band-end", type=int, default=None)
     parser.add_argument("--k", type=int, default=None)
@@ -113,11 +118,21 @@ def main() -> None:
     )
 
     datasets = [d.strip() for d in args.datasets.split(",") if d.strip()]
+    math_levels: list[int]
+    if args.levels:
+        math_levels = [int(x) for x in args.levels.split(",") if x.strip()]
+        if not math_levels:
+            raise SystemExit("--levels must list at least one level")
+        for lv in math_levels:
+            if lv < 1 or lv > 5:
+                raise SystemExit(f"invalid math500 level {lv} (want 1-5)")
+    else:
+        math_levels = list(range(1, 6))
     cells: list[tuple[str, int | None, int | None]] = []
     for ds in datasets:
         if ds == "math500":
-            for level in range(1, 6):
-                lim = args.limit if args.limit is not None else settings.problems_per_cell
+            lim = args.limit if args.limit is not None else settings.problems_per_cell
+            for level in math_levels:
                 cells.append((ds, level, lim))
         elif ds == "aime":
             cells.append((ds, None, args.limit))  # None → full 30
@@ -140,12 +155,14 @@ def main() -> None:
         "model_revision": loaded.model_revision,
         "device": str(loaded.device),
         "dtype": str(loaded.dtype),
+        "attn_implementation": settings.attn_implementation,
         "band_start": band_start,
         "band_end": band_end,
         "strength_label": "medium_equivalent",
         "k": k,
         "token_budgets": summarize_profile(token_profile) if token_profile else None,
         "datasets": datasets,
+        "math500_levels": math_levels if "math500" in datasets else None,
         "repos": {
             "gsm8k": GSM8K_REPO,
             "math500": MATH500_REPO,
@@ -159,8 +176,11 @@ def main() -> None:
         "completed_before_start": len(done),
         "early_stop_on_answer": settings.early_stop_on_answer,
         "ablated_token_budget_multiplier": settings.ablated_token_budget_multiplier,
+        "token_budget_ceiling": settings.token_budget_ceiling,
     }
     write_run_meta(out_dir / "run_meta.json", meta)
+
+    import torch
 
     for dataset, level, limit in cells:
         problems = load_cell(dataset, level, limit, settings)
@@ -201,6 +221,8 @@ def main() -> None:
                         f"len={rec.trace_length_tokens} "
                         f"cap={rec.hit_token_cap} early_stop={early}"
                     )
+                    if torch.cuda.is_available():
+                        torch.cuda.empty_cache()
 
     if args.size_control:
         size_path = out_dir / "size_control.jsonl"

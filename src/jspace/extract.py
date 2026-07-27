@@ -174,13 +174,32 @@ def answers_equal(dataset: str, predicted: str | None, gold: str) -> bool:
         return _multihop_equal(predicted, gold)
     raise ValueError(f"unknown dataset: {dataset}")
 
+def _normalize_math_surface(text: str) -> str:
+    """Light latex/whitespace normalize for string fallback."""
+    text = text.strip().replace(" ", "")
+    text = text.replace("\\left", "").replace("\\right", "")
+    text = text.replace("\\,", "").replace("\\;", "").replace("\\!", "")
+    return text
+
+
 def math500_equal(predicted: str, gold: str) -> bool:
-    """Symbolic equivalence via math_verify when available; else normalized string."""
+    """Symbolic equivalence via math_verify when usable; else normalized string.
+
+    ``math_verify.parse`` can return an empty list for simple latex (e.g.
+    ``\\sqrt{51}``) while still not raising — treat that as unusable and fall
+    back so identical extracted/gold strings are not false negatives.
+    """
+    if predicted.strip() == gold.strip():
+        return True
+    if _normalize_math_surface(predicted) == _normalize_math_surface(gold):
+        return True
     try:
         from math_verify import parse, verify
 
         gold_parsed = parse(gold)
         pred_parsed = parse(predicted)
+        if not gold_parsed or not pred_parsed:
+            return False
         return bool(verify(gold_parsed, pred_parsed))
     except Exception:
-        return predicted.strip() == gold.strip()
+        return False
