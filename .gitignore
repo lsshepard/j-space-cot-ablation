@@ -26,6 +26,9 @@ runs/active/*
 !runs/active/calibration/**
 runs/**/*.jsonl
 runs/**/ablation_token_traces.json
+# MATH500 A40 migration handoff — keep truncated traces + pre-cap backup in git
+!runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl
+!runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl.pre_retro_cap.bak
 *.pt
 *.pth
 .cache/

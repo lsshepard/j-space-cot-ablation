@@ -1,0 +1,130 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:   2%|▏         | 7/398 [00:00<00:11, 32.93it/s]Loading weights:  18%|█▊        | 71/398 [00:00<00:02, 111.80it/s]Loading weights:  25%|██▍       | 99/398 [00:00<00:02, 109.28it/s]Loading weights:  27%|██▋       | 109/398 [00:01<00:03, 86.68it/s]Loading weights:  29%|██▉       | 117/398 [00:01<00:04, 69.48it/s]Loading weights:  35%|███▍      | 138/398 [00:02<00:05, 47.27it/s]Loading weights:  42%|████▏     | 169/398 [00:02<00:03, 74.61it/s]Loading weights:  47%|████▋     | 186/398 [00:02<00:03, 59.57it/s]Loading weights:  49%|████▉     | 197/398 [00:03<00:04, 46.93it/s]Loading weights:  62%|██████▏   | 247/398 [00:03<00:01, 78.13it/s]Loading weights:  65%|██████▍   | 258/398 [00:04<00:03, 43.60it/s]Loading weights:  69%|██████▉   | 276/398 [00:04<00:03, 39.71it/s]Loading weights:  79%|███████▉  | 316/398 [00:05<00:01, 50.44it/s]Loading weights:  87%|████████▋ | 346/398 [00:05<00:00, 67.65it/s]Loading weights:  95%|█████████▌| 380/398 [00:06<00:00, 68.01it/s]Loading weights: 100%|██████████| 398/398 [00:06<00:00, 65.80it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 81.94it/s]
+Generating test split:   0%|          | 0/500 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 500/500 [00:00<00:00, 14885.45 examples/s]
+=== cell math500_L1 n=15 ===
+math500-test-14-L1 direct_clean rseed=0 correct=False graded=-4.658475920557976 len=506 cap=False early_stop=True
+math500-test-14-L1 cot_clean rseed=0 correct=False graded=-3.4112523198127747 len=1392 cap=False early_stop=True
+math500-test-14-L1 direct_j_ablated rseed=0 correct=False graded=-6.877014517784119 len=235 cap=False early_stop=True
+math500-test-14-L1 cot_j_ablated rseed=0 correct=False graded=-6.073337599635124 len=2010 cap=False early_stop=True
+math500-test-14-L1 direct_random rseed=0 correct=False graded=-4.2907471507787704 len=280 cap=False early_stop=True
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:  17%|█▋        | 68/398 [00:00<00:02, 148.29it/s]Loading weights:  30%|██▉       | 119/398 [00:00<00:01, 157.94it/s]Loading weights:  47%|████▋     | 186/398 [00:00<00:00, 250.09it/s]Loading weights:  56%|█████▋    | 224/398 [00:01<00:01, 122.01it/s]Loading weights:  63%|██████▎   | 249/398 [00:01<00:01, 116.10it/s]Loading weights:  68%|██████▊   | 269/398 [00:02<00:01, 85.20it/s] Loading weights:  77%|███████▋  | 305/398 [00:02<00:01, 81.74it/s]Loading weights:  80%|███████▉  | 317/398 [00:03<00:01, 63.06it/s]Loading weights:  94%|█████████▍| 376/398 [00:03<00:00, 111.97it/s]Loading weights: 100%|██████████| 398/398 [00:03<00:00, 117.09it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 157.97it/s]
+resuming: 5 completed runs in /root/j-space-cot-ablation/runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl
+=== cell math500_L1 n=15 ===
+math500-test-14-L1 cot_random rseed=0 correct=True graded=-3.275790497660637 len=2781 cap=False early_stop=True
+math500-test-16-L1 direct_clean rseed=0 correct=True graded=-6.1302555203437805 len=193 cap=False early_stop=True
+math500-test-16-L1 cot_clean rseed=0 correct=True graded=-5.245855251948039 len=2095 cap=False early_stop=True
+math500-test-16-L1 direct_j_ablated rseed=0 correct=True graded=-6.933087428410848 len=200 cap=False early_stop=True
+math500-test-16-L1 cot_j_ablated rseed=0 correct=True graded=-6.153690914312999 len=1847 cap=False early_stop=True
+math500-test-16-L1 direct_random rseed=0 correct=True graded=-5.750075181325276 len=253 cap=False early_stop=True
+math500-test-16-L1 cot_random rseed=0 correct=True graded=-4.450324575106303 len=2678 cap=False early_stop=True
+math500-test-18-L1 direct_clean rseed=0 correct=False graded=-6.132339656352997 len=1360 cap=True early_stop=False
+math500-test-18-L1 cot_clean rseed=0 correct=False graded=-2.607320229212443 len=9302 cap=True early_stop=False
+math500-test-18-L1 direct_j_ablated rseed=0 correct=True graded=-8.345801969369253 len=2114 cap=False early_stop=True
+Traceback (most recent call last):
+  File "/root/j-space-cot-ablation/scripts/06_run_grid.py", line 239, in <module>
+    main()
+  File "/root/j-space-cot-ablation/scripts/06_run_grid.py", line 184, in main
+    rec = run_problem(
+          ^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/src/jspace/run_one.py", line 66, in run_problem
+    graded = teacher_forced_gold_logprob(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/src/jspace/graded.py", line 134, in teacher_forced_gold_logprob
+    clean_out = loaded.hf_model(input_ids=input_ids, attention_mask=mask)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/.venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 911, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 492, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/.venv/lib/python3.12/site-packages/transformers/utils/generic.py", line 1040, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/.venv/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 262, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 424, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/.venv/lib/python3.12/site-packages/transformers/modeling_layers.py", line 110, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 318, in forward
+    hidden_states, _ = self.self_attn(
+                       ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 277, in forward
+    attn_output, attn_weights = attention_interface(
+                                ^^^^^^^^^^^^^^^^^^^^
+  File "/root/j-space-cot-ablation/.venv/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 213, in eager_attention_forward
+    attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query.dtype)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/functional.py", line 2139, in softmax
+    ret = input.softmax(dim, dtype=dtype)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 14.91 GiB. GPU 0 has a total capacity of 79.25 GiB of which 9.20 GiB is free. Including non-PyTorch memory, this process has 70.05 GiB memory in use. Of the allocated memory 41.63 GiB is allocated by PyTorch, and 27.92 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 8021.44it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 182.24it/s]
+resuming: 15 completed runs in /root/j-space-cot-ablation/runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl
+=== cell math500_L1 n=15 ===
+math500-test-18-L1 cot_j_ablated rseed=0 correct=False graded=-7.312500198682149 len=16384 cap=True early_stop=False
+math500-test-18-L1 direct_random rseed=0 correct=False graded=-6.31320458650589 len=432 cap=False early_stop=False
+math500-test-18-L1 cot_random rseed=0 correct=False graded=-7.3029143412907915 len=13798 cap=False early_stop=False
+math500-test-38-L1 direct_clean rseed=0 correct=True graded=-4.189331084489822 len=141 cap=False early_stop=False
+math500-test-38-L1 cot_clean rseed=0 correct=True graded=-4.314453572034836 len=608 cap=False early_stop=True
+math500-test-38-L1 direct_j_ablated rseed=0 correct=True graded=-4.688167572021484 len=160 cap=False early_stop=True
+math500-test-38-L1 cot_j_ablated rseed=0 correct=True graded=-5.515869140625 len=1083 cap=False early_stop=False
+math500-test-38-L1 direct_random rseed=0 correct=True graded=-4.063457503914833 len=147 cap=False early_stop=False
+math500-test-38-L1 cot_random rseed=0 correct=True graded=-3.062511444091797 len=747 cap=False early_stop=False
+math500-test-58-L1 direct_clean rseed=0 correct=True graded=-4.161794573068619 len=204 cap=False early_stop=False
+math500-test-58-L1 cot_clean rseed=0 correct=True graded=-3.7187604755163193 len=1764 cap=False early_stop=False
+math500-test-58-L1 direct_j_ablated rseed=0 correct=True graded=-4.984977766871452 len=199 cap=False early_stop=False
+math500-test-58-L1 cot_j_ablated rseed=0 correct=True graded=-5.458984553813934 len=1190 cap=False early_stop=False
+math500-test-58-L1 direct_random rseed=0 correct=True graded=-3.9034218937158585 len=171 cap=False early_stop=False
+math500-test-58-L1 cot_random rseed=0 correct=True graded=-3.4221275001764297 len=1627 cap=False early_stop=False
+math500-test-65-L1 direct_clean rseed=0 correct=True graded=-6.500002503395081 len=203 cap=False early_stop=False
+math500-test-65-L1 cot_clean rseed=0 correct=True graded=-6.9001305103302 len=823 cap=False early_stop=False
+math500-test-65-L1 direct_j_ablated rseed=0 correct=True graded=-6.100003981590271 len=171 cap=False early_stop=False
+math500-test-65-L1 cot_j_ablated rseed=0 correct=True graded=-3.7500004053115843 len=2959 cap=False early_stop=False
+math500-test-65-L1 direct_random rseed=0 correct=True graded=-5.325012588500977 len=252 cap=False early_stop=False
+math500-test-65-L1 cot_random rseed=0 correct=True graded=-5.425004601478577 len=764 cap=False early_stop=False
+math500-test-77-L1 direct_clean rseed=0 correct=True graded=-7.472391033172608 len=169 cap=False early_stop=False
+math500-test-77-L1 cot_clean rseed=0 correct=True graded=-7.00595715045929 len=621 cap=False early_stop=False
+math500-test-77-L1 direct_j_ablated rseed=0 correct=True graded=-9.62344138622284 len=216 cap=False early_stop=False
+math500-test-77-L1 cot_j_ablated rseed=0 correct=True graded=-3.850000834465027 len=16384 cap=True early_stop=False
+math500-test-77-L1 direct_random rseed=0 correct=True graded=-6.836864948272705 len=144 cap=False early_stop=True
+math500-test-77-L1 cot_random rseed=0 correct=True graded=-5.902113223075867 len=684 cap=False early_stop=False
+math500-test-79-L1 direct_clean rseed=0 correct=True graded=-6.538677501678467 len=169 cap=False early_stop=False
+math500-test-79-L1 cot_clean rseed=0 correct=True graded=-7.00050721168518 len=764 cap=False early_stop=False
+math500-test-79-L1 direct_j_ablated rseed=0 correct=True graded=-7.1930670738220215 len=192 cap=False early_stop=False

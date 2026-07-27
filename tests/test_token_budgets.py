@@ -188,3 +188,29 @@ def test_ablated_cap_respects_settings_ceiling_tighten():
         )
         == 10000
     )
+
+
+def test_global_ceiling_also_caps_clean_cot():
+    profile = TokenBudgetProfile(
+        model_name="test",
+        multiplier=2.0,
+        ceiling=16384,
+        datasets={
+            "math500": DatasetTokenCaps(
+                direct=1360,
+                cot=9302,
+                cot_p95_observed=4651,
+            )
+        },
+    )
+    settings = Settings(token_budget_ceiling=8000)
+    assert (
+        resolve_max_new_tokens(
+            settings,
+            "math500",
+            enable_thinking=True,
+            profile=profile,
+            ablation_kind="none",
+        )
+        == 8000
+    )

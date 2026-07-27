@@ -144,14 +144,15 @@ def resolve_max_new_tokens(
         profile_ceiling = (
             profile.ceiling if profile is not None else settings.token_budget_ceiling
         )
-        # Settings/env can tighten the ablated hard cap (e.g. 10k) without
+        # Settings/env can tighten the ablated hard cap (e.g. 8k) without
         # rewriting calibration JSON; never raises above the profile ceiling.
         ceiling = min(profile_ceiling, settings.token_budget_ceiling)
         base = min(ceiling, max(base, ablated_floor))
 
     if local_fast and ablation_kind != "none":
-        return min(base, settings.local_fast_ablation_cap)
-    return base
+        base = min(base, settings.local_fast_ablation_cap)
+    # Global hard ceiling applies to clean and ablated arms (cost control).
+    return min(base, settings.token_budget_ceiling)
 
 
 def _measure_clean_lengths(
