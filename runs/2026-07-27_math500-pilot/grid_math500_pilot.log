@@ -128,3 +128,88 @@ math500-test-77-L1 cot_random rseed=0 correct=True graded=-5.902113223075867 len
 math500-test-79-L1 direct_clean rseed=0 correct=True graded=-6.538677501678467 len=169 cap=False early_stop=False
 math500-test-79-L1 cot_clean rseed=0 correct=True graded=-7.00050721168518 len=764 cap=False early_stop=False
 math500-test-79-L1 direct_j_ablated rseed=0 correct=True graded=-7.1930670738220215 len=192 cap=False early_stop=False
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:   1%|          | 4/398 [00:00<01:31,  4.32it/s]Loading weights:  23%|██▎       | 90/398 [00:02<00:06, 46.29it/s]Loading weights:  59%|█████▉    | 234/398 [00:02<00:01, 140.28it/s]Loading weights:  73%|███████▎  | 289/398 [00:02<00:00, 124.64it/s]Loading weights: 100%|██████████| 398/398 [00:02<00:00, 133.13it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 24.74it/s]
+resuming: 45 completed runs in /root/j-space-cot-ablation/runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl
+=== cell math500_L1 n=15 ===
+math500-test-79-L1 cot_j_ablated rseed=0 correct=True graded=-6.8828125 len=1259 cap=False early_stop=False
+math500-test-79-L1 direct_random rseed=0 correct=True graded=-6.515332221984863 len=174 cap=False early_stop=False
+math500-test-79-L1 cot_random rseed=0 correct=True graded=-5.052119636535645 len=688 cap=False early_stop=True
+math500-test-86-L1 direct_clean rseed=0 correct=True graded=-6.14901294027056 len=144 cap=False early_stop=True
+math500-test-86-L1 cot_clean rseed=0 correct=True graded=-4.607422062328884 len=793 cap=False early_stop=False
+math500-test-86-L1 direct_j_ablated rseed=0 correct=True graded=-6.9403484889439175 len=149 cap=False early_stop=False
+math500-test-86-L1 cot_j_ablated rseed=0 correct=True graded=-2.169643078531538 len=8000 cap=True early_stop=False
+math500-test-86-L1 direct_random rseed=0 correct=True graded=-6.07165036882673 len=116 cap=False early_stop=False
+math500-test-86-L1 cot_random rseed=0 correct=True graded=-3.392886298043387 len=772 cap=False early_stop=False
+math500-test-87-L1 direct_clean rseed=0 correct=True graded=-7.66114501953125 len=484 cap=False early_stop=False
+math500-test-87-L1 cot_clean rseed=0 correct=True graded=-6.200012516975403 len=1481 cap=False early_stop=False
+math500-test-87-L1 direct_j_ablated rseed=0 correct=True graded=-9.720425510406494 len=432 cap=False early_stop=True
+math500-test-87-L1 cot_j_ablated rseed=0 correct=True graded=-8.3125 len=1887 cap=False early_stop=False
+math500-test-87-L1 direct_random rseed=0 correct=True graded=-6.932373046875 len=467 cap=False early_stop=False
+math500-test-87-L1 cot_random rseed=0 correct=True graded=-6.380730819702149 len=1616 cap=False early_stop=True
+math500-test-97-L1 direct_clean rseed=0 correct=True graded=-6.062705670084272 len=272 cap=False early_stop=True
+math500-test-97-L1 cot_clean rseed=0 correct=False graded=-7.232158984456744 len=1420 cap=False early_stop=False
+math500-test-97-L1 direct_j_ablated rseed=0 correct=False graded=-9.188178879874092 len=285 cap=False early_stop=False
+math500-test-97-L1 cot_j_ablated rseed=0 correct=False graded=-7.250001975468227 len=8000 cap=True early_stop=False
+math500-test-97-L1 direct_random rseed=0 correct=True graded=-6.834766541208539 len=239 cap=False early_stop=False
+math500-test-97-L1 cot_random rseed=0 correct=False graded=-6.142864482743399 len=1786 cap=False early_stop=False
+math500-test-102-L1 direct_clean rseed=0 correct=True graded=-3.6186167651956733 len=232 cap=False early_stop=False
+math500-test-102-L1 cot_clean rseed=0 correct=True graded=-3.943249377337369 len=1049 cap=False early_stop=False
+math500-test-102-L1 direct_j_ablated rseed=0 correct=True graded=-4.580150333317843 len=219 cap=False early_stop=False
+math500-test-102-L1 cot_j_ablated rseed=0 correct=True graded=-4.363637425682762 len=8000 cap=True early_stop=False
+math500-test-102-L1 direct_random rseed=0 correct=True graded=-3.404132127761841 len=243 cap=False early_stop=False
+math500-test-102-L1 cot_random rseed=0 correct=True graded=-3.1938673799688164 len=1100 cap=False early_stop=False
+math500-test-141-L1 direct_clean rseed=0 correct=False graded=-9.675535106658936 len=416 cap=False early_stop=True
+math500-test-141-L1 cot_clean rseed=0 correct=True graded=-6.250063967704773 len=1200 cap=False early_stop=True
+math500-test-141-L1 direct_j_ablated rseed=0 correct=True graded=-9.100258135795594 len=363 cap=False early_stop=False
+math500-test-141-L1 cot_j_ablated rseed=0 correct=True graded=-3.9750025987625124 len=8000 cap=True early_stop=False
+math500-test-141-L1 direct_random rseed=0 correct=True graded=-10.175263357162475 len=320 cap=False early_stop=True
+math500-test-141-L1 cot_random rseed=0 correct=True graded=-4.875102376937866 len=2286 cap=False early_stop=False
+math500-test-144-L1 direct_clean rseed=0 correct=True graded=-8.44053864479065 len=215 cap=False early_stop=False
+math500-test-144-L1 cot_clean rseed=0 correct=True graded=-5.264043529828389 len=872 cap=False early_stop=False
+math500-test-144-L1 direct_j_ablated rseed=0 correct=True graded=-9.78126343091329 len=266 cap=False early_stop=False
+math500-test-144-L1 cot_j_ablated rseed=0 correct=True graded=-5.15277882417043 len=8000 cap=True early_stop=False
+math500-test-144-L1 direct_random rseed=0 correct=True graded=-7.032498902744717 len=212 cap=False early_stop=False
+math500-test-144-L1 cot_random rseed=0 correct=True graded=-5.055564138624403 len=895 cap=False early_stop=False
+math500-test-148-L1 direct_clean rseed=0 correct=True graded=-6.770751953125 len=156 cap=False early_stop=False
+math500-test-148-L1 cot_clean rseed=0 correct=True graded=-4.180182298024495 len=1408 cap=False early_stop=True
+math500-test-148-L1 direct_j_ablated rseed=0 correct=True graded=-7.548878987630208 len=211 cap=False early_stop=False
+math500-test-148-L1 cot_j_ablated rseed=0 correct=True graded=-6.979166666666667 len=1242 cap=False early_stop=False
+math500-test-148-L1 direct_random rseed=0 correct=True graded=-7.22802734375 len=166 cap=False early_stop=False
+math500-test-148-L1 cot_random rseed=0 correct=True graded=-5.027264416217804 len=1283 cap=False early_stop=False
+wrote /root/j-space-cot-ablation/runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:   2%|▏         | 6/398 [00:00<00:07, 55.16it/s]Loading weights:   4%|▎         | 14/398 [00:00<00:06, 55.53it/s]Loading weights:   8%|▊         | 30/398 [00:00<00:03, 94.74it/s]Loading weights:  15%|█▌        | 61/398 [00:00<00:02, 162.21it/s]Loading weights:  21%|██        | 83/398 [00:00<00:01, 171.05it/s]Loading weights:  30%|██▉       | 119/398 [00:00<00:01, 224.10it/s]Loading weights:  49%|████▉     | 195/398 [00:00<00:00, 367.33it/s]Loading weights:  59%|█████▊    | 233/398 [00:00<00:00, 366.43it/s]Loading weights:  68%|██████▊   | 270/398 [00:01<00:00, 287.82it/s]Loading weights:  76%|███████▌  | 302/398 [00:01<00:00, 290.44it/s]Loading weights:  84%|████████▎ | 333/398 [00:01<00:00, 208.99it/s]Loading weights: 100%|██████████| 398/398 [00:01<00:00, 267.08it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 70.45it/s]
+resuming: 90 completed runs in /root/j-space-cot-ablation/runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl
+=== cell math500_L3 n=15 ===
+math500-test-2-L3 direct_clean rseed=0 correct=True graded=-4.960961556434631 len=350 cap=False early_stop=False
+math500-test-2-L3 cot_clean rseed=0 correct=False graded=-3.0878116130828857 len=1648 cap=False early_stop=True
+math500-test-2-L3 direct_j_ablated rseed=0 correct=True graded=-6.879580819606781 len=341 cap=False early_stop=False
+math500-test-2-L3 cot_j_ablated rseed=0 correct=True graded=-4.03125102519989 len=8000 cap=True early_stop=False
+math500-test-2-L3 direct_random rseed=0 correct=True graded=-5.166297554969788 len=350 cap=False early_stop=False
+math500-test-2-L3 cot_random rseed=0 correct=False graded=-2.909765911102295 len=1760 cap=False early_stop=True
+math500-test-3-L3 direct_clean rseed=0 correct=True graded=-7.957176232337952 len=324 cap=False early_stop=False
+math500-test-3-L3 cot_clean rseed=0 correct=True graded=-6.350133728981018 len=1566 cap=False early_stop=False
+math500-test-3-L3 direct_j_ablated rseed=0 correct=True graded=-10.683987808227538 len=254 cap=False early_stop=False
+math500-test-3-L3 cot_j_ablated rseed=0 correct=True graded=-4.7250008344650265 len=8000 cap=True early_stop=False
+math500-test-3-L3 direct_random rseed=0 correct=True graded=-7.970362854003906 len=309 cap=False early_stop=False
+math500-test-3-L3 cot_random rseed=0 correct=True graded=-5.110085415840149 len=1488 cap=False early_stop=True
+math500-test-6-L3 direct_clean rseed=0 correct=True graded=-5.3193090955416364 len=348 cap=False early_stop=False
+math500-test-6-L3 cot_clean rseed=0 correct=True graded=-4.833361705144246 len=2277 cap=False early_stop=False
+math500-test-6-L3 direct_j_ablated rseed=0 correct=True graded=-6.334534962972005 len=437 cap=False early_stop=False
+math500-test-6-L3 cot_j_ablated rseed=0 correct=True graded=-8.268117268880209 len=5916 cap=False early_stop=False
+math500-test-6-L3 direct_random rseed=0 correct=True graded=-5.6721140543619795 len=484 cap=False early_stop=False
+math500-test-6-L3 cot_random rseed=0 correct=True graded=-3.7088738679885864 len=1984 cap=False early_stop=True
+math500-test-8-L3 direct_clean rseed=0 correct=True graded=-5.4368889927864075 len=316 cap=False early_stop=False
+math500-test-8-L3 cot_clean rseed=0 correct=True graded=-3.350009870529175 len=1126 cap=False early_stop=False
+math500-test-8-L3 direct_j_ablated rseed=0 correct=True graded=-5.092883336544037 len=267 cap=False early_stop=False
+math500-test-8-L3 cot_j_ablated rseed=0 correct=True graded=-3.7281256198883055 len=973 cap=False early_stop=False
+math500-test-8-L3 direct_random rseed=0 correct=True graded=-5.1266467571258545 len=190 cap=False early_stop=False
+math500-test-8-L3 cot_random rseed=0 correct=True graded=-2.800005519390106 len=1360 cap=False early_stop=False
+math500-test-10-L3 direct_clean rseed=0 correct=True graded=-4.062864392995834 len=680 cap=False early_stop=False
+math500-test-10-L3 cot_clean rseed=0 correct=True graded=-3.875046879053116 len=4820 cap=False early_stop=False
+math500-test-10-L3 direct_j_ablated rseed=0 correct=False graded=-4.818422883749008 len=4080 cap=True early_stop=False
+math500-test-10-L3 cot_j_ablated rseed=0 correct=False graded=-2.046877086162567 len=8000 cap=True early_stop=False
+math500-test-10-L3 direct_random rseed=0 correct=True graded=-3.984414517879486 len=509 cap=False early_stop=False

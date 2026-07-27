@@ -31,7 +31,7 @@
     "math500"
   ],
   "math500_levels": [
-    1
+    3
   ],
   "repos": {
     "gsm8k": "openai/gsm8k",
@@ -95,15 +95,8 @@
     0
   ],
   "resume": true,
-  "completed_before_start": 15,
+  "completed_before_start": 90,
   "early_stop_on_answer": true,
   "ablated_token_budget_multiplier": 6.0,
-  "token_budget_ceiling": 8000,
-  "migration": {
-    "target_gpu": "A40",
-    "global_token_ceiling": 8000,
-    "retro_cap_script": "scripts/15_retro_cap_traces.py",
-    "l1_traces_at_stop": 45,
-    "handoff": "runs/2026-07-27_math500-pilot/README.md"
-  }
+  "token_budget_ceiling": 8000
 }
