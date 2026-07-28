@@ -28,11 +28,9 @@
     }
   },
   "datasets": [
-    "math500"
+    "aime"
   ],
-  "math500_levels": [
-    5
-  ],
+  "math500_levels": null,
   "repos": {
     "gsm8k": "openai/gsm8k",
     "math500": "HuggingFaceH4/MATH-500",
@@ -95,7 +93,7 @@
     0
   ],
   "resume": true,
-  "completed_before_start": 180,
+  "completed_before_start": 0,
   "early_stop_on_answer": true,
   "ablated_token_budget_multiplier": 6.0,
   "token_budget_ceiling": 8000

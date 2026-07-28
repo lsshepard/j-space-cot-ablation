@@ -1,0 +1,26 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights:  27%|██▋       | 109/398 [00:00<00:00, 1031.19it/s]Loading weights:  54%|█████▎    | 213/398 [00:00<00:00, 349.56it/s] Loading weights:  68%|██████▊   | 270/398 [00:00<00:00, 314.87it/s]Loading weights:  79%|███████▊  | 313/398 [00:00<00:00, 284.23it/s]Loading weights:  87%|████████▋ | 348/398 [00:01<00:00, 273.84it/s]Loading weights:  95%|█████████▌| 379/398 [00:01<00:00, 251.87it/s]Loading weights: 100%|██████████| 398/398 [00:01<00:00, 305.05it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 26.80it/s]
+Generating train split:   0%|          | 0/30 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 30/30 [00:00<00:00, 618.04 examples/s]
+=== cell aime n=15 ===
+aime2024-train-0 direct_clean rseed=0 correct=False graded=-5.944754464285714 len=512 cap=True early_stop=False
+aime2024-train-0 cot_clean rseed=0 correct=True graded=-3.5718885319573537 len=3744 cap=False early_stop=True
+aime2024-train-0 direct_j_ablated rseed=0 correct=False graded=-6.741734095982143 len=512 cap=True early_stop=False
+aime2024-train-0 cot_j_ablated rseed=0 correct=True graded=-6.271205357142857 len=2733 cap=False early_stop=False
+aime2024-train-0 direct_random rseed=0 correct=False graded=-5.727225167410714 len=512 cap=True early_stop=False
+aime2024-train-0 cot_random rseed=0 correct=True graded=-3.2960359709603444 len=3152 cap=False early_stop=True
+aime2024-train-1 direct_clean rseed=0 correct=False graded=-5.509281703404018 len=512 cap=True early_stop=False
+aime2024-train-1 cot_clean rseed=0 correct=False graded=-1.581316317830767 len=8000 cap=True early_stop=False
+aime2024-train-1 direct_j_ablated rseed=0 correct=False graded=-8.227285657610212 len=512 cap=True early_stop=False
+aime2024-train-1 cot_j_ablated rseed=0 correct=False graded=-4.301345723015921 len=8000 cap=True early_stop=False
+aime2024-train-1 direct_random rseed=0 correct=False graded=-5.1767578125 len=512 cap=True early_stop=False
+aime2024-train-1 cot_random rseed=0 correct=False graded=-2.958788071359907 len=8000 cap=True early_stop=False
+aime2024-train-2 direct_clean rseed=0 correct=False graded=-5.271691458565848 len=512 cap=True early_stop=False
+aime2024-train-2 cot_clean rseed=0 correct=False graded=-3.8732079097202847 len=8000 cap=True early_stop=False
+aime2024-train-2 direct_j_ablated rseed=0 correct=False graded=-5.9325392586844305 len=512 cap=True early_stop=False
+aime2024-train-2 cot_j_ablated rseed=0 correct=False graded=-4.676340409687588 len=8000 cap=True early_stop=False
+aime2024-train-2 direct_random rseed=0 correct=False graded=-5.393453053065708 len=512 cap=True early_stop=False
+aime2024-train-2 cot_random rseed=0 correct=False graded=-3.99441967691694 len=8000 cap=True early_stop=False
+aime2024-train-3 direct_clean rseed=0 correct=False graded=-7.31206921168736 len=512 cap=True early_stop=False
+aime2024-train-3 cot_clean rseed=0 correct=False graded=-5.539075255393982 len=8000 cap=True early_stop=False
+aime2024-train-3 direct_j_ablated rseed=0 correct=False graded=-10.322016750063215 len=512 cap=True early_stop=False
