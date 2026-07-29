@@ -439,3 +439,5 @@ math500-test-64-L4 cot_random rseed=0 correct=False graded=-2.8648717403411865 l
 math500-test-67-L4 direct_clean rseed=0 correct=True graded=-5.984408696492513 len=374 cap=False early_stop=False
 math500-test-67-L4 cot_clean rseed=0 correct=True graded=-5.000627497831981 len=1869 cap=False early_stop=False
 math500-test-67-L4 direct_j_ablated rseed=0 correct=True graded=-7.65688427289327 len=333 cap=False early_stop=False
+math500-test-67-L4 cot_j_ablated rseed=0 correct=True graded=-6.734151204427083 len=1472 cap=False early_stop=True
+math500-test-67-L4 direct_random rseed=0 correct=True graded=-5.2904612223307295 len=416 cap=False early_stop=False
