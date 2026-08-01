@@ -95,7 +95,7 @@
     0
   ],
   "resume": true,
-  "completed_before_start": 270,
+  "completed_before_start": 335,
   "early_stop_on_answer": true,
   "ablated_token_budget_multiplier": 6.0,
   "token_budget_ceiling": 8000
