@@ -291,14 +291,13 @@ def plot_band_diagnostic(
     for k in sorted(match_rates_by_topk):
         rates = match_rates_by_topk[k]
         xs = list(range(len(rates)))
-        selected = k == band.select_topk
         ax.plot(
             xs,
             rates,
             marker="o",
-            label=f"lens top-{k}" + (" (select)" if selected else ""),
-            linewidth=2.0 if selected else 1.2,
-            alpha=1.0 if selected else 0.75,
+            label=f"lens top-{k}",
+            linewidth=1.5,
+            alpha=0.9,
         )
     ax.axvspan(
         band.band_start,
@@ -309,7 +308,7 @@ def plot_band_diagnostic(
     )
     ax.set_xlabel("layer")
     ax.set_ylabel("match rate")
-    ax.set_title("Workspace band diagnostic (medium-equivalent single band)")
+    ax.set_title("Workspace band diagnostic")
     ax.legend()
     fig.tight_layout()
     fig.savefig(path)
