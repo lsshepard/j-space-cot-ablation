@@ -181,3 +181,24 @@ python -u scripts/06_run_grid.py --datasets math500 --limit 15 --levels 2 \
 ## Pod shutdown
 
 Grid and orchestrators **killed cleanly** at user request (~19:45 UTC 2026-07-29). Traces flushed to disk.
+
+---
+
+## AIME direct rerun (2026-08-03)
+
+**Branch:** `aime-direct-reruns`  
+**What changed:** Prior AIME direct arms used the uncalibrated 512-token fallback (no `aime` entry in `token_budgets.json`; 93% cap-hit, invalid EM). Added calibrated `aime` block (`direct: 4100`, `cot: 8000`), removed 45 stale direct traces (CoT kept), reran direct arms only via resume on A40 (~2h).
+
+### Verification (post-rerun, n=15 per arm)
+
+| Condition | EM | Cap-hit |
+|---|---:|---:|
+| direct_clean | 0.267 | 4/15 (27%) |
+| direct_j_ablated | 0.267 | 5/15 (33%) |
+| direct_random | 0.333 | 3/15 (20%) |
+
+Direct aggregate: **12/45 cap-hit (27%)**; median trace length **1504** tokens (max 4100). CoT arms unchanged (45 rows preserved).
+
+**Plot regeneration:** `scripts/21_pilot_em_plots.py` and `scripts/22_final_report_plots.py` rerun after direct refresh.
+
+**Backup:** stale direct rows at `grid_aime_pilot/traces.jsonl.pre_direct_rerun`.

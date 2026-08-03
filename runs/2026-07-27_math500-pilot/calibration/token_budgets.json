@@ -14,6 +14,12 @@
       "cot": 9302,
       "direct_p95_observed": 680,
       "cot_p95_observed": 4651
+    },
+    "aime": {
+      "direct": 4100,
+      "cot": 8000,
+      "direct_p95_observed": 680,
+      "cot_p95_observed": 4000
     }
   }
 }

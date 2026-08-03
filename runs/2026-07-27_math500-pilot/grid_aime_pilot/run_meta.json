@@ -24,6 +24,12 @@
         "cot": 9302,
         "direct_p95_observed": 680,
         "cot_p95_observed": 4651
+      },
+      "aime": {
+        "direct": 4100,
+        "cot": 8000,
+        "direct_p95_observed": 680,
+        "cot_p95_observed": 4000
       }
     }
   },
@@ -93,7 +99,7 @@
     0
   ],
   "resume": true,
-  "completed_before_start": 0,
+  "completed_before_start": 45,
   "early_stop_on_answer": true,
   "ablated_token_budget_multiplier": 6.0,
   "token_budget_ceiling": 8000
