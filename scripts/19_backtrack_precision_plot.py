@@ -107,7 +107,7 @@ def main() -> None:
     parser.add_argument(
         "--plot",
         type=Path,
-        default=ROOT / "report_results/backtrack_precision_by_stratum.png",
+        default=ROOT / "report/figures/supplementary/backtrack_precision_by_stratum.png",
     )
     args = parser.parse_args()
 

@@ -12,7 +12,7 @@ Outputs:
 - `runs/backtrack-analysis/regex_summary.json`
 - `runs/backtrack-analysis/judge_sample_jobs.jsonl` (90 spans, 5/cell×condition)
 - `runs/backtrack-analysis/hand_label_template.jsonl` (first 50 for hand labels)
-- `report_results/backtrack_regex_rates.png`
+- `report/figures/supplementary/backtrack_regex_rates.png`
 
 Current pilot inputs: gsm8k + math500 + aime traces (270 CoT arms; L4 complete n=15).
 
@@ -28,8 +28,8 @@ python scripts/20_backtrack_adjusted_plot.py
 Outputs:
 - `runs/backtrack-analysis/precision_by_stratum.json`
 - `runs/backtrack-analysis/adjusted_rates_boot.json`
-- `report_results/backtrack_precision_by_stratum.png`
-- `report_results/backtrack_adjusted_rates_boot.png`
+- `report/figures/supplementary/backtrack_precision_by_stratum.png`
+- `report/figures/supplementary/backtrack_adjusted_rates_boot.png`
 
 Overall PPV ≈ 0.37 (198/539). L4 resampled after trace completion (shared RNG shifts L5 sample too); 158 new spans judged in `judge_batches_l4/`.
 

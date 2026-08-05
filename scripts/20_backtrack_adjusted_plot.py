@@ -91,7 +91,7 @@ def main() -> None:
     parser.add_argument(
         "--plot",
         type=Path,
-        default=ROOT / "report_results/backtrack_adjusted_rates_boot.png",
+        default=ROOT / "report/figures/supplementary/backtrack_adjusted_rates_boot.png",
     )
     parser.add_argument("--n-boot", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=0)

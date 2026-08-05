@@ -30,6 +30,9 @@ runs/**/ablation_token_traces.json
 !runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl
 !runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl.pre_retro_cap.bak
 !runs/2026-07-27_math500-pilot/grid_aime_pilot/traces.jsonl
+!runs/backtrack-analysis/judge_verdicts.jsonl
+!runs/backtrack-analysis/judge_sample_jobs.jsonl
+!runs/backtrack-analysis/*.json
 *.pt
 *.pth
 .cache/

@@ -298,7 +298,7 @@ def plot_protection_with_drops(datasets, out_path: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--plot-dir", type=Path, default=ROOT / "report_results")
+    parser.add_argument("--plot-dir", type=Path, default=ROOT / "report/figures/supplementary")
     args = parser.parse_args()
     plot_dir = args.plot_dir
 

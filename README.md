@@ -1,99 +1,73 @@
 # J-space ablation vs CoT externalization
 
-Homework Zero experiment harness for [CS 2881R](https://boazbk.github.io/mltheoryseminar/hw0-2026/), testing whether CoT protection against J-space ablation shrinks as math difficulty rises ([paper](https://transformer-circuits.pub/2026/workspace/index.html)).
+Replication code and results for *Does Chain-of-Thought Protection Against J-Space Ablation Survive Increasing Difficulty?* (CS 2881R Homework Zero, 2026).
 
-See [preregistration.md](preregistration.md) for hypotheses and disconfirmation conditions (committed before main runs). Design detail: [EXPERIMENT_DESIGN.md](EXPERIMENT_DESIGN.md).
+Tests whether CoT shields Qwen3-4B from Jacobian-lens J-space ablation as math difficulty rises, following [Gurnee et al. (2026)](https://transformer-circuits.pub/2026/workspace/index.html).
 
-## Setup
+## Quick start
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
+python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
+./scripts/reproduce_report.sh    # figures from committed traces (~1 min, no GPU)
+pytest                           # unit tests
 ```
 
-Single config surface: `jspace.config.Settings` / `JSPACE_*` env vars (`JSPACE_MODEL`, `JSPACE_DEVICE`, `JSPACE_DTYPE`, `JSPACE_BAND_START`, `JSPACE_BAND_END`, `JSPACE_K`, `JSPACE_RUN_DIR`, …).
+Paper source: [`report/report_latex.txt`](report/report_latex.txt) · Figures: [`report/figures/final/`](report/figures/final/) · Pre-registration: [`preregistration.md`](preregistration.md)
 
-| Setting | Local (M4) | GPU (authoritative) |
+## Repository map
+
+| Path | Purpose |
+| --- | --- |
+| [`src/jspace/`](src/jspace/) | Core library: generation, ablation hooks, scoring, metrics |
+| [`scripts/`](scripts/README.md) | Numbered pipeline (`00` calibration → `06` grid → `17–24` analysis/plots) |
+| [`runs/`](runs/README.md) | Committed traces, calibration artifacts, RunPod handoffs |
+| [`report/`](report/README.md) | LaTeX source, references, paper + supplementary figures |
+| [`rubrics/`](rubrics/README.md) | Frozen backtrack-judge prompts |
+| [`docs/`](docs/README.md) | Full experiment design spec (pre-implementation) |
+| [`tests/`](tests/) | Fast unit tests (+ optional `pytest -m slow` with weights) |
+
+## Main results (committed traces)
+
+| Cell | Traces | Run folder |
 | --- | --- | --- |
-| Model | `Qwen/Qwen3-0.6B` (default) | `Qwen/Qwen3-4B` |
-| Device / dtype | MPS / fp32 | CUDA / bf16 |
-| Attn | `eager` | `eager` |
+| GSM8K (n=15) | `runs/2026-07-26_gsm8k-pilot/grid_gsm8k_pilot/traces.jsonl` | instrument + easy anchor |
+| MATH L1/L3/L4/L5 (n=15 each) | `runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl` | primary difficulty gradient |
+| AIME 2024 (n=15) | `runs/2026-07-27_math500-pilot/grid_aime_pilot/traces.jsonl` | hard anchor (direct rerun @ 4.1k) |
+| Backtrack judge | `runs/backtrack-analysis/` | 539-span stratified sample |
 
-Local runs validate logic only. Report numbers from the GPU 4B run. The Neuronpedia lens is fit for **Qwen3-4B**; on 0.6B/1.7B the harness uses an identity Jacobian proxy for plumbing only.
-
-## Frozen ablation (instrument-validated on 4B)
+## Frozen science knobs (4B GPU runs)
 
 | Knob | Value |
 | --- | --- |
-| Selection | Top-k activated **J-lens token vectors** \(v_t = J^\top u_t\) by lens logit |
-| Band | **[27, 33]** (manual lock on late-ramp diagnostic; not auto mid-plateau) |
-| `k` | 10 |
-| `exclude_topk` | 10 (clean next-token top-10, position-local) |
-| Prompt tokens | ablated |
-| Control | matched-norm random directions, seeds {0,1,2} |
+| Model | `Qwen/Qwen3-4B`, bf16, CUDA |
+| Band | layers **[27, 31]**, k=10, exclude clean top-10 |
+| Token ceiling | 8000; ablated arms ≥ 6× clean p95 |
+| Decoding | greedy, seed 0, early-stop on scorable answer |
+| Attn | `sdpa` on A40 (eager OOMs on long dual-KV ablation) |
 
-Instrument gate: exact-match on multihop items the model gets right, with J ≫ random. See `runs/2026-07-26_instrument-run5/HANDOFF.md`.
+Instrument gate: Anthropic 93-item multihop set (`tests/fixtures/lens-eval-multihop.json`), J below clean and random — see `runs/2026-07-26_band31-check/`.
 
-## Runs layout
+## Re-running experiments (GPU)
 
-All experiment outputs go under [`runs/`](runs/README.md): one dated folder per session (`YYYY-MM-DD_<slug>/`), plus `HANDOFF.md`. Default write path is `runs/active` (`JSPACE_RUN_DIR` to override).
+Full grid reproduction requires a GPU, HF access, and the pre-fitted lens from `neuronpedia/jacobian-lens`. See [`scripts/README.md`](scripts/README.md) for the `00`→`06` pipeline and [`runs/2026-07-27_math500-pilot/README.md`](runs/2026-07-27_math500-pilot/README.md) for the A40 runbook.
 
-Token budgets: `scripts/00_calibrate_token_budgets.py` → `<run_dir>/calibration/token_budgets.json` (probe ceiling vs final cap; ablated arms ≥ 3× observed clean p95).
+Set `JSPACE_RUN_DIR` to a dated folder under `runs/` before launching.
 
-## Datasets (homework-fixed)
+## Limitations (disclose in paper)
 
-| Dataset | HF repo | Notes |
-| --- | --- | --- |
-| GSM8K | `openai/gsm8k` | easy anchor |
-| MATH-500 | `HuggingFaceH4/MATH-500` | levels 1–5 = primary axis |
-| AIME | `HuggingFaceH4/aime_2024` | **n = 30** (2024 I+II); no silent year mixing |
+- Direct arm uses `enable_thinking=False` but prompts still request step-by-step solutions; contrast is thinking-mode off vs on, not answer-only vs CoT.
+- Single ablation band (not paper strength sweep); n=15/cell; MATH L2 omitted.
+- AIME direct re-budgeted after initial 512-token fallback; CoT arms hit cap on hard cells.
+- Number-token J-space loading ≈ 0 on calibration probes.
 
-Target ~50 problems/cell for GSM8K and MATH levels; AIME uses the full set.
+## Citation
 
-## Script order
-
-```bash
-export JSPACE_MODEL=Qwen/Qwen3-4B JSPACE_DEVICE=cuda JSPACE_DTYPE=bfloat16
-# optional: export JSPACE_RUN_DIR=runs/$(date +%F)_my-run
-
-python scripts/00_calibrate_token_budgets.py --datasets gsm8k,math500,aime --problems-per-dataset 5
-python scripts/01_harness_smoke.py --limit 5
-python scripts/02_lens_sanity.py
-python scripts/03_band_and_loading.py --n-prompts 64
-# review band plot; override with --band-start/--band-end if needed
-python scripts/04_multihop_gate.py --band-start 27 --band-end 33
-python scripts/05_timing_probe.py --band-start 27 --band-end 33
-python scripts/06_run_grid.py --band-start 27 --band-end 33
-python scripts/07_judge_backtracks.py --traces runs/.../traces.jsonl
+```bibtex
+@misc{shepard2026jspacecot,
+  author = {Liam Robert Shepard},
+  title  = {Does Chain-of-Thought Protection Against J-Space Ablation Survive Increasing Difficulty?},
+  year   = {2026},
+  howpublished = {\url{https://github.com/lsshepard/j-space-cot-ablation}}
+}
 ```
-
-Instrument helpers (optional): `09`–`13` (probes, gold-lp triad, token trace, EM CIs).
-
-## GPU runbook
-
-1. Rent single A100 / L40S; install deps; set `JSPACE_*` as above.
-2. Run **00 → 05** (budgets, lens, band, multihop gate, timing). Fail closed on gates.
-3. Lock band/k from the 4B diagnostic (local band is throwaway).
-4. Run **06** (resumes by default); size GSM8K/MATH cells from the timing probe; AIME = all 30.
-5. Offline: **07** + hand-label ~30–50 spans.
-
-## Disclosure checklist (report)
-
-- Single medium-equivalent band (not paper strength sweep); locked `[27,33]` on a late-ramp curve.
-- Ablation = J-lens **token** directions (not SVD of J); refill-to-k after exclusion; Gram–Schmidt span projection.
-- Selection/holding mechanism is a conjecture beyond the paper’s two-hop evidence.
-- Instrument validated on factual multihop (clean-correct EM); number-token loading ≈ 0 — math CoT may differ.
-- AIME n=30 + floor risk → widest CIs on the hard anchor.
-
-## Tests
-
-```bash
-pytest                 # fast suite (no weights)
-pytest -m slow         # optional model-backed (incl. lens agreement)
-```
-
-## Lens
-
-Pre-fitted Jacobian lens via `jlens` from `neuronpedia/jacobian-lens`
-(`qwen3-4b/jlens/Salesforce-wikitext/Qwen3-4B_jacobian_lens.pt`).

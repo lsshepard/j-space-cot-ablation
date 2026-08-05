@@ -1,0 +1,172 @@
+{
+  "n_cot_traces": 270,
+  "cells": [
+    "aime",
+    "gsm8k",
+    "math500_L1",
+    "math500_L3",
+    "math500_L4",
+    "math500_L5"
+  ],
+  "conditions": [
+    "cot_clean",
+    "cot_j_ablated",
+    "cot_random"
+  ],
+  "strata": {
+    "aime::cot_clean": {
+      "cell": "aime",
+      "condition": "cot_clean",
+      "n_traces": 15,
+      "mean_count": 14.533333333333333,
+      "mean_rate": 0.002118003566590406,
+      "total_markers": 218
+    },
+    "aime::cot_j_ablated": {
+      "cell": "aime",
+      "condition": "cot_j_ablated",
+      "n_traces": 15,
+      "mean_count": 5.933333333333334,
+      "mean_rate": 0.0008195887522384685,
+      "total_markers": 89
+    },
+    "aime::cot_random": {
+      "cell": "aime",
+      "condition": "cot_random",
+      "n_traces": 15,
+      "mean_count": 15.8,
+      "mean_rate": 0.002307696736776061,
+      "total_markers": 237
+    },
+    "gsm8k::cot_clean": {
+      "cell": "gsm8k",
+      "condition": "cot_clean",
+      "n_traces": 15,
+      "mean_count": 2.2,
+      "mean_rate": 0.002566855828794521,
+      "total_markers": 33
+    },
+    "gsm8k::cot_j_ablated": {
+      "cell": "gsm8k",
+      "condition": "cot_j_ablated",
+      "n_traces": 15,
+      "mean_count": 1.1333333333333333,
+      "mean_rate": 0.0005254555876676776,
+      "total_markers": 17
+    },
+    "gsm8k::cot_random": {
+      "cell": "gsm8k",
+      "condition": "cot_random",
+      "n_traces": 15,
+      "mean_count": 2.6,
+      "mean_rate": 0.002426758533381401,
+      "total_markers": 39
+    },
+    "math500_L1::cot_clean": {
+      "cell": "math500_L1",
+      "condition": "cot_clean",
+      "n_traces": 15,
+      "mean_count": 4.533333333333333,
+      "mean_rate": 0.002673114248027841,
+      "total_markers": 68
+    },
+    "math500_L1::cot_j_ablated": {
+      "cell": "math500_L1",
+      "condition": "cot_j_ablated",
+      "n_traces": 15,
+      "mean_count": 3.0,
+      "mean_rate": 0.0009073153643049659,
+      "total_markers": 45
+    },
+    "math500_L1::cot_random": {
+      "cell": "math500_L1",
+      "condition": "cot_random",
+      "n_traces": 15,
+      "mean_count": 5.333333333333333,
+      "mean_rate": 0.002065917490362752,
+      "total_markers": 80
+    },
+    "math500_L3::cot_clean": {
+      "cell": "math500_L3",
+      "condition": "cot_clean",
+      "n_traces": 15,
+      "mean_count": 5.0,
+      "mean_rate": 0.002097754104971615,
+      "total_markers": 75
+    },
+    "math500_L3::cot_j_ablated": {
+      "cell": "math500_L3",
+      "condition": "cot_j_ablated",
+      "n_traces": 15,
+      "mean_count": 2.533333333333333,
+      "mean_rate": 0.0004753310971915373,
+      "total_markers": 38
+    },
+    "math500_L3::cot_random": {
+      "cell": "math500_L3",
+      "condition": "cot_random",
+      "n_traces": 15,
+      "mean_count": 4.333333333333333,
+      "mean_rate": 0.002029297691124408,
+      "total_markers": 65
+    },
+    "math500_L4::cot_clean": {
+      "cell": "math500_L4",
+      "condition": "cot_clean",
+      "n_traces": 15,
+      "mean_count": 8.333333333333334,
+      "mean_rate": 0.002071541660978929,
+      "total_markers": 125
+    },
+    "math500_L4::cot_j_ablated": {
+      "cell": "math500_L4",
+      "condition": "cot_j_ablated",
+      "n_traces": 15,
+      "mean_count": 5.733333333333333,
+      "mean_rate": 0.0009713683937053305,
+      "total_markers": 86
+    },
+    "math500_L4::cot_random": {
+      "cell": "math500_L4",
+      "condition": "cot_random",
+      "n_traces": 15,
+      "mean_count": 7.6,
+      "mean_rate": 0.0020047957970662214,
+      "total_markers": 114
+    },
+    "math500_L5::cot_clean": {
+      "cell": "math500_L5",
+      "condition": "cot_clean",
+      "n_traces": 15,
+      "mean_count": 8.266666666666667,
+      "mean_rate": 0.0020190218158835254,
+      "total_markers": 124
+    },
+    "math500_L5::cot_j_ablated": {
+      "cell": "math500_L5",
+      "condition": "cot_j_ablated",
+      "n_traces": 15,
+      "mean_count": 4.133333333333334,
+      "mean_rate": 0.0007371910292071338,
+      "total_markers": 62
+    },
+    "math500_L5::cot_random": {
+      "cell": "math500_L5",
+      "condition": "cot_random",
+      "n_traces": 15,
+      "mean_count": 7.8,
+      "mean_rate": 0.001882034037354453,
+      "total_markers": 117
+    }
+  },
+  "overall_mean_rate": 0.0017055023186459584,
+  "overall_mean_count": 6.044444444444444,
+  "n_candidate_spans": 4943,
+  "n_judge_sample": 539,
+  "per_stratum": 30,
+  "trace_sources": [
+    "/Users/liamshepard/Desktop/Skole/semester 7/AI safety/H0/j-space-cot-ablation/runs/2026-07-26_gsm8k-pilot/grid_gsm8k_pilot/traces.jsonl",
+    "/Users/liamshepard/Desktop/Skole/semester 7/AI safety/H0/j-space-cot-ablation/runs/2026-07-27_math500-pilot/grid_math500_pilot/traces.jsonl",
+    "/Users/liamshepard/Desktop/Skole/semester 7/AI safety/H0/j-space-cot-ablation/runs/2026-07-27_math500-pilot/grid_aime_pilot/traces.jsonl"
+  ]
+}

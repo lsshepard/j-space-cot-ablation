@@ -126,7 +126,7 @@ def main() -> None:
     parser.add_argument(
         "--plot-dir",
         type=Path,
-        default=ROOT / "report_results",
+        default=ROOT / "report/figures/supplementary",
     )
     parser.add_argument("--per-stratum", type=int, default=5)
     parser.add_argument("--seed", type=int, default=0)

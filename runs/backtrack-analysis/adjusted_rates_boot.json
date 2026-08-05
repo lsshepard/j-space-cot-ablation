@@ -1,0 +1,146 @@
+{
+  "aime::cot_clean": {
+    "cell": "aime",
+    "condition": "cot_clean",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0008472014266361625,
+    "ci_lo": 0.0006771035238221026,
+    "ci_hi": 0.001047194252620613
+  },
+  "aime::cot_j_ablated": {
+    "cell": "aime",
+    "condition": "cot_j_ablated",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.00016391775044769367,
+    "ci_lo": 0.00011391775044769368,
+    "ci_hi": 0.00021687705817782657
+  },
+  "aime::cot_random": {
+    "cell": "aime",
+    "condition": "cot_random",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0006923090210328182,
+    "ci_lo": 0.0005780126059302304,
+    "ci_hi": 0.0008157136087649318
+  },
+  "gsm8k::cot_clean": {
+    "cell": "gsm8k",
+    "condition": "cot_clean",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0012834279143972606,
+    "ci_lo": 0.000976400592217906,
+    "ci_hi": 0.001582298353319041
+  },
+  "gsm8k::cot_j_ablated": {
+    "cell": "gsm8k",
+    "condition": "cot_j_ablated",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0002717873729315574,
+    "ci_lo": 0.00010264047599340495,
+    "ci_hi": 0.0004953311650408602
+  },
+  "gsm8k::cot_random": {
+    "cell": "gsm8k",
+    "condition": "cot_random",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0011324873155779869,
+    "ci_lo": 0.0009556057541909373,
+    "ci_hi": 0.0013273763623148007
+  },
+  "math500_L1::cot_clean": {
+    "cell": "math500_L1",
+    "condition": "cot_clean",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0009801418909435417,
+    "ci_lo": 0.0007946472613793527,
+    "ci_hi": 0.0011770349566874345
+  },
+  "math500_L1::cot_j_ablated": {
+    "cell": "math500_L1",
+    "condition": "cot_j_ablated",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.000302438454768322,
+    "ci_lo": 0.0001848728112357777,
+    "ci_hi": 0.00043784648858018633
+  },
+  "math500_L1::cot_random": {
+    "cell": "math500_L1",
+    "condition": "cot_random",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0006886391634542507,
+    "ci_lo": 0.0005654241044976904,
+    "ci_hi": 0.0008150541535421826
+  },
+  "math500_L3::cot_clean": {
+    "cell": "math500_L3",
+    "condition": "cot_clean",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.00041955082099432307,
+    "ci_lo": 0.00036133352705671384,
+    "ci_hi": 0.0004851492779018979
+  },
+  "math500_L3::cot_j_ablated": {
+    "cell": "math500_L3",
+    "condition": "cot_j_ablated",
+    "n_traces": 15,
+    "mean_adjusted_rate": 1.5844369906384575e-05,
+    "ci_lo": 8.986740289985727e-06,
+    "ci_hi": 2.6131879543094495e-05
+  },
+  "math500_L3::cot_random": {
+    "cell": "math500_L3",
+    "condition": "cot_random",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0006764325637081359,
+    "ci_lo": 0.0005605257243134293,
+    "ci_hi": 0.0008135706044977766
+  },
+  "math500_L4::cot_clean": {
+    "cell": "math500_L4",
+    "condition": "cot_clean",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0013119763852866549,
+    "ci_lo": 0.001106732471349964,
+    "ci_hi": 0.0015350085658566517
+  },
+  "math500_L4::cot_j_ablated": {
+    "cell": "math500_L4",
+    "condition": "cot_j_ablated",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0005504420897663539,
+    "ci_lo": 0.0003851444336765951,
+    "ci_hi": 0.0007221412706097838
+  },
+  "math500_L4::cot_random": {
+    "cell": "math500_L4",
+    "condition": "cot_random",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0008019183188264886,
+    "ci_lo": 0.0006562189706821411,
+    "ci_hi": 0.0009370039277484554
+  },
+  "math500_L5::cot_clean": {
+    "cell": "math500_L5",
+    "condition": "cot_clean",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0008076087263534104,
+    "ci_lo": 0.0006849903303398779,
+    "ci_hi": 0.0009573690817931917
+  },
+  "math500_L5::cot_j_ablated": {
+    "cell": "math500_L5",
+    "condition": "cot_j_ablated",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.00024573034306904463,
+    "ci_lo": 0.00015749781543875215,
+    "ci_hi": 0.000347178445632491
+  },
+  "math500_L5::cot_random": {
+    "cell": "math500_L5",
+    "condition": "cot_random",
+    "n_traces": 15,
+    "mean_adjusted_rate": 0.0005646102112063358,
+    "ci_lo": 0.0004652178624783588,
+    "ci_hi": 0.0006676067845097244
+  }
+}

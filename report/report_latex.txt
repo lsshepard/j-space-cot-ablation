@@ -1,0 +1,184 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=0.75in]{geometry}
+\setlength{\columnsep}{18pt}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titling}
+\setlength{\droptitle}{-3.5em}
+\emergencystretch=2em
+\raggedbottom
+
+\title{Does Chain-of-Thought Protection Against J-space Ablation Survive Increasing Difficulty?}
+\author{Liam Robert Shepard\\CS 2881R Homework Zero – August 2026\\2.8 pages of prose excluding figures, tables, and references\\Repo: https://github.com/lsshepard/j-space-cot-ablation}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We test whether the protection chain-of-thought gives against J-space ablation weakens as math problems get harder, using Qwen3-4B on GSM8K, MATH-500 by level, and AIME 2024. On exact-match accuracy the prediction is unresolved: ablation inflates chain-of-thought length until it hits the token budget, so at the hard end a genuine effect and a truncation artifact cannot be separated, and the graded route that would bypass this is contaminated on the reasoned arm. The one budget-robust difficulty test we have, whether the backtracking gap widens, shows no trend. The clean positive results are that J-ablation lowers the correct answer's log-probability by one to two nats on the direct arm where a norm-matched random ablation does not, and that it reduces effective backtracking below the random control in every cell. The study is compute-bound: fifteen-problem cells give low power and token budget caps hide the mechanism at the hard end, leaving the difficulty question to a higher-budget run.
+\end{abstract}
+
+%==============================================================================
+\section{Hypothesis}
+%==============================================================================
+
+Recent work~\cite{workspace} showed that LLMs maintain a verbalizable internal workspace, the J-space, that mediates their reasoning. Ablating this space (J-ablation) significantly degrades a model's reasoning ability, but this effect is weaker for chain-of-thought (CoT) models. Gurnee et al.\ interpret this as an internal-external trade-off in which the CoT model can externalize its workspace intermediates onto the page. We investigate whether this trade-off holds as problem difficulty increases.
+
+We hypothesize that while CoT reasoning can substitute some J-space functionality, it is not equivalent, and that the discrepancies become impactful the more reasoning-intensive the task is. To formalize our hypothesis, we quantify the substitution as the accuracy chain of thought preserves under ablation:
+\[
+  \text{CoT-protection} \;=\; (\mathrm{direct}_{\mathrm{clean}} - \mathrm{direct}_{J}) - (\mathrm{cot}_{\mathrm{clean}} - \mathrm{cot}_{J}),
+\]
+the amount by which ablation costs the direct answer more than the reasoned one. Our main hypothesis then becomes: as task difficulty increases, CoT-protection will shrink towards zero.
+
+Furthermore, we concretize the mechanism through which we expect CoT-protection to fall. Abstractly, J-space functionality can be divided into transmission and flexible mutation. Transmission refers to latent states in J-space being available downstream, and is what can be replaced by externalizing tokens onto a page and rereading them with attention. Flexible mutation is the J-space's ability to modify the latent state between layers in an appropriate way that progresses reasoning beyond practiced structure. Being latent and dynamic, it cannot be replaced by CoT, and we expect it to degrade comparably in both modes under J-ablation. As problem difficulty increases, the model becomes reasoning-bound, flexible mutation dominates as a bottleneck, and CoT-protection decreases. Because these two functions are difficult to separate, measuring flexible mutation falls outside our scope; instead we use backtracking as a proxy. Backtracking a reasoning trace requires breaking the local congruency LLMs typically follow, and therefore marks a significant state mutation. Our mechanism hypothesis then becomes: CoT backtracking normalized by trace length decreases more than a strength-matched random control during J-ablation, and this decrease scales with problem difficulty.
+
+%==============================================================================
+\section{Experiment design}
+%==============================================================================
+
+The core comparison crosses reasoning mode with ablation condition in six arms: direct and chain-of-thought answers, each run clean, with J-ablation, and with a random-direction control matched to the J-ablation in perturbation norm. The direct-versus-reasoned contrast is the externalization axis the hypothesis rides on; the clean-versus-ablated contrast measures each mode's damage; and the matched control, expected to hurt but less than J-ablation, separates a workspace-specific effect from the generic cost of removing residual-stream directions. MATH-500 by level is the primary gradient because its format and scoring stay fixed while only difficulty changes; GSM8K and AIME 2024 bracket it as easy and olympiad-hard anchors, though cross-dataset comparisons confound difficulty with format.
+
+Two hazards can manufacture or bury the interaction. Performance ceilings and floors occur on problem sets where the model gets almost all or almost none right, driving CoT-protection toward zero because all arms then score about equally. Token budget caps truncate traces that exceed their maximum, but are necessary given limited compute and non-converging traces. Removing these hazards is out of scope; we make them visible by logging token usage and cap hits, and keep floors and ceilings analyzable by storing the teacher-forced probability of the correct answer.
+
+%==============================================================================
+\section{Experimental details}
+%==============================================================================
+
+\textbf{Model and ablation.} We use Qwen3-4B in bfloat16 with a pre-fitted Jacobian lens. J-ablation projects out the span of the top $k{=}10$ active J-lens token directions in layers 27--31, at every position in both modes. Any that coincide with the clean next-token top ten are excluded, so the cut spares the imminent output rather than the internal reasoning; the set is then refilled to $k$ and orthogonalized before projection. The random control removes ten random directions from the same band at matched perturbation norm, redrawn at each layer and position from a single base seed. Decoding is greedy with a fixed seed, one trace per problem and arm. The direct arm sets \texttt{enable\_thinking=False}, which suppresses Qwen3's thinking channel; decoding stops as soon as a scorable answer appears.
+
+\textbf{Calibration.} Two checks preceded the grid (Fig.~\ref{fig:calib}). The band diagnostic measures where the lens's readout matches the model's actual next token: the match rate rises in two stages, first across layers 27--31 (the workspace band we ablate) and again across 31--34 as the representation converges on the output. As a positive control, on 93 two-hop factual questions from the paper's multi-hop lens evaluation~\cite{workspace}, J-ablation lowers accuracy to 0.30 against 0.37 clean and 0.35 for the matched control, consistent with a reasoning-specific rather than indiscriminate cut.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.44\linewidth]{figures/final/band_selection.png}\hspace{0.04\linewidth}%
+\includegraphics[width=0.25\linewidth]{figures/supplementary/multihop_em_n93_27_31.png}
+\caption{Calibration. Left: lens--model next-token match rate by layer; the workspace band $[27,31]$ (shaded) is ablated. Right: two-hop factual positive control ($n{=}93$); J-ablation sits below clean and the matched random control.}
+\label{fig:calib}
+\end{figure*}
+
+\textbf{Datasets and scoring.} The grid is six difficulty cells (GSM8K, MATH-500 levels 1, 3, 4, and 5, with level 2 omitted as level 3 already nears the ceiling, and AIME 2024), each sampled to fifteen problems and run through all six arms. AIME uses \texttt{HuggingFaceH4/aime\_2024}, the thirty 2024 problems (parts I and II), of which the first fifteen in dataset order are taken. The sample is small because every problem is decoded six times and the ablated arms run a clean and an ablated forward pass at each token, so fifteen keeps the $6\times6$ grid within our compute budget. Answers are scored by exact match, taking the final integer for GSM8K, a boxed expression checked for mathematical equivalence for MATH-500, and an integer in $0$--$999$ for AIME, with unextractable answers logged separately from wrong ones.
+
+\textbf{Token budgets.} Each arm is capped at roughly six times the longest clean trace seen in a five-problem calibration, under an 8000-token ceiling (lower on the easier cells). Uncapped decoding is not viable because ablated chains of thought tend not to terminate: prior work on thinking-budget saturation~\cite{budget} finds accuracy plateaus within a few hundred tokens on GSM8K and MATH-500, while AIME is bimodal, with some traces never terminating.
+
+\textbf{Metrics.} Accuracy and protection are reported per cell with 95\% intervals from 10{,}000 bootstrap resamples over the fifteen problems, protection computed per problem so its interval reflects within-problem pairing. Cap-hit is the fraction of traces reaching the cap. The graded readout is the teacher-forced log-probability of the gold answer appended after the model's own prefix, reported as the paired clean-minus-ablated difference in nats (one nat is an $e$-fold change in probability), as point estimates without intervals; positive means ablation lowered the correct answer's probability.
+
+\textbf{Effective backtracking.} Reversal markers are counted by regular expression; an LLM judge labels a stratified sample (about 30 per stratum, 539 spans over 270 traces) for genuine changes of approach. Since the judge agrees with the markers only 38\% of the time, each stratum's marker rate is multiplied by the judge's precision and normalized by trace length, with a 95\% bootstrap interval over traces; the raw count is the uncalibrated markers per trace, shown to rule out a normalization artifact.
+
+
+%==============================================================================
+\section{Experimental results}
+%==============================================================================
+
+Exact-match accuracy is reported in Table~\ref{tab:em}. Clean accuracy broadly declines with difficulty, from 0.93 on GSM8K to 0.67--0.73 at MATH levels 4--5 and 0.27--0.47 on AIME, though not monotonically: L1 at 0.87 sits below GSM8K, and L3 is the maximum at 1.00. J-ablation moves accuracy little: the largest direct drop is 0.20 (level 3), most cells do not move, and the matched random control moves comparably, even raising the reasoned GSM8K arm to 1.00. On the direct arm, J-ablation is the minimum or tied for the minimum in every cell, which the random control is not.
+
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l ccc @{\hskip 7pt} ccc}
+\toprule
+& \multicolumn{3}{c}{Direct} & \multicolumn{3}{c}{CoT} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+Cell & cln & $J$ & rnd & cln & $J$ & rnd \\
+\midrule
+GSM8K & 0.93 & 0.80 & 0.93 & 0.93 & 0.87 & 1.00 \\
+L1    & 0.87 & 0.87 & 0.87 & 0.87 & 0.87 & 0.87 \\
+L3    & 1.00 & 0.80 & 1.00 & 0.93 & 0.87 & 0.93 \\
+L4    & 0.67 & 0.67 & 0.67 & 0.67 & 0.60 & 0.73 \\
+L5    & 0.73 & 0.67 & 0.67 & 0.73 & 0.60 & 0.73 \\
+AIME  & 0.27 & 0.27 & 0.33 & 0.47 & 0.20 & 0.33 \\
+\bottomrule
+\end{tabular}
+\caption{Exact-match accuracy ($n{=}15$/cell). The clean/$J$/random ordering is the informative feature, not any single gap.}
+\label{tab:em}
+\end{table}
+
+CoT-protection is shown in Fig.~\ref{fig:prot}. The point estimates run $+0.07$, $0.00$, $+0.13$, $-0.07$, $-0.07$, and $-0.27$ from GSM8K through the MATH levels to AIME; every 95\% interval crosses zero and the intervals overlap. The easy cells, where all arms sit near the accuracy ceiling, are pinned near zero.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/final/cot_protection_all.png}
+\caption{CoT-protection by cell with 95\% bootstrap intervals. Every interval crosses zero; the negative AIME estimate is confounded by floor effects and truncation (see text).}
+\label{fig:prot}
+\end{figure}
+
+Trace length and truncation are shown in Fig.~\ref{fig:tok} and Table~\ref{tab:cap}. The ablated chain of thought is the longest arm in every cell, its median exhausting the 8000-token ceiling from level 3 onward, and it hits the cap 40 to 87\% of the time against 0 to 20\% for the random control outside AIME, where the control also truncates heavily at 67\%. The $-0.27$ protection at AIME decomposes into the reasoned arm falling from 0.47 to 0.20 while the direct arm holds at 0.27, and the reasoned arm hits the cap on 87\% of AIME traces, so the cell the estimate hinges on is also the one where the control is least clean. Suppressing the thinking channel does not fully suppress reasoning on the page: direct-arm token usage climbs with difficulty, from a median of 180 on GSM8K to 1132 on AIME, and since decoding halts at the first scorable answer those tokens are work shown before it.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/final/token_usage_by_set.png}
+\caption{Per-arm token usage (box: p25--p75, line: median, whiskers: p10/p90). The ablated chain of thought is the longest arm everywhere and saturates the ceiling on the harder cells, the externalization the mechanism predicts and the source of the budget confound.}
+\label{fig:tok}
+\end{figure*}
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{lccc}
+\toprule
+Chain-of-thought cap-hit & clean & $J$ & random \\
+\midrule
+GSM8K   &  7\% & 40\% &  0\% \\
+MATH L1 &  7\% & 47\% &  7\% \\
+MATH L3 &  0\% & 73\% &  0\% \\
+MATH L4 & 13\% & 60\% &  7\% \\
+MATH L5 & 27\% & 53\% & 20\% \\
+AIME    & 47\% & 87\% & 67\% \\
+\bottomrule
+\end{tabular}
+\caption{Fraction of chain-of-thought traces exhausting the token cap; the ablated arm truncates far more than clean or the control, contaminating hard-cell accuracy. Direct arms stay under 13\% except AIME (clean 27\%, $J$ 33\%).}
+\label{tab:cap}
+\end{table}
+
+The graded readout is reported in Table~\ref{tab:lp}. On the direct arm, J-ablation lowers the correct answer's probability by 1.2 to 2.0 nats in every cell, while the matched random control moves it by less than 0.25 nats. The drop appears even where accuracy is identical across arms, as at level 4, where all three direct arms score 0.67. On the reasoned arm the same difference is noisy and changes sign across cells.
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lcc}
+\toprule
+Cell & clean$-J$ & clean$-$rand \\
+\midrule
+GSM8K & 1.77 & $-$0.11 \\
+L1    & 1.16 & $-$0.23 \\
+L3    & 1.25 & $-$0.11 \\
+L4    & 2.01 & $-$0.24 \\
+L5    & 1.65 & $-$0.19 \\
+AIME  & 1.68 & $-$0.16 \\
+\bottomrule
+\end{tabular}
+\caption{Direct-arm drop in the teacher-forced log-probability of the correct answer (nats), clean minus ablated. J-ablation costs 1--2 nats in every cell; the matched control costs nothing, so the cost tracks the J-directions more than arbitrary ones, and appears even where accuracy is unchanged.}
+\label{tab:lp}
+\end{table}
+
+Effective backtracking is shown in Fig.~\ref{fig:bt}. The robust signal is the raw reversal-marker count (bottom): the ablated arm has the fewest in every cell despite producing the longest traces, so the reduction is assumption-free and not a length effect. The judge-calibrated rate (top) shows the same ordering with non-overlapping intervals in five cells, but those intervals resample traces only and hold the per-stratum precision fixed; that precision is itself estimated from about 30 spans and ranges from 0.03 to 0.63, so the calibrated intervals understate uncertainty. The 0.03 low end is the L3 ablated stratum, which is why that cell's calibrated ablated rate collapses to near zero in the top panel while its raw count does not: there the separation is precision noise and should not be counted among the five. The ablated-minus-random gap is largest at GSM8K and does not grow toward AIME.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{figures/final/backtrack_rate_and_count.png}
+\caption{Effective backtracking. Top: judge-precision-calibrated, length-normalized rate with 95\% bootstrap intervals; the near-zero L3 ablated bar reflects that stratum's precision estimate (0.03), not a real collapse. Bottom: raw reversal-marker count per trace, which cannot be a normalization artifact, is lowest for the ablated arm in every cell and carries the result; the calibrated rate agrees. The ablated-minus-random gap does not grow with difficulty.}
+\label{fig:bt}
+\end{figure*}
+
+
+%==============================================================================
+\section{Analysis of results}
+%==============================================================================
+
+The main difficulty prediction gets no clean test. The accuracy route is confounded: J-ablation inflates chain-of-thought length several-fold and pushes the reasoned arm into the token budget, so at the hard end genuine ablation-induced failure and truncation of traces that would have converged with more budget move CoT-protection together and cannot be separated here; every protection interval crosses zero, so the design excludes only large trends, not small ones. The small sample and budget caps are costs fixed in advance, not signs the effect is absent. The one cell that could carry a sign, AIME, is also the least trustworthy: its direct arm is floored, and a clean direct-arm accuracy of 0.27 on AIME 2024 for a 4B model is high enough to raise the prospect of partial answer recall inflating that arm. The graded route that would bypass the confound is blocked too: protection is a difference of arms, and the chain-of-thought arm's log-probability is itself truncation-contaminated (§4), so the flat direct-arm effect below characterizes direct-arm damage, not protection. The main hypothesis is therefore untested here; only the mechanism sub-prediction has a budget-robust measurement, and it is not borne out (below). Post-hoc separation fails: conditioning on terminated traces is confounded by convergence correlating with correctness, and the capped ablated failures contain the correct answer in about half of MATH cases but a third on AIME, a difficulty-dependent mixture rather than a uniform artifact.
+
+The graded readout supplies the cleanest positive result. On the budget-clean direct arm, J-ablation costs one to two nats of confidence in the correct answer in every cell, while a norm-matched random ablation costs nothing. This specific effect on math reasoning is real even though exact-match accuracy is too coarse to register it, which shows the accuracy null does not come from an inert intervention. The effect shows no ordering with difficulty, though Table~\ref{tab:lp} carries point estimates only, so this is read off the values rather than tested. This bears on instrument validity while leaving the level of protection open. The workspace's footprint on math is real but modest, consistent with the selectivity Gurnee et al.\ report, since much arithmetic is automatic and bypasses the workspace.
+
+The mechanism arm gives the study's most robust positive result: the assumption-free raw-count reduction of §4 tracks the J-directions more than arbitrary ones and is at least partly independent of the budget confound. As trace-level evidence it is indirect, since a drop in course-correction is consistent with flexible mutation being workspace-bound without isolating it, and the finer prediction that the gap widens with difficulty is not borne out.
+
+Several alternative explanations remain open. If the direct arm externalizes too, protection contrasts more against less externalization rather than internal against external, and since leakage grows with difficulty it shrinks protection exactly as the hypothesis predicts. The backtracking drop may partly reflect a failure to stop rather than to change course, or degenerate repetition, which likewise yields long traces with few reversal markers, and the small accuracy effect may be an artifact of the lens using single-token directions. The control is also weak: projecting out ten random directions from a roughly 2500-dimensional residual stream removes little the model relies on, and Table~\ref{tab:lp} bears this out, with the control never lowering the gold probability in any cell, contrary to our §2 expectation that it too would hurt. Since those directions are redrawn per layer and position, the uniform near-zero control is not a seed artifact; it means only that J-directions matter more than arbitrary ones. We claim no difficulty law; the workspace's role in math surfaces in course-correction and graded confidence more than in accuracy. The next steps follow from these limits: raise the token budget, or more cheaply teacher-force the gold answer after a fixed-length prefix in every arm to make protection budget-invariant by construction, and add a non-convergence detector (prototyped as an activation probe in the budget work we build on) to separate the two hard-cell mechanisms; enforce the direct arm with a format constraint or answer-position prefill rather than the thinking-mode toggle alone; draw the control from lower-ranked lens directions to test J-specificity harder; increase problems per cell, concentrated on the intermediate MATH levels where the effect is separable from the budget confound; and adopt a multi-token or math-tuned lens with step-level causal interventions to tie a workspace direction to a specific mutation.
+
+\begin{thebibliography}{9}
+\bibitem{workspace} W.~Gurnee, N.~Sofroniew, A.~Pearce, et al.\ \emph{Verbalizable Representations Form a Global Workspace in Language Models.} Transformer Circuits Thread, Anthropic, July 2026.
+\bibitem{budget} R.~Oladri, N.~Jawahar, and A.~Mohamed.\ \emph{Token Budget Saturation and Mechanistic Early-Detection of Reasoning Non-Convergence in Chain-of-Thought Models.} arXiv:2607.21433, 2026.
+\end{thebibliography}
+
+\end{document}

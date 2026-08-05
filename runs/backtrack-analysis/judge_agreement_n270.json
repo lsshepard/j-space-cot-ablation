@@ -1,0 +1,6 @@
+{
+  "n_jobs": 270,
+  "n_verdicts": 270,
+  "regex_judge_agreement": 0.37777777777777777,
+  "judge_positive_rate": 0.37777777777777777
+}

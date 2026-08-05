@@ -173,8 +173,7 @@ CAP_HIT_FOOTNOTE = (
 )
 
 TOKEN_USAGE_FOOTNOTE = (
-    "Budget cap per bar under arm label. "
-    "AIME direct uses uncalibrated 512-token fallback."
+    "Budget cap per bar under arm label; ablated arms up to 6x clean, ceiling 8k."
 )
 
 
@@ -183,7 +182,7 @@ BAR_CENTERS = (-0.42, 0.0, 0.42)
 BAR_XLIM = (-0.68, 0.68)
 FACET_COL_WIDTH = 2.1
 FACET_WSPACE = 0.32
-FACET_HSPACE = 0.38
+FACET_HSPACE = 0.75
 
 
 def _make_facet_axes(nrows: int, ncols: int, *, height_per_row: float = 3.8):
@@ -407,42 +406,59 @@ def _percentile_strip(ax, x: float, values: list[int], width: float, color: str)
 
 
 def plot_token_usage(datasets, out_path: Path) -> None:
+    configure_matplotlib()
     import matplotlib.pyplot as plt
-    import numpy as np
+    from matplotlib.patches import Patch
 
     modes = [("Direct", DIRECT_CONDITIONS), ("CoT", COT_CONDITIONS)]
-    ncols = len(datasets)
-    fig, axes = _make_facet_axes(2, ncols, height_per_row=4.6)
+    n_sets = len(datasets)
+    width = 0.26
+    offsets = (-width, 0.0, width)
 
-    for row, (mode_label, conds) in enumerate(modes):
+    fig, (ax_top, ax_bot) = plt.subplots(
+        2, 1, figsize=(10.5, 3.85), gridspec_kw={"hspace": 0.55}
+    )
+
+    for ax, (mode_label, conds) in zip((ax_top, ax_bot), modes):
         row_max = 0.0
-        for _, xs, _ in datasets:
-            for cond in conds:
-                vals = tokens_by_condition(xs, cond)
-                if vals:
-                    row_max = max(row_max, float(np.max(vals)))
-        for col, (cell, xs, n) in enumerate(datasets):
-            ax = axes[row][col]
-            for center, arm, cond in zip(BAR_CENTERS, REPORT_ARM_ORDER, conds):
-                _percentile_strip(
-                    ax, center, tokens_by_condition(xs, cond), BAR_WIDTH, REPORT_ARM_COLORS[arm],
+        positions, cap_labels = [], []
+        for xi, (_, xs, _) in enumerate(datasets):
+            for off, arm, cond in zip(offsets, REPORT_ARM_ORDER, conds):
+                top = _percentile_strip(
+                    ax, xi + off, tokens_by_condition(xs, cond), width, REPORT_ARM_COLORS[arm]
                 )
-            ax.set_title(_facet_title(cell, n), fontsize=9)
-            _style_facet_cell(
-                ax,
-                col=col,
-                y_label=f"{mode_label}\ntokens",
-                x_labels=_arm_cap_xticklabels(xs, conds),
-            )
-        axes[row][0].set_ylim(0, row_max * 1.12 if row_max else 1)
+                row_max = max(row_max, top)
+                positions.append(xi + off)
+                cap_labels.append(_fmt_cap(_cap_for_cond(xs, cond)))
+        ax.set_ylabel(f"{mode_label} tokens", fontsize=13)
+        ax.set_ylim(0, row_max * 1.12 if row_max else 1)
+        ax.tick_params(axis="y", labelsize=11)
+        ax.set_xlim(-0.6, n_sets - 0.4)
+        ax.set_xticks(positions)
+        ax.set_xticklabels(cap_labels, rotation=30, ha="right", fontsize=8)
+        ax.tick_params(axis="x", length=0)
+        style_report_axes(ax)
+
+    # problem-set names as a lower tier below the bottom row's cap labels
+    for xi, (cell, _, n) in enumerate(datasets):
+        ax_bot.annotate(
+            f"{report_cell_xticklabels([cell])[0]} (n={n})",
+            xy=(xi, 0), xycoords=("data", "axes fraction"),
+            xytext=(0, -30), textcoords="offset points",
+            ha="center", va="top", fontsize=11,
+        )
+
+    handles = [
+        Patch(facecolor=REPORT_ARM_COLORS[a], label=REPORT_ARM_LABELS[a]) for a in REPORT_ARM_ORDER
+    ]
+    ax_top.legend(handles=handles, frameon=False, fontsize=12, ncol=3, loc="upper left")
 
     fig.suptitle(
-        "Token usage by problem set  ·  box = p25–p75, line = median, whiskers = p10/p90",
-        fontsize=11,
-        y=1.04,
+        "Token usage by problem set  ·  box = p25–p75, line = median, whiskers = p10/p90  ·  labels = token cap",
+        fontsize=12,
+        y=0.99,
     )
-    fig.text(0.5, 0.01, TOKEN_USAGE_FOOTNOTE, ha="center", fontsize=8, color="0.35", wrap=True)
-    fig.tight_layout(rect=(0, 0.04, 1, 0.98))
+    fig.tight_layout(rect=(0, 0.0, 1, 0.97))
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_path, dpi=160, bbox_inches="tight")
     plt.close(fig)
@@ -523,7 +539,8 @@ def plot_j_ablation_drops(datasets, out_path: Path) -> None:
 def write_band_selection(out_path: Path) -> None:
     band_path = ROOT / "runs/active/calibration/band.json"
     if not band_path.exists():
-        shutil.copy2(ROOT / "report_results/band_selection.png", out_path)
+        fallback = ROOT / "report/figures/supplementary/band_selection.png"
+        shutil.copy2(fallback, out_path)
         print(f"copied {out_path} (no band.json)")
         return
     raw = json.loads(band_path.read_text(encoding="utf-8"))
@@ -560,8 +577,8 @@ def remove_stale_plots(out_dir: Path) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--out-dir", type=Path, default=ROOT / "report_results/final")
-    parser.add_argument("--report-src", type=Path, default=ROOT / "report_results")
+    parser.add_argument("--out-dir", type=Path, default=ROOT / "report/figures/final")
+    parser.add_argument("--report-src", type=Path, default=ROOT / "report/figures/supplementary")
     args = parser.parse_args()
     out_dir = args.out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
