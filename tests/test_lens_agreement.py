@@ -14,7 +14,7 @@ import torch
 
 AGREEMENT_PROMPT = "The capital of the most populous country in the world is"
 TOP_K = 10
-DEFAULT_BAND = (27, 33)
+DEFAULT_BAND = (27, 31)
 
 
 def _band_layers(lens, n_layers: int, band_start: int, band_end: int) -> list[int]:

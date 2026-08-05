@@ -261,7 +261,7 @@ Steps 2–5 hold the risk; 6–8 are mechanical once the hook is validated. If t
 Recorded after the instrument gate; does not change the hypotheses in §2.
 
 - **Ablation selection:** top-k activated **J-lens token vectors** \(v_t = J^\top u_t\) ranked by lens logit on \(h\), not right singular vectors of \(J\). Survivors after clean top-10 exclusion are Gram–Schmidt’d and the span is projected out; the ranking walks past excluded tokens to refill up to \(k\) (slightly stronger than dropping to \(<k\)).
-- **Band:** layers **[27, 33]** on Qwen3-4B (36 layers). The match-rate diagnostic is a **late ramp**, not a mid-network plateau; auto-select preferred [30, 33]; human lock includes onset. Prompt tokens are ablated.
+- **Band:** layers **[27, 31]** on Qwen3-4B (36 layers); narrowed from preregistered [27, 33] after pilot abort (see `preregistration.md` amendment). The match-rate diagnostic is a **late ramp** across 27–31 with a second ramp toward output layers; auto-select preferred [30, 33] on the diagnostic only. Prompt tokens are ablated.
 - **Instrument success:** exact-match on multihop items that are clean-correct, with J accuracy clearly below matched-norm random. Pooled EM / gold-lp over items the model does not know can null or invert — do not use those as the sole gate.
 - **Artifacts:** session outputs live under `runs/<YYYY-MM-DD_slug>/` with a `HANDOFF.md`; see `runs/README.md`.
 - **Math caveat unchanged:** number-token J-space loading remains near zero; a null on GSM8K/MATH CoT EM is compatible with a working factual instrument.

@@ -48,7 +48,7 @@ def main() -> None:
     parser.add_argument("--level", type=int, default=None, help="MATH-500 level filter")
     parser.add_argument("--limit", type=int, default=30)
     parser.add_argument("--band-start", type=int, default=27)
-    parser.add_argument("--band-end", type=int, default=33)
+    parser.add_argument("--band-end", type=int, default=31)
     parser.add_argument("--k", type=int, default=10)
     parser.add_argument("--exclude-topk", type=int, default=10)
     parser.add_argument(

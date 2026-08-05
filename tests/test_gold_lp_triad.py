@@ -30,7 +30,7 @@ def test_summarize_j_specific_bite():
     result = summarize_gold_lp_triad(
         rows,
         band_start=27,
-        band_end=33,
+        band_end=31,
         k=10,
         exclude_topk=10,
         random_seeds=(0, 1, 2),

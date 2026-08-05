@@ -40,7 +40,7 @@ def main() -> None:
         help="eval J/random only on items clean got right (near-ceiling set)",
     )
     parser.add_argument("--band-start", type=int, default=27)
-    parser.add_argument("--band-end", type=int, default=33)
+    parser.add_argument("--band-end", type=int, default=31)
     parser.add_argument("--k", type=int, default=10)
     parser.add_argument("--exclude-topk", type=int, default=10)
     parser.add_argument("--random-seeds", type=str, default="0,1,2")

@@ -13,7 +13,7 @@ pip install -e ".[dev]"
 pytest                           # unit tests
 ```
 
-Paper source: [`report/report_latex.txt`](report/report_latex.txt) · Figures: [`report/figures/final/`](report/figures/final/) · Pre-registration: [`preregistration.md`](preregistration.md)
+Paper: [`report.pdf`](report.pdf) · LaTeX source: [`report/report_latex.txt`](report/report_latex.txt) · Figures: [`report/figures/final/`](report/figures/final/) · Pre-registration: [`preregistration.md`](preregistration.md)
 
 ## Repository map
 

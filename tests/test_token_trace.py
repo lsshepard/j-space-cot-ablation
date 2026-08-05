@@ -98,7 +98,7 @@ def _minimal_trace(
         intermediates=["Brazil"],
         prompt_token_count=11,
         band_start=27,
-        band_end=33,
+        band_end=31,
         k=10,
         exclude_topk=10,
         clean_completion=clean_c,
